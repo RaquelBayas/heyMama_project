@@ -6,7 +6,7 @@ import { IoIosSettings } from "react-icons/io";
 
 function Menu() {
   return (
-    <div className="bg-primary h-screen w-[100px] flex items-center flex-col">
+    <div className="bg-primary h-screen w-[100px] flex items-center flex-col shadow-md shadow-amber-950">
         <ul className='flex flex-col h-full align-top place-content-evenly'>
             <li className='mb-4'><Link to="/"><FaHome className="text-3xl icons" /></Link></li>
             <li className='mb-4'><Link to="/foros"><MdOutlineForum className="text-3xl icons"/></Link></li>
