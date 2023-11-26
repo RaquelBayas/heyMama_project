@@ -1,6 +1,9 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Landpage from './components/Landpage'
 /* import Menu from './components/Menu'
+import About from './components/About'
+import {Routes, Route} from 'react-router-dom'
+import Menu from './components/Menu'
 import Home from './components/Home'
 import Search from './components/Search' */
 import './App.css'
