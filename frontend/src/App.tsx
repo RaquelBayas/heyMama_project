@@ -1,3 +1,4 @@
+import About from './components/About'
 import {Routes, Route} from 'react-router-dom'
 import Menu from './components/Menu'
 import Home from './components/Home'
@@ -7,6 +8,7 @@ import './App.css'
 function App() {
 
   return (
+
     <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
       <Menu/>
       <div className="grid w-full grid-rows-[5em_1fr]">
