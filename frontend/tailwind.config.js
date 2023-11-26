@@ -7,10 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary': 'hsl(27, 78%, 82%)',
-        'secondary': 'hsl(29, 100%, 96%)',
+        background: '#FFF4EA',
+        primary: '#F5CEAF',
+        secondary: '#DDBEA9',        
       }
-
     },
   },
   plugins: [],
