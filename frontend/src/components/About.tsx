@@ -6,9 +6,9 @@ function About() {
     }
 
     return (
-        <main className='bg-primary flex flex-col h-screen p-4'>
-            <section className='flex justify-around items-center h-full mt-6'>
-                <h1 className='font-semibold text-5xl'>¿Quiénes somos?</h1>
+        <main className='flex flex-col w-screen h-screen p-4 bg-primary'>
+            <section className='flex items-center justify-around h-full mt-6'>
+                <h1 className='text-5xl font-semibold'>¿Quiénes somos?</h1>
                 <article className='font-light text-lg max-w-[25rem] '>
                     <p>Lorem ipsum dolor sit amet consectetur. Accumsan cursus tempus in purus at.</p>
                     <hr className='bg-black py-[0.5px] border-none my-10' />
@@ -17,10 +17,10 @@ function About() {
                     <p>Lorem ipsum dolor sit amet consectetur. Accumsan cursus tempus in purus at.</p>
                 </article>
             </section>
-            <section className='justify-self-end flex justify-between h-full'>
+            <section className='flex justify-between h-full justify-self-end'>
                 <img src="./src/assets/flower.svg" alt="flower" className='' />
 
-                <button className='self-end flex justify-center items-center gap-2 m-4 bg-secondary p-3 rounded-full outline-black outline outline-2'
+                <button className='flex items-center self-end justify-center gap-2 p-3 m-4 rounded-full bg-secondary outline-black outline outline-2'
                     onClick={handleclick}>
                     <img src='./src/assets/arrow.svg' alt="back to home" className='-mt-[2px]' />
                     <span className='w-max'>VOLVER AL INICIO</span>

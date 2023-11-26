@@ -4,11 +4,14 @@ import Menu from './components/Menu'
 import Home from './components/Home'
 import Search from './components/Search'
 import './App.css'
+import Register from './components/Register'
 
 function App() {
 
   return (
-
+    /*<About/>*/
+    <Register/>
+    /*
     <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
       <Menu/>
       <div className="grid w-full grid-rows-[5em_1fr]">
@@ -22,7 +25,7 @@ function App() {
           </Routes>  
         </div>
       </div>         
-    </div>
+    </div>*/
   )
 }
 
