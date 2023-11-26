@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Landpage from './components/Landpage'
-/* import Menu from './components/Menu'
+import Home from './components/Home'
 import About from './components/About'
+/* import Menu from './components/Menu'
 import {Routes, Route} from 'react-router-dom'
 import Menu from './components/Menu'
 import Home from './components/Home'
@@ -13,9 +13,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Landpage/>}/>
-        {/* <Route path='/info' element={<Info/>}/>
-        <Route path='/contacto' element={<Contacto/>}/>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/about' element={<About/>}/>
+        {/*<Route path='/contacto' element={<Contacto/>}/>
         <Route path='/inicio-sesion' element={<InicioSesion/>}/>
         <Route path='/registro' element={<Registro/>}/> */}
       </Routes>
