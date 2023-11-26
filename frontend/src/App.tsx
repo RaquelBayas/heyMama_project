@@ -1,13 +1,24 @@
-import {Routes, Route} from 'react-router-dom'
-import Menu from './components/Menu'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Landpage from './components/Landpage'
+/* import Menu from './components/Menu'
 import Home from './components/Home'
-import Search from './components/Search'
+import Search from './components/Search' */
 import './App.css'
 
 function App() {
 
   return (
-    <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Landpage/>}/>
+        {/* <Route path='/info' element={<Info/>}/>
+        <Route path='/contacto' element={<Contacto/>}/>
+        <Route path='/inicio-sesion' element={<InicioSesion/>}/>
+        <Route path='/registro' element={<Registro/>}/> */}
+      </Routes>
+    </BrowserRouter>
+  )
+    {/* <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
       <Menu/>
       <div className="grid w-full grid-rows-[5em_1fr]">
         <div className='flex flex-col justify-center mt-3 mb-3'>
@@ -20,8 +31,8 @@ function App() {
           </Routes>  
         </div>
       </div>         
-    </div>
-  )
+    </div> */}
+  
 }
 
 export default App
