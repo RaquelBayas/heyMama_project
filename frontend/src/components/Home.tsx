@@ -1,11 +1,7 @@
-
-function Home() {
-  return (
-    <div className="w-full h-full">
-      <h1 className="text-2xl">Home</h1>
-    
-    </div>
-  )
+function Home(){
+    return(
+        <div>Home</div>
+    )
 }
 
-export default Home
+export default Home;
