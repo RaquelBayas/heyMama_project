@@ -16,7 +16,7 @@ function Contact(){
                         <p className="font-light text-4xl">112</p>
                         <NavLink 
                     to={'/'}
-                    className='absolute bottom-12 left-6 flex flex-row justify-start gap-2 m-4  bg-primary border border-solid border-black p-3 px-5 rounded-full shadow-md cursor-pointer lg:bottom-24 lg:right-40 hover:scale-125 transition-transform duration-300 ease-in-out'
+                    className='absolute bottom-12 left-6 flex flex-row justify-start gap-2 m-4  bg-primary border border-solid border-black p-3 px-5 rounded-full shadow-md cursor-pointer lg:bottom-24 lg:left-40 hover:scale-125 transition-transform duration-300 ease-in-out'
                 >
                     <FaArrowRight className='my-0.5'/>
                     <button className='w-max text-xl'>VOLVER AL INICIO</button>
