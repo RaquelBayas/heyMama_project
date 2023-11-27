@@ -1,15 +1,10 @@
-import About from './components/About'
-import {Routes, Route} from 'react-router-dom'
-import Menu from './components/Menu'
-import Home from './components/Home'
-import Search from './components/Search'
 import './App.css'
 import Register from './components/Register'
+
 
 function App() {
 
   return (
-    /*<About/>*/
     <Register/>
     /*
     <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
@@ -21,11 +16,13 @@ function App() {
         </div>        
         <div className='w-full'>
           <Routes>
-            <Route path='/' element={<Home/>}></Route>   
+            <Route path='/' element={<Home/>}></Route> 
+            <Route path='/about' element={<About/>}></Route> 
           </Routes>  
         </div>
       </div>         
-    </div>*/
+    </div>
+    */
   )
 }
 
