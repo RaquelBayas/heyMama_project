@@ -2,6 +2,7 @@ import {Routes, Route} from 'react-router-dom';
 import Landpage from './components/Landpage';
 import About from './components/About';
 import Contact from './components/Contact';
+import Login from './components/Login';
 /* import Menu from './components/Menu'
 import {Routes, Route} from 'react-router-dom'
 import Menu from './components/Menu'
@@ -16,8 +17,8 @@ function App() {
         <Route path='/' element={<Landpage/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
-        {/*<Route path='/inicio-sesion' element={<InicioSesion/>}/>
-        <Route path='/registro' element={<Registro/>}/> */}
+        <Route path='/login' element={<Login/>}/>
+        {/*<Route path='/registro' element={<Registro/>}/> */}
       </Routes>
   )
     {/* <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>

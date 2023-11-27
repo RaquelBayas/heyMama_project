@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import '../index.css';
 
@@ -22,7 +22,7 @@ function Landpage() {
 
         <div className='w-60 text-xl absolute bottom-32 right-6 bg-primary flex flex-row justify-start gap-2 border border-solid border-black p-3 px-5 rounded-full shadow-md cursor-pointer lg:bottom-44 lg:right-40 transition-all duration-300 ease-in-out hover:w-64'>
           <FaArrowRight className='my-0.5'/>
-          <button>INICIAR SESIÓN</button>
+          <Link to='/login'>INICIAR SESIÓN</Link>
         </div>
 
         <div className='w-60 text-xl absolute bottom-12 right-6 bg-primary flex flex-row justify-start gap-2 border border-solid border-black p-3 px-5 rounded-full shadow-md cursor-pointer lg:bottom-24 lg:right-40 transition-all duration-300 ease-in-out hover:w-64'>
