@@ -13,7 +13,6 @@ export default {
         background: '#FFF4EA',
         primary: '#F5CEAF',
         secondary: '#DDBEA9',
-        'green':'#affc41',
         'piel-claro': '#fff1e5',
         'marron':'#543C2E',
         'shade-bg': 'rgba(255, 244, 234, 0.8)',        
@@ -24,6 +23,11 @@ export default {
       backgroundSize:{
         '30%':'30%',
         '120%': '120%',
+      },
+      spacing: {
+        '450': '450px',
+        '400': '400px',
+        '550': '550px',
       }
     },
   },

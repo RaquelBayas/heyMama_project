@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import Landpage from './components/Landpage';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -12,7 +12,6 @@ import './App.css'
 function App() {
 
   return (
-    <BrowserRouter>
       <Routes>
         <Route path='/' element={<Landpage/>}/>
         <Route path='/about' element={<About/>}/>
@@ -20,7 +19,6 @@ function App() {
         {/*<Route path='/inicio-sesion' element={<InicioSesion/>}/>
         <Route path='/registro' element={<Registro/>}/> */}
       </Routes>
-    </BrowserRouter>
   )
     {/* <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
       <Menu/>
