@@ -1,4 +1,4 @@
-import {Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Landpage from './components/Landpage';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -9,20 +9,22 @@ import Home from './components/Home'
 import Search from './components/Search' */
 import './App.css'
 import Register from './components/Register';
+import UserConf from './components/UserConf';
 
 
 function App() {
 
   return (
-      <Routes>
-        <Route path='/' element={<Landpage/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/contact' element={<Contact/>}/>
-        {/*<Route path='/inicio-sesion' element={<Register/>}/> */}
-        <Route path='/register' element={<Register/>}/> 
-      </Routes>
-   )
-    {/* <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
+    <Routes>
+      <Route path='/' element={<Landpage />} />
+      <Route path='/about' element={<About />} />
+      <Route path='/contact' element={<Contact />} />
+      {/*<Route path='/inicio-sesion' element={<Register/>}/> */}
+      <Route path='/register' element={<Register />} />
+      <Route path='/config' element={<UserConf />} />
+    </Routes>
+  )
+  {/* <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
       <Menu/>
       <div className="grid w-full grid-rows-[5em_1fr]">
         <div className='flex flex-col justify-center mt-3 mb-3'>
@@ -36,7 +38,7 @@ function App() {
         </div>
       </div>         
     </div> */}
-  
+
 }
 
 export default App
