@@ -22,12 +22,12 @@ function Landpage() {
 
         <div className='absolute flex flex-row justify-start gap-2 p-3 px-5 text-xl transition-all duration-300 ease-in-out border border-black border-solid rounded-full shadow-md cursor-pointer w-60 bottom-32 right-6 bg-primary lg:bottom-44 lg:right-40 hover:w-64'>
           <FaArrowRight className='my-0.5'/>
-          <button><NavLink to='/register'>INICIAR SESIÓN</NavLink></button>
+          <button>INICIAR SESIÓN</button>
         </div>
 
         <div className='absolute flex flex-row justify-start gap-2 p-3 px-5 text-xl transition-all duration-300 ease-in-out border border-black border-solid rounded-full shadow-md cursor-pointer w-60 bottom-12 right-6 bg-primary lg:bottom-24 lg:right-40 hover:w-64'>
           <FaArrowRight className='my-0.5'/>
-          <button>REGISTRATE AQUÍ</button>
+          <button><NavLink to='/register'>REGISTRATE AQUÍ</NavLink></button>
         </div>
       </div>
       </>
