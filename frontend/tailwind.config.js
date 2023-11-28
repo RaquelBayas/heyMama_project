@@ -19,7 +19,8 @@ export default {
         'shade-bg': 'rgba(255, 244, 234, 0.8)',        
       }, 
       backgroundImage:{
-        'img-mom': "url('./assets/img-mujer.png')"
+        'img-mom': "url('./assets/img-mujer.png')",
+        'img-login': "url('./assets/img-login.png')"
       }, 
       backgroundSize:{
         '30%':'30%',

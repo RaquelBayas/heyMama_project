@@ -2,6 +2,7 @@ import {Routes, Route} from 'react-router-dom';
 import Landpage from './components/Landpage';
 import About from './components/About';
 import Contact from './components/Contact';
+import Login from './components/Login';
 /* import Menu from './components/Menu'
 import {Routes, Route} from 'react-router-dom'
 import Menu from './components/Menu'
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' element={<Landpage/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
+        <Route path='/login' element={<Login/>}/>
         <Route path='/registerUser' element={<Register/>}/> 
         <Route path='/register' element={<RegisterType/>}/> 
       </Routes>

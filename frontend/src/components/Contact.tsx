@@ -14,13 +14,13 @@ function Contact(){
                     </div>
                         <h3 className="text-xl tracking-wide">Número Nacional de Emergencias</h3>
                         <p className="font-light text-4xl">112</p>
-                        <NavLink 
+                    <NavLink 
                     to={'/'}
-                    className='absolute bottom-12 left-6 flex flex-row justify-start gap-2 m-4  bg-primary border border-solid border-black p-3 px-5 rounded-full shadow-md cursor-pointer lg:bottom-24 lg:left-40 hover:scale-125 transition-transform duration-300 ease-in-out'
-                >
+                    className='absolute bottom-12 left-6 flex flex-row justify-start gap-2 m-4  bg-primary border border-solid border-black p-3 px-5 rounded-full shadow-md cursor-pointer lg:bottom-24 lg:left-40 hover:scale-110 transition-transform duration-300 ease-in-out'
+                    >
                     <FaArrowRight className='my-0.5'/>
                     <button className='w-max text-xl'>VOLVER AL INICIO</button>
-                </NavLink>
+                    </NavLink>
                 </div>
                 <form className="mt-auto mx-6 bg-primary border-2 border-solid border-black rounded-3xl lg:h-5/6 lg:w-1/2 lg:ml-14 lg:my-auto">
                     <div className="flex flex-col mx-6 mt-8 mb-4">
