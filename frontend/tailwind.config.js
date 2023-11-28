@@ -12,7 +12,8 @@ export default {
       colors: {
         background: '#FFF4EA',
         primary: '#F5CEAF',
-        secondary: '#DDBEA9',
+        secondary: '#DDBEA9',   
+        dark_brown: '#543C2E',     
         'piel-claro': '#fff1e5',
         'marron':'#543C2E',
         'shade-bg': 'rgba(255, 244, 234, 0.8)',        

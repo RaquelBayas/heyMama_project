@@ -9,6 +9,9 @@ import Menu from './components/Menu'
 import Home from './components/Home'
 import Search from './components/Search' */
 import './App.css'
+import Register from './components/Register';
+import RegisterType from './components/RegisterType';
+
 
 function App() {
 
@@ -18,9 +21,10 @@ function App() {
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/login' element={<Login/>}/>
-        {/*<Route path='/registro' element={<Registro/>}/> */}
+        <Route path='/registerUser' element={<Register/>}/> 
+        <Route path='/register' element={<RegisterType/>}/> 
       </Routes>
-  )
+   )
     {/* <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
       <Menu/>
       <div className="grid w-full grid-rows-[5em_1fr]">

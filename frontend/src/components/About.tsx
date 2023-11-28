@@ -19,9 +19,8 @@ function About() {
                     <p>Lorem ipsum dolor sit amet consectetur. Accumsan cursus tempus in purus at.</p>
                 </article>
             </section>
-            <section className='justify-self-end flex justify-between h-full'>
+            <section className='flex justify-between h-full justify-self-end'>
                 <img src="./src/assets/flower.svg" alt="flower" className='' />
-
                 <NavLink 
                     to={'/'}
                     className='absolute bottom-12 right-6 flex flex-row justify-start gap-2 m-4  bg-background border border-solid border-black p-3 px-5 rounded-full shadow-md cursor-pointer lg:bottom-24 lg:right-40 hover:scale-125 transition-transform duration-300 ease-in-out'
