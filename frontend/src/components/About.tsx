@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+import { FaArrowRight } from "react-icons/fa";
 
 function About() {
 
@@ -6,10 +8,10 @@ function About() {
     }
 
     return (
-        <main className='flex flex-col w-screen h-screen p-4 bg-primary'>
-            <section className='flex items-center justify-around h-full mt-6'>
-                <h1 className='text-5xl font-semibold'>¿Quiénes somos?</h1>
-                <article className='font-light text-lg max-w-[25rem] '>
+        <main className='bg-primary w-screen h-screen flex flex-col p-4 font-anybody'>
+            <section className='flex justify-around items-center h-full pt-20'>
+                <h1 className='font-semibold text-4xl tracking-widest lg:text-6xl'>¿Quiénes somos?</h1>
+                <article className='font-light text-lg w-450 h-450 pt-20 flex flex-col text-justify gap-5 lg:w-550 lg:text-xl'>
                     <p>Lorem ipsum dolor sit amet consectetur. Accumsan cursus tempus in purus at.</p>
                     <hr className='bg-black py-[0.5px] border-none my-10' />
                     <p>Lorem ipsum dolor sit amet consectetur. Ultrices auctor aenean in id imperdiet vel. Consequat quis egestas faucibus netus aliquam ac scelerisque tortor commodo.</p>
@@ -19,12 +21,13 @@ function About() {
             </section>
             <section className='flex justify-between h-full justify-self-end'>
                 <img src="./src/assets/flower.svg" alt="flower" className='' />
-
-                <button className='flex items-center self-end justify-center gap-2 p-3 m-4 rounded-full bg-secondary outline-black outline outline-2'
-                    onClick={handleclick}>
-                    <img src='./src/assets/arrow.svg' alt="back to home" className='-mt-[2px]' />
-                    <span className='w-max'>VOLVER AL INICIO</span>
-                </button>
+                <NavLink 
+                    to={'/'}
+                    className='absolute bottom-12 right-6 flex flex-row justify-start gap-2 m-4  bg-background border border-solid border-black p-3 px-5 rounded-full shadow-md cursor-pointer lg:bottom-24 lg:right-40 hover:scale-125 transition-transform duration-300 ease-in-out'
+                >
+                    <FaArrowRight className='my-0.5'/>
+                    <button className='w-max text-xl'>VOLVER AL INICIO</button>
+                </NavLink>
             </section>
         </main>
     )
