@@ -1,29 +1,19 @@
+import {Routes, Route} from 'react-router-dom';
 import './App.css'
-import Register from './components/Register'
+import Register from './components/Register';
+import RegisterType from './components/RegisterType';
+import RegisterProf from './components/RegisterProf';
 
 
 function App() {
 
   return (
-    <Register/>
-    /*
-    <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
-      <Menu/>
-      <div className="grid w-full grid-rows-[5em_1fr]">
-        <div className='flex flex-col justify-center mt-3 mb-3'>
-         <div className='flex justify-evenly'><Search /></div>
-          <div className='w-full mt-2 mb-2 border-b border-secondary'></div>
-        </div>        
-        <div className='w-full'>
-          <Routes>
-            <Route path='/' element={<Home/>}></Route> 
-            <Route path='/about' element={<About/>}></Route> 
-          </Routes>  
-        </div>
-      </div>         
-    </div>
-    */
-  )
+      <Routes>
+        <Route path='/registerUser' element={<Register/>}/> 
+        <Route path='/registerProf' element={<RegisterProf/>}/> 
+        <Route path='/register' element={<RegisterType/>}/> 
+      </Routes>
+   )  
 }
 
 export default App

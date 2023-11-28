@@ -1,9 +1,7 @@
+import { FaEye, FaEyeSlash, FaArrowRight} from "react-icons/fa";
 
-import { FaEye, FaEyeSlash, FaArrowRight } from "react-icons/fa";
 
-        
-
-function Register() {
+function RegisterProf() {
   return (
     <div className="grid w-screen h-screen bg-background auto-cols-auto sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-auto xl:grid-cols-[320px,1fr]">
         <div className="hidden w-full h-screen rotate-0 bg-center bg-no-repeat bg-cover bg-primary md:block "
@@ -35,13 +33,24 @@ function Register() {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="phone" className="block mb-1 text-sm font-medium text-gray-600">
-          Teléfono
+        <label htmlFor="lastName" className="block mb-1 text-sm font-medium text-gray-600">
+          Profesión
         </label>
         <input
           type="text"
-          id="phone"
-          name="phone"
+          id="job"
+          name="job"
+          className="w-full py-2 bg-transparent border-b-2 border-dark_brown focus:outline-none focus:border-blue-700"
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="lastName" className="block mb-1 text-sm font-medium text-gray-600">
+          Número de colegiado
+        </label>
+        <input
+          type="number"
+          id="lastName"
+          name="numCollege"
           className="w-full py-2 bg-transparent border-b-2 border-dark_brown focus:outline-none focus:border-blue-700"
         />
       </div>
@@ -75,7 +84,7 @@ function Register() {
       </button>
         </div>
       </div>
-      <button type="submit" className="flex p-2 mx-auto mt-4 border-2 border-solid rounded-md border-dark_brown text-dark_brown bg-primary">
+      <button type="submit" className="flex p-2 mx-auto my-auto border-2 border-solid rounded-md border-dark_brown text-dark_brown bg-primary">
         <span className="my-auto mr-2"><FaArrowRight />  </span>
         Registrarse
       </button>
@@ -85,4 +94,4 @@ function Register() {
   )
 }
 
-export default Register
+export default RegisterProf
