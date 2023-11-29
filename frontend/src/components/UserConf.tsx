@@ -5,40 +5,33 @@ function UserConf() {
     const handleClick = (e) => {
         console.log(e.target.alt);
         if (e.target.alt === 'avatar') {
-
         }
-
     }
 
     return (
-        <main className='flex justify-center'>
-            <form className='flex flex-col p-4 config w-max' onClick={handleClick}>
+        <main className='grid grid-cols-200 p-4 h-screen w-screen font-anybody'>
+            <nav className='bg-background flex flex-col'>
+                <div className='flex flex-col mt-32 mx-auto text-start gap-6 text-xl flex-grow'>
+                    <h2>Ajustes de perfil</h2>
+                    <h2>Ajustes de cuenta</h2>
+                    <h2 className='text-red-500 text-center mt-auto mb-16 text-2xl'>Cerrar sesión</h2>
+                </div>
+            </nav>
 
-                <h1 className='mb-4'>Ajustes</h1>
-
-                <label htmlFor="avatar">Avatar
-                    <input type="file" accept='image/*' capture="camera" id='avatar' className='hidden' />
-                    <img src="./src/assets/avatar-person.svg" alt="avatar" className='mb-4 -ml-4 max-w-[5rem]' />
-                </label>
-
+            <div className='flex flex-col ml-14 text-xl gap-2'>
+                <h1 className='my-10 uppercase text-4xl text-center tracking-wider lg:text-start lg:ml-10'>Ajustes</h1>
                 <label htmlFor="name">Nombre</label>
                 <span className='text-gray-400 mb-4'>Raquel</span>
-
                 <label htmlFor="username">Nombre de usuario</label>
                 <span className='text-gray-400 mb-4'>raquel</span>
-
                 <label htmlFor="biography">Biografía</label>
                 <span className='text-gray-400 mb-4'>¡Hola!</span>
-
                 <label htmlFor="email">Correo electrónico</label>
                 <span className='text-gray-400 mb-4'>ejemplo@gmail.com</span>
-
                 <label htmlFor="password">Contraseña</label>
-                <span className='text-gray-400 mb-2'>***</span>
-
+                <span className='text-gray-400 mb-4'>***</span>
                 <ToggleSwitch />
-
-            </form>
+            </div>
         </main>
     )
 }

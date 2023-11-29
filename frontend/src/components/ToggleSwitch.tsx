@@ -25,16 +25,18 @@ export default function ToggleSwitch() {
         setSwitchState(!switchState);
     }
     return (
-        <label htmlFor="checkbox">Politica de privacidad
-            <span className="profile block text-gray-500 my-1">Perfil público</span>
-            <label htmlFor="checkbox" className="switch on">
-                <input
-                    id="checkbox"
-                    type="checkbox"
-                    checked={switchState}
-                    onChange={handleOnChange}
-                />
+        <div >
+            <label className="flex flex-col gap-2" htmlFor="checkbox">Politica de privacidad
+                <span className="profile block text-gray-500">Perfil público</span>
+                <label htmlFor="checkbox" className="switch on">
+                    <input
+                        id="checkbox"
+                        type="checkbox"
+                        checked={switchState}
+                        onChange={handleOnChange}
+                    />
+                </label>
             </label>
-        </label>
+        </div>
     );
 }

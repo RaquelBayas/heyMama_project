@@ -29,6 +29,9 @@ export default {
         '450': '450px',
         '400': '400px',
         '550': '550px',
+      }, 
+      gridTemplateColumns: {
+        '200':'minmax(200px, 300px),1fr'
       }
     },
   },
