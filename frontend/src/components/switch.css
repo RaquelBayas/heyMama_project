@@ -20,7 +20,7 @@ label.switch {
 }
 
 label.on {
-    background-color: #765e4e;
+    background-color: #adadad;
 
     &:after {
         left: 5px
@@ -28,7 +28,7 @@ label.on {
 }
 
 label.off {
-    background-color: #adadad;
+    background-color: #765e4e;
 
     &:after {
         left: calc(55% - 5px)

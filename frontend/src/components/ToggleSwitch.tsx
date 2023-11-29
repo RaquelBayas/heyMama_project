@@ -11,11 +11,11 @@ export default function ToggleSwitch() {
         if (switchState) {
             label.classList.add('on')
             label.classList.remove('off')
-            privacyState.innerText = 'Perfil público'
+            privacyState.innerText = 'Perfil privado'
         } else {
             label.classList.add('off')
             label.classList.remove('on')
-            privacyState.innerText = 'Perfil privado'
+            privacyState.innerText = 'Perfil público'
         }
 
     }, [switchState])
@@ -26,7 +26,7 @@ export default function ToggleSwitch() {
     }
     return (
         <label htmlFor="checkbox">Politica de privacidad
-            <span className="profile block text-gray-500">Perfil público</span>
+            <span className="profile block text-gray-500 my-1">Perfil público</span>
             <label htmlFor="checkbox" className="switch on">
                 <input
                     id="checkbox"
