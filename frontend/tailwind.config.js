@@ -27,9 +27,16 @@ export default {
         '120%': '120%',
       },
       spacing: {
+        '250':'250px',
+        '350':'350px',
         '450': '450px',
         '400': '400px',
         '550': '550px',
+        '650': '650px',
+      }, 
+      screens: {
+        "2xl": "1536px",
+        "3xl": "2000px",
       }, 
       gridTemplateColumns: {
         '200':'minmax(200px, 300px),1fr'
