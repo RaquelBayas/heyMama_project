@@ -1,6 +1,8 @@
 import {z} from 'zod'
 
 const User = z.object({
+    name: z.string(),
+    surname: z.string(),
     email: z.string({
       required_error: 'Campo obligatorio',
       invalid_type_error: 'El campo tiene que ser un string'
