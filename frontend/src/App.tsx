@@ -1,4 +1,4 @@
-import {Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Landpage from './components/Landpage';
 import About from './components/About';
@@ -8,21 +8,23 @@ import Register from './components/Register';
 import RegisterType from './components/RegisterType';
 import RegisterProf from './components/RegisterProf';
 import './App.css'
+import Forum from './components/Forum';
 
 
 function App() {
 
   return (
-      <Routes>
-        <Route path='/' element={<Landpage/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/contact' element={<Contact/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/registerUser' element={<Register/>}/> 
-        <Route path='/registerProf' element={<RegisterProf/>}/> 
-        <Route path='/register' element={<RegisterType/>}/> 
-      </Routes>
-   )  
+    <Routes>
+      <Route path='/' element={<Landpage />} />
+      <Route path='/about' element={<About />} />
+      <Route path='/contact' element={<Contact />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/registerUser' element={<Register />} />
+      <Route path='/registerProf' element={<RegisterProf />} />
+      <Route path='/register' element={<RegisterType />} />
+      <Route path='/forum' element={<Forum />} />
+    </Routes>
+  )
 }
 
 export default App
