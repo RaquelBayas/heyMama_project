@@ -4,7 +4,7 @@ import Contact from "./Contact";
 import Navbar from "./Navbar";
 
 
-function Scroll(){
+function MainPage(){
     return(
         <div>
             <Navbar/>
@@ -14,4 +14,4 @@ function Scroll(){
         </div>
     )
 }
-export default Scroll;
+export default MainPage;

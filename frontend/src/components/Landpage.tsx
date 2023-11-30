@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
-import { Link } from "react-scroll";
 import '../index.css';
 
 function Landpage() {
