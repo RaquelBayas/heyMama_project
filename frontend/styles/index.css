@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('/frontend/styles/fonts/Montserrat-VariableFont_wght.ttf');
+@import url('/frontend/styles/fonts/Montserrat-Italic-VariableFont_wght.ttf');
 
 @font-face {
     font-family: Montserrat;

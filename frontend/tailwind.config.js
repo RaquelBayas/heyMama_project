@@ -8,22 +8,23 @@ export default {
     extend: {
       fontFamily: {
         'anybody': ['Anybody', 'sans-serif'],
+        'Montserrat': ['Montserrat', 'sans-serif']
       },
       colors: {
         background: '#FFF4EA',
         primary: '#F5CEAF',
-        secondary: '#DDBEA9',   
-        dark_brown: '#543C2E',     
+        secondary: '#DDBEA9',
+        dark_brown: '#543C2E',
         'piel-claro': '#fff1e5',
-        'marron':'#543C2E',
-        'shade-bg': 'rgba(255, 244, 234, 0.8)',        
-      }, 
-      backgroundImage:{
+        'marron': '#543C2E',
+        'shade-bg': 'rgba(255, 244, 234, 0.8)',
+      },
+      backgroundImage: {
         'img-mom': "url('./assets/img-mujer.png')",
         'img-login': "url('./assets/img-login.png')"
-      }, 
-      backgroundSize:{
-        '30%':'30%',
+      },
+      backgroundSize: {
+        '30%': '30%',
         '120%': '120%',
       },
       spacing: {
