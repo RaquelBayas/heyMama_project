@@ -29,9 +29,8 @@ function Landpage() {
         </div>
         </div>
       </div>
-      </>
-    )
-  }
-  
-  export default Landpage;
-  
+    </>
+  )
+}
+
+export default Landpage;

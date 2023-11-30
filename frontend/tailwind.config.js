@@ -37,7 +37,10 @@ export default {
       screens: {
         "2xl": "1536px",
         "3xl": "2000px",
-      },
+      }, 
+      gridTemplateColumns: {
+        '200':'minmax(200px, 300px),1fr'
+      }
     },
   },
   plugins: [],
