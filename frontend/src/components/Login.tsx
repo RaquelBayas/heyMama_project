@@ -13,16 +13,16 @@ function Login(){
                         <div className="flex flex-col mx-6 mt-8 mb-4 text-start text-xl">
                             <label>Email:</label>
                             <input
-                                className='h-10 border-2 border-solid border-transparent border-b-black bg-shade-bg'
+                                className='h-10 mt-2 border-2 border-solid border-transparent border-b-black bg-shade-bg'
                                 type="text"
                                 name="email"
                             />
                         </div>
-                        <div className="flex flex-col mx-6 mt-8 mb-4 text-start text-xl">
+                        <div className="box-border flex flex-col mx-6 mt-8 mb-4 text-start text-xl">
                             <label>Contraseña:</label>
-                                <FaRegEye className='ml-auto relative top-7'/>
+                                <FaRegEye className='ml-auto relative top-4'/>
                                 <input
-                                    className='w-full py-2 bg-transparent border-b-2 border-dark_brownh-10 border-2 border-solid border-transparent border-b-black'
+                                    className='w-full bg-transparent border-b-2 border-dark_brownh-10 border-2 border-solid border-transparent border-b-black'
                                     type="text"
                                     name="email"
                                 />

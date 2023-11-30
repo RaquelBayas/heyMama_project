@@ -20,7 +20,7 @@ function Landpage() {
         <div className="flex flex-col gap-10 ml-auto pr-10 pb-10 lg:pr-44 lg:pb-32 lg:gap-10">
           <div className='flex flex-row justify-start gap-2 p-3 px-5 text-xl transition-all duration-300 ease-in-out border border-black border-solid rounded-full shadow-md cursor-pointer w-60 bg-primary hover:scale-110 uppercase'>
             <FaArrowRight className='my-0.5'/>
-            <Link to='/login'>Iniciar sesión</Link>
+            <NavLink to='/login'>Iniciar sesión</NavLink>
           </div>
 
           <div className='flex flex-row justify-start gap-2 p-3 px-5 text-xl transition-all duration-300 ease-in-out border border-black border-solid rounded-full shadow-md cursor-pointer w-60 bg-primary hover:scale-110 uppercase'>
