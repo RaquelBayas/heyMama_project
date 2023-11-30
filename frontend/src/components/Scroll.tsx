@@ -1,11 +1,13 @@
 import Landpage from "./Landpage";
 import About from "./About";
 import Contact from "./Contact";
+import Navbar from "./Navbar";
 
 
 function Scroll(){
     return(
         <div>
+            <Navbar/>
             <Landpage/>
             <About />
             <Contact/>

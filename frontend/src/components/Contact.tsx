@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 
 function Contact(){
     return(
-        <body className="w-screen h-screen bg-background font-anybody">
+        <section className="w-full h-screen bg-background font-anybody lg:w-screen">
             <div className="grid grid-cols-2">
-                <div className="flex flex-col gap-12 mx-auto mt-40 ">
+                <div className="flex flex-col gap-12 mx-auto mt-64">
                     <h1 className="text-4xl pb-8 lg:text-5xl uppercase">Ponte en contacto</h1>
                     <div className="flex flex-row gap-3 align-center">
                         <FaPhoneAlt className='my-0.5'/>
@@ -22,7 +22,7 @@ function Contact(){
                     <button className='w-max text-xl uppercase'>Volver al inicio</button>
                     </NavLink>
                 </div>
-                <form className="mt-20 mx-6 bg-primary border-2 border-solid border-black rounded-3xl lg:h-5/6 lg:w-1/2 lg:ml-14 lg:mt-32">
+                <form className="mt-48 mx-6 bg-primary border-2 border-solid border-black rounded-3xl lg:h-5/6 lg:w-1/2 lg:ml-14 lg:mt-32">
                     <div className="flex flex-col mx-6 mt-8 mb-4">
                         <label>Nombre:</label>
                         <input 
@@ -62,7 +62,7 @@ function Contact(){
                     </div>
                 </form>
             </div>
-        </body>
+        </section>
     )
 }
 
