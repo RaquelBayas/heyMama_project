@@ -1,9 +1,45 @@
 
 import { FaEye, FaEyeSlash, FaArrowRight } from "react-icons/fa";
+import { useState } from "react";
+import { RegistrationFormState } from '../models/RegistrationForm.ts'
+import {register} from '../services/registerService.ts'
 
-        
 
 function Register() {
+    const [showPassword, setShowPassword] = useState(false);
+    const [formData, setFormData] = useState<RegistrationFormState>({
+      userType: 'user',
+      name: '',
+      lastName: '',
+      phone: 0,
+      email: '',
+      password: '',
+    });
+
+    function handleChange(event:React.ChangeEvent<HTMLInputElement>) {
+      setFormData({ ...formData, [event.target.name]: event.target.value });
+    }
+
+    function handleSubmit(event:React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        console.log(formData);
+        setFormData({
+          userType: 'user',
+          name: '',
+          lastName: '',
+          phone: 0,
+          email: '',
+          password: '',
+        }); 
+        register(formData).then((response) => {
+          if(response.error) {
+            return '';
+            
+          }
+          console.log(response);
+          
+        })
+    }
   return (
     <div className="grid w-screen h-screen bg-background auto-cols-auto sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-auto xl:grid-cols-[320px,1fr]">
         <div className="hidden w-full h-screen rotate-0 bg-center bg-no-repeat bg-cover bg-primary md:block "
@@ -11,15 +47,18 @@ function Register() {
         </div>
         <div className="my-auto bg-background">
           <h1 className="text-4xl text-center font-anybody">CREA UNA CUENTA</h1>
-        <form className="max-w-md mx-auto my-auto mt-8 max-h-md sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+        <form className="max-w-md mx-auto my-auto mt-8 max-h-md sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl" onSubmit={handleSubmit}>
         <div className="mb-4">
-        <label htmlFor="firstName" className="block mb-1 text-sm font-medium text-gray-600">
+        <label htmlFor="name" className="block mb-1 text-sm font-medium text-gray-600">
           Nombre
         </label>
         <input
           type="text"
-          id="firstName"
-          name="firstName"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
           className="w-full py-2 bg-transparent border-b-2 border-dark_brown focus:outline-none focus:border-blue-700"
         />
       </div>
@@ -31,6 +70,8 @@ function Register() {
           type="text"
           id="lastName"
           name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
           className="w-full py-2 bg-transparent border-b-2 border-dark_brown focus:outline-none focus:border-blue-700"
         />
       </div>
@@ -39,9 +80,11 @@ function Register() {
           Teléfono
         </label>
         <input
-          type="text"
+          type="number"
           id="phone"
           name="phone"
+          value={formData.phone}
+          onChange={handleChange}
           className="w-full py-2 bg-transparent border-b-2 border-dark_brown focus:outline-none focus:border-blue-700"
         />
       </div>
@@ -53,6 +96,9 @@ function Register() {
           type="email"
           id="email"
           name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
           className="w-full py-2 bg-transparent border-b-2 border-dark_brown focus:outline-none focus:border-blue-700"
         />
       </div>
@@ -62,16 +108,20 @@ function Register() {
         </label>
         <div className="relative">
         <input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           id="password"
           name="password" 
+          value={formData.password}
+          onChange={handleChange}
+          required
           className="w-full py-2 bg-transparent border-b-2 border-dark_brown focus:outline-none focus:border-blue-700 "
         />
         <button
         type="button"
+        onClick={() => setShowPassword(!showPassword)}
         className="absolute text-2xl transform -translate-y-1/2 cursor-pointer right-3 top-1/2"
       >
-         <FaEyeSlash />
+        {showPassword ? <FaEye /> : <FaEyeSlash /> } 
       </button>
         </div>
       </div>
