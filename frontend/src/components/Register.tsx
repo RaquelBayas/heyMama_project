@@ -22,7 +22,8 @@ function Register() {
 
     function handleSubmit(event:React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        console.log(formData);
+      
+        const currentFormData = { ...formData };
         setFormData({
           userType: 'user',
           name: '',
@@ -31,13 +32,12 @@ function Register() {
           email: '',
           password: '',
         }); 
-        register(formData).then((response) => {
+        register(currentFormData).then((response) => {
           if(response.error) {
-            return '';
-            
+            return response.error;            
           }
           console.log(response);
-          
+          return response;
         })
     }
   return (

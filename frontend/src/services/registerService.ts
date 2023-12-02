@@ -12,9 +12,8 @@ async function register(registerData: RegistrationFormState): Promise<RegisterRe
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(registerData),
+          body: JSON.stringify(registerData)
         });
-    
         if (!resp.ok) {
           const errorResponse: RegisterResponse = await resp.json();
           throw new Error(`Server error: ${errorResponse.error}`);

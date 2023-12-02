@@ -1,7 +1,7 @@
 import { FaEye, FaEyeSlash, FaArrowRight} from "react-icons/fa";
 import { useState } from "react";
 import { RegistrationFormState } from '../models/RegistrationForm.ts'
-
+import { register } from "../services/registerService.ts";
 
 function RegisterProf() {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,7 +21,8 @@ function RegisterProf() {
 
   function handleSubmit(event:React.FormEvent<HTMLFormElement>) {
       event.preventDefault();
-      console.log(formData);
+      
+      const currentFormData = { ...formData };
       setFormData({
         userType: 'prof',
         name: '',
@@ -31,6 +32,14 @@ function RegisterProf() {
         email: '',
         password: '',
       }); 
+
+      register(currentFormData).then((response) => {
+        if(response.error) {
+          return response.error;            
+        }
+        console.log(response)
+        return response;
+      })
   }
   return (
     <div className="grid w-screen h-screen bg-background auto-cols-auto sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-auto xl:grid-cols-[320px,1fr]">
