@@ -10,7 +10,7 @@ function Register() {
     const [formData, setFormData] = useState<RegistrationFormState>({
       userType: 'user',
       name: '',
-      lastName: '',
+      surname: '',
       phone: 0,
       email: '',
       password: '',
@@ -27,7 +27,7 @@ function Register() {
         setFormData({
           userType: 'user',
           name: '',
-          lastName: '',
+          surname: '',
           phone: 0,
           email: '',
           password: '',
@@ -63,14 +63,14 @@ function Register() {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="lastName" className="block mb-1 text-sm font-medium text-gray-600">
+        <label htmlFor="surname" className="block mb-1 text-sm font-medium text-gray-600">
           Apellidos
         </label>
         <input
           type="text"
-          id="lastName"
-          name="lastName"
-          value={formData.lastName}
+          id="surname"
+          name="surname"
+          value={formData.surname}
           onChange={handleChange}
           className="w-full py-2 bg-transparent border-b-2 border-dark_brown focus:outline-none focus:border-blue-700"
         />

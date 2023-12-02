@@ -1,7 +1,7 @@
 export interface RegistrationFormState {
     userType: 'user' | 'prof',
     name: string;
-    lastName: string;
+    surname: string;
     job?: string;
     numCollege?: number;
     phone?: number;
