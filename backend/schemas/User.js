@@ -3,7 +3,7 @@ import {z} from 'zod'
 const User = z.object({
   userType: z.nativeEnum(['user', 'prof']).optional() ,
   name: z.string(),
-  lastName: z.string(),
+  surname: z.string(),
   phone: z.string().transform(value => parseFloat(value)).optional(),
   job: z.string().optional(),
   numCollege:  z.string().transform(value => parseFloat(value)).optional(),

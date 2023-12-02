@@ -20,7 +20,7 @@ async function signUp(req,res,next) {
     //Comprobar que el usuario está registrado
     //Comprobar si tiene el dato 'num_colegiado/profesion' --> type_user_id = 2 (prof)
     //Admin (1), Prof. (2), Wom. (3)
-    const { userType, name, lastName, email, password, phone, job, numCollege} = data;
+    const { userType, name, surname, email, password, phone, job, numCollege} = data;
 
     try {
         const type_user_id = {
@@ -30,9 +30,9 @@ async function signUp(req,res,next) {
         }
         
         if(userType === 'prof') {
-            await sendQuery('INSERT INTO users (name, lastName, email, password, phone, job, numCollege, type_user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [name, lastName, email, password, phone, job, numCollege, type_user_id[userType]]);
+            await sendQuery('INSERT INTO users (name, surname, email, password, phone, job, numCollege, type_user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [name, surname, email, password, phone, job, numCollege, type_user_id[userType]]);
         } else if(userType === 'user') {
-            await sendQuery('INSERT INTO users (name, lastName, email, password, phone, type_user_id) VALUES (?, ?, ?, ?, ?, ?)', [name, lastName, email, password, phone, type_user_id[userType]]);
+            await sendQuery('INSERT INTO users (name, surname, email, password, phone, type_user_id) VALUES (?, ?, ?, ?, ?, ?)', [name, surname, email, password, phone, type_user_id[userType]]);
         }
         
     } catch (error) {
