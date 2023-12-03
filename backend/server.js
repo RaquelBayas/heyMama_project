@@ -1,12 +1,14 @@
 import express from 'express'
 import 'dotenv/config'
 import morgan from 'morgan'
+import cors from 'cors'
 import { connection } from './db/connectDB.js'
 import { userRoutes } from './routes/user.routes.js'
 
 const port = process.env.PORT;
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use(morgan('dev'));
 
 
