@@ -3,13 +3,9 @@ import { FaArrowRight } from "react-icons/fa";
 
 function About() {
 
-    function handleclick(e: object) {
-        console.log(e);
-    }
-
     return (
         <main className='bg-primary w-full h-full flex flex-col p-4 font-anybody'>
-            <section className='flex justify-around items-center h-full pt-20'>
+            <div className='flex justify-around items-center h-full pt-20'>
                 <h1 className='font-semibold text-4xl tracking-widest lg:text-6xl'>¿Quiénes somos?</h1>
                 <article className='font-light text-lg w-450 h-450 pt-20 flex flex-col text-justify gap-5 lg:w-550 lg:text-xl'>
                     <p>Lorem ipsum dolor sit amet consectetur. Accumsan cursus tempus in purus at.</p>
@@ -18,7 +14,7 @@ function About() {
                     <hr className='bg-black py-[0.5px] border-none my-10' />
                     <p>Lorem ipsum dolor sit amet consectetur. Accumsan cursus tempus in purus at.</p>
                 </article>
-            </section>
+            </div>
             <section className='flex justify-between h-full justify-self-end'>
                 <img src="./src/assets/flower.svg" alt="flower" className='' />
                 <NavLink

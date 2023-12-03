@@ -1,0 +1,36 @@
+// import { ReactNode } from 'react'
+import Menu from '../../Menu'
+import Search from '../../Search'
+
+function Depresion() {
+    return (
+        <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
+
+            <Menu />
+            <div className="grid w-full grid-rows-[5em_1fr]">
+
+                <div className='flex flex-col justify-center mt-3 mb-3'>
+                    <div className='flex justify-evenly'><Search /></div>
+                    <div className='w-full mt-2 mb-2 border-b border-secondary'></div>
+                </div>
+
+                <main className="font-Montserrat p-8">
+                    <section className='grid grid-cols-2 gap-4 justify-around border-2 border-[#ddbea9] w-full h-full'>
+                        <article className='bg-white rounded-md p-3 border-2 border-primary w-[20rem] drop-shadow-md'></article>
+                        <article className='bg-white rounded-md p-3 border-2 border-primary w-[20rem] drop-shadow-md'></article>
+                        <article className='bg-white rounded-md p-3 border-2 border-primary w-[20rem] drop-shadow-md'></article>
+                        <article className='bg-white rounded-md p-3 border-2 border-primary w-[20rem] drop-shadow-md'></article>
+                        <article className='bg-white rounded-md p-3 border-2 border-primary w-[20rem] drop-shadow-md'></article>
+                        <article className='bg-white rounded-md p-3 border-2 border-primary w-[20rem] drop-shadow-md'></article>
+                        <article className='bg-white rounded-md p-3 border-2 border-primary w-[20rem] drop-shadow-md'></article>
+                        <article className='bg-white rounded-md p-3 border-2 border-primary w-[20rem] drop-shadow-md'></article>
+                        <article className='bg-white rounded-md p-3 border-2 border-primary w-[20rem] drop-shadow-md'></article>
+                        <article className='bg-white rounded-md p-3 border-2 border-primary w-[20rem] drop-shadow-md'></article>
+                    </section>
+                </main>
+            </div>
+        </div>
+    )
+}
+
+export default Depresion

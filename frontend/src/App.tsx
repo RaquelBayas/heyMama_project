@@ -9,6 +9,8 @@ import RegisterType from './components/RegisterType';
 import RegisterProf from './components/RegisterProf';
 import './App.css'
 import ForumHome from './components/Forum/ForumHome';
+import Forums from './components/Forum/Forums';
+import Depresion from './components/Forum/forumTypes/Depresion'
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
       <Route path='/registerProf' element={<RegisterProf />} />
       <Route path='/register' element={<RegisterType />} />
       <Route path='/forum' element={<ForumHome />} />
+      <Route path='/forums' element={<Forums />} />
+      <Route path='/forum/depresion' element={<Depresion />} />
     </Routes>
   )
 }
