@@ -8,7 +8,7 @@ import Register from './components/Register';
 import RegisterType from './components/RegisterType';
 import RegisterProf from './components/RegisterProf';
 import './App.css'
-import Forum from './components/Forum';
+import ForumHome from './components/Forum/ForumHome';
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
       <Route path='/registerUser' element={<Register />} />
       <Route path='/registerProf' element={<RegisterProf />} />
       <Route path='/register' element={<RegisterType />} />
-      <Route path='/forum' element={<Forum />} />
+      <Route path='/forum' element={<ForumHome />} />
     </Routes>
   )
 }
