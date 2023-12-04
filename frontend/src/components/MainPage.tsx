@@ -9,7 +9,7 @@ function MainPage(){
         <div>
             <Navbar/>
             <Landpage/>
-            <About />
+            <About/>
             <Contact/>
         </div>
     )
