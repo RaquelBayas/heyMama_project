@@ -17,4 +17,6 @@ const User = z.object({
   }).min(4).max(32),
 });
 
-export {User};
+const LoginUser = User.omit({ userType:true, name: true, surname:true, phone:true, job:true, numCollege:true });
+
+export {User, LoginUser};
