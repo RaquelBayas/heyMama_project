@@ -25,3 +25,5 @@ connection.connect()
     app.listen(port, () => console.log(`Escuchando en el puerto ${port}...`));
   })
   .catch(err => console.log(err.message));
+
+  // connection.query('SELECT * FROM user')
