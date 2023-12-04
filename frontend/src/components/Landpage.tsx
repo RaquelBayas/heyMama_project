@@ -1,38 +1,33 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import '../index.css';
 
 function Landpage() {
+
     return (
-      <>
-        <div className='w-screen h-screen bg-bottom bg-no-repeat bg-contain bg-img-mom md:mx-9 font-anybody'>
-        <div className='absolute top-0 bottom-0 left-0 right-0 flex flex-col bg-shade-bg'>
+        <section id='landpage'>
+          <div className='w-full max-w-full h-screen bg-bottom bg-no-repeat bg-contain bg-img-mom font-anybody lg:w-screen'>
+          <div className='h-screen w-full flex flex-col bg-shade-bg leading-none lg:w-screen'>
+            <h1 className='flex flex-col gap-16 mx-10 mt-auto text-5xl tracking-wider s:text-2xl s:gap-8 md:text-4xl md:mt-250 lg:mx-24 lg:text-6xl uppercase'>
+              <p>No estás sola,</p>
+              <p>¡Únete a nuestra</p>
+              <p>comunidad!</p>
+            </h1>
+          
+            <div className="flex flex-col gap-10 ml-auto pr-10 pb-10 s:pr-4 s:gap-6 md:mt-auto lg:pr-44 lg:pb-32 lg:gap-10">
+              <div className=' flex flex-row justify-start gap-2 p-3 px-5  transition-all duration-300 ease-in-out border border-black border-solid rounded-full shadow-md cursor-pointer bg-primary hover:scale-110 uppercase s:text-sm s:w-48 lg:w-60 lg:text-xl'>
+                <FaArrowRight className='my-0.5'/>
+                <NavLink to='/login'>Iniciar sesión</NavLink>
+              </div>
+              <div className='flex flex-row justify-start gap-2 p-3 px-5 text-xl hover:scale-110 transition-all duration-300 ease-in-out border border-black border-solid rounded-full shadow-md cursor-pointer w-60 bg-primary  uppercase s:text-sm s:w-48 lg:w-60 lg:text-xl'>
+                <FaArrowRight className='my-0.5'/>
+                <NavLink to='/register'>Regístrate aquí</NavLink>
+              </div>
+            </div>
+          </div>
+          </div>
+        </section>
+  )
+}
 
-        <nav className='fixed flex flex-row justify-start w-screen gap-10 p-4 mt-0 text-xl border-2 border-solid shadow-md border-b-marron bg-piel-claro sm:pl-0 lg:pl-0'>
-              <NavLink to='/about' className='mx-10 tracking-wider transition-transform duration-300 ease-in-out transform scale-100 cursor-pointer hover:scale-125 lg:ml-24'>INFO</NavLink>
-              <NavLink to='/contact' className='mx-2 tracking-wider transition-transform duration-300 ease-in-out transform scale-100 cursor-pointer hover:scale-125'>CONTACTO</NavLink> 
-        </nav>
-
-        <h1 className='flex flex-col gap-16 mx-10 my-auto text-5xl tracking-wider lg:mx-24 lg:text-6xl'>
-          <p>NO ESTÁS SOLA,</p>
-          <p>¡ÚNETE A NUESTRA</p>
-          <p>COMUNIDAD!</p>
-        </h1>
-        </div>
-
-        <div className='absolute flex flex-row justify-start gap-2 p-3 px-5 text-xl transition-all duration-300 ease-in-out border border-black border-solid rounded-full shadow-md cursor-pointer w-60 bottom-32 right-6 bg-primary lg:bottom-44 lg:right-40 hover:w-64'>
-          <FaArrowRight className='my-0.5'/>
-          <Link to='/login'>INICIAR SESIÓN</Link>
-        </div>
-
-        <div className='absolute flex flex-row justify-start gap-2 p-3 px-5 text-xl transition-all duration-300 ease-in-out border border-black border-solid rounded-full shadow-md cursor-pointer w-60 bottom-12 right-6 bg-primary lg:bottom-24 lg:right-40 hover:w-64'>
-          <FaArrowRight className='my-0.5'/>
-          <button><NavLink to='/register'>REGISTRATE AQUÍ</NavLink></button>
-        </div>
-      </div>
-      </>
-    )
-  }
-  
-  export default Landpage;
-  
+export default Landpage;

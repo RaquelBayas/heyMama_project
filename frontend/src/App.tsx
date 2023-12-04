@@ -1,17 +1,19 @@
 import { Routes, Route } from 'react-router-dom';
 
+
 import Landpage from './components/Landpage';
 import About from './components/About';
 import Contact from './components/Contact';
 import Login from './components/Login';
 import Register from './components/Register';
+import UserConf from './components/UserConf';
 import RegisterType from './components/RegisterType';
 import RegisterProf from './components/RegisterProf';
+import MainPage from './components/MainPage';
 import './App.css'
 import ForumHome from './components/Forum/ForumHome';
 import Forums from './components/Forum/Forums';
 import Depresion from './components/Forum/forumTypes/Depresion'
-
 
 function App() {
 
@@ -27,6 +29,7 @@ function App() {
       <Route path='/forum' element={<ForumHome />} />
       <Route path='/forums' element={<Forums />} />
       <Route path='/forum/depresion' element={<Depresion />} />
+       <Route path='/config' element={<UserConf />} />
     </Routes>
   )
 }
