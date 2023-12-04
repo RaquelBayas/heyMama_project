@@ -52,8 +52,6 @@ async function signUp(req,res,next) {
 async function logIn (req, res, next) {
 
   const { success, error, data } = LoginUser.safeParse(req.body);
-  
-  console.log(req.body);
 
   if(!success){
       const errors = zodErrorMap(error);
@@ -64,15 +62,17 @@ async function logIn (req, res, next) {
           message: null,
           error: errors
       })
-  }
+  };
 
   const { email, password } = data;
 
   try {
-      const [user] = await sendQuery(query.checkEmail, [email]);
+      const checkEmailInDB = ('SELECT * FROM users WHERE email = ?');
+
+      const [user] = await sendQuery(checkEmailInDB, [email]);
       
       if(!user) {
-          return next(new HttpError(400, 'Email y/o contraseña incorrectos.'))
+          return next(new HttpError(400, 'Email no existe.'))
       }
       
       res.send({
