@@ -1,5 +1,3 @@
-import { NavLink } from "react-router-dom";
-import { FaArrowRight } from "react-icons/fa";
 
 function About() {
 

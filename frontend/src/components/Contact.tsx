@@ -1,6 +1,5 @@
 import { FaPhoneAlt } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+
 
 function Contact() {
     return (
@@ -22,7 +21,7 @@ function Contact() {
                         <button className='w-max text-xl'>VOLVER AL INICIO</button>
                     </NavLink>
                 </div>
-                <form className="mt-auto mx-6 bg-primary border-2 border-solid border-black rounded-3xl lg:h-5/6 lg:w-1/2 lg:ml-14 lg:my-auto">
+                <form className="mt-48 mx-6 bg-primary border-2 border-solid border-black rounded-3xl s:mt-24 lg:h-5/6 lg:w-1/2 lg:ml-14 lg:mt-32">
                     <div className="flex flex-col mx-6 mt-8 mb-4">
                         <label>Nombre:</label>
                         <input
@@ -62,7 +61,7 @@ function Contact() {
                     </div>
                 </form>
             </div>
-        </body>
+        </section>
     )
 }
 
