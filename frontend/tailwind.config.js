@@ -8,12 +8,13 @@ export default {
     extend: {
       fontFamily: {
         'anybody': ['Anybody', 'sans-serif'],
+        'Montserrat': ['Montserrat', 'sans-serif']
       },
       colors: {
         background: '#FFF4EA',
         primary: '#F5CEAF',
-        secondary: '#DDBEA9',   
-        dark_brown: '#543C2E',     
+        secondary: '#DDBEA9',
+        dark_brown: '#543C2E',
         'piel-claro': '#fff1e5',
         'marron':'#543C2E',
         'marron2':'#684b39',
@@ -22,9 +23,9 @@ export default {
       backgroundImage:{
         'img-mom': "url('./assets/img-mujer.png')",
         'img-login': "url('./assets/img-login.png')"
-      }, 
-      backgroundSize:{
-        '30%':'30%',
+      },
+      backgroundSize: {
+        '30%': '30%',
         '120%': '120%',
       },
       spacing: {
@@ -33,6 +34,12 @@ export default {
         '450': '450px',
         '400': '400px',
         '550': '550px',
+      },
+      screens: {
+        'mw150': { 'raw': '(max-width: 1150px)' },
+        'mw24': { 'raw': '(min-width: 1024px)' },
+        'mw68': { 'raw': '(max-width: 680px)' },
+        // => @media (min-height: 800px) { ... }
         '650': '650px',
       }, 
       screens: {
