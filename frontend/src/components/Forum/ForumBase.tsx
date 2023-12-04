@@ -23,15 +23,15 @@ function Forum({ children }: { children: ReactNode }) {
                     <div className='w-full mt-2 mb-2 border-b border-secondary'></div>
                 </div>
 
-                <main className="flex gap-4 font-Montserrat justify-around">
+                <main className="flex gap-4 font-Montserrat justify-around mw150:pl-4">
 
-                    <section className="flex flex-col gap-6 flex-shrink-0">
-                        {children}
+                    <section className="flex flex-col gap-6">
+                        {children}-
                     </section>
 
-                    <section className="flex-grow-0 mt-16">
+                    {/* <section className="flex-grow-0 mt-16 mw150:hidden">
                         <article className="bg-white w-[300px] h-[400px]"></article>
-                    </section>
+                    </section> */}
 
                 </main>
             </div>

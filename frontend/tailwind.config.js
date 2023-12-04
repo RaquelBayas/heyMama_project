@@ -31,6 +31,12 @@ export default {
         '450': '450px',
         '400': '400px',
         '550': '550px',
+      },
+      screens: {
+        'mw150': { 'raw': '(max-width: 1150px)' },
+        'mw24': { 'raw': '(min-width: 1024px)' },
+        'mw68': { 'raw': '(max-width: 680px)' },
+        // => @media (min-height: 800px) { ... }
       }
     },
   },
