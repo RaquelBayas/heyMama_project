@@ -7,7 +7,7 @@ import logInUser from "../services/logInService"
 import { LogInForm } from "../models/LogInForm";
 
 function Login(){
-    const [hidden, setHidden] = useState(true);
+    const [hidden, setHidden] = useState(false);
 
     const [formData, setFormData] = useState<LogInForm>({
         email: '',
@@ -49,34 +49,36 @@ function Login(){
                 <div className="flex flex-col w-550 text-center relative top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
                     <h1 className="text-5xl tracking-wide">¡BIENVENIDA!</h1>
                     <form onSubmit={handleSubmit}>
-                        <div className="flex flex-col mx-6 mt-8 mb-4 text-start text-xl">
+                        <div className="flex flex-col h-[82px] mx-6 mt-8 mb-4 text-start text-xl">
                             <label>Email:</label>
                             <input
-                                className='h-10 mt-2 border-2 border-solid border-transparent border-b-black bg-transparent'
                                 type='email'
                                 name='email'
                                 id='email'
                                 value={formData.email}
                                 required
                                 onChange={handleChange}
+
+                                className='h-10 mt-2 border-2 border-solid border-transparent border-b-black bg-transparent text-lg text-gray-600 tracking-wide focus:outline-none'
                             />
                         </div>
-                        <div className="box-border flex flex-col mx-6 mt-8 mb-4 text-start text-xl">
+                        <div className="box-border flex flex-col h-[82px] mx-6 mt-8 mb-4 text-start text-xl">
                             <label>Contraseña:</label>
                             <button 
                                 type='button' 
-                                className='mt-0.5'
+                                className='absolute transform -translate-y-1/2 right-8 top-56 cursor-pointer'
                                 onClick={() => setHidden(!hidden)}>
                                 { hidden ? <FaEye /> : <IoEyeOffSharp /> }
                             </button >
                                 <input
-                                    className='w-full bg-transparent border-b-2 border-dark_brownh-10 border-2 border-solid border-transparent border-b-black'
-                                    type='password'
+                                    type={hidden ? 'text':'password'}
                                     name='password'
                                     id='password'
                                     value={formData.password}
                                     required
                                     onChange={handleChange}
+
+                                    className='w-full bg-transparent border-b-2 border-dark_brownh-10 border-2 border-solid text-lg text-gray-600 border-transparent border-b-black focus:outline-none'
                                     />
                                     {isError && <span>{JSON.stringify(isError)}</span>}
                         </div>
@@ -94,6 +96,7 @@ function Login(){
                     to={'/'}
                     className='absolute bottom-12 left-6 flex flex-row justify-start gap-2 m-4 align-middle bg-primary border border-solid border-black p-3 px-5 rounded-full shadow-md cursor-pointer lg:bottom-24 lg:left-40 hover:scale-110 transition-transform duration-300 ease-in-out'
                 >
+                    <FaArrowRight className='my-0.5'/>
                     <button className='w-max text-xl sm:text-base'>VOLVER AL INICIO</button>
                 </Link>
             </div>
