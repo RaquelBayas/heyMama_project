@@ -14,7 +14,7 @@ function Navbar(){
                             offset={0} 
                             duration={500} 
                             >
-                                <IoHomeOutline className='mt-0.5 text-3xl' />
+                                <IoHomeOutline className='mt-0.5 text-3xl'/>
                         </Link>
                     </a>
                 </li>
