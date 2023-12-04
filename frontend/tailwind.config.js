@@ -36,6 +36,9 @@ export default {
         'mw150': { 'raw': '(max-width: 1150px)' },
         'mw24': { 'raw': '(min-width: 1024px)' },
         'mw68': { 'raw': '(max-width: 680px)' },
+        'mh150': { 'raw': '(max-height: 1050px)' },
+        'mw45': { 'raw': '(max-width: 450px)' },
+
         // => @media (min-height: 800px) { ... }
       }
     },
