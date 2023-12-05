@@ -36,19 +36,33 @@ async function addMood(req, res, next) {
     next()
 }
 
+async function getMoodName(req,res,next) {
+    console.log(req.query);
+    const {mood_id} = req.query;
+    
+    const name = await sendQuery('SELECT mood_type FROM mood_type WHERE mood_id=?',mood_id);
+    res.send({
+        ok:true,
+        error:null,
+        data:name,
+        message: 'Mood name '+name
+    })
+    next();
+}
+
 async function getMood(req, res, next) {
     console.log(req.query);
     
    const {user_id} = req.query;
 
     const mood = await sendQuery('SELECT * FROM mood WHERE user_id=?',[user_id]);
-    console.log('MOOD ALL',await sendQuery('SELECT * FROM mood WHERE user_id=?',[user_id]))
+    
     res.send({
         ok: true,
         error: null,
         data: mood,
         message: 'Historial de emociones del usuario '+user_id
-      });
+    });
 
     next()
 }
@@ -74,4 +88,4 @@ async function deleteMood(req, res, next) {
     next()
 }
 
-export {addMood, getMood, deleteMood}
+export {addMood, getMood, getMoodName, deleteMood}
