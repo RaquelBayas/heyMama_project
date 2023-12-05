@@ -26,4 +26,3 @@ connection.connect()
   })
   .catch(err => console.log(err.message));
 
-  // connection.query('SELECT * FROM user')
