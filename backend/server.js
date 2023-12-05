@@ -1,9 +1,9 @@
-import express from 'express'
-import 'dotenv/config'
-import morgan from 'morgan'
-import cors from 'cors'
-import { connection } from './db/connectDB.js'
-import { userRoutes } from './routes/user.routes.js'
+import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
+import { connection } from './db/connectDB.js';
+import { userRoutes } from './routes/user.routes.js';
+import 'dotenv/config';
 
 const port = process.env.PORT;
 const app = express();
@@ -20,6 +20,7 @@ app.use('/users', userRoutes);
 
 app.use(async (error, req, res, next) => {
   console.log(error.message);
+  console.log(next);
 });
 
 

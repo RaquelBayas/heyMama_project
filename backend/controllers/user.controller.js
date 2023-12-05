@@ -1,7 +1,10 @@
+import bcrypt from 'bcrypt';
+import jwt from "jsonwebtoken";
 import { User, LoginUser } from "../schemas/User.js";
 import {sendQuery} from '../db/connectDB.js'
 import { zodErrorMap } from '../helpers/zodErrorMap.js';
 
+// REGISTER
 async function signUp(req,res,next) {
     console.log(req.body)
     
@@ -22,6 +25,10 @@ async function signUp(req,res,next) {
     //Admin (1), Prof. (2), Wom. (3)
     const { userType, name, surname, email, password, phone, job, numCollege} = data;
 
+    const salt = 10;
+    const hashedPassword = bcrypt.hashSync(password, salt);
+    const confirmationCode = crypto.randomUUID;
+
     try {
         const type_user_id = {
           'admin': 1,
@@ -30,14 +37,13 @@ async function signUp(req,res,next) {
         }
         
         if(userType === 'prof') {
-            await sendQuery('INSERT INTO users (name, surname, email, password, phone, job, numCollege, type_user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [name, surname, email, password, phone, job, numCollege, type_user_id[userType]]);
+            await sendQuery('INSERT INTO users (name, surname, email, password, phone, job, numCollege, type_user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [name, surname, email, hashedPassword, phone, job, numCollege, type_user_id[userType]]);
         } else if(userType === 'user') {
-            await sendQuery('INSERT INTO users (name, surname, email, password, phone, type_user_id) VALUES (?, ?, ?, ?, ?, ?)', [name, surname, email, password, phone, type_user_id[userType]]);
-        }
-        
+            await sendQuery('INSERT INTO users (name, surname, email, password, phone, type_user_id) VALUES (?, ?, ?, ?, ?, ?)', [name, surname, email, hashedPassword, phone, type_user_id[userType]]);
+        };
     } catch (error) {
         return next(new Error(error.message));
-    }
+    };
 
     res.send({
         ok: true,
@@ -49,6 +55,7 @@ async function signUp(req,res,next) {
     next()
 };
 
+// LOGIN
 async function logIn (req, res, next) {
 
   const { success, error, data } = LoginUser.safeParse(req.body);
@@ -64,29 +71,44 @@ async function logIn (req, res, next) {
       })
   };
 
-  const { email, password } = data;
+  const { email, password:truePassword } = data;
 
   try {
       const checkEmailInDB = ('SELECT * FROM users WHERE email = ?');
 
       const [user] = await sendQuery(checkEmailInDB, [email]);
-      
-      console.log(user);
 
       if(!user) {
           return next(new HttpError(404, 'Email no existe.'))
-      } 
+      };
       
+      const match = await bcrypt.compare(truePassword, user.password);
+
+      if (!match){
+        return next(new HttpError(400, 'Contraseña incorrecta'))
+      };
+      
+      const infoUser = { 
+        id:user.user_id, 
+        type:user.type_user_id 
+      }
+
+      const token = jwt.sign(infoUser, process.env.JWT_SECRET,{
+        expiresIn: '1 day'
+      });
+
+      infoUser.exp = Date.now() + (1000 * 60 * 60 * 24);
+
       res.send({
         ok:true,
         message: 'Logeado correctamente',
-        error:null
+        error:null,
+        data: {token, user:infoUser}
   })
-      
   } catch (error) {
       return next(error)
   }
-}
+};
 
 
 export { signUp , logIn }
