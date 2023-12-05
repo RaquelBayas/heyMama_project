@@ -4,6 +4,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import { connection } from './db/connectDB.js'
 import { userRoutes } from './routes/user.routes.js'
+import { moodRoutes } from './routes/mood.routes.js'
 
 const port = process.env.PORT;
 const app = express();
@@ -17,11 +18,11 @@ app.get('/', (req, res) => {
 })
 
 app.use('/users', userRoutes)
-
+app.use('/mood', moodRoutes)
 
 connection.connect()
   .then(() => {
-    console.log('Conectado a la base de datos...');
+    console.log('Conectado a la base de datos...'+process.env.MYSQL_ADDON_PORT);
     app.listen(port, () => console.log(`Escuchando en el puerto ${port}...`));
   })
   .catch(err => console.log(err.message));
