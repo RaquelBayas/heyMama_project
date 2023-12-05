@@ -8,6 +8,9 @@ function Depresion() {
     main?.classList.add('flex-col')
     main?.classList.remove('justify-center')
 
+    const date = new Date();
+    const output = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
+
     return (
         <div className='w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden'>
 
@@ -28,60 +31,70 @@ function Depresion() {
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
+                            <time className='italic'>{output}</time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
+                            <time className='italic'>{output}</time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
+                            <time className='italic'>{output}</time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
+                            <time className='italic'>{output}</time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
+                            <time className='italic'>{output}</time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
+                            <time className='italic'>{output}</time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
+                            <time className='italic'>{output}</time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
+                            <time className='italic'>{output}</time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
+                            <time className='italic'>{output}</time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
+                            <time className='italic'>{output}</time>
                         </article>
                     </section>
 
