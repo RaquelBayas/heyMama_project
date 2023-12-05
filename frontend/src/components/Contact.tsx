@@ -53,7 +53,7 @@ function Contact(){
                     </div>
                 </form>
             </div>
-        </section>
+        </body>
     )
 }
 

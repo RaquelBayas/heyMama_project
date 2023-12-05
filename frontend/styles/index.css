@@ -1,21 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('/frontend/styles/fonts/Montserrat-VariableFont_wght.ttf');
-@import url('/frontend/styles/fonts/Montserrat-Italic-VariableFont_wght.ttf');
 
-@font-face {
-    font-family: Montserrat;
-    src: url(./fonts/Montserrat-Light.ttf);
-    font-weight: 300;
+@media (max-width: 680px) {
+    .data-forumscard {
+        width: 180px;
+    }
+
+    .data-forumspath {
+        justify-content: center;
+        align-self: center;
+        margin-left: -8rem;
+        flex-direction: column;
+    }
 }
 
-@font-face {
-    font-family: Montserrat;
-    src: url(./fonts/Montserrat-SemiBold.ttf);
-    font-weight: 600;
+@media (min-width: 1600px) {
+    .data-forumscard {
+        width: 42rem;
+    }
 }
 
-body {
-    font-family: Montserrat;
+@media (min-width: 680px) and (max-width: 1600px) {
+    .data-forumscard {
+        width: max-content;
+    }
 }
