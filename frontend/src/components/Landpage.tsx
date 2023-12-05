@@ -8,7 +8,7 @@ function Landpage() {
         <section id='landpage'>
           <div className='w-full h-screen max-w-full bg-bottom bg-no-repeat bg-contain bg-img-mom font-anybody lg:w-screen'>
           <div className='flex flex-col w-full h-screen leading-none bg-shade-bg lg:w-screen'>
-            <h1 className='flex flex-col gap-16 mx-10 mt-auto text-5xl tracking-wider uppercase s:text-2xl s:gap-8 md:text-4xl md:mt-250 lg:mx-24 lg:text-6xl'>
+            <h1 className='flex flex-col gap-16 mx-10 mt-auto text-5xl tracking-wider uppercase s:text-5xl s:pt-20 s:gap-8 md:text-4xl md:mt-250 lg:mx-24 lg:text-6xl'>
               <p>No estás sola,</p>
               <p>¡Únete a nuestra</p>
               <p>comunidad!</p>
