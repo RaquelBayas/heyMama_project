@@ -41,8 +41,8 @@ async function getMood(req, res, next) {
     
    const {user_id} = req.query;
 
-    const [mood] = await sendQuery('SELECT * FROM mood WHERE user_id=?',[user_id]);
-
+    const mood = await sendQuery('SELECT * FROM mood WHERE user_id=?',[user_id]);
+    console.log('MOOD ALL',await sendQuery('SELECT * FROM mood WHERE user_id=?',[user_id]))
     res.send({
         ok: true,
         error: null,
