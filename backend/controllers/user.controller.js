@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 import { User, LoginUser } from "../schemas/User.js";
-import {sendQuery} from '../db/connectDB.js'
+import { sendQuery } from '../db/connectDB.js'
 import { zodErrorMap } from '../helpers/zodErrorMap.js';
 
 // REGISTER
