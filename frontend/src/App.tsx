@@ -14,12 +14,13 @@ import './App.css'
 import ForumHome from './components/Forum/ForumHome';
 import Forums from './components/Forum/Forums';
 import Depresion from './components/Forum/forumTypes/Depresion'
+import MoodTracker from './components/MoodTracker';
 
 function App() {
 
   return (
     <Routes>
-      <Route path='/' element={<Landpage />} />
+      <Route path='/' element={<MainPage />} />
       <Route path='/about' element={<About />} />
       <Route path='/contact' element={<Contact />} />
       <Route path='/login' element={<Login />} />
@@ -29,7 +30,8 @@ function App() {
       <Route path='/forum' element={<ForumHome />} />
       <Route path='/forums' element={<Forums />} />
       <Route path='/forum/depresion' element={<Depresion />} />
-       <Route path='/config' element={<UserConf />} />
+      <Route path='/config' element={<UserConf />} />
+      <Route path='/mood' element={<MoodTracker />}/>
     </Routes>
   )
 }
