@@ -23,16 +23,66 @@ function Depresion() {
                     <h1 className='self-start text-4xl font-semibold text-[#8B6956] flex items-center mt-4 mb-6 data-forumspath'>FOROS <img src="/src/assets/arrow-symbol.svg" className='inline mx-6 w-4' /> <span className='text-2xl'> Depresión</span></h1>
 
                     <section className="grid grid-cols-2 mw150:flex mw150:flex-col justify-around gap-6 border-2 border-[#DDBEA9] p-8 -pr-8 -ml-[12rem] mb-4">
-                        <article className="bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</article>
-                        <article className="bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</article>
-                        <article className="bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</article>
-                        <article className="bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</article>
-                        <article className="bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</article>
-                        <article className="bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</article>
-                        <article className="bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</article>
-                        <article className="bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</article>
-                        <article className="bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</article>
-                        <article className="bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</article>
+                        <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                            <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                            </p>
+                        </article>
+                        <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                            <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                            </p>
+                        </article>
+                        <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                            <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                            </p>
+                        </article>
+                        <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                            <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                            </p>
+                        </article>
+                        <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                            <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                            </p>
+                        </article>
+                        <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                            <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                            </p>
+                        </article>
+                        <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                            <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                            </p>
+                        </article>
+                        <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                            <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                            </p>
+                        </article>
+                        <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                            <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                            </p>
+                        </article>
+                        <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                            <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                            </p>
+                        </article>
                     </section>
 
                     {/* <section className="flex-grow-0 mt-16 mw150:hidden">
