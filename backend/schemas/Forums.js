@@ -1,8 +1,10 @@
 
 import { z } from 'zod'
 
-const forumCard = z.object({
-    text: z.string()
+const ForumCard = z.object({
+    user_id: z.number(),
+    subforum_title: z.string(),
+    subforum_content: z.string()
 })
 
-export { forumCard }
+export { ForumCard }
