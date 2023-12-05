@@ -1,49 +1,63 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOffSharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
-import { useState } from "react";
-import logInUser from "../services/logInService"
 import { LogInForm } from "../models/LogInForm";
 
+interface FormError {
+    [key: string]: string
+}
+
 function Login(){
-    const [hidden, setHidden] = useState(false);
+    const [hidden, setHidden] = useState(true);
 
     const [formData, setFormData] = useState<LogInForm>({
         email: '',
         password: '',
       });
 
-    const [isError, setIsError] = useState(null);
+    const [error, setError] = useState<FormError | null>(null);
 
     function handleChange(e:React.ChangeEvent<HTMLInputElement>){
         setFormData({
             ...formData, 
             [e.target.name] : e.target.value
         })
-    }
+    };
 
-    function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const actualData = {...formData}
-        setFormData({
-            email:'',
-            password:''
-        })
+        const baseUrl = 'http://localhost:5000/users/login';
+        
+        try {
+            const resp = await fetch(baseUrl, {
+                method:'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+        
+        
+            const data = await resp.json(); 
+            console.log(data);
 
-        logInUser(actualData).then(resp => {
-            if(resp.error){
-                return resp.error;
-            }
-        setIsError(null)
-        console.log(resp);
-        return resp;
-        })
+            if (!resp.ok && resp.status === 400) {
+                setError(data.error)
+            };
+
+            if (resp.ok) {
+                setError(null);
+            };
+        } catch (error) {
+            console.error(error);
+        };
     };
 
     return(
-        <body>
+        <section>
             <div className="w-screen h-screen font-anybody box-border bg-img-login bg-no-repeat bg-center bg-contain">
             <div className='absolute top-0 right-0 left-0 bottom-0 bg-shade-bg'>    
                 <div className="flex flex-col w-550 text-center relative top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
@@ -52,15 +66,17 @@ function Login(){
                         <div className="flex flex-col h-[82px] mx-6 mt-8 mb-4 text-start text-xl">
                             <label>Email:</label>
                             <input
-                                type='email'
+                                type='text'
                                 name='email'
                                 id='email'
                                 value={formData.email}
                                 required
+                                autoComplete="off"
                                 onChange={handleChange}
-
+                                
                                 className='h-10 mt-2 border-2 border-solid border-transparent border-b-black bg-transparent text-lg text-gray-600 tracking-wide focus:outline-none'
-                            />
+                                />
+                                {error?.email && <span className="text-[18px] text-red-500 p-3">{error.email}</span>}
                         </div>
                         <div className="box-border flex flex-col h-[82px] mx-6 mt-8 mb-4 text-start text-xl">
                             <label>Contraseña:</label>
@@ -75,12 +91,12 @@ function Login(){
                                     name='password'
                                     id='password'
                                     value={formData.password}
-                                    required
                                     onChange={handleChange}
-
+                                    autoComplete="off"
+                                    
                                     className='w-full bg-transparent border-b-2 border-dark_brownh-10 border-2 border-solid text-lg text-gray-600 border-transparent border-b-black focus:outline-none'
                                     />
-                                    {isError && <span>{JSON.stringify(isError)}</span>}
+                                    {error?.password && <span className="text-[18px] text-red-500 p-3">{error.password}</span>}
                         </div>
                         <div className="flex flex-row text-center justify-center align-bottom gap-10 mt-8">
                             <h2>¿No tienes una cuenta?</h2>
@@ -101,7 +117,7 @@ function Login(){
                 </Link>
             </div>
             </div>
-        </body>
+        </section>
     )
 }
 

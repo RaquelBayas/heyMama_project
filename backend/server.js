@@ -14,9 +14,13 @@ app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
-})
+});
 
-app.use('/users', userRoutes)
+app.use('/users', userRoutes);
+
+app.use(async (error, req, res, next) => {
+  console.log(error.message);
+});
 
 
 connection.connect()

@@ -71,9 +71,11 @@ async function logIn (req, res, next) {
 
       const [user] = await sendQuery(checkEmailInDB, [email]);
       
+      console.log(user);
+
       if(!user) {
-          return next(new HttpError(400, 'Email no existe.'))
-      }
+          return next(new HttpError(404, 'Email no existe.'))
+      } 
       
       res.send({
         ok:true,
