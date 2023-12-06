@@ -1,15 +1,29 @@
+import { useEffect, useState } from 'react';
 import Menu from '../../Menu'
 import Search from '../../Search'
 
 function Depresion() {
 
-    const main = document.querySelector('main')
+    interface ForumCard {
+        "subforum_id": number
+        "subforum_title": string
+        "subforum_content": string
+        "create_time": string
+    }
 
-    main?.classList.add('flex-col')
-    main?.classList.remove('justify-center')
+    const [forumCards, setForumCards] = useState<ForumCard[]>([]);
 
-    const date = new Date();
-    const output = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
+    useEffect(() => {
+
+        fetch('http://localhost:5000/forum/depresion')
+            .then(resp => resp.json())
+            .then(data => {
+                if (!data.error) {
+                    return setForumCards(data.forumCards);
+                }
+            })
+            .catch(error => console.error(error.message));
+    }, []);
 
     return (
         <div className='w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden'>
@@ -26,75 +40,87 @@ function Depresion() {
                     <h1 className='self-start text-4xl font-semibold text-[#8B6956] flex items-center mt-4 mb-6 data-forumspath'>FOROS <img src="/src/assets/arrow-symbol.svg" className='inline mx-6 w-4' /> <span className='text-2xl'> Depresión</span></h1>
 
                     <section className="grid grid-cols-2 mw150:flex mw150:flex-col justify-around gap-6 border-2 border-[#DDBEA9] p-8 -pr-8 -ml-[12rem] mb-4">
+
+                        {forumCards?.map(forumCard => (
+                            <article key={forumCard.subforum_id} className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                                <h2 className='font-semibold text-xl'>{forumCard.subforum_title}</h2>
+                                <p>
+                                    {forumCard.subforum_content}
+                                </p>
+                                <time className='italic'>{forumCard.create_time}</time>
+                            </article>
+                        ))}
+
+
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
-                            <time className='italic'>{output}</time>
+                            <time className='italic'></time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
-                            <time className='italic'>{output}</time>
+                            <time className='italic'></time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
-                            <time className='italic'>{output}</time>
+                            <time className='italic'></time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
-                            <time className='italic'>{output}</time>
+                            <time className='italic'></time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
-                            <time className='italic'>{output}</time>
+                            <time className='italic'></time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
-                            <time className='italic'>{output}</time>
+                            <time className='italic'></time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
-                            <time className='italic'>{output}</time>
+                            <time className='italic'></time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
-                            <time className='italic'>{output}</time>
+                            <time className='italic'></time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
-                            <time className='italic'>{output}</time>
+                            <time className='italic'></time>
                         </article>
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
-                            <time className='italic'>{output}</time>
+                            <time className='italic'></time>
                         </article>
                     </section>
 
