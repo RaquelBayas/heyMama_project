@@ -1,9 +1,9 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import 'dotenv/config';
 import { connection } from './db/connectDB.js';
 import { userRoutes } from './routes/user.routes.js';
-import 'dotenv/config';
 
 const port = process.env.PORT;
 const app = express();
