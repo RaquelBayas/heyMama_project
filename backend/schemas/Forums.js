@@ -3,6 +3,7 @@ import { z } from 'zod'
 
 const ForumCard = z.object({
     user_id: z.number(),
+    forum_id: z.number(),
     subforum_title: z.string(),
     subforum_content: z.string()
 })
