@@ -1,3 +1,4 @@
+
 import express from 'express'
 import 'dotenv/config'
 import morgan from 'morgan'
@@ -16,8 +17,14 @@ app.use(morgan('dev'));
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
+
 app.use('/users', userRoutes)
 app.use('/forum', forumRoutes)
+
+app.use(async (error, req, res, next) => {
+  console.log(error.message);
+  console.log(next);
+});
 
 
 connection.connect()
@@ -26,3 +33,4 @@ connection.connect()
     app.listen(port, () => console.log(`Escuchando en el puerto ${port}...`));
   })
   .catch(err => console.log(err.message));
+

@@ -7,6 +7,11 @@
         width: 180px;
     }
 
+    .data-forumscard p,
+    time {
+        visibility: hidden;
+    }
+
     .data-forumspath {
         justify-content: center;
         align-self: center;

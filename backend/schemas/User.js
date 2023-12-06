@@ -14,7 +14,9 @@ const User = z.object({
   password: z.string({
     required_error: 'Campo obligatorio',
     invalid_type_error: 'El campo tiene que ser un string'
-  }).min(4).max(32),
+  }).min(4, {message: 'Mínimo 4 caracteres'}).max(32, { message: 'Máximo 32 caracteres' }),
 });
 
-export {User};
+const LoginUser = User.omit({ userType:true, name: true, surname:true, phone:true, job:true, numCollege:true });
+
+export {User, LoginUser};
