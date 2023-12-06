@@ -28,7 +28,7 @@ function Contact() {
 
 
                 <form 
-                   className="mx-6 h-fit border-2 border-black border-solid bg-primary rounded-3xl 
+                   className="mx-6 h-fit border-2 border-black border-solid bg-primary rounded-3xl overflow-hidden
                    
                    sm:mt-36 sm:mb-20
                    md:mt-36 

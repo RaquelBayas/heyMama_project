@@ -3,7 +3,7 @@ function About() {
     return (
         <section 
         id='about' 
-        className='m-0 p-0 flex flex-row w-full h-screen mx-auto bg-primary font-anybody'
+        className='m-0 p-0 flex flex-row w-full h-screen mx-auto bg-primary font-anybody '
         >
             <div className='flex flex-col w-2/5'>
                 <h1 
@@ -21,8 +21,10 @@ function About() {
                     className='mt-0 h-350 mr-auto
                     
                     sm:h-250 s:mt-32
-                    md:h-350 md:mt-24
-                    lg:h-350 lg:mt-10
+                    md:h-350 md:mt-26
+                    lg:h-350 lg:mt-26
+                    xl:mt-30
+                    2xl:mt-30
                     ' />
             </div>
                 
