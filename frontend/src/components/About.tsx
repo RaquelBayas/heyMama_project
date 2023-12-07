@@ -7,21 +7,22 @@ function About() {
         >
             <div className='flex flex-col w-2/5'>
                 <h1 
-                    className='mt-auto font-semibold tracking-widest text-center uppercase leading-loose
+                    className='flex flex-col gap-5 mt-auto font-semibold tracking-widest text-center uppercase leading-loose
                     
                     sm:text-xl
                     md:text-2xl
                     lg:text-3xl
                     xl:text-4xl'
                 >
-                    ¿Quiénes somos?
+                    <span>¿Quiénes </span> 
+                    <span>somos?</span>
                 </h1>
                 <img 
                     src="./src/assets/flower.svg" alt="flower" 
                     className='mt-0 h-350 mr-auto
                     
-                    sm:h-250 s:mt-32
-                    md:h-350 md:mt-26
+                    sm:h-250 sm:mt-20
+                    md:h-350 md:mt-20
                     lg:h-350 lg:mt-26
                     xl:mt-30
                     2xl:mt-30
@@ -32,7 +33,7 @@ function About() {
                     className='flex flex-col ml-auto my-auto h-auto gap-4 font-light text-justify
                     
                     sm:w-96 sm:mr-10 sm:text-sm
-                    md:w-450 md:mr-12 md:text-md
+                    md:w-350 md:mr-12 md:text-md
                     lg:w-650 lg:mr-auto lg:text-xl
                     xl:w-650 xl:mr-auto xl:text-xl
                     '
