@@ -104,7 +104,7 @@ async function logIn (req, res, next) {
         message: 'Logeado correctamente',
         error:null,
         data: {token, user:infoUser}
-  })
+      })
   } catch (error) {
       return next(error)
   }

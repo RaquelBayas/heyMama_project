@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 
-import Landpage from './components/Landpage';
+
 import About from './components/About';
 import Contact from './components/Contact';
 import Login from './components/Login';
