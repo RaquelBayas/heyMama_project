@@ -10,13 +10,17 @@ function Breathing() {
 
     function handleClick(e) {
 
+        let breathInterval
+
         if (e.target.innerText === 'EMPEZAR') {
             ball?.classList.add('circle', 'pulse')
             setBreathing('Inhala...')
+            breathInterval = setInterval(() => console.log('interval'), 4000)
 
         } else {
             ball?.classList.remove('circle', 'pulse')
             setBreathing('Respira...')
+            clearInterval(breathInterval)
         }
     }
 
