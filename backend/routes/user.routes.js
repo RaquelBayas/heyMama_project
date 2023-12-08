@@ -1,6 +1,6 @@
 import express from "express";
 import { signUp, logIn } from "../controllers/user.controller.js";
-import contact_form from "../controllers/contact_form.js"
+import { contact_form } from "../controllers/contact_form.js"
 
 const userRoutes = express.Router();
 
