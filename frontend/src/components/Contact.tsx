@@ -1,21 +1,54 @@
 import { useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
+import { ContactForm } from "../models/ContactForm";
 
 function Contact() {
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const [ error, setError ] = useState<ContactForm | null>(null);
+
+    const [ contactData, setContactData ] = useState({
+        name: '',
+        phone: '',
+        email:'',
+        message:'',
+        }
+    );
+
+    function handleChange(e : React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
+        setContactData({
+            ...contactData, 
+            [e.target.name] : e.target.value
+        })
+    };
+
+    async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        console.log('Data', name, email, phone, message);
+        const baseUrl = 'http://localhost:5000/users/contact';
         
+        try {
+            const resp = await fetch(baseUrl, {
+                method:'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify(contactData)
+            });
+            
+            if (!resp.ok && resp.status === 400) {
+                const data = await resp.json(); 
+                setError(data.error)
+            } else {
+                setError(null);
+            }; 
+            
+        } catch (error) {
+            console.error(error);
+        };
     };
 
     return (
-        <section id='contact' className="w-full h-screen bg-background font-anybody">
+        <div id='contact' className="w-full h-screen bg-background font-anybody">
             <div className="grid grid-cols-2">
                 
                 <div className="flex flex-col gap-12 mx-auto my-auto pt-36 
@@ -54,47 +87,57 @@ function Contact() {
                         <label>Nombre:</label>
                         <input
                             type='text'
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            name='name'
+                            value={contactData.name}
+                            onChange={handleChange}
                             placeholder="Escriba su nombre"
                             
                             className='mt-1 p-4 h-10 border-2 border-black border-solid rounded-xl text-sm'
                         />
+                        
+                        {error?.name && <span className="text-[18px] text-red-500 p-3">{error.name}</span>}
+                        
                     </div>
                     <div className="flex flex-col mx-6 mt-8 mb-4">
                         <label>Teléfono:</label>
                         <input
                             type="number"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
+                            name="phone"
+                            value={contactData.phone}
+                            onChange={handleChange}
                             placeholder="Ejemplo +34 655 123 123"
 
                             className='mt-1 h-10 border-2 border-black border-solid rounded-xl p-4 text-sm'
                             
                         />
+                        {error?.phone && <span className="text-[18px] text-red-500 p-3">{error.phone}</span>}
+
                     </div>
                     <div className="flex flex-col mx-6 mt-8 mb-4">
                         <label>Email:</label>
                         <input
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="email"
+                            name="email"
+                            value={contactData.email}
+                            onChange={handleChange}
                             placeholder="email@gmail.com"
                             
-                            className='mt-1 h-10 border-2 border-black border-solid rounded-xl p-4 text-sm'
-                            
+                            className='mt-1 h-10 border-2 border-black border-solid rounded-xl p-4 text-sm' 
                         />
+                        {error?.email && <span className="text-[18px] text-red-500 p-3">{error.email}</span>}
                     </div>
                     <div className="flex flex-col mx-6 mt-8 mb-4">
                         <label>Mensaje:</label>
                         <textarea
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
+                            name="message"
+                            rows={5}
+                            value={contactData.message}
+                            onChange={handleChange}
                             placeholder="Deje su mensaje"
 
-                            className='mt-1 border-2 border-black border-solid h-52 rounded-xl lg:h-40 p-4 text-sm'
-                            rows={5}
+                            className='mt-1 border-2 border-black border-solid h-52 rounded-xl lg:h-40 p-4 text-sm' 
                         />
+                        {error?.message && <span className="text-[18px] text-red-500 p-3">{error.message}</span>}
                     </div>
                     <div className="flex justify-center my-3">
                         <button
@@ -107,7 +150,7 @@ function Contact() {
                 </form>
 
             </div>
-        </section>
+        </div>
     )
 }
 
