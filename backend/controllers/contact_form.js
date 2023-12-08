@@ -1,6 +1,6 @@
-import { sendQuery } from "../db/connectDB";
-import { zodErrorMap } from "../helpers/zodErrorMap";
-import { ContactForm } from "../schemas/User";
+import { sendQuery } from "../db/connectDB.js";
+import { zodErrorMap } from "../helpers/zodErrorMap.js";
+import { ContactForm } from "../schemas/User.js";
 
 async function contact_form(req, res){
     
@@ -17,7 +17,7 @@ async function contact_form(req, res){
         })
     };
 
-    const { name, phone, email, message } = contactData;
+    const { name, phone, email, message } = req.body;
 
     //crear tabla contact_form
 
@@ -25,21 +25,21 @@ async function contact_form(req, res){
         const newContactRequest = 'INSERT INTO contact_form (name, phone, email, message) VALUES (?, ?, ?, ?)';
         
         await sendQuery(newContactRequest, [name ,phone, email,message]);
+        res.send({
+            ok: true,
+            error: null,
+            data: null,
+            message: 'Datos de contacto añadido correctamente.'
+          })
         
     } catch (error) {
         
         res.status(500).send({
             ok: false,
             data: null,
-            error: error.message
+            error: error
         })
     }
-    res.send({
-        ok: true,
-        error: null,
-        data: null,
-        message: 'Datos de contacto añadido correctamente.'
-      })
 }
 
 export { contact_form };
