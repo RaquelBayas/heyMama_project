@@ -15,6 +15,7 @@ import ForumHome from './components/Forum/ForumHome';
 import Forums from './components/Forum/Forums';
 import Depresion from './components/Forum/forumTypes/Depresion'
 import MoodTracker from './components/MoodTracker';
+import Breathing from './components/Breathing';
 
 function App() {
 
@@ -31,7 +32,8 @@ function App() {
       <Route path='/forums' element={<Forums />} />
       <Route path='/forum/depresion' element={<Depresion />} />
       <Route path='/config' element={<UserConf />} />
-      <Route path='/mood' element={<MoodTracker />}/>
+      <Route path='/mood' element={<MoodTracker />} />
+      <Route path='/breathing' element={<Breathing />} />
     </Routes>
   )
 }
