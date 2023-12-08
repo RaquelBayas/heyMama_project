@@ -7,21 +7,21 @@ import Search from './Search'
 function MoodPage() {
   return (
     
-    <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
-      <Menu />
-      <div className="grid w-full grid-rows-[5em_1fr]">
-        <div className='flex flex-col justify-center mt-3 mb-3'>
-         <div className='flex justify-evenly'><Search /></div>
-          <div className='w-full mt-2 mb-2 border-b border-secondary'></div>
-        </div>  
-        <div className='bg-white w-fit h-fit'>
-        <MoodRecord />
-        <MoodTracker />
-        </div>      
+    <div className='grid w-full h-screen grid-cols-[auto,1fr] overflow-hidden bg-background'>
+  <div><Menu /></div>
+  
+  <div className="grid w-full grid-cols-1 grid-rows-[5em,1fr]">
+    <div className='flex flex-col justify-center mt-3 mb-3'>
+      <div className='flex justify-evenly'><Search /></div>
+      <div className='w-full mt-2 mb-2 border-b border-secondary'></div>
+    </div>  
+    <div className='mx-auto bg-white h-fit w-fit'>
+      <MoodRecord />
+      <MoodTracker />
+    </div>      
+  </div>
+</div>
 
-      </div>               
-
-    </div>
   )
 }
 

@@ -7,11 +7,12 @@ import { MoodData } from '../models/MoodData';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function MoodRecord() {
-    const [moodData, setMoodData] = useState([]);
+    const [moodData, setMoodData] = useState<MoodData[]>([]);
+    const [loading, setLoading] = useState(true);
     
     const data = {
-        labels: moodData.map((mood: MoodData) => 
-            mood.mood_type_id),
+        
+        labels : ['Feliz', 'Bien', 'Regular', 'Mal', 'Triste'],
 
         datasets: [
             {
@@ -37,27 +38,28 @@ function MoodRecord() {
            }
         ]
     }
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const moodInfo = await getMood();
+            console.log(moodInfo.data)
+            setMoodData(moodInfo.data);
+          } catch (error) {
+            console.error('Error fetching mood data:', error);
+          } finally {
+            setLoading(false);
+          }
+        };
     
-    
-
-    
-        if(moodData.length == 0) {
-            const data1 = async() => {
-
-                try {
-                    const moodInfo = await getMood();
-                    setMoodData(moodInfo.data);
-                } catch (error) {
-                    console.log(error);
-                }
-                
-            }
-            data1();
+        // Solo fetchData si moodData está vacío
+        if (moodData.length === 0) {
+          fetchData();
         }
+      }, [moodData]);
     
   return (
     <div>
-        <Pie data={data} />
+        { loading ? (<p>Cargando datos... </p>) :  ( <Pie data={data} />)}
     </div>
   )
 }
