@@ -4,6 +4,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import { connection } from './db/connectDB.js';
 import { userRoutes } from './routes/user.routes.js';
+import { articlesRoutes } from './routes/articles.routes.js';
 
 const port = process.env.PORT;
 const app = express();
@@ -17,6 +18,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users', userRoutes);
+
+app.use('/articles', articlesRoutes);
 
 app.use(async (error, req, res, next) => {
   console.log(error.message);
