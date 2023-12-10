@@ -3,10 +3,8 @@ import { zodErrorMap } from '../helpers/zodErrorMap.js';
 import { Articles } from '../schemas/Articles.js';
 
 async function addArticle(req, res, next) {
-    console.log(req.body)
     
     const { success, error, data } = Articles.safeParse(req.body);
-    console.log(success,error,data)
 
     if (!success) {
       const errors = zodErrorMap(error);
@@ -49,21 +47,46 @@ async function deleteArticle(req, res, next) {
         error: null,
         data: null,
         message: 'Artículo eliminado correctamente.'
-      });
+    });
 
     next();
 }
 
 async function editArticle(req, res, next){
-    const article_id = req.params;
-    const newInfo = req.body;
+    const article_id = req.params.article_id;
+
+    const { success, error, data } = Articles.safeParse(req.body);
+
+    if (!success) {
+      const errors = zodErrorMap(error);
+      return res.send({
+        ok: false,
+        data: null,
+        error: errors
+      });
+    }
 
     try {
-        Articles.parse(newInfo);
-        console.log(getArticles());
+        const article = await findArticleById(article_id);
+        console.log('article:',article);       
+    } catch (error) {
+        return next(new Error(error.message));
+    }
+
+    const { title, author, content} = data;
+    
+    try {
+        await sendQuery('UPDATE articles SET title = ?, author = ?, content = ? WHERE article_id = ?',[title, author, content, article_id]);
     } catch(error) {
         return next(new Error(error.message));
     }
+    res.send({
+        ok: true,
+        error: null,
+        data: null,
+        message: 'Artículo actualizado correctamente.'
+    });
+    next();
 }
 
 async function getArticles() {
@@ -73,7 +96,15 @@ async function getArticles() {
     }catch(error) {
         return next(new Error(error.message));
     }
-    
 }
 
+async function findArticleById(id) {
+    try {
+        const article = await sendQuery('SELECT * FROM articles WHERE article_id=?',id);
+        return article;
+    }catch(error) {
+        return next(new Error(error.message));
+    }
+    
+}
 export {addArticle, deleteArticle, editArticle, getArticles};
