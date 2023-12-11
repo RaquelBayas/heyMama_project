@@ -111,13 +111,13 @@ async function getArticles(req, res, next) {
     next()
 }
 
-async function findArticleById(id) {
+async function findArticleById(req, res, next) {
     try {
-        const article = await sendQuery('SELECT * FROM articles WHERE article_id=?', id);
+        const article = await sendQuery('SELECT * FROM articles WHERE article_id=?', req.id);
         return article;
     } catch (error) {
         return next(new Error(error.message));
     }
 
 }
-export { addArticle, deleteArticle, editArticle, getArticles };
+export { addArticle, deleteArticle, editArticle, getArticles, findArticleById };
