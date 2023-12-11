@@ -5,7 +5,7 @@ import cors from 'cors'
 import { connection } from './db/connectDB.js'
 import { userRoutes } from './routes/user.routes.js'
 import { forumRoutes } from './routes/forum.routes.js'
-
+import { articlesRoutes } from './routes/articles.routes.js';
 
 const port = process.env.PORT;
 
@@ -21,6 +21,8 @@ app.get('/', (req, res) => {
 
 app.use('/users', userRoutes)
 app.use('/forum', forumRoutes)
+
+app.use('/articles', articlesRoutes);
 
 app.use(async (error, req, res, next) => {
   console.log(error.message);
