@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
-import '../index.css';
+import '../../index.css';
 
 function Landpage() {
 
