@@ -29,6 +29,9 @@ function Login(){
     async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
+        console.log('HOLA');
+        
+
         const baseUrl = 'http://localhost:5000/users/login';
         
         try {
@@ -71,7 +74,7 @@ function Login(){
                                 id='email'
                                 value={formData.email}
                                 required
-                                autoComplete="off"
+                                autoComplete="on"
                                 onChange={handleChange}
                                 
                                 className='h-10 mt-2 border-2 border-solid border-transparent border-b-black bg-transparent text-lg text-gray-600 tracking-wide focus:outline-none'

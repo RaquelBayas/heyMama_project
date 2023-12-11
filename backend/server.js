@@ -26,7 +26,6 @@ app.use('/articles', articlesRoutes);
 
 app.use(async (error, req, res, next) => {
   console.log(error.message);
-  console.log(next);
 });
 
 
