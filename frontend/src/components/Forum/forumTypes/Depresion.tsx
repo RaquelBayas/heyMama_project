@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Menu from '../../Menu'
 import Search from '../../Search'
+import { Link } from 'react-router-dom';
 
 function Depresion() {
 
@@ -15,11 +16,14 @@ function Depresion() {
 
     useEffect(() => {
 
-        fetch('http://localhost:5000/forum/depresion')
+        fetch('http://localhost:5000/forum/subforum')
             .then(resp => resp.json())
             .then(data => {
+                console.log(data);
+
                 if (!data.error) {
-                    return setForumCards(data.forumCards);
+                    return setForumCards(data.data);
+
                 }
             })
             .catch(error => console.error(error.message));
@@ -42,17 +46,21 @@ function Depresion() {
                     <section className="grid grid-cols-2 mw150:flex mw150:flex-col justify-around gap-6 border-2 border-[#DDBEA9] p-8 -pr-8 -ml-[12rem] mb-4">
 
                         {forumCards?.map(forumCard => (
-                            <article key={forumCard.subforum_id} className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
-                                <h2 className='font-semibold text-xl'>{forumCard.subforum_title}</h2>
-                                <p>
-                                    {forumCard.subforum_content}
-                                </p>
-                                <time className='italic'>{forumCard.create_time}</time>
-                            </article>
+                            <Link to={'/forum/depresion/subforum'} key={forumCard.subforum_id}>
+                                <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                                    <h2 className='font-semibold text-xl'>{forumCard.subforum_title}</h2>
+                                    <p>
+                                        {forumCard.subforum_content}
+                                    </p>
+                                    <time className='italic'>{forumCard.create_time.slice(0, 10)}</time>
+                                </article>
+                            </Link>
                         ))}
 
+                        {/* <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
 
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -121,7 +129,9 @@ function Depresion() {
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
                             <time className='italic'></time>
-                        </article>
+
+                        </article> */}
+                        {/* </article> */}
                     </section>
 
                     {/* <section className="flex-grow-0 mt-16 mw150:hidden">
