@@ -19,4 +19,14 @@ const User = z.object({
 
 const LoginUser = User.omit({ userType:true, name: true, surname:true, phone:true, job:true, numCollege:true });
 
-export {User, LoginUser};
+const ContactForm = z.object({
+  name: z.string(),
+  phone: z.string().transform(value => parseFloat(value)).optional(),
+  email: z.string({
+    required_error: 'Campo obligatorio',
+    invalid_type_error: 'El campo tiene que ser un string'
+  }).email({ message: 'No has enviado un email válido'}),
+  message: z.string().min(1, {message: 'Escribe tu mensaje'}),
+})
+
+export { User, LoginUser, ContactForm };

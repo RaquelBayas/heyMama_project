@@ -1,59 +1,156 @@
+import { useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
+import { ContactForm } from "../models/ContactForm";
 
 function Contact() {
+
+    const [ error, setError ] = useState<ContactForm | null>(null);
+
+    const [ contactData, setContactData ] = useState({
+        name: '',
+        phone: '',
+        email:'',
+        message:'',
+        }
+    );
+
+    function handleChange(e : React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
+        setContactData({
+            ...contactData, 
+            [e.target.name] : e.target.value
+        })
+    };
+
+    async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        const baseUrl = 'http://localhost:5000/users/contact';
+        
+        try {
+            const resp = await fetch(baseUrl, {
+                method:'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify(contactData)
+            });
+            
+            if (!resp.ok && resp.status === 400) {
+                const data = await resp.json(); 
+                setError(data.error)
+            } else {
+                setError(null);
+            }; 
+            
+        } catch (error) {
+            console.error(error);
+        };
+    };
+
     return (
-        <section id='contact' className="w-full h-screen bg-background font-anybody lg:w-screen">
-            <div className="grid grid-cols-2 sm:grid sm:grid-cols-2">
-                <div className="flex flex-col gap-12 mx-auto my-auto pt-36 s:pt-20">
-                    <h1 className="pb-8 text-4xl uppercase lg:text-5xl s:text-2xl md:text-3xl">Ponte en contacto</h1>
+        <div id='contact' className="w-full h-screen bg-background font-anybody">
+            <div className="grid grid-cols-2">
+                
+                <div className="flex flex-col gap-12 mx-auto my-auto pt-36 
+                
+                sm:pt-0">
+                    
+                    <h1 className="pb-8 text-4xl uppercase 
+                    
+                    sm:text-2xl 
+                    md:text-3xl 
+                    lg:text-4xl"
+                    >
+                        Ponte en contacto
+                    </h1>
+                    
                     <div className="flex flex-row gap-3 align-center">
                         <FaPhoneAlt className='my-0.5' />
-                        <h2 className="text-2xl font-light s:text-lg">Números de interés</h2>
+                        <h2 className="text-2xl font-light">Números de interés</h2>
                     </div>
-                    <h3 className="text-xl tracking-wide s:text-lg">Número Nacional de Emergencias</h3>
-                    <p className="text-4xl font-light s:text-xl md:text-4xl">112</p>
+
+                    <h3 className="text-xl tracking-wide">Número Nacional de Emergencias</h3>
+                    <p className="text-4xl font-light">112</p>
+
                 </div>
-                <form className="mx-6 mt-48 border-2 border-black border-solid bg-primary rounded-3xl s:mt-36 lg:h-5/6 lg:w-1/2 lg:ml-14 lg:mt-32">
+
+
+                <form 
+                    onSubmit={handleSubmit}
+                   className="mx-6 mb-auto leading-4 h-fit border-2 border-black border-solid bg-primary rounded-3xl overflow-hidden
+                   
+
+                   md:mt-24 
+                   lg:mt-32 lg:w-1/2 lg:ml-14 "
+                >
                     <div className="flex flex-col mx-6 mt-8 mb-4">
                         <label>Nombre:</label>
                         <input
-                            className='h-10 border-2 border-black border-solid rounded-xl'
-                            type="text"
-                            name="nombre"
+                            type='text'
+                            name='name'
+                            value={contactData.name}
+                            onChange={handleChange}
+                            placeholder="Escriba su nombre"
+                            
+                            className='mt-1 p-4 h-10 border-2 border-black border-solid rounded-xl text-sm'
                         />
+                        
+                        {error?.name && <span className="text-[18px] text-red-500 p-3">{error.name}</span>}
+                        
                     </div>
                     <div className="flex flex-col mx-6 mt-8 mb-4">
                         <label>Teléfono:</label>
                         <input
-                            className='h-10 border-2 border-black border-solid rounded-xl'
                             type="number"
-                            name="telefono"
+                            name="phone"
+                            value={contactData.phone}
+                            onChange={handleChange}
+                            placeholder="Ejemplo +34 655 123 123"
+
+                            className='mt-1 h-10 border-2 border-black border-solid rounded-xl p-4 text-sm'
+                            
                         />
+                        {error?.phone && <span className="text-[18px] text-red-500 p-3">{error.phone}</span>}
+
                     </div>
                     <div className="flex flex-col mx-6 mt-8 mb-4">
                         <label>Email:</label>
                         <input
-                            className='h-10 border-2 border-black border-solid rounded-xl'
-                            type="text"
+                            type="email"
                             name="email"
+                            value={contactData.email}
+                            onChange={handleChange}
+                            placeholder="email@gmail.com"
+                            
+                            className='mt-1 h-10 border-2 border-black border-solid rounded-xl p-4 text-sm' 
                         />
+                        {error?.email && <span className="text-[18px] text-red-500 p-3">{error.email}</span>}
                     </div>
                     <div className="flex flex-col mx-6 mt-8 mb-4">
                         <label>Mensaje:</label>
                         <textarea
-                            className='border-2 border-black border-solid h-52 rounded-xl lg:h-40'
+                            name="message"
                             rows={5}
+                            value={contactData.message}
+                            onChange={handleChange}
+                            placeholder="Deje su mensaje"
+
+                            className='mt-1 border-2 border-black border-solid h-52 rounded-xl lg:h-40 p-4 text-sm' 
                         />
+                        {error?.message && <span className="text-[18px] text-red-500 p-3">{error.message}</span>}
                     </div>
                     <div className="flex justify-center my-3">
                         <button
-                            className="p-2 font-bold tracking-wider transition-all duration-300 ease-in-out border-2 border-black border-solid shadow-md cursor-pointer bg-background rounded-2xl hover:bg-lime-400 hover:scale-110"
                             type="submit"
+
+                            className="p-2 font-bold tracking-wider transition-all duration-300 ease-in-out border-2 border-black border-solid shadow-md cursor-pointer bg-background rounded-2xl hover:bg-lime-400 hover:scale-110"
                         >Enviar</button>
                     </div>
+                
                 </form>
+
             </div>
-        </section>
+        </div>
     )
 }
 

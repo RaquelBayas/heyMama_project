@@ -81,8 +81,9 @@ function Login(){
                         <div className="box-border flex flex-col h-[82px] mx-6 mt-8 mb-4 text-start text-xl">
                             <label>Contraseña:</label>
                             <button 
-                                type='button' 
                                 className='absolute transform -translate-y-1/2 right-8 top-56 cursor-pointer'
+
+                                type='button'
                                 onClick={() => setHidden(!hidden)}>
                                 { hidden ? <FaEye /> : <IoEyeOffSharp /> }
                             </button >

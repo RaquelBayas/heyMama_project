@@ -1,4 +1,3 @@
-
 import express from 'express'
 import 'dotenv/config'
 import morgan from 'morgan'
@@ -7,7 +6,9 @@ import { connection } from './db/connectDB.js'
 import { userRoutes } from './routes/user.routes.js'
 import { forumRoutes } from './routes/forum.routes.js'
 
-const port = 5000;
+
+const port = process.env.PORT;
+
 const app = express();
 app.use(express.json());
 app.use(cors());

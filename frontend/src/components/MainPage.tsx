@@ -4,13 +4,13 @@ import Contact from "./Contact";
 import Navbar from "./Navbar";
 
 
-function MainPage(){
-    return(
-        <div>
-            <Navbar/>
-            <Landpage/>
-            <About/>
-            <Contact/>
+function MainPage() {
+    return (
+        <div className="overflow-x-hidden overflow-y-hidden">
+            <Navbar />
+            <Landpage />
+            <About />
+            <Contact />
         </div>
     )
 }
