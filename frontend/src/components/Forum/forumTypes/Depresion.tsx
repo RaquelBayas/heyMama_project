@@ -15,11 +15,14 @@ function Depresion() {
 
     useEffect(() => {
 
-        fetch('http://localhost:5000/forum/depresion')
+        fetch('http://localhost:5000/forum/subforum')
             .then(resp => resp.json())
             .then(data => {
+                console.log(data);
+
                 if (!data.error) {
-                    return setForumCards(data.forumCards);
+                    return setForumCards(data.data);
+       
                 }
             })
             .catch(error => console.error(error.message));
@@ -51,8 +54,10 @@ function Depresion() {
                             </article>
                         ))}
 
+                        {/* <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
 
                         <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+
                             <h2 className='font-semibold text-xl'>Lorem, ipsum dolor.</h2>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -121,6 +126,8 @@ function Depresion() {
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             </p>
                             <time className='italic'></time>
+
+                        </article> */}
                         </article>
                     </section>
 
