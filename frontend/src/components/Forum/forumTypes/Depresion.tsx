@@ -45,14 +45,14 @@ function Depresion() {
 
                     <section className="grid grid-cols-2 mw150:flex mw150:flex-col justify-around gap-6 border-2 border-[#DDBEA9] p-8 -pr-8 -ml-[12rem] mb-4">
 
-                        {forumCards?.map(forumCard => (
-                            <Link to={'/forum/depresion/subforum'} key={forumCard.subforum_id}>
+                        {forumCards?.map(({ subforum_id, subforum_title: title, subforum_content: content, create_time: time }) => (
+                            <Link to={`/forum/depresion/subforum/:${subforum_id}`} key={subforum_id}>
                                 <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
-                                    <h2 className='font-semibold text-xl'>{forumCard.subforum_title}</h2>
+                                    <h2 className='font-semibold text-xl'>{title}</h2>
                                     <p>
-                                        {forumCard.subforum_content}
+                                        {content}
                                     </p>
-                                    <time className='italic'>{forumCard.create_time.slice(0, 10)}</time>
+                                    <time className='italic'>{time.slice(0, 10)}</time>
                                 </article>
                             </Link>
                         ))}
