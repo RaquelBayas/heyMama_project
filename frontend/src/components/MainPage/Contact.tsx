@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
-import { ContactForm } from "../models/ContactForm";
+import { ContactForm } from "../../models/ContactForm";
 
 function Contact() {
 
