@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import express from 'express';
-import morgan from 'morgan';
-import cors from 'cors';
-import 'dotenv/config';
-import { connection } from './db/connectDB.js';
-import { userRoutes } from './routes/user.routes.js';
-import { articlesRoutes } from './routes/articles.routes.js';
-=======
 import express from 'express'
 import 'dotenv/config'
 import morgan from 'morgan'
@@ -14,8 +5,7 @@ import cors from 'cors'
 import { connection } from './db/connectDB.js'
 import { userRoutes } from './routes/user.routes.js'
 import { forumRoutes } from './routes/forum.routes.js'
-
->>>>>>> 47e1f84d5f855fcb76a57c099e00776c9956a2f7
+import { articlesRoutes } from './routes/articles.routes.js';
 
 const port = process.env.PORT;
 
