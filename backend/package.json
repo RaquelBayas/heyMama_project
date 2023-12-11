@@ -5,7 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "node --watch server.js",
+    "dev:node": "node --watch server.js",
+    "dev:nodemon": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -20,5 +21,8 @@
     "morgan": "^1.10.0",
     "mysql2": "^3.6.5",
     "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }

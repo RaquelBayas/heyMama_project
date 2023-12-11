@@ -3,6 +3,8 @@ import jwt from "jsonwebtoken";
 import { User, LoginUser } from "../schemas/User.js";
 import { sendQuery } from '../db/connectDB.js'
 import { zodErrorMap } from '../helpers/zodErrorMap.js';
+import { HttpError } from '../models/HttpError.js';
+import crypto from 'node:crypto';
 
 // REGISTER
 async function signUp(req,res,next) {
@@ -27,7 +29,7 @@ async function signUp(req,res,next) {
 
     const salt = 10;
     const hashedPassword = bcrypt.hashSync(password, salt);
-    const confirmationCode = crypto.randomUUID;
+    const confirmationCode = crypto.randomUUID();
 
     try {
         const type_user_id = {
@@ -79,15 +81,18 @@ async function logIn (req, res, next) {
       const [user] = await sendQuery(checkEmailInDB, [email]);
 
       if(!user) {
-          return next(new HttpError(404, 'Email no existe.'))
+          return next(new HttpError(400, 'Email y/o contraseña incorrectos'))
       };
       
       const match = await bcrypt.compare(truePassword, user.password);
 
       if (!match){
-        return next(new HttpError(400, 'Contraseña incorrecta'))
+        return next(new HttpError(400, 'Email y/o contraseña incorrectos'))
       };
       
+
+
+
       const infoUser = { 
         id:user.user_id, 
         type:user.type_user_id 
@@ -96,6 +101,8 @@ async function logIn (req, res, next) {
       const token = jwt.sign(infoUser, process.env.JWT_SECRET,{
         expiresIn: '1 day'
       });
+
+      console.log(token);
 
       infoUser.exp = Date.now() + (1000 * 60 * 60 * 24);
 
