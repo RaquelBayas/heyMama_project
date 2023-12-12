@@ -1,49 +1,100 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { getMood } from '../services/moodService';
 import { MoodData } from '../models/MoodData';
+import {MoodContext, MoodContextValue} from '../context/MoodContext';
+import MoodProvider from '../context/MoodContext';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function MoodRecord() {
-    const [moodData, setMoodData] = useState<MoodData[]>([]);
+    const [moodDataArray, setMoodDataArray] = useState<MoodData[]>([]);
     const [loading, setLoading] = useState(true);
+    const {moodData, updateMoodData} = useContext(MoodContext) as MoodContextValue;
     
-    const data = {
+
+    interface MoodData {
+      //mood_id: number;
+      user_id: number;
+      //mood_date: string;
+      mood_type_id: number;
+    }
+    
+    const getMoodTypeName = (mood_type_id: number): string => {
+      const moodTypeNames: Record<number, string> = {
+        1: 'FELIZ',
+        2: 'BIEN',
+        3: 'REGULAR',
+        4: 'MAL',
+        5: 'TRISTE',
+      };
+    
+      return moodTypeNames[mood_type_id] || 'Desconocido';
+    };
+    
+    const calculatePercentage = (moodData: MoodData[]): { moodTypeName: string; percentage: number }[] => {
+      const moodCount: Record<string, number> = {};
+      console.log('percentage.',moodData)
+      moodData.forEach((mood) => {
         
-        labels : ['Feliz', 'Bien', 'Regular', 'Mal', 'Triste'],
+        const moodTypeName = getMoodTypeName(mood.mood_type_id);
+        moodCount[moodTypeName] = (moodCount[moodTypeName] || 0) + 1;
+      });
+    
+      const totalMoods = moodData.length;
+    
+      const percentageData = Object.entries(moodCount).map(([moodTypeName, count]) => ({
+        moodTypeName,
+        percentage: (count / totalMoods) * 100,
+      }));
+    
+      return percentageData;
+    };
+    
+    const percentageData = calculatePercentage(moodData);
+
+    const data = {
+      labels: percentageData.map((entry) => entry.moodTypeName),
 
         datasets: [
             {
              label: '# of Votes',
-             data: [12, 19, 3, 5, 2, 3],
+             data: percentageData.map((entry) => entry.percentage),
              backgroundColor: [
-               'rgba(255, 99, 132, 0.2)',
-               'rgba(54, 162, 235, 0.2)',
-               'rgba(255, 206, 86, 0.2)',
-               'rgba(75, 192, 192, 0.2)',
-               'rgba(153, 102, 255, 0.2)',
-               'rgba(255, 159, 64, 0.2)',
+               'rgba(251, 207, 232, 0.8)',
+               'rgba(233, 213, 255, 0.8)',
+               'rgba(250, 225, 195, 0.8)',
+               'rgba(254, 202, 202, 0.8)',
+               'rgba(191, 219, 254, 0.8)'
              ],
              borderColor: [
-               'rgba(255, 99, 132, 1)',
-               'rgba(54, 162, 235, 1)',
-               'rgba(255, 206, 86, 1)',
-               'rgba(75, 192, 192, 1)',
-               'rgba(153, 102, 255, 1)',
-               'rgba(255, 159, 64, 1)',
-             ],
+              'rgba(255, 99, 132, 1)',
+              ' rgba(153, 102, 255, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(54, 162, 235, 1)',              
+              'rgba(75, 192, 192, 1)',
+            ],
              borderWidth: 1,
            }
         ]
     }
     useEffect(() => {
+      console.log('moodRecord.moodData:',moodData)
         const fetchData = async () => {
           try {
-            const moodInfo = await getMood();
-            console.log(moodInfo.data)
-            setMoodData(moodInfo.data);
+            const result = await getMood();
+            //const arrayMoods: MoodData[] = [];
+          
+            const flattenedData = result.data.flat();
+            console.log('flat.',result.data)
+            if (flattenedData.length > 0) {
+              updateMoodData(result.data);
+            }
+            console.log('fetch moodrecord:',result)
+            //setMoodDataArray(result.data);
+            //updateMoodData(arrayMoods)
+           
           } catch (error) {
             console.error('Error fetching mood data:', error);
           } finally {
@@ -55,12 +106,13 @@ function MoodRecord() {
         if (moodData.length === 0) {
           fetchData();
         }
-      }, [moodData]);
+      }, [moodData,updateMoodData]);
     
-  return (
+  return (  
     <div>
-        { loading ? (<p>Cargando datos... </p>) :  ( <Pie data={data} />)}
+          { loading ? (<p>Cargando datos... </p>) :  ( <Pie data={data} />)}    
     </div>
+    
   )
 }
 

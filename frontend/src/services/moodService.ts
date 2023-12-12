@@ -26,7 +26,7 @@ async function addMood(moodData: MoodData){
 }
 
 async function getMood(){
-    const baseUrl = 'http://localhost:5000/mood/getMood?user_id=1';
+    const baseUrl = 'http://localhost:5000/mood/getMood/1';
 
     try {
         const resp = await fetch(baseUrl, {
