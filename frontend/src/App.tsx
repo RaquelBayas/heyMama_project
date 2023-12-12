@@ -30,8 +30,8 @@ function App() {
       <Route path='/forum' element={<ForumHome />} />
       <Route path='/forums' element={<Forums />} />
       <Route path='/forum/depresion' element={<Depresion />} />
-      <Route path='/forum/depresion/articles' element={<Articles />} />
-      <Route path='/forum/depresion/articlescontent' element={<ArticleContent />} />
+      <Route path='/articles' element={<Articles />} />
+      <Route path='/articles/content/:id' element={<ArticleContent />} />
       <Route path='/config/*' element={<UserConf />} />
       <Route path='/mood' element={<MoodTracker />} />
       <Route path='/breathing' element={<Breathing />} />

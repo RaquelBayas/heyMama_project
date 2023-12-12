@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react"
 import Menu from "../Menu"
 import Search from "../Search"
+import { Link, useParams } from "react-router-dom"
 
 function ArticleContent() {
+
+    const articleId = useParams()
+    console.log(articleId.id);
 
     interface Articles {
         "article_id": number
@@ -14,18 +18,20 @@ function ArticleContent() {
 
     useEffect(() => {
 
-        fetch('http://localhost:5000/articles/getArticlesByID')
+        fetch(`http://localhost:5000/articles/getArticlesByID/${articleId.id}`)
             .then(resp => resp.json())
             .then(data => {
                 console.log(data);
 
                 if (!data.error) {
+                    console.log(data.data);
+
                     return setArticles(data.data);
 
                 }
             })
             .catch(error => console.error(error.message));
-    }, []);
+    }, [articleId]);
 
     return (
         <div className='w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden'>
@@ -40,7 +46,7 @@ function ArticleContent() {
 
                 <main className="flex flex-col gap-4 font-Montserrat ml-[3.5rem]">
 
-                    <h1 className='slef-start ml-36 text-4xl font-semibold text-[#8B6956] mt-4 mb-6'>{articles.title}</h1>
+                    <h1 className='slef-start ml-36 text-4xl font-semibold text-[#8B6956] mt-4 mb-6'>TITLE</h1>
 
                     <section className="self-center grid grid-cols-4 gap-12 mb-8 mx-auto">
                         {articles?.map(article => (
