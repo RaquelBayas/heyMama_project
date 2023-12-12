@@ -112,9 +112,18 @@ async function getArticles(req, res, next) {
 }
 
 async function findArticleById(req, res, next) {
+    const id = req.params.id;
+    console.log('id.', id)
     try {
-        const article = await sendQuery('SELECT * FROM articles WHERE article_id=?', req.id);
-        return article;
+        const article = await sendQuery('SELECT * FROM articles WHERE article_id = ?', id);
+        res.send({
+            ok: true,
+            error: null,
+            data: article,
+            message: 'Articles.'
+        });
+
+        next()
     } catch (error) {
         return next(new Error(error.message));
     }
