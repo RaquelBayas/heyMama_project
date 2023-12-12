@@ -10,11 +10,13 @@ import MainPage from './components/MainPage/MainPage';
 import './App.css'
 import ForumHome from './components/Forum/ForumHome';
 import Forums from './components/Forum/Forums';
-import Depresion from './components/Forum/forumTypes/Depresion'
+import SubForum from './components/Forum/forumTypes/SubForum'
 import MoodTracker from './components/MoodTracker';
 import Breathing from './components/Breathing';
 import Articles from './components/Forum/Articles';
 import ArticleContent from './components/Forum/ArticleContent';
+import Discussion from './components/Forum/Discussion';
+import Layout from './components/Layout';
 
 function App() {
 
@@ -29,7 +31,13 @@ function App() {
       <Route path='/register' element={<RegisterType />} />
       <Route path='/forum' element={<ForumHome />} />
       <Route path='/forums' element={<Forums />} />
-      <Route path='/forum/depresion' element={<Depresion />} />
+
+      <Route path='/forum/subforum/:id' element={
+        <Layout>
+          <SubForum />
+        </Layout>} />
+
+      <Route path='/forum/subforum/discussion/:id' element={<Discussion />} />
       <Route path='/articles' element={<Articles />} />
       <Route path='/articles/content/:id' element={<ArticleContent />} />
       <Route path='/config/*' element={<UserConf />} />

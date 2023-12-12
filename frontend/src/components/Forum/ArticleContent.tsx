@@ -65,20 +65,6 @@ function ArticleContent() {
                     </section>
 
                 </main>
-
-                {/* <h1 className='slef-start ml-36 text-4xl font-semibold text-[#8B6956] mt-4 mb-6'>TITLE</h1>
-
-                    <section className="self-center grid grid-cols-4 gap-12 mb-8 mx-auto">
-                        {articles?.map(article => (
-                            <Link to={'/forum/depresion/articlescontent'} key={article.article_id}>
-                                <article className="flex flex-col justify-between bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md w-[250px] h-[150px]">
-
-                                    <h2 className='font-semibold text-xl'>{article.title}</h2>
-                                    <time className='italic'>{article.create_time}</time>
-                                </article>
-                            </Link>
-                        ))}
-                    </section>*/}
             </div>
         </div>
     )
