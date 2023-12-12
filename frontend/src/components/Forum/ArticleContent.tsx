@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Menu from "../Menu"
 import Search from "../Search"
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 function ArticleContent() {
 
@@ -11,7 +11,7 @@ function ArticleContent() {
     interface Articles {
         "article_id": number
         "title": string
-        "create_time": string
+        "content": string
     }
 
     const [articles, setArticles] = useState<Articles[]>([]);
@@ -44,9 +44,29 @@ function ArticleContent() {
                     <div className='w-screen mt-2 mb-2 border-b border-secondary'></div>
                 </div>
 
-                <main className="flex flex-col gap-4 font-Montserrat ml-[3.5rem]">
+                <main className="flex gap-4 font-Montserrat justify-around ml-[3.5rem]">
 
-                    <h1 className='slef-start ml-36 text-4xl font-semibold text-[#8B6956] mt-4 mb-6'>TITLE</h1>
+                    {articles?.map(article => (
+                        <section className="flex flex-col gap-6" key={article.article_id}>
+                            <h1 className='slef-start ml-36 text-4xl font-semibold text-[#8B6956] mt-6 mb-4'>{article.title}</h1>
+                            <article className="bg-white p-3 outline-4 outline-[#8D5E44] outline-offset-8 w-full min-h-min h-3/4">
+                                <p>{article.content}</p>
+                            </article>
+                        </section>
+
+                    ))}
+
+                    <section className="flex-grow-0 mt-16 mw150:hidden -ml-32 bg-white h-min">
+                        <article className="flex flex-col items-center w-[300px] h-[400px] outline-2 outline-[#8D5E44] justify-center gap-12">
+                            <img src="../.././src/assets/avatar-person.svg" alt="avatar" className='mt-6 max-w-[8rem]' />
+                            <p>Texto de prueba</p>
+                            <button className="rounded-md mb-6 py-4 px-8 bg-[#DDBEA9] text-[#8D5E44]">Enviar consulta</button>
+                        </article>
+                    </section>
+
+                </main>
+
+                {/* <h1 className='slef-start ml-36 text-4xl font-semibold text-[#8B6956] mt-4 mb-6'>TITLE</h1>
 
                     <section className="self-center grid grid-cols-4 gap-12 mb-8 mx-auto">
                         {articles?.map(article => (
@@ -58,9 +78,7 @@ function ArticleContent() {
                                 </article>
                             </Link>
                         ))}
-                    </section>
-
-                </main>
+                    </section>*/}
             </div>
         </div>
     )
