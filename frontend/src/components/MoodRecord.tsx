@@ -8,34 +8,30 @@ import MoodProvider from '../context/MoodContext';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const moodTypeNames: Record<number, string> = {
+  1: 'FELIZ',
+  2: 'BIEN',
+  3: 'REGULAR',
+  4: 'MAL',
+  5: 'TRISTE',
+};
 function MoodRecord() {
-    const [moodDataArray, setMoodDataArray] = useState<MoodData[]>([]);
     const [loading, setLoading] = useState(true);
     const {moodData, updateMoodData} = useContext(MoodContext) as MoodContextValue;
     
-
     interface MoodData {
       //mood_id: number;
       user_id: number;
       //mood_date: string;
       mood_type_id: number;
     }
-    
-    const getMoodTypeName = (mood_type_id: number): string => {
-      const moodTypeNames: Record<number, string> = {
-        1: 'FELIZ',
-        2: 'BIEN',
-        3: 'REGULAR',
-        4: 'MAL',
-        5: 'TRISTE',
-      };
-    
-      return moodTypeNames[mood_type_id] || 'Desconocido';
+
+    const getMoodTypeName = (mood_type_id: number): string => {   
+      return moodTypeNames[mood_type_id];
     };
     
     const calculatePercentage = (moodData: MoodData[]): { moodTypeName: string; percentage: number }[] => {
       const moodCount: Record<string, number> = {};
-      console.log('percentage.',moodData)
       moodData.forEach((mood) => {
         
         const moodTypeName = getMoodTypeName(mood.mood_type_id);
@@ -72,15 +68,14 @@ function MoodRecord() {
               'rgba(255, 99, 132, 1)',
               ' rgba(153, 102, 255, 1)',
               'rgba(255, 206, 86, 1)',
-              'rgba(54, 162, 235, 1)',              
-              'rgba(75, 192, 192, 1)',
+              '#eb3666',              
+              '#4b76c0',
             ],
              borderWidth: 1,
            }
         ]
     }
     useEffect(() => {
-      console.log('moodRecord.moodData:',moodData)
         const fetchData = async () => {
           try {
             const result = await getMood();
@@ -93,8 +88,7 @@ function MoodRecord() {
             }
             console.log('fetch moodrecord:',result)
             //setMoodDataArray(result.data);
-            //updateMoodData(arrayMoods)
-           
+            //updateMoodData(arrayMoods)           
           } catch (error) {
             console.error('Error fetching mood data:', error);
           } finally {
@@ -116,4 +110,5 @@ function MoodRecord() {
   )
 }
 
+export {moodTypeNames};
 export default MoodRecord

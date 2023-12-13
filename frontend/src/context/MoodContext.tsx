@@ -20,16 +20,12 @@ function MoodProvider({ children }: MoodContextProps) {
       // Realiza una llamada a la base de datos para obtener los datos iniciales
       const fetchData = async () => {
         try {
-          // Lógica para obtener datos iniciales de la base de datos
           const initialData = await getMood();
-          console.log('initial,',initialData)
           setMoodData(initialData.data);
         } catch (error) {
-          console.error('Error fetching initial data:', error);
+          console.error('Se ha producido un error al obtener los datos', error);
         }
       };
-  
-      // Llama a la función para obtener datos cuando el componente se monta
       fetchData();
     }, []); 
     const updateMoodData = (newMood: MoodData) => {
@@ -37,8 +33,6 @@ function MoodProvider({ children }: MoodContextProps) {
         setMoodData((prevMoodData) => [...prevMoodData, newMood]);
       }
     };
-    //console.log('context.',updateMoodData)
-    console.log('context2.',moodData)
     return (
       <MoodContext.Provider value={{ moodData, updateMoodData }}>
         {children}

@@ -32,7 +32,7 @@ function App() {
       <Route path='/forums' element={<Forums />} />
       <Route path='/forum/depresion' element={<Depresion />} />
       <Route path='/config' element={<UserConf />} />
-      <Route path='/mood' element={<MoodPage />}/>
+      <Route path='/moods' element={<MoodPage />}/>
     </Routes>
   )
 }

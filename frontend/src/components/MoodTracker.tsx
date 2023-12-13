@@ -12,19 +12,11 @@ function MoodTracker() {
     
     function handleValueChange(event:React.ChangeEvent<HTMLInputElement>) {
         setMoodState(event.target.value)
-        console.log('value.',event.target.value)
     }
 
-    /*function updateMoodData(newMoodData: MoodData) {
-        //updatedMood?.updateMoodData({user_id:1, mood_type_id:parseFloat(moodState)});
-        console.log('moodData1:',newMoodData)
-        setMoodData([...moodData,newMoodData]);
-        console.log('moodData2',moodData)
-    }*/
     function handleMoodSubmit(event: React.FormEvent) {
         event.preventDefault();
         //setMoodData({user_id:1, mood_type_id:parseFloat(moodState)})
-        console.log('Start')
         
         const moodData : MoodData = {
             'user_id': 1,
@@ -37,22 +29,21 @@ function MoodTracker() {
             }
             return response;
         })
-        console.log('moodState',moodState)
-        console.log('mood', moodData)
         updateMoodData(moodData);   
-        console.log('End')     
     }
 
   return (
-    <div className='p-2 m-2 text-center bg-white rounded-md w-fit h-fit'>
+    <div className='p-2 m-2 text-center rounded-md w-fit h-fit font-Montserrat'>
         <MoodContext.Provider value={{moodData, updateMoodData}}>
         <MoodProvider>
         <form onSubmit={handleMoodSubmit} className='flex-inline'>
-        <div>Please choose your mood</div>
-            <div className="flex">
+        <div className='m-4'>
+            <h1 className='text-xl'>¿Cómo te sientes hoy?</h1>
+        </div>
+        <div className="flex">
                 <div className="flex justify-content-center">
                     <div className="flex align-items-center">
-                        <div className='flex flex-col justify-center p-2 align-middle bg-pink-200'>
+                        <div className='flex flex-col justify-center p-2 rounded-l-md align-middle bg-pink-200'>
                             <span className='mx-auto text-4xl text-pink-600'><FaRegFaceLaughBeam /></span>
                             <div >
                                 <input type='radio' name='Feliz'  value="1" checked={moodState === '1'} onChange={handleValueChange}/>
@@ -80,7 +71,7 @@ function MoodTracker() {
                             <label htmlFor="f5" className="ml-1 mr-3">Mal</label>
                             </div>
                         </div>
-                        <div className='flex flex-col justify-center p-2 align-middle bg-blue-200'>
+                        <div className='flex flex-col justify-center p-2 rounded-r-md align-middle bg-blue-200'>
                             <span className='mx-auto text-4xl text-blue-800'><FaRegFaceGrinBeam /> </span>
                             <div>
                             <input type='radio' name='Triste'  value="5" checked={moodState === '5'} onChange={handleValueChange}/>
@@ -90,7 +81,7 @@ function MoodTracker() {
                     </div>
                 </div>
             </div>        
-        <button type="submit" className='p-2 m-4 mb-2 rounded-md bg-primary'>Registrar estado</button>
+        <button type="submit" className='p-2 m-4 mb-2 rounded-md bg-primary text-xl'>Registrar estado</button>
         </form>
         </MoodProvider>
         </MoodContext.Provider>
