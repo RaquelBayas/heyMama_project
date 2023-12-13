@@ -1,4 +1,4 @@
-import { sendQuery } from '../../db/connectDB.js';
+import { sendQuery } from "../db/connectDB.js";
 import { HttpError } from '../models/HttpError.js';
 
 async function deleteUserById(req, res, next){
