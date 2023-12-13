@@ -14,26 +14,29 @@ import Depresion from './components/Forum/forumTypes/Depresion'
 import MoodTracker from './components/MoodTracker';
 import Breathing from './components/Breathing';
 import SubForum from './components/Forum/SubForum';
+import UserProvider from './context/UserProvider';
 
 function App() {
 
   return (
-    <Routes>
-      <Route path='/' element={<MainPage />} />
-      <Route path='/about' element={<About />} />
-      <Route path='/contact' element={<Contact />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/registerUser' element={<Register />} />
-      <Route path='/registerProf' element={<RegisterProf />} />
-      <Route path='/register' element={<RegisterType />} />
-      <Route path='/forum' element={<ForumHome />} />
-      <Route path='/forums' element={<Forums />} />
-      <Route path='/forum/depresion' element={<Depresion />} />
-      <Route path='/config/*' element={<UserConf />} />
-      <Route path='/forum/depresion/subforum' element={<SubForum />} />
-      <Route path='/mood' element={<MoodTracker />} />
-      <Route path='/breathing' element={<Breathing />} />
-    </Routes>
+    <UserProvider>
+      <Routes>
+        <Route path='/' element={<MainPage />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/registerUser' element={<Register />} />
+        <Route path='/registerProf' element={<RegisterProf />} />
+        <Route path='/register' element={<RegisterType />} />
+        <Route path='/forum' element={<ForumHome />} />
+        <Route path='/forums' element={<Forums />} />
+        <Route path='/forum/depresion' element={<Depresion />} />
+        <Route path='/config/*' element={<UserConf />} />
+        <Route path='/forum/depresion/subforum' element={<SubForum />} />
+        <Route path='/mood' element={<MoodTracker />} />
+        <Route path='/breathing' element={<Breathing />} />
+      </Routes>
+    </UserProvider>
   )
 }
 
