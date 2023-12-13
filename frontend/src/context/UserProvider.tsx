@@ -1,15 +1,26 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState } from "react";
 
 interface UserProviderProps{
     children: React.ReactNode;
 }
 
-const UserContext = createContext();
+interface UserContextType {
+    user: User | null;
+    logIn: (user: User) => void;
+    logOut: () => void;
+}
+
+interface User {
+    id: string;
+    userType: 'user' | 'prof';
+}
+
+const UserContext = createContext<UserContextType | null>(null);
 
 function userProvider ({children}: UserProviderProps){
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState<User | null>(null);
     
-    function logIn (user){
+    function logIn (user: User){
         setUser(user);
     }
 

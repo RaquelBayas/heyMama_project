@@ -1,7 +1,7 @@
 import {z} from 'zod'
 
 const User = z.object({
-  userType: z.nativeEnum(['user', 'prof']).optional() ,
+  userType: z.enum(['user', 'prof']).optional() ,
   name: z.string(),
   surname: z.string(),
   phone: z.string().transform(value => parseFloat(value)).optional(),
