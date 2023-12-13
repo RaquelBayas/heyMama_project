@@ -14,7 +14,19 @@ const User = z.object({
   password: z.string({
     required_error: 'Campo obligatorio',
     invalid_type_error: 'El campo tiene que ser un string'
-  }).min(4).max(32),
+  }).min(4, {message: 'Mínimo 4 caracteres'}).max(32, { message: 'Máximo 32 caracteres' }),
 });
 
-export {User};
+const LoginUser = User.omit({ userType:true, name: true, surname:true, phone:true, job:true, numCollege:true });
+
+const ContactForm = z.object({
+  name: z.string(),
+  phone: z.string().transform(value => parseFloat(value)).optional(),
+  email: z.string({
+    required_error: 'Campo obligatorio',
+    invalid_type_error: 'El campo tiene que ser un string'
+  }).email({ message: 'No has enviado un email válido'}),
+  message: z.string().min(1, {message: 'Escribe tu mensaje'}),
+})
+
+export { User, LoginUser, ContactForm };

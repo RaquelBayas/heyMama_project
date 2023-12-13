@@ -8,10 +8,10 @@ const connection = await mysql.createConnection({
     password: process.env.MYSQL_ADDON_PASSWORD
 });
 
-async function sendQuery (query, values) {
+async function sendQuery(query, values) {
     const [results] = await connection.query(query, values);
-  
+
     return results;
 }
 
-export {connection, sendQuery}
+export { connection, sendQuery }
