@@ -5,7 +5,7 @@ const moodRoutes = express.Router();
 
 
 moodRoutes.post('/addMood', addMood);
-moodRoutes.get('/getMood',getMood);
+moodRoutes.get('/getMood/:user_id',getMood);
 moodRoutes.get('/getMoodName', getMoodName);
 moodRoutes.delete('/deleteMood', deleteMood);
 

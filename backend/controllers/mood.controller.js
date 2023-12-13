@@ -53,7 +53,7 @@ async function getMoodName(req,res,next) {
 async function getMood(req, res, next) {
     console.log(req.query);
     
-   const {user_id} = req.query;
+   const {user_id} = req.params;
 
     const mood = await sendQuery('SELECT * FROM mood WHERE user_id=?',[user_id]);
     
