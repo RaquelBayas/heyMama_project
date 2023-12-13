@@ -5,7 +5,7 @@ import ProfileConfig from './ProfileConfig';
 function UserConf() {
 
     return (
-        <main className='grid grid-cols-200 p-4 h-screen w-screen font-anybody'>
+        <form className='grid grid-cols-200 p-4 h-screen w-screen font-anybody'>
             <nav className='bg-background flex flex-col'>
                 <div className='flex flex-col mt-32 mx-auto gap-20 text-xl flex-grow'>
                 <ul className='text-center'>
@@ -24,7 +24,12 @@ function UserConf() {
                         </li>
                     </div>
                 </ul>
-                <h2 className='text-red-500 text-center mt-auto mb-16 text-2xl'>Cerrar sesión</h2>
+               
+                <button 
+                    type='submit' className='text-red-500 text-center mt-auto mb-16 text-2xl'
+                >
+                    Cerrar sesión
+                </button>
                 </div>
             </nav>
             
@@ -34,7 +39,7 @@ function UserConf() {
                     <Route path='/account' element={<AccountConfig/>} />                      
                 </Routes>
             </div>
-        </main>
+        </form>
     )
 }
 

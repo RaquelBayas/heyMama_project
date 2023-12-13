@@ -51,7 +51,8 @@ function ProfileConfig(){
             <button
                 className="p-2 w-[200px] bg-background border-2 border-black rounded-xl hover:bg-lime-400 hover:scale-110"
             >
-                Actualizar perfil</button>
+                Actualizar perfil
+            </button>
             </form>
         </div>                
     )
