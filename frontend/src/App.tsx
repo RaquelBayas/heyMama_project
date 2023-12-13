@@ -12,6 +12,7 @@ import ForumHome from './components/Forum/ForumHome';
 import Forums from './components/Forum/Forums';
 import Depresion from './components/Forum/forumTypes/Depresion'
 import MoodTracker from './components/MoodTracker';
+import MoodPage from './components/MoodPage';
 import Breathing from './components/Breathing';
 import SubForum from './components/Forum/SubForum';
 import UserProvider from './context/UserProvider';
