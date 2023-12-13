@@ -1,12 +1,11 @@
-import React from 'react'
-import { moodTypeNames } from './MoodRecord';
+import { moodTypeNames } from './MoodGraphic';
 
 type MoodRecordProps = {
     moodDate: Date;
     moodType: string;
 }
 function MoodRecordRow(props:MoodRecordProps) {
-    const {moodDate, moodType} = props;
+    const {moodDate, moodType} = props;    
 
     function formatDate(inputDate: Date) {
         const date = new Date(inputDate);

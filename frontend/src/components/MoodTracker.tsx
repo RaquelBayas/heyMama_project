@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaRegFaceSmile , FaRegFaceGrinBeam, FaRegFaceMeh, FaRegFaceAngry, FaRegFaceLaughBeam   } from "react-icons/fa6";
 import { addMood } from '../services/moodService';
 import { MoodData } from '../models/MoodData';
@@ -10,6 +10,9 @@ function MoodTracker() {
     const [moodData, setMoodData] = useState<MoodData[]>([]); //useState('');
     
     
+    useEffect(()=> {
+        
+    })
     function handleValueChange(event:React.ChangeEvent<HTMLInputElement>) {
         setMoodState(event.target.value)
     }
@@ -28,7 +31,8 @@ function MoodTracker() {
                 console.log(response.error)
             }
             return response;
-        })
+        });
+        (document.getElementById('btnForm') as HTMLButtonElement).disabled = true;
         updateMoodData(moodData);   
     }
 
@@ -81,7 +85,7 @@ function MoodTracker() {
                     </div>
                 </div>
             </div>        
-        <button type="submit" className='p-2 m-4 mb-2 rounded-md bg-primary text-xl'>Registrar estado</button>
+        <button id='btnForm' type="submit" className='p-2 m-4 mb-2 rounded-md bg-primary text-xl disabled:opacity-25'>Registrar estado</button>
         </form>
         </MoodProvider>
         </MoodContext.Provider>
