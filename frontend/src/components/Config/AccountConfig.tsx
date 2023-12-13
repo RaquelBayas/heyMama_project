@@ -5,7 +5,7 @@ function AccountConfig(){
     return(
         <form 
             id='account' 
-            className='flex flex-col ml-14 text-xl gap-8'
+            className='flex flex-col ml-14 text-xl gap-10'
         >
             
             <h1 className='my-10 uppercase text-4xl text-center tracking-wider lg:text-start lg:ml-10'>Ajustes</h1>
@@ -24,6 +24,12 @@ function AccountConfig(){
             </div>
             
             <ToggleSwitch/>
+
+            <button
+                className="mr-auto hover:text-red-500 hover:scale-110"
+            >
+                Eliminar mi cuenta
+            </button>
 
             <button
                 className="p-2 w-[200px] bg-background border-2 border-black rounded-xl hover:bg-lime-400 hover:scale-110"
