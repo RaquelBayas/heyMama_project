@@ -13,20 +13,20 @@ function Forum({ children }: { children: ReactNode }) {
     // }
 
     return (
-        <div className='w-screen h-screen bg-background grid overflow-hidden grid-cols-[100px,1fr]'>
+        <div className='w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden'>
 
             <Menu />
-            <div className="grid w-full grid-rows-[5em_1fr]">
+            <div className="grid w-screen grid-rows-[5em_1fr]">
 
-                <div className='flex flex-col justify-center mt-3 mb-3'>
+                <div className='flex flex-col justify-center mt-3 mb-3 ml-[3.5rem]'>
                     <div className='flex justify-evenly'><Search /></div>
-                    <div className='w-full mt-2 mb-2 border-b border-secondary'></div>
+                    <div className='w-screen mt-2 mb-2 border-b border-secondary'></div>
                 </div>
 
-                <main className="flex gap-4 font-Montserrat justify-around mw150:pl-4">
+                <main className="flex gap-4 font-Montserrat justify-center ml-[3.5rem]">
 
                     <section className="flex flex-col gap-6">
-                        {children}-
+                        {children}
                     </section>
 
                     {/* <section className="flex-grow-0 mt-16 mw150:hidden">
