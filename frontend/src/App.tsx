@@ -16,6 +16,8 @@ import MoodPage from './components/MoodPage';
 import Breathing from './components/Breathing';
 import SubForum from './components/Forum/SubForum';
 import UserProvider from './context/UserProvider';
+import ArticlesForm from './components/Articles/ArticleForm';
+import Home from './components/Home';
 
 function App() {
 
@@ -37,9 +39,11 @@ function App() {
         <Route path='/forum/depresion/subforum' element={<SubForum />} />
         <Route path='/moods' element={<MoodPage />}/>
         <Route path='/breathing' element={<Breathing />} />
+        <Route path='/articles/newArticle' element={<ArticlesForm/>} />
+        <Route path='/home' element={<Home/>} />
       </Routes>
     </UserProvider>
-  )
+  );
 }
 
 export default App;

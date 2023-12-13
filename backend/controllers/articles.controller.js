@@ -5,7 +5,7 @@ import { Articles } from '../schemas/Articles.js';
 async function addArticle(req, res, next) {
 
     const { success, error, data } = Articles.safeParse(req.body);
-
+    console.log('article-suc.',data)
     if (!success) {
         const errors = zodErrorMap(error);
         return res.send({
@@ -18,7 +18,10 @@ async function addArticle(req, res, next) {
     const { title, author, content } = data;
 
     try {
+        console.log('start')
+        console.log(await sendQuery('INSERT INTO articles (title, author, content) VALUES (?, ?, ?)', [title, author, content]))
         await sendQuery('INSERT INTO articles (title, author, content) VALUES (?, ?, ?)', [title, author, content]);
+        console.log('end')
     } catch (error) {
         return next(new Error(error.message));
     };

@@ -1,6 +1,6 @@
 import { FaEye, FaEyeSlash, FaArrowRight} from "react-icons/fa";
 import { useState } from "react";
-import { RegistrationFormState } from '../models/RegistrationForm.ts'
+import { RegistrationFormState } from '../models/RegistrationForm.ts';
 import { register } from "../services/registerService.ts";
 
 function RegisterProf() {
@@ -37,9 +37,9 @@ function RegisterProf() {
         if(response.error) {
           return response.error;            
         }
-        console.log(response)
+        console.log('resp.prof,',response);
         return response;
-      })
+      });
   }
   return (
     <div className="grid w-screen h-screen bg-background auto-cols-auto sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-auto xl:grid-cols-[320px,1fr]">
@@ -149,7 +149,7 @@ function RegisterProf() {
         </form>
         </div>
     </div>
-  )
+  );
 }
 
-export default RegisterProf
+export default RegisterProf;

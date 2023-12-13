@@ -9,12 +9,8 @@ function MoodTracker() {
     const [moodState, setMoodState] = useState('');
     const [moodData, setMoodData] = useState<MoodData[]>([]); //useState('');
     
-    
-    useEffect(()=> {
-        
-    })
     function handleValueChange(event:React.ChangeEvent<HTMLInputElement>) {
-        setMoodState(event.target.value)
+        setMoodState(event.target.value);
     }
 
     function handleMoodSubmit(event: React.FormEvent) {
@@ -24,16 +20,17 @@ function MoodTracker() {
         const moodData : MoodData = {
             'user_id': 1,
             'mood_type_id': parseFloat(moodState)
-        }
+        };
         addMood(moodData).then((response) => {
             console.log(response);
             if(response.error) {
-                console.log(response.error)
+                console.log(response.error);
             }
             return response;
         });
-        (document.getElementById('btnForm') as HTMLButtonElement).disabled = true;
         updateMoodData(moodData);   
+        (document.getElementById('btnForm') as HTMLButtonElement).disabled = true;
+        
     }
 
   return (
@@ -91,7 +88,7 @@ function MoodTracker() {
         </MoodContext.Provider>
         
     </div>
-  )
+  );
 }
 
-export default MoodTracker
+export default MoodTracker;

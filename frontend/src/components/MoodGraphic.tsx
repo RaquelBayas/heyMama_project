@@ -74,7 +74,7 @@ function MoodGraphic() {
              borderWidth: 1,
            }
         ]
-    }
+    };
     useEffect(() => {
         const fetchData = async () => {
           try {
@@ -105,8 +105,8 @@ function MoodGraphic() {
           { loading ? (<p>Cargando datos... </p>) :  ( <Pie data={data} />)}    
     </div>
     
-  )
+  );
 }
 
 export {moodTypeNames};
-export default MoodGraphic
+export default MoodGraphic;

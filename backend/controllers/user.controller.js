@@ -150,5 +150,22 @@ async function isLogIn(req, res, next) {
   }
 }
 
+async function getUserById(req,res,next) {
+  const {userId} = req.params;
+  console.log('user-id,',req.params)
+  try{
+    const results = await sendQuery('SELECT * FROM users WHERE user_id=?', [userId]);
+    console.log(results)
+    res.send({
+      ok:true,
+      message: 'Datos del usuario',
+      error: null,
+      data: results
+    });
+    next();
+  } catch(error) {
+    return next(error);
+  }
+}
 
-export { signUp, logIn, isLogIn }
+export { signUp, logIn, isLogIn, getUserById };
