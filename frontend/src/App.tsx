@@ -11,7 +11,6 @@ import './App.css';
 import ForumHome from './components/Forum/ForumHome';
 import Forums from './components/Forum/Forums';
 import Depresion from './components/Forum/forumTypes/Depresion';
-import MoodTracker from './components/MoodTracker';
 import MoodPage from './components/MoodPage';
 import Breathing from './components/Breathing';
 import SubForum from './components/Forum/SubForum';
@@ -20,6 +19,7 @@ import UserProvider from './context/UserProvider';
 function App() {
 
   return (
+
 
     <UserProvider>
       <Routes>
@@ -35,11 +35,12 @@ function App() {
         <Route path='/forum/depresion' element={<Depresion />} />
         <Route path='/config/*' element={<UserConf />} />
         <Route path='/forum/depresion/subforum' element={<SubForum />} />
-        <Route path='/moods' element={<MoodPage />}/>
+        <Route path='/moods' element={<MoodPage />} />
         <Route path='/breathing' element={<Breathing />} />
       </Routes>
     </UserProvider>
-  )
+
+  );
 }
 
 export default App;

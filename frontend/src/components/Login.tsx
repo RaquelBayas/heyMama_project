@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOffSharp } from "react-icons/io5";
@@ -8,6 +8,9 @@ import { LogInForm } from "../models/LogInForm";
 interface FormError {
     [key: string]: string
 }
+
+const { isLogged, setIsLogged } = useContext(contextBase);
+console.log(isLogged);
 
 
 function Login() {
