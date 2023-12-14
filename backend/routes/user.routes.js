@@ -1,6 +1,5 @@
 import express from "express";
 
-import { signUp } from "../controllers/user.controller.js";
 import checkUsername from "../middlewares/checkUsername.js";
 import { contact_form } from "../controllers/contact_form.js";
 import deleteUserById from "../controllers/deleteUserById.js"

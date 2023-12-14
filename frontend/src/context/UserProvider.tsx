@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 interface UserProviderProps {
     children: React.ReactNode;
@@ -19,21 +19,11 @@ interface User {
 const UserContext = createContext<UserContextType | null>(null);
 
 function UserProvider({ children }: UserProviderProps) {
-    const [user, setUser] = useState<Promise<User | null>>(async () => {
-        const token = localStorage.getItem('token');
-        if (!token) return;
-        const resp = await fetch('http://localhost:5000/users/initialLogin', {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        });
-        const data = await resp.json();
-
-        return data.user;
+    const [user, setUser] = useState<User | null>(() => {
+        const user = localStorage.getItem('user');
+        if (user) return JSON.parse(user);
 
     });
-
-
 
     function logIn(user: User) {
         setUser(user);
