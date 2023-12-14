@@ -26,13 +26,13 @@ function ToggleSwitch() {
     }
 
     return (
-        <div >
-            <label className={`flex flex-col gap-2`} htmlFor="checkbox">
-                Politica de privacidad
-                <span className={`profile block text-gray-500`}>
+        <div>
+            <label className={`flex flex-col gap-4`} htmlFor="checkbox">
+                Politica de privacidad:
+                <span className={`ml-5 profile block text-gray-500`}>
                     Perfil público
                 </span>
-                <label htmlFor="checkbox" className={`${styles.switch} ${switchState ? styles.on : styles.off}`}>
+                <label htmlFor="checkbox" className={`ml-5 ${styles.switch} ${switchState ? styles.on : styles.off}`}>
                     <input
                         id="checkbox"
                         type="checkbox"

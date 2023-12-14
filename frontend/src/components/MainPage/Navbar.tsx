@@ -8,7 +8,6 @@ function Navbar(){
             
             sm:text-md md:text-xl lg:text-2xl lg:gap-8">
                 <li className='cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out lg:ml-14'>
-                    <a href="/" >
                         <Link activeClass="active" 
                             to="landpage" 
                             spy={true} 
@@ -18,12 +17,11 @@ function Navbar(){
                             >
                                 <IoHomeOutline className='mt-0.5 text-3xl'/>
                         </Link>
-                    </a>
                 </li>
                 <div className="flex flex-row lg:mr-72">
                     <li className='cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out'>
-                        <a href="/">
-                            <Link activeClass="active"
+                            <Link 
+                                activeClass="active"
                                 to="about"
                                 spy={true}
                                 smooth={true}
@@ -33,7 +31,6 @@ function Navbar(){
                             >
                                 Info
                             </Link>
-                        </a>
                     </li>
                     <li className='cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out'>
                         <Link
