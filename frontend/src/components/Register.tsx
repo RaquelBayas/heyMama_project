@@ -1,5 +1,6 @@
 import { FaEye, FaEyeSlash, FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
+
 import { RegistrationFormState } from "../models/RegistrationForm.ts";
 import { register } from "../services/registerService.ts";
 
@@ -177,3 +178,4 @@ function Register() {
 }
 
 export default Register;
+
