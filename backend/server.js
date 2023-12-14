@@ -8,7 +8,10 @@ import { moodRoutes } from './routes/mood.routes.js'
 import { forumRoutes } from './routes/forum.routes.js'
 import { articlesRoutes } from './routes/articles.routes.js';
 
-const port = process.env.PORT;
+
+const { PORT, MYSQL_ADDON_PORT } = process.env
+
+const port = PORT;
 
 const app = express();
 app.use(express.json());
@@ -32,7 +35,7 @@ app.use(async (error, req, res, next) => {
 
 connection.connect()
   .then(() => {
-    console.log('Conectado a la base de datos...'+process.env.MYSQL_ADDON_PORT);
+    console.log('Conectado a la base de datos...' + MYSQL_ADDON_PORT);
     app.listen(port, () => console.log(`Escuchando en el puerto ${port}...`));
   })
   .catch(err => console.log(err.message));

@@ -104,7 +104,7 @@ async function getArticles(req, res, next) {
     res.send({
         ok: true,
         error: null,
-        data: results,
+        articles: results,
         message: 'Articles.'
     });
 

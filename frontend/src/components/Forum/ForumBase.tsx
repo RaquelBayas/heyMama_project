@@ -1,6 +1,6 @@
-import { ReactNode } from "react"
-import Menu from "../Menu"
-import Search from "../Search"
+import { ReactNode } from "react";
+import Menu from "../Menu";
+import Search from "../Search";
 
 function Forum({ children }: { children: ReactNode }) {
 
@@ -24,7 +24,7 @@ function Forum({ children }: { children: ReactNode }) {
                 </main>
             </div>
         </div>
-    )
+    );
 }
 
-export default Forum
+export default Forum;

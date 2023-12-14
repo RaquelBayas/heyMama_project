@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { FaHome, FaBookOpen, FaRegSmile } from "react-icons/fa";
 import { MdOutlineForum } from "react-icons/md";
 import { BsPersonCircle } from "react-icons/bs";
@@ -17,7 +17,7 @@ function Menu() {
         <li className='mb-4'><Link to="/ajustes"><IoIosSettings className="text-3xl icons" /></Link></li>
       </ul>
     </div>
-  )
+  );
 }
 
-export default Menu
+export default Menu;

@@ -1,10 +1,7 @@
 import express from "express";
-import { addSubForum } from '../controllers/forum/addSubForum.js'
-import { getForum } from "../controllers/forum/getForum.js";
-import { getSubForum } from "../controllers/forum/getSubForum.js";
-import { deleteSubForum } from "../controllers/forum/deleteSubForum.js";
-import { getForumById } from "../controllers/forum/getForumById.js";
-import getSubForumById from "../controllers/forum/getSubForumById.js";
+
+import { addSubForum, getForum, getSubForum, deleteSubForum, getForumById, getSubForumById } from '../controllers/forum.controllers.js'
+
 import { validateForumId } from "../middlewares/index.js";
 
 const forumRoutes = express.Router();

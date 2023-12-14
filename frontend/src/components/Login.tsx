@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaArrowRight } from "react-icons/fa";
 import { IoEyeOffSharp } from "react-icons/io5";
-import { FaArrowRight } from "react-icons/fa";
 import { LogInForm } from "../models/LogInForm";
 import useUserContext from "../hooks/useUserContext";
 

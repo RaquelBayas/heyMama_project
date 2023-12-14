@@ -1,6 +1,6 @@
-import { ReactNode } from "react"
-import Menu from "./Menu"
-import Search from "./Search"
+import { ReactNode } from "react";
+import Menu from "./Menu";
+import Search from "./Search";
 
 function Layout({ children }: { children: ReactNode }) {
 
@@ -19,7 +19,7 @@ function Layout({ children }: { children: ReactNode }) {
 
             </div>
         </div>
-    )
+    );
 }
 
-export default Layout
+export default Layout;

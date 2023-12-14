@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 
 function Discussion() {
 
-    const discussionId = useParams()
+    const discussionId = useParams();
     console.log(discussionId.id);
 
     interface Discussion {
-        "subforum_id": number
+        "article_id": number
         "title": string
         "comments": string
         "create_time": string
@@ -20,15 +20,15 @@ function Discussion() {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/articles/getArticlesByID/${discussionId.id}`)
+        fetch(`http://localhost:5000/articles/getArticles`)
             .then(resp => resp.json())
-            .then(data => {
-                console.log(data);
+            .then(articles => {
+                console.log(articles);
 
-                if (!data.error) {
-                    console.log(data.data);
+                if (!articles.error) {
+                    console.log(articles.articles);
 
-                    return setDiscussion(data.data);
+                    return setDiscussion(articles.articles);
 
                 }
             })
@@ -50,14 +50,14 @@ function Discussion() {
             <main>
 
                 <section className="flex flex-col gap-6 w-2/4 mx-auto mt-28">
-                    {discussions?.map(discussion => (
-                        <article className="flex flex-col bg-white p-3 rounded-lg border-4 border-green-300 w-full min-h-min" key={discussion.subforum_id}>
-                            <h2 className='text-xl font-semibold mb-2'>{discussion.title}</h2>
-                            <p className="text-gray-600 mb-4">{discussion.comments}</p>
+                    {discussions?.map(({ article_id, title, comments, create_time, author }) => (
+                        <article className="flex flex-col bg-white p-3 rounded-lg border-4 border-green-300 w-full min-h-min" key={article_id}>
+                            <h2 className='text-xl font-semibold mb-2'>Esto es un test de prueba</h2>
+                            <p className="text-gray-600 mb-4">{comments}</p>
 
                             <span className="text-gray-400">
-                                <time>{discussion.create_time.slice(0, 10)} {discussion.create_time.slice(11, 16)}</time>
-                                <small>{discussion.author}</small>
+                                <time>{create_time.slice(0, 10)} {create_time.slice(11, 16)}</time>
+                                <small className="block">Tester</small>
                             </span>
                         </article>
                     ))}
@@ -66,7 +66,7 @@ function Discussion() {
             </main>
 
         </div>
-    )
+    );
 }
 
-export default Discussion
+export default Discussion;

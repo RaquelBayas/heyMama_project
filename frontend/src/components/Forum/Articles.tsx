@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
-import Menu from '../Menu'
-import Search from '../Search'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import Menu from '../Menu';
+import Search from '../Search';
+import { Link } from 'react-router-dom';
 
 function Articles() {
 
@@ -45,12 +45,12 @@ function Articles() {
 
                     <section className="self-center grid grid-cols-4 gap-12 mb-8 mx-auto">
 
-                        {articles?.map(article => (
-                            <Link to={`/articles/content/${article.article_id}`} key={article.article_id}>
+                        {articles?.map(({ article_id, title, create_time }) => (
+                            <Link to={`/articles/content/${article_id}`} key={article_id}>
                                 <article className="flex flex-col justify-between bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md w-[250px] h-[150px]">
 
-                                    <h2 className='font-semibold text-xl'>{article.title}</h2>
-                                    <time className='italic'>{article.create_time}</time>
+                                    <h2 className='font-semibold text-xl'>{title}</h2>
+                                    <time className='italic'>{create_time}</time>
                                 </article>
                             </Link>
                         )
@@ -62,7 +62,7 @@ function Articles() {
                 </main>
             </div>
         </div>
-    )
+    );
 }
 
-export default Articles
+export default Articles;

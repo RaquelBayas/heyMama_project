@@ -1,7 +1,7 @@
 
-import { useEffect, useState } from 'react'
-import ForumBase from './ForumBase.tsx'
-import ForumCard from './ForumCard.tsx'
+import { useEffect, useState } from 'react';
+import ForumBase from './ForumBase.tsx';
+import ForumCard from './ForumCard.tsx';
 
 function Forum() {
 
@@ -16,11 +16,11 @@ function Forum() {
 
         fetch(`http://localhost:5000/forum/`)
             .then(resp => resp.json())
-            .then(data => {
-                console.log(data);
+            .then(forums => {
+                console.log(forums);
 
-                if (!data.error) {
-                    return setForums(data.data);
+                if (!forums.error) {
+                    return setForums(forums.forums);
 
                 }
             })
@@ -32,10 +32,10 @@ function Forum() {
 
             {forums?.map(({ forum_id, forum_type: title }) => (
 
-                <ForumCard img='./src/assets/foros.svg' alt='Una imagen de gente hablando' bg='primary' title={title.slice(0, 1) + title.slice(1).toLowerCase()} text='Comparte y resuelve tus dudas y pensamientos con personas como tú' page={'/forum/subforum/' + forum_id.toString()} key={forum_id} />
+                <ForumCard img='/public/assets/foros.svg' alt='Una imagen de gente hablando' bg='primary' title={title.slice(0, 1) + title.slice(1).toLowerCase()} text='Comparte y resuelve tus dudas y pensamientos con personas como tú' page={'/forum/subforum/' + forum_id.toString()} key={forum_id} />
             ))}
         </ForumBase>
-    )
+    );
 }
 
-export default Forum
+export default Forum;
