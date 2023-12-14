@@ -1,0 +1,37 @@
+.switch {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 50px;
+    height: 25px;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+}
+
+.switch::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+.on {
+    background-color: #adadad;
+}
+
+.on::after {
+    left: 5px
+}
+
+
+.off {
+    background-color: #765e4e;
+}
+
+.off:after {
+    left: calc(55% - 5px)
+}
