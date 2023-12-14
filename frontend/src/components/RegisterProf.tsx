@@ -13,6 +13,7 @@ function RegisterProf() {
     numCollege: 0,
     email: "",
     password: "",
+    username: "",
   });
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -31,6 +32,7 @@ function RegisterProf() {
       numCollege: 0,
       email: "",
       password: "",
+      username: "",
     });
 
     register(currentFormData).then((response) => {

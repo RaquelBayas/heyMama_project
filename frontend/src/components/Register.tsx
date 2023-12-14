@@ -12,6 +12,7 @@ function Register() {
     phone: 0,
     email: "",
     password: "",
+    username: "",
   });
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -29,6 +30,7 @@ function Register() {
       phone: 0,
       email: "",
       password: "",
+      username: "",
     });
     register(currentFormData).then((response) => {
       if (response.error) {
