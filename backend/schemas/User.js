@@ -15,6 +15,10 @@ const User = z.object({
     required_error: 'Campo obligatorio',
     invalid_type_error: 'El campo tiene que ser un string'
   }).min(4).max(32),
+  username: z.string({
+    required_error: 'Campo obligatorio',
+    invalid_type_error: 'El campo tiene que ser un string'
+  }).min(4).max(32),
 });
 
 export {User};
