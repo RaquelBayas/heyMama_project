@@ -1,9 +1,6 @@
-import useUserContext from '../../hooks/useUserContext';
 import ToggleSwitch from "./Switch/ToggleSwitch";
 
 function AccountConfig(){
-
-    const { user, logOut } = useUserContext();
     
     return(
         <form 
