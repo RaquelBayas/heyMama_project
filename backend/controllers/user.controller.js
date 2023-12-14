@@ -26,7 +26,7 @@ async function signUp(req, res, next) {
   //Comprobar que el usuario está registrado
   //Comprobar si tiene el dato 'num_colegiado/profesion' --> type_user_id = 2 (prof)
   //Admin (1), Prof. (2), Wom. (3)
-  const { userType, name, surname, email, password, phone, job, numCollege } = data;
+  const { userType, name, surname, email, password, username, phone, job, numCollege } = data;
 
   const salt = 10;
   const hashedPassword = bcrypt.hashSync(password, salt);
@@ -40,9 +40,9 @@ async function signUp(req, res, next) {
     }
 
     if (userType === 'prof') {
-      await sendQuery('INSERT INTO users (name, surname, email, password, phone, job, numCollege, type_user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [name, surname, email, hashedPassword, phone, job, numCollege, type_user_id[userType]]);
+      await sendQuery('INSERT INTO users (name, surname, email, password, username, phone, job, numCollege, type_user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [name, surname, email, username, hashedPassword, phone, job, numCollege, type_user_id[userType]]);
     } else if (userType === 'user') {
-      await sendQuery('INSERT INTO users (name, surname, email, password, phone, type_user_id) VALUES (?, ?, ?, ?, ?, ?)', [name, surname, email, hashedPassword, phone, type_user_id[userType]]);
+      await sendQuery('INSERT INTO users (name, surname, email, password, username, phone, type_user_id) VALUES (?, ?, ?, ?, ?, ?, ?)', [name, surname, email, username, hashedPassword, phone, type_user_id[userType]]);
     };
   } catch (error) {
     return next(new Error(error.message));
