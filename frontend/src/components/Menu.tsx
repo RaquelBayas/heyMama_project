@@ -17,7 +17,7 @@ function Menu() {
         <li className='mb-4'><Link to="/config"><IoIosSettings className="text-3xl icons" /></Link></li>
       </ul>
     </div>
-  )
+  );
 }
 
 export default Menu

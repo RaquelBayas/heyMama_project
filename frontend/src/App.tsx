@@ -11,12 +11,11 @@ import './App.css';
 import ForumHome from './components/Forum/ForumHome';
 import Forums from './components/Forum/Forums';
 import Depresion from './components/Forum/forumTypes/Depresion';
-import MoodTracker from './components/MoodTracker';
 import MoodPage from './components/MoodPage';
 import Breathing from './components/Breathing';
 import SubForum from './components/Forum/SubForum';
 import UserProvider from './context/UserProvider';
-import ArticlesForm from './components/Articles/ArticleForm';
+import NewArticle from './components/Articles/NewArticle';
 import Home from './components/Home';
 import TextEditor from './components/Articles/TextEditor';
 
@@ -40,7 +39,7 @@ function App() {
         <Route path='/forum/depresion/subforum' element={<SubForum />} />
         <Route path='/moods' element={<MoodPage />}/>
         <Route path='/breathing' element={<Breathing />} />
-        <Route path='/articles/newArticle' element={<ArticlesForm/>} />
+        <Route path='/articles/newArticle' element={<NewArticle/>} />
         <Route path='/home' element={<Home/>} />
         <Route path='/editor' element={<TextEditor/>} />
       </Routes>
