@@ -1,9 +1,33 @@
-function ProfileConfig(){
+import { useState } from "react";
+import useUserContext from "../../hooks/useUserContext";
+
+async function ProfileConfig(){
+
+    const [ configData, setConfigData ] = useState({
+        username: '',
+        name: '',
+        phone: '',
+        email:'',
+    });
+
+    const [ biographyData, setBiographyData ] = useState({
+        biography: '',
+    })
+
+    const { user } = useUserContext()
+
+    async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        const baseUrl = 'http://localhost:5000/users/config/:userId';
+    }
+
     return(
         <div className='flex flex-col ml-14 text-xl gap-5'>
             <h1 className='mt-10 mb-4 uppercase text-4xl text-center tracking-wider lg:text-start lg:ml-10'>Ajustes</h1>
 
             <form
+            onSubmit={handleSubmit}
                 className="flex flex-col justify-start gap-8"
             >
                 <h3>Foto de perfil:</h3>
