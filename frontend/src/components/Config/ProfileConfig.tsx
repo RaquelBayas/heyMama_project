@@ -1,11 +1,11 @@
 import { useState } from "react";
-import useUserContext from "../../hooks/useUserContext";
 
 async function ProfileConfig(){
 
     const [ configData, setConfigData ] = useState({
         username: '',
         name: '',
+        surname:'',
         phone: '',
         email:'',
     });
@@ -14,7 +14,17 @@ async function ProfileConfig(){
         biography: '',
     })
 
-    const { user } = useUserContext()
+    function handleChange (e:  React.ChangeEvent<HTMLInputElement>){
+        setConfigData({
+            ...configData,
+            [e.target.name]:e.target.value
+        });
+
+        setBiographyData({
+            ...biographyData,
+            [e.target.name]: e.target.value
+        })
+    }
 
     async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -35,7 +45,8 @@ async function ProfileConfig(){
                     <input 
                         type="file" 
                         accept='image/*' 
-                        id='avatar' 
+                        id='avatar'
+                        name="avatar" 
                         className='hidden' />
                     <img 
                         src="./src/assets/avatar-person.svg" alt="avatar" 
@@ -46,30 +57,48 @@ async function ProfileConfig(){
             <div 
                 className="flex flex-col">
                 <label htmlFor="username">Nombre de usuario:</label>
-                <input 
+                <input
+                    name="username" 
+                    value={configData.username}
+                    onChange={handleChange}
                     className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
             </div>
 
             <div className="flex flex-col">
                 <label htmlFor="name">Nombre:</label>
                 <input 
+                    name="name"
+                    value={configData.name}
+                    onChange={handleChange}
                     className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
             </div>
             
             <div className="flex flex-col">
                 <label htmlFor="name">Apellido:</label>
-                <input className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none' />
+                <input 
+                    name="surname"
+                    value={configData.surname}
+                    onChange={handleChange}
+                    className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none' />
             </div>
             
             <div className="flex flex-col">
                 <label htmlFor="name">Teléfono:</label>
-                <input className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
+                <input 
+                    name="phone"
+                    value={configData.phone}
+                    onChange={handleChange}
+                    className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
             </div>
 
 
             <div className="flex flex-col">
                 <label htmlFor="biography">Biografía:</label>
-                <input className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
+                <input 
+                    name="biography"
+                    value={biographyData.biography}
+                    onChange={handleChange}
+                    className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
             </div>
 
             <button
