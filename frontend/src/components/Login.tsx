@@ -53,13 +53,11 @@ function Login() {
             }
 
             if (resp.ok) {
-                debugger
                 setError(null);
                 localStorage.setItem('token', data.data.token);
+                localStorage.setItem('user', JSON.stringify(data.data.user));
                 logIn(data.data.user);
                 console.log(data.data.user);
-
-
 
                 return navigate("/");
             }

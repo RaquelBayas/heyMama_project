@@ -14,6 +14,6 @@ function MainPage() {
             <Contact />
             <Link to="/forum">Forum</Link>
         </div>
-    )
+    );
 }
 export default MainPage;
