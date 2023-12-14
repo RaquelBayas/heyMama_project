@@ -5,7 +5,7 @@ import { Articles } from '../schemas/Articles.js';
 async function addArticle(req, res, next) {
 
     const { success, error, data } = Articles.safeParse(req.body);
-    console.log('article-suc.',data)
+
     if (!success) {
         const errors = zodErrorMap(error);
         return res.send({
@@ -18,10 +18,7 @@ async function addArticle(req, res, next) {
     const { title, author, content } = data;
 
     try {
-        console.log('start')
-        console.log(await sendQuery('INSERT INTO articles (title, author, content) VALUES (?, ?, ?)', [title, author, content]))
         await sendQuery('INSERT INTO articles (title, author, content) VALUES (?, ?, ?)', [title, author, content]);
-        console.log('end')
     } catch (error) {
         return next(new Error(error.message));
     };
@@ -37,22 +34,21 @@ async function addArticle(req, res, next) {
 }
 
 async function deleteArticle(req, res, next) {
-    const article_id = req.params;
+    const {article_id} = req.params;
 
     try {
         await sendQuery('DELETE FROM articles WHERE article_id=?', article_id);
+        res.send({
+            ok: true,
+            error: null,
+            data: null,
+            message: 'Artículo eliminado correctamente.'
+        });
+    
+        next();
     } catch (error) {
         return next(new Error(error.message));
-    };
-
-    res.send({
-        ok: true,
-        error: null,
-        data: null,
-        message: 'Artículo eliminado correctamente.'
-    });
-
-    next();
+    };    
 }
 
 async function editArticle(req, res, next) {

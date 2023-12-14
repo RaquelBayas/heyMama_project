@@ -18,6 +18,7 @@ import SubForum from './components/Forum/SubForum';
 import UserProvider from './context/UserProvider';
 import ArticlesForm from './components/Articles/ArticleForm';
 import Home from './components/Home';
+import TextEditor from './components/Articles/TextEditor';
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
         <Route path='/breathing' element={<Breathing />} />
         <Route path='/articles/newArticle' element={<ArticlesForm/>} />
         <Route path='/home' element={<Home/>} />
+        <Route path='/editor' element={<TextEditor/>} />
       </Routes>
     </UserProvider>
   );

@@ -4,7 +4,7 @@ interface ArticleResponse {
     error: string
 }
 async function addArticle(article: Article){
-    console.log('article-serv.',article)
+    console.log('article-serv.',article);
     const baseUrl = 'http://localhost:5000/articles/addArticle';
 
     try {
