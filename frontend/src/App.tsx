@@ -15,6 +15,7 @@ import MoodPage from './components/MoodPage';
 import Breathing from './components/Breathing';
 import SubForum from './components/Forum/SubForum';
 import UserProvider from './context/UserProvider';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
 
@@ -29,8 +30,12 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/registerUser' element={<Register />} />
         <Route path='/registerProf' element={<RegisterProf />} />
+        <Route path='/forum' element={
+          <PrivateRoute>
+            <ForumHome />
+          </PrivateRoute>
+        } />
         <Route path='/register' element={<RegisterType />} />
-        <Route path='/forum' element={<ForumHome />} />
         <Route path='/forums' element={<Forums />} />
         <Route path='/forum/depresion' element={<Depresion />} />
         <Route path='/config/*' element={<UserConf />} />

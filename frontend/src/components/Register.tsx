@@ -1,17 +1,11 @@
 
 import { FaEye, FaEyeSlash, FaArrowRight } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { RegistrationFormState } from '../models/RegistrationForm.ts';
 import { register } from '../services/registerService.ts';
 
 
 function Register() {
-
-  useEffect(() => {
-    IsLogged();
-  }, []);
-
-
 
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<RegistrationFormState>({
