@@ -1,5 +1,6 @@
 import { User } from "../schemas/User.js";
 import { sendQuery } from '../db/connectDB.js';
+import { zodErrorMap } from "../helpers/zodErrorMap.js";
 
 async function profileConfig(req, res){
     const { success, error, data } = User.safeParse(req.body);
@@ -21,13 +22,13 @@ async function profileConfig(req, res){
 
     try {
 
-        const updateProfileDataQuery = 'UPDATE users SET username = IFNULL(?,username), name = IFNULL(?,name), surname = (?, surname), phone = IFNULL(?,phone) WHERE id = ?';
+        const updateProfileDataQuery = 'UPDATE users SET username = IFNULL(?,username), name = IFNULL(?,name), surname = (?, surname), phone = IFNULL(?,phone) WHERE user_id = ?';
 
         const [resultProfile] = await sendQuery(updateProfileDataQuery, [username, name, surname, phone, userId]);
 
-        const updateBiography = 'UPDATE data_users SET biography = IFNULL(?,biography) WHERE id = ?';
+        const updateBiography = 'UPDATE data_users SET biography = IFNULL(?,biography) WHERE user_id = ?';
 
-        const [resultBio] = await sendQuery(updateBiography, [biography]);
+        const [resultBio] = await sendQuery(updateBiography, [biography, userId]);
 
         if (resultProfile.affectedRows > 0 || resultBio.affectedRows > 0) {
             res.send({
@@ -51,7 +52,6 @@ async function profileConfig(req, res){
             error: { message: 'Error al actualizar el perfil' }
         });
     }
-
 }
 
 export default profileConfig;

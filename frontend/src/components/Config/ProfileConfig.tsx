@@ -1,6 +1,7 @@
 import { useState } from "react";
+import useUserContext from "../../hooks/useUserContext";
 
-async function ProfileConfig(){
+function ProfileConfig(){
 
     const [ configData, setConfigData ] = useState({
         username: '',
@@ -29,7 +30,33 @@ async function ProfileConfig(){
     async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const baseUrl = 'http://localhost:5000/users/config/:userId';
+        const { user } = useUserContext();
+
+        const userId = user ? user.id : '';
+
+        const baseUrl = `http://localhost:5000/users/config/:${userId}`;
+
+        try {
+            const response = await fetch(baseUrl,{
+                method:'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...configData,
+                    ...biographyData,
+                }),
+            });
+
+            if (response.ok){
+                const result = await response.json();
+                console.log(result);
+            } else{
+                console.error('Error al enviar datos al servidor');
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return(
