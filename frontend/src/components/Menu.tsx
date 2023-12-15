@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { FaHome, FaBookOpen, FaRegSmile } from "react-icons/fa";
 import { MdOutlineForum } from "react-icons/md";
 import { BsPersonCircle } from "react-icons/bs";
@@ -20,4 +20,4 @@ function Menu() {
   );
 }
 
-export default Menu
+export default Menu;
