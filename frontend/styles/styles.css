@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: Montserrat;
+    src: url(./fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: Montserrat-italic;
+    src: url(./fonts/Montserrat-Italic-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: Anybody;
+    src: url(./fonts/Anybody-VariableFont_wdth\,wght.ttf);
+}
+
+@font-face {
+    font-family: Anybody-italic;
+    src: url(./fonts/Anybody-Italic-VariableFont_wdth\,wght.ttf);
+}
+
+
+@media (max-width: 680px) {
+    .data-forumscard {
+        width: 180px;
+    }
+
+    .data-forumscard p,
+    time {
+        visibility: hidden;
+    }
+
+    .data-forumspath {
+        justify-content: center;
+        align-self: center;
+        margin-left: -8rem;
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 1600px) {
+    .data-forumscard {
+        width: 42rem;
+    }
+}
+
+@media (min-width: 680px) and (max-width: 1600px) {
+    .data-forumscard {
+        width: max-content;
+    }
+}
+
+
+.circle {
+    box-shadow: 0px 0px 1px 1px #0000001a;
+}
+
+.pulse {
+    animation: pulse-animation 4s infinite;
+}
+
+@keyframes pulse-animation {
+    0% {
+        box-shadow: 0 0 0 0px #DDBEA9;
+    }
+
+    100% {
+        box-shadow: 0 0 0 50px rgba(0, 0, 0, 0);
+    }
+}

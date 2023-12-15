@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 interface ForumCardProps {
     img: string
@@ -22,7 +22,7 @@ function ForumCard({ img, alt, bg, title, text, page }: ForumCardProps) {
                 </div>
             </article>
         </Link>
-    )
+    );
 }
 
-export default ForumCard
+export default ForumCard;
