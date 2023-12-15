@@ -1,4 +1,5 @@
 import { MoodData } from "../models/MoodData";
+import { getUserData } from "./authService";
 
 interface MoodResponse {
     error: string
@@ -26,7 +27,8 @@ async function addMood(moodData: MoodData){
 }
 
 async function getMood(){
-    const baseUrl = 'http://localhost:5000/mood/getMood/1';
+    const {id}  = JSON.parse(localStorage.getItem('user')!);
+    const baseUrl = 'http://localhost:5000/mood/getMood/'+id;
 
     try {
         const resp = await fetch(baseUrl, {
