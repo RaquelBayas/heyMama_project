@@ -34,22 +34,21 @@ async function addArticle(req, res, next) {
 }
 
 async function deleteArticle(req, res, next) {
-    const article_id = req.params;
+    const {article_id} = req.params;
 
     try {
         await sendQuery('DELETE FROM articles WHERE article_id=?', article_id);
+        res.send({
+            ok: true,
+            error: null,
+            data: null,
+            message: 'Artículo eliminado correctamente.'
+        });
+    
+        next();
     } catch (error) {
         return next(new Error(error.message));
-    };
-
-    res.send({
-        ok: true,
-        error: null,
-        data: null,
-        message: 'Artículo eliminado correctamente.'
-    });
-
-    next();
+    };    
 }
 
 async function editArticle(req, res, next) {
@@ -104,20 +103,29 @@ async function getArticles(req, res, next) {
     res.send({
         ok: true,
         error: null,
-        data: results,
+        articles: results,
         message: 'Articles.'
     });
 
     next()
 }
 
-async function findArticleById(id) {
+async function findArticleById(req, res, next) {
+    const id = req.params.id;
+    console.log('id.', id)
     try {
-        const article = await sendQuery('SELECT * FROM articles WHERE article_id=?', id);
-        return article;
+        const article = await sendQuery('SELECT * FROM articles WHERE article_id = ?', id);
+        res.send({
+            ok: true,
+            error: null,
+            data: article,
+            message: 'Articles.'
+        });
+
+        next()
     } catch (error) {
         return next(new Error(error.message));
     }
 
 }
-export { addArticle, deleteArticle, editArticle, getArticles };
+export { addArticle, deleteArticle, editArticle, getArticles, findArticleById };

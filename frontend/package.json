@@ -4,21 +4,23 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm-run-all -p dev:vite dev:tailwindcss",
-    "dev:vite": "vite",
+    "dev": "vite",
     "dev:tailwindcss": "npx tailwindcss -i ./src/index.css -o ./dist/output.css --watch",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/quill": "^2.0.14",
     "@types/styled-components": "^5.1.32",
     "chart.js": "^4.4.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-quill": "^2.0.0",
     "react-scroll": "^1.9.0",
     "styled-components": "^6.1.1",
+    "sweetalert2": "^11.10.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -40,6 +42,6 @@
     "react-router-dom": "^6.20.0",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
-    "vite": "^5.0.4"
+    "vite": "^5.0.8"
   }
 }

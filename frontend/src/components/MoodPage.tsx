@@ -1,9 +1,9 @@
-import MoodTracker from './MoodTracker'
-import MoodRecord from './MoodRecord'
-import Menu from './Menu'
-import Search from './Search'
-import MoodGraphic from './MoodGraphic'
-
+import MoodTracker from './MoodTracker';
+import MoodRecord from './MoodRecord';
+import Menu from './Menu';
+import Search from './Search';
+import MoodGraphic from './MoodGraphic';
+import MoodProvider from '../context/MoodContext';
 function MoodPage() {
   
   return (
@@ -17,17 +17,19 @@ function MoodPage() {
       <div className='w-full mt-2 mb-2 border-b border-secondary'></div>
     </div>  
     <div className='mx-auto h-screen w-full flex flex-row ml-4 justify-evenly'>
+      <MoodProvider>
       <div className='h-fit'>
-      <MoodGraphic/>
-      <MoodTracker />
-      </div>
-      <div className='h-4/5 mb-4'>
-        <MoodRecord/>
-      </div>      
+        <MoodGraphic/>
+        <MoodTracker />
+        </div>
+        <div className='h-4/5 mb-4'>
+          <MoodRecord/>
+        </div>   
+      </MoodProvider>
     </div>  
   </div>
 </div>
-  )
+  );
 }
 
-export default MoodPage
+export default MoodPage;

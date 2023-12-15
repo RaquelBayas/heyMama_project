@@ -7,15 +7,14 @@ import UserConf from './components/Config/UserConf';
 import RegisterType from './components/RegisterType';
 import RegisterProf from './components/RegisterProf';
 import MainPage from './components/MainPage/MainPage';
-import './App.css';
 import ForumHome from './components/Forum/ForumHome';
 import Forums from './components/Forum/Forums';
-import Depresion from './components/Forum/forumTypes/Depresion';
 import MoodPage from './components/MoodPage';
 import Breathing from './components/Breathing';
-import SubForum from './components/Forum/SubForum';
 import UserProvider from './context/UserProvider';
+import NewArticle from './components/Articles/NewArticle';
 import PrivateRoute from './components/PrivateRoute';
+import SubForum from './components/Forum/forumTypes/SubForum';
 
 function App() {
 
@@ -41,11 +40,6 @@ function App() {
             <Forums />
           </PrivateRoute>
         } />
-        <Route path='/forum/depresion' element={
-          <PrivateRoute>
-            <Depresion />
-          </PrivateRoute>
-        } />
         <Route path='/config/*' element={
           <PrivateRoute>
             <UserConf />
@@ -66,9 +60,13 @@ function App() {
             <Breathing />
           </PrivateRoute>
         } />
+        <Route path='/articles/newArticle' element={
+          <PrivateRoute>
+            <NewArticle />
+          </PrivateRoute>
+        } />
       </Routes>
     </UserProvider>
-
   );
 }
 

@@ -1,0 +1,23 @@
+.quill.customStyles .ql-container.ql-snow {
+    min-height: 20rem;
+    max-height: 36rem;
+    height: 36rem;
+}
+
+@media (max-width: 768px) {
+    .quill {
+        width: 28rem;
+    }
+    .quill.customStyles .ql-container.ql-snow {
+        height: 28rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .quill {
+        width: 18rem;
+    }
+    .quill.customStyles .ql-container.ql-snow {
+        height: 22rem;
+    }
+}
