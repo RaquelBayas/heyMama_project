@@ -1,17 +1,17 @@
-import { useState, useRef } from 'react'
-import Menu from './Menu'
-import Search from './Search'
+import { useState, useRef } from 'react';
+import Menu from './Menu';
+import Search from './Search';
 
 function Breathing() {
 
-    const [breathing, setBreathing] = useState('Respira...')
-    const [isIntervalActive, setIsIntervalActive] = useState(false)
-    const breathIntervalRef = useRef<number | null>(null)
-    const ball = document.querySelector('div.ball')
+    const [breathing, setBreathing] = useState('Respira...');
+    const [isIntervalActive, setIsIntervalActive] = useState(false);
+    const breathIntervalRef = useRef<number | null>(null);
+    const ball = document.querySelector('div.ball');
 
     function initBreath() {
-        const ball = document.querySelector('div.ball')
-        ball?.classList.add('circle', 'pulse')
+        const ball = document.querySelector('div.ball');
+        ball?.classList.add('circle', 'pulse');
 
         if (!isIntervalActive) {
             setBreathing('Inhala...');
@@ -27,11 +27,11 @@ function Breathing() {
     }
 
     function stopBreath() {
-        ball?.classList.remove('circle', 'pulse')
+        ball?.classList.remove('circle', 'pulse');
 
-        clearInterval(breathIntervalRef.current!)
-        setIsIntervalActive(false)
-        setBreathing('Respira...')
+        clearInterval(breathIntervalRef.current!);
+        setIsIntervalActive(false);
+        setBreathing('Respira...');
     }
 
     return (
@@ -57,7 +57,7 @@ function Breathing() {
                 </main>
             </div>
         </div>
-    )
+    );
 }
 
-export default Breathing
+export default Breathing;

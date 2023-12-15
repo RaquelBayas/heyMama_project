@@ -30,7 +30,7 @@ async function addMood(req, res, next) {
         error: null,
         data: null,
         message: 'Mood registrado correctamente.'
-      });
+    });
 
     next()
 }

@@ -123,12 +123,24 @@ async function logIn(req, res, next) {
   const { email, password: truePassword } = data;
 
   try {
-    const checkEmailInDB = "SELECT * FROM users WHERE email = ?";
+    const checkEmailInDB = `SELECT *
+    FROM users 
+        LEFT JOIN data_users
+          USING (user_id)
+            WHERE email = ?`
 
     const [user] = await sendQuery(checkEmailInDB, [email]);
 
+
     if (!user) {
       return next(new HttpError(400, "Email y/o contraseña incorrectos"));
+    }
+
+    if (!user.isActive) {
+      return res.status(403).send({
+        message: "This account has been deleted",
+        data: null,
+      });
     }
 
     const match = await bcrypt.compare(truePassword, user.password);
@@ -145,8 +157,6 @@ async function logIn(req, res, next) {
     const token = jwt.sign(infoUser, process.env.JWT_SECRET, {
       expiresIn: "1 day",
     });
-
-    console.log(token);
 
     infoUser.exp = Date.now() + 1000 * 60 * 60 * 24;
 
@@ -195,23 +205,48 @@ async function isLogIn(req, res, next) {
   }
 }
 
-async function getUserById(req,res,next) {
-  const {userId} = req.params;
-  console.log('user-id,',req.params)
-  try{
+
+function initialLogin(req, res) {
+  const { authorization } = req.headers;
+
+  if (!authorization) {
+    return res.status(400).send({
+      error: 'Tienes que enviar cabecera "authorization"'
+    })
+  }
+
+  const token = authorization.split(' ')[1];
+
+  // verificar el token con JWT
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    res.send({
+      user
+    })
+  } catch (error) {
+    return res.status(400).send({
+      user: null,
+      error: 'Token inválido o expirado'
+    })
+  }
+}
+
+async function getUserById(req, res, next) {
+  const { userId } = req.params;
+  console.log('user-id,', req.params)
+  try {
     const results = await sendQuery('SELECT * FROM users WHERE user_id=?', [userId]);
     console.log(results)
     res.send({
-      ok:true,
+      ok: true,
       message: 'Datos del usuario',
       error: null,
       data: results
     });
     next();
-  } catch(error) {
+  } catch (error) {
     return next(error);
   }
 }
 
-export { signUp, logIn, isLogIn, getUserById };
-
+export { signUp, logIn, isLogIn, getUserById, initialLogin };
