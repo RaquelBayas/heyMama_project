@@ -16,7 +16,6 @@ const moodTypeNames: Record<number, string> = {
   5: 'TRISTE',
 };
 function MoodGraphic() {
-    const [loading, setLoading] = useState(true);
     const {moodData, updateMoodData} = useContext(MoodContext) as MoodContextValue;   
 
     interface MoodData {
@@ -74,23 +73,18 @@ function MoodGraphic() {
              borderWidth: 1,
            }
         ]
-    }
+    };
     useEffect(() => {
         const fetchData = async () => {
           try {
             const result = await getMood();
-            //const arrayMoods: MoodData[] = [];
           
             const flattenedData = result.data.flat();
             if (flattenedData.length > 0) {
               updateMoodData(result.data);
-            }
-            //setMoodDataArray(result.data);
-            //updateMoodData(arrayMoods)           
+            }         
           } catch (error) {
             console.error('Error fetching mood data:', error);
-          } finally {
-            setLoading(false);
           }
         };
     
@@ -102,11 +96,11 @@ function MoodGraphic() {
     
   return (  
     <div>
-          { loading ? (<p>Cargando datos... </p>) :  ( <Pie data={data} />)}    
+          <Pie data={data} />    
     </div>
     
-  )
+  );
 }
 
 export {moodTypeNames};
-export default MoodGraphic
+export default MoodGraphic;
