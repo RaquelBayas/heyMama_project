@@ -16,6 +16,7 @@ async function addConsult(req, res, next) {
 
     const {user_id, profesional_id, consult} = data;
 
+
     try {
         await sendQuery('INSERT INTO consult(user_id,profesional_id,consult) VALUES (?,?,?)', [user_id,profesional_id,consult]);
         res.send({
@@ -31,7 +32,21 @@ async function addConsult(req, res, next) {
     }
 }
 
-async function getConsults
+async function getConsults(req, res, next) {
+    try {
+        const consults = await sendQuery('SELECT * FROM consult');
+        res.send({
+            ok: true,
+            error: null,
+            data: consults,
+            message: 'Consultas'
+        });
+    
+        next();
+    } catch (error) {
+        return next(new Error(error.message));
+    }
+}
 async function getConsultsByProfId(req, res, next) {
     const {profesional_id} = req.params;
     
@@ -87,4 +102,4 @@ async function deleteConsult(req, res, next) {
 }
 
 
-export {addConsult, getConsultsByProfId, getConsultByUserId, deleteConsult};
+export {addConsult, getConsults, getConsultsByProfId, getConsultByUserId, deleteConsult};

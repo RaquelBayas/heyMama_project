@@ -7,6 +7,7 @@ import { userRoutes } from './routes/user.routes.js'
 import { moodRoutes } from './routes/mood.routes.js'
 import { forumRoutes } from './routes/forum.routes.js'
 import { articlesRoutes } from './routes/articles.routes.js';
+import { consultRoutes } from './routes/consult.routes.js'
 
 const port = process.env.PORT;
 
@@ -24,6 +25,7 @@ app.use('/users', userRoutes)
 app.use('/mood', moodRoutes)
 app.use('/forum', forumRoutes)
 app.use('/articles', articlesRoutes);
+app.use('/consults', consultRoutes);
 
 app.use(async (error, req, res, next) => {
   console.log(error.message);

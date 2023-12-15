@@ -195,4 +195,18 @@ async function isLogIn(req, res, next) {
   }
 }
 
-export { signUp, logIn, isLogIn };
+async function getAllUsers(req, res, next) {
+  try {
+    const users = await sendQuery('SELECT * FROM users');
+    res.send({
+      ok: true,
+      message: "Lista de usuarios registrados",
+      error: null,
+      data: users
+    });
+    next();
+  } catch (error) {
+    return next(new Error(error.message));
+  }
+}
+export { signUp, logIn, isLogIn, getAllUsers };
