@@ -15,6 +15,7 @@ import UserProvider from './context/UserProvider';
 import NewArticle from './components/Articles/NewArticle';
 import PrivateRoute from './components/PrivateRoute';
 import SubForum from './components/Forum/forumTypes/SubForum';
+import Layout from './components/Layout';
 
 function App() {
 
@@ -45,9 +46,11 @@ function App() {
             <UserConf />
           </PrivateRoute>
         } />
-        <Route path='/forum/depresion/subforum' element={
+        <Route path='/forum/subforum/:id' element={
           <PrivateRoute>
-            <SubForum />
+            <Layout>
+              <SubForum />
+            </Layout>
           </PrivateRoute>
         } />
         <Route path='/moods' element={

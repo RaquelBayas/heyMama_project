@@ -32,11 +32,11 @@ function SubForum() {
         <main className="flex flex-col gap-4 font-Montserrat ml-60 items-center">
             <h1 className='self-start text-4xl font-semibold text-[#8B6956] flex items-center mt-4 mb-6 data-forumspath'>FOROS <img src="/assets/arrow-symbol.svg" className='inline mx-6 w-4' /> <span className='text-2xl'> Depresión</span></h1>
 
-            <section className="grid grid-cols-2 mw150:flex mw150:flex-col justify-around gap-6 border-2 border-[#DDBEA9] p-8 -pr-8 -ml-[12rem] mb-4">
+            <section className="grid grid-cols-2 mw150:flex mw150:flex-col justify-center gap-6 border-2 border-[#DDBEA9] p-8 -pr-8 -ml-[12rem] mb-4 w-5/6">
 
                 {forumCards?.map(({ subforum_id, subforum_title: title, subforum_content: content, create_time: time }) => (
                     <Link to={`/forum/subforum/discussion/${subforum_id}`} key={subforum_id}>
-                        <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28 data-forumscard">
+                        <article className="flex flex-col gap-2 bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md h-28">
                             <h2 className='font-semibold text-xl'>{title}</h2>
                             <p>
                                 {content}
