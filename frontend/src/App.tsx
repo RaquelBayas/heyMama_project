@@ -79,6 +79,11 @@ function App() {
             <Profile />
           </PrivateRoute>
         } />
+        <Route path='/home' element={
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        } />
       </Routes>
     </UserProvider>
   );

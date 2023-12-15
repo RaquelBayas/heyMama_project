@@ -26,14 +26,16 @@ function ProfileCard() {
 
   return (
     
-      <div className="flex flex-row justify-center gap-4 p-4 text-center align-middle bg-white rounded-md h-fit w-fit">
+      <div className="flex flex-row justify-center gap-4 p-4 align-middle bg-white rounded-md h-fit w-fit">
         
         <img className="w-32 mx-auto rounded-full h-fit" src={ photo && photo.trim() !== ''
       ? photo : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541'} alt="" />
 
-        <div className="flex flex-col w-64 gap-2">
+        <div className="flex flex-col w-64 gap-3 text-left">
         <h1 className="text-lg ">{name}</h1>
         <p className="text-md">{bio}</p>
+
+        <button className="p-2 mt-2 rounded-md bg-primary w-fit">Mensajes</button>
         </div>
     </div>
     
