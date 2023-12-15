@@ -33,7 +33,7 @@ async function addMood(req, res, next) {
         message: 'Mood registrado correctamente.'
       });
 
-    next()
+    next();
 }
 
 async function getMoodName(req,res,next) {
@@ -64,11 +64,11 @@ async function getMood(req, res, next) {
         message: 'Historial de emociones del usuario '+user_id
     });
 
-    next()
+    next();
 }
 
 async function deleteMood(req, res, next) {
-    console.log(req.query);
+   console.log(req.query);
     
    const {user_id} = req.query;
 
@@ -85,7 +85,7 @@ async function deleteMood(req, res, next) {
         message: 'Historial de emociones del usuario '+user_id+' eliminado.'
       });
 
-    next()
+    next();
 }
 
 export {addMood, getMood, getMoodName, deleteMood}
