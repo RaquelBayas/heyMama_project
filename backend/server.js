@@ -7,6 +7,8 @@ import { userRoutes } from './routes/user.routes.js'
 import { moodRoutes } from './routes/mood.routes.js'
 import { forumRoutes } from './routes/forum.routes.js'
 import { articlesRoutes } from './routes/articles.routes.js';
+import { Server } from 'socket.io';
+import http from 'node:http';
 
 
 const { PORT, MYSQL_ADDON_PORT } = process.env
@@ -17,7 +19,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
-
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -40,3 +41,27 @@ connection.connect()
   })
   .catch(err => console.log(err.message));
 
+const server = http.createServer(app);
+const io = new Server(server, {
+  transports: ['websocket'],
+  connectionStateRecovery: {}
+});
+
+io.on('connection', socket => {
+  console.log(socket.id);
+
+  socket.on('message', (body) => {
+    console.log(body);
+
+    // Guardar mensaje en MongoDB
+    // Retornar mensaje en MongoDB
+
+    socket.broadcast.emit('message', {
+      body,
+      from: socket.id.slice(6)
+    });
+  });
+});
+
+server.listen(443)
+console.log('Server on port', 443);

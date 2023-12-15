@@ -16,6 +16,7 @@ import NewArticle from './components/Articles/NewArticle';
 import PrivateRoute from './components/PrivateRoute';
 import SubForum from './components/Forum/forumTypes/SubForum';
 import Layout from './components/Layout';
+import Chat from './components/chat/Chat';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/registerUser' element={<Register />} />
         <Route path='/registerProf' element={<RegisterProf />} />
+        <Route path='/chat' element={<Chat />} />
         <Route path='/forum' element={
           <PrivateRoute>
             <ForumHome />
