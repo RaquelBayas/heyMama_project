@@ -4,57 +4,57 @@ import { ContactForm } from "../../models/ContactForm";
 
 function Contact() {
 
-    const [ error, setError ] = useState<ContactForm | null>(null);
+    const [error, setError] = useState<ContactForm | null>(null);
 
-    const [ contactData, setContactData ] = useState({
+    const [contactData, setContactData] = useState({
         name: '',
         phone: '',
-        email:'',
-        message:'',
-        }
+        email: '',
+        message: '',
+    }
     );
 
-    function handleChange(e : React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
+    function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         setContactData({
-            ...contactData, 
-            [e.target.name] : e.target.value
-        })
-    };
+            ...contactData,
+            [e.target.name]: e.target.value
+        });
+    }
 
-    async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
         const baseUrl = 'http://localhost:5000/users/contact';
-        
+
         try {
             const resp = await fetch(baseUrl, {
-                method:'POST',
+                method: 'POST',
                 headers: {
-                    'Content-Type':'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(contactData)
             });
-            
+
             if (!resp.ok && resp.status === 400) {
-                const data = await resp.json(); 
-                setError(data.error)
+                const data = await resp.json();
+                setError(data.error);
             } else {
                 setError(null);
-            }; 
-            
+            }
+
         } catch (error) {
             console.error(error);
-        };
-    };
+        }
+    }
 
     return (
         <div id='contact' className="w-full h-screen bg-background font-anybody">
             <div className="grid grid-cols-2">
-                
+
                 <div className="flex flex-col gap-12 mx-auto my-auto pt-36 
                 
                 sm:pt-0">
-                    
+
                     <h1 className="pb-8 text-4xl uppercase 
                     
                     sm:text-2xl 
@@ -63,7 +63,7 @@ function Contact() {
                     >
                         Ponte en contacto
                     </h1>
-                    
+
                     <div className="flex flex-row gap-3 align-center">
                         <FaPhoneAlt className='my-0.5' />
                         <h2 className="text-2xl font-light">Números de interés</h2>
@@ -75,9 +75,9 @@ function Contact() {
                 </div>
 
 
-                <form 
+                <form
                     onSubmit={handleSubmit}
-                   className="mx-6 mb-auto leading-4 h-fit border-2 border-black border-solid bg-primary rounded-3xl overflow-hidden
+                    className="mx-6 mb-auto leading-4 h-fit border-2 border-black border-solid bg-primary rounded-3xl overflow-hidden
                    
 
                    md:mt-24 
@@ -91,12 +91,12 @@ function Contact() {
                             value={contactData.name}
                             onChange={handleChange}
                             placeholder="Escriba su nombre"
-                            
+
                             className='mt-1 p-4 h-10 border-2 border-black border-solid rounded-xl text-sm'
                         />
-                        
+
                         {error?.name && <span className="text-[18px] text-red-500 p-3">{error.name}</span>}
-                        
+
                     </div>
                     <div className="flex flex-col mx-6 mt-8 mb-4">
                         <label>Teléfono:</label>
@@ -108,7 +108,7 @@ function Contact() {
                             placeholder="Ejemplo +34 655 123 123"
 
                             className='mt-1 h-10 border-2 border-black border-solid rounded-xl p-4 text-sm'
-                            
+
                         />
                         {error?.phone && <span className="text-[18px] text-red-500 p-3">{error.phone}</span>}
 
@@ -121,8 +121,8 @@ function Contact() {
                             value={contactData.email}
                             onChange={handleChange}
                             placeholder="email@gmail.com"
-                            
-                            className='mt-1 h-10 border-2 border-black border-solid rounded-xl p-4 text-sm' 
+
+                            className='mt-1 h-10 border-2 border-black border-solid rounded-xl p-4 text-sm'
                         />
                         {error?.email && <span className="text-[18px] text-red-500 p-3">{error.email}</span>}
                     </div>
@@ -135,7 +135,7 @@ function Contact() {
                             onChange={handleChange}
                             placeholder="Deje su mensaje"
 
-                            className='mt-1 border-2 border-black border-solid h-52 rounded-xl lg:h-40 p-4 text-sm' 
+                            className='mt-1 border-2 border-black border-solid h-52 rounded-xl lg:h-40 p-4 text-sm'
                         />
                         {error?.message && <span className="text-[18px] text-red-500 p-3">{error.message}</span>}
                     </div>
@@ -146,12 +146,12 @@ function Contact() {
                             className="p-2 font-bold tracking-wider transition-all duration-300 ease-in-out border-2 border-black border-solid shadow-md cursor-pointer bg-background rounded-2xl hover:bg-lime-400 hover:scale-110"
                         >Enviar</button>
                     </div>
-                
+
                 </form>
 
             </div>
         </div>
-    )
+    );
 }
 
 export default Contact;

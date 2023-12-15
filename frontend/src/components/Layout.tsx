@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import Menu from "../Menu";
-import Search from "../Search";
+import Menu from "./Menu";
+import Search from "./Search";
 
-function Forum({ children }: { children: ReactNode }) {
+function Layout({ children }: { children: ReactNode }) {
 
     return (
         <div className='w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden'>
@@ -15,16 +15,11 @@ function Forum({ children }: { children: ReactNode }) {
                     <div className='w-screen mt-2 mb-2 border-b border-secondary'></div>
                 </div>
 
-                <main className="flex gap-4 font-Montserrat justify-center ml-[3.5rem] mb-8">
+                {children}
 
-                    <section className="flex flex-col gap-6">
-                        {children}
-                    </section>
-
-                </main>
             </div>
         </div>
     );
 }
 
-export default Forum;
+export default Layout;

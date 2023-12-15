@@ -22,7 +22,6 @@ function UserProvider({ children }: UserProviderProps) {
     const [user, setUser] = useState<User | null>(() => {
         const user = localStorage.getItem('user');
         if (user) return JSON.parse(user);
-
     });
 
     function logIn(user: User) {

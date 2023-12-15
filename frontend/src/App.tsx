@@ -7,18 +7,18 @@ import UserConf from './components/Config/UserConf';
 import RegisterType from './components/RegisterType';
 import RegisterProf from './components/RegisterProf';
 import MainPage from './components/MainPage/MainPage';
-import './App.css';
 import ForumHome from './components/Forum/ForumHome';
 import Forums from './components/Forum/Forums';
-import Depresion from './components/Forum/forumTypes/Depresion';
 import MoodPage from './components/MoodPage';
 import Breathing from './components/Breathing';
-import SubForum from './components/Forum/SubForum';
 import UserProvider from './context/UserProvider';
 import NewArticle from './components/Articles/NewArticle';
 import Home from './components/Home';
-import PrivateRoute from './components/PrivateRoute';
 import Profile from './components/Profile/Profile';
+import PrivateRoute from './components/PrivateRoute';
+import SubForum from './components/Forum/forumTypes/SubForum';
+import Layout from './components/Layout';
+
 
 function App() {
 
@@ -44,19 +44,16 @@ function App() {
             <Forums />
           </PrivateRoute>
         } />
-        <Route path='/forum/depresion' element={
-          <PrivateRoute>
-            <Depresion />
-          </PrivateRoute>
-        } />
         <Route path='/config/*' element={
           <PrivateRoute>
             <UserConf />
           </PrivateRoute>
         } />
-        <Route path='/forum/depresion/subforum' element={
+        <Route path='/forum/subforum/:id' element={
           <PrivateRoute>
-            <SubForum />
+            <Layout>
+              <SubForum />
+            </Layout>
           </PrivateRoute>
         } />
         <Route path='/moods' element={

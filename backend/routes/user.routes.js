@@ -2,11 +2,13 @@ import express from "express";
 
 import checkUsername from "../middlewares/checkUsername.js";
 import { contact_form } from "../controllers/contact_form.js";
-import { signUp, logIn, isLogIn, getUserById } from "../controllers/user.controller.js";
+
+import { signUp, logIn, isLogIn, getUserById, initialLogin } from "../controllers/user.controller.js";
 import profileConfig from "../controllers/profileConfig.js";
 import accountConfig from "../controllers/accountConfig.js";
 import initialLogin from "../controllers/initialLogin.js";
 import { addAvatar, getDataUser } from "../controllers/profile.controller.js";
+
 
 const userRoutes = express.Router();
 
