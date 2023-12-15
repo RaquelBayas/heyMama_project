@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-interface UserProviderProps{
+interface UserProviderProps {
     children: React.ReactNode;
 }
 
@@ -13,34 +13,33 @@ interface UserContextType {
 interface User {
     id: string;
     userType: 'user' | 'prof';
+    exp: number;
 }
 
 const UserContext = createContext<UserContextType | null>(null);
 
-function userProvider ({children}: UserProviderProps){
-    const [user, setUser] = useState<User | null>(null);
-    
-    function logIn (user: User){
+function UserProvider({ children }: UserProviderProps) {
+    const [user, setUser] = useState<User | null>(() => {
+        const user = localStorage.getItem('user');
+        if (user) return JSON.parse(user);
+
+    });
+
+    function logIn(user: User) {
         setUser(user);
     }
 
-    function logOut(){
+    function logOut() {
         setUser(null);
         localStorage.removeItem('token');
     }
 
-    return(
-        <UserContext.Provider
-            value={{
-                user,
-                logIn,
-                logOut
-            }}    
-        >
+    return (
+        <UserContext.Provider value={{ user, logIn, logOut }} >
             {children}
         </UserContext.Provider>
-    )
+    );
 }
 
-export default userProvider;
-export { UserContext }
+export default UserProvider;
+export { UserContext };

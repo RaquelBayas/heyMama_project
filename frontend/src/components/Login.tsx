@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { IoEyeOffSharp } from "react-icons/io5";
 import { FaArrowRight } from "react-icons/fa";
 import { LogInForm } from "../models/LogInForm";
+import useUserContext from "../hooks/useUserContext";
 
 interface FormError {
     [key: string]: string
@@ -11,6 +12,7 @@ interface FormError {
 
 
 function Login() {
+    const { logIn } = useUserContext();
     const navigate = useNavigate();
     const [hidden, setHidden] = useState(true);
 
@@ -53,6 +55,9 @@ function Login() {
             if (resp.ok) {
                 setError(null);
                 localStorage.setItem('token', data.data.token);
+                localStorage.setItem('user', JSON.stringify(data.data.user));
+                logIn(data.data.user);
+                console.log(data.data.user);
 
                 return navigate("/");
             }

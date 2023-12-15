@@ -18,10 +18,12 @@ import UserProvider from './context/UserProvider';
 import NewArticle from './components/Articles/NewArticle';
 import Home from './components/Home';
 import TextEditor from './components/Articles/TextEditor';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
 
   return (
+
 
     <UserProvider>
       <Routes>
@@ -31,17 +33,47 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/registerUser' element={<Register />} />
         <Route path='/registerProf' element={<RegisterProf />} />
+        <Route path='/forum' element={
+          <PrivateRoute>
+            <ForumHome />
+          </PrivateRoute>
+        } />
         <Route path='/register' element={<RegisterType />} />
-        <Route path='/forum' element={<ForumHome />} />
-        <Route path='/forums' element={<Forums />} />
-        <Route path='/forum/depresion' element={<Depresion />} />
-        <Route path='/config/*' element={<UserConf />} />
-        <Route path='/forum/depresion/subforum' element={<SubForum />} />
-        <Route path='/moods' element={<MoodPage />}/>
-        <Route path='/breathing' element={<Breathing />} />
-        <Route path='/articles/newArticle' element={<NewArticle/>} />
-        <Route path='/home' element={<Home/>} />
-        <Route path='/editor' element={<TextEditor/>} />
+        <Route path='/forums' element={
+          <PrivateRoute>
+            <Forums />
+          </PrivateRoute>
+        } />
+        <Route path='/forum/depresion' element={
+          <PrivateRoute>
+            <Depresion />
+          </PrivateRoute>
+        } />
+        <Route path='/config/*' element={
+          <PrivateRoute>
+            <UserConf />
+          </PrivateRoute>
+        } />
+        <Route path='/forum/depresion/subforum' element={
+          <PrivateRoute>
+            <SubForum />
+          </PrivateRoute>
+        } />
+        <Route path='/moods' element={
+          <PrivateRoute>
+            <MoodPage />
+          </PrivateRoute>
+        } />
+        <Route path='/breathing' element={
+          <PrivateRoute>
+            <Breathing />
+          </PrivateRoute>
+        } />
+        <Route path='/articles/newArticle' element={
+          <PrivateRoute>
+            <NewArticle />
+          </PrivateRoute>
+        } />
       </Routes>
     </UserProvider>
   );

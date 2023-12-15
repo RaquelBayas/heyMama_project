@@ -1,8 +1,11 @@
 import { Routes, Route, Link } from 'react-router-dom';
 import AccountConfig from './AccountConfig';
 import ProfileConfig from './ProfileConfig';
+import useUserContext from '../../hooks/useUserContext';
 
 function UserConf() {
+
+    const { logOut } = useUserContext();
 
     return (
         <form className='grid grid-cols-200 p-4 h-screen w-screen font-anybody'>
@@ -26,7 +29,9 @@ function UserConf() {
                 </ul>
                
                 <button 
-                    type='submit' className='text-red-500 text-center mt-auto mb-16 text-2xl'
+                    type='submit' 
+                    className='text-red-500 text-center mt-auto mb-16 text-2xl'
+                    onClick={logOut}
                 >
                     Cerrar sesión
                 </button>
