@@ -58,7 +58,7 @@ function ArticleContent() {
 
                     <section className="flex-grow-0 mt-16 mw150:hidden -ml-32 bg-white h-min">
                         <article className="flex flex-col items-center w-[300px] h-[400px] outline-2 outline-[#8D5E44] justify-center gap-12">
-                            <img src="/public/assets/avatar-person.svg" alt="avatar" className='mt-6 max-w-[8rem]' />
+                            <img src="/assets/avatar-person.svg" alt="avatar" className='mt-6 max-w-[8rem]' />
                             <p>Texto de prueba</p>
                             <button className="rounded-md mb-6 py-4 px-8 bg-[#DDBEA9] text-[#8D5E44]">Enviar consulta</button>
                         </article>

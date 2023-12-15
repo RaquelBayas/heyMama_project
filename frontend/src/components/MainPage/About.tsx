@@ -18,7 +18,7 @@ function About() {
                     <span>somos?</span>
                 </h1>
                 <img
-                    src="/public/assets/flower.svg" alt="flower"
+                    src="/assets/flower.svg" alt="flower"
                     className='mt-0 h-350 mr-auto
                     
                     sm:h-250 sm:mt-20

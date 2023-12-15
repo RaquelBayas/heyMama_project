@@ -30,7 +30,7 @@ function SubForum() {
 
     return (
         <main className="flex flex-col gap-4 font-Montserrat ml-60 items-center">
-            <h1 className='self-start text-4xl font-semibold text-[#8B6956] flex items-center mt-4 mb-6 data-forumspath'>FOROS <img src="/public/assets/arrow-symbol.svg" className='inline mx-6 w-4' /> <span className='text-2xl'> Depresión</span></h1>
+            <h1 className='self-start text-4xl font-semibold text-[#8B6956] flex items-center mt-4 mb-6 data-forumspath'>FOROS <img src="/assets/arrow-symbol.svg" className='inline mx-6 w-4' /> <span className='text-2xl'> Depresión</span></h1>
 
             <section className="grid grid-cols-2 mw150:flex mw150:flex-col justify-around gap-6 border-2 border-[#DDBEA9] p-8 -pr-8 -ml-[12rem] mb-4">
 

@@ -32,7 +32,7 @@ function Forum() {
 
             {forums?.map(({ forum_id, forum_type: title }) => (
 
-                <ForumCard img='/public/assets/foros.svg' alt='Una imagen de gente hablando' bg='primary' title={title.slice(0, 1) + title.slice(1).toLowerCase()} text='Comparte y resuelve tus dudas y pensamientos con personas como tú' page={'/forum/subforum/' + forum_id.toString()} key={forum_id} />
+                <ForumCard img='/assets/foros.svg' alt='Una imagen de gente hablando' bg='primary' title={title.slice(0, 1) + title.slice(1).toLowerCase()} text='Comparte y resuelve tus dudas y pensamientos con personas como tú' page={'/forum/subforum/' + forum_id.toString()} key={forum_id} />
             ))}
         </ForumBase>
     );
