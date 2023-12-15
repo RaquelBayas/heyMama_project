@@ -9,10 +9,6 @@ function MoodTracker() {
     const [moodState, setMoodState] = useState('');
     const [moodData, setMoodData] = useState<MoodData[]>([]); //useState('');
 
-
-    useEffect(() => {
-
-    });
     function handleValueChange(event: React.ChangeEvent<HTMLInputElement>) {
         setMoodState(event.target.value);
     }

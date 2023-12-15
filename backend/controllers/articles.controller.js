@@ -34,22 +34,21 @@ async function addArticle(req, res, next) {
 }
 
 async function deleteArticle(req, res, next) {
-    const article_id = req.params;
+    const {article_id} = req.params;
 
     try {
         await sendQuery('DELETE FROM articles WHERE article_id=?', article_id);
+        res.send({
+            ok: true,
+            error: null,
+            data: null,
+            message: 'Artículo eliminado correctamente.'
+        });
+    
+        next();
     } catch (error) {
         return next(new Error(error.message));
-    };
-
-    res.send({
-        ok: true,
-        error: null,
-        data: null,
-        message: 'Artículo eliminado correctamente.'
-    });
-
-    next();
+    };    
 }
 
 async function editArticle(req, res, next) {

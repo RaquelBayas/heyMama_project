@@ -14,7 +14,6 @@ async function addMood(req, res, next) {
           data: null,
           error: errors
         });
-    
     }
 
     const {user_id, mood_type_id} = data;

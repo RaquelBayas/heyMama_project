@@ -3,7 +3,6 @@ import { MoodData } from '../models/MoodData';
 import { getMood } from '../services/moodService';
 import MoodRecordRow from './MoodRecordRow';
 import MoodProvider, { MoodContextValue, MoodContext } from '../context/MoodContext';
-import { uid } from 'chart.js/helpers';
 
 function MoodRecord() {
     const [data, setData] = useState<MoodData[]>([]);
@@ -21,7 +20,7 @@ function MoodRecord() {
       };
       console.log('mood ha cambiado + ', crypto.randomUUID(),moodData);
     fetchData();   
-  }, [moodData])
+  }, [moodData]);
 
   
   return (
@@ -36,7 +35,7 @@ function MoodRecord() {
       }
     </div>
     </MoodProvider>
-  )
+  );
 }
 
-export default MoodRecord
+export default MoodRecord;
