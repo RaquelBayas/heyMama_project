@@ -15,6 +15,9 @@ import MoodPage from './components/MoodPage';
 import Breathing from './components/Breathing';
 import SubForum from './components/Forum/SubForum';
 import UserProvider from './context/UserProvider';
+import NewArticle from './components/Articles/NewArticle';
+import Home from './components/Home';
+import TextEditor from './components/Articles/TextEditor';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -66,9 +69,13 @@ function App() {
             <Breathing />
           </PrivateRoute>
         } />
+        <Route path='/articles/newArticle' element={
+          <PrivateRoute>
+            <NewArticle />
+          </PrivateRoute>
+        } />
       </Routes>
     </UserProvider>
-
   );
 }
 

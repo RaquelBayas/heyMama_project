@@ -23,6 +23,7 @@ const User = z.object({
 
 const LoginUser = User.omit({ userType:true, name: true, surname:true, phone:true, job:true, numCollege:true, username:true });
 
+
 const ContactForm = z.object({
   name: z.string(),
   phone: z.string().transform(value => parseFloat(value)).optional(),
