@@ -24,7 +24,7 @@ function ForumHome(): ReactNode {
 
     return (
         <Forum>
-            <h1 className="text-3xl">Bienvenida {username.toLowerCase()}</h1>
+            <h1 className="text-4xl font-semibold text-[#755543]">¡Bienvenida, {username.toLowerCase()}!</h1>
             <ForumCard img='/assets/foros.svg' alt='Una imagen de gente hablando' bg='primary' title='Foros' text='Comparte y resuelve tus dudas y pensamientos con personas como tú' page='/Forums' />
             <ForumCard img='/assets/foro-info.svg' alt='Una bombilla' bg='orange-100' title='Información' text='Encuentra información más ampliada de parte de profesionales.' page='/articles' />
         </Forum>

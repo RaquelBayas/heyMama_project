@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: Montserrat;
+    src: url(./fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: Montserrat-italic;
+    src: url(./fonts/Montserrat-Italic-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: Anybody;
+    src: url(./fonts/Anybody-VariableFont_wdth\,wght.ttf);
+}
+
+@font-face {
+    font-family: Anybody-italic;
+    src: url(./fonts/Anybody-Italic-VariableFont_wdth\,wght.ttf);
+}
+
+
 @media (max-width: 680px) {
     .data-forumscard {
         width: 180px;
