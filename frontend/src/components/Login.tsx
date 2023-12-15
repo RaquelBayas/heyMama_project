@@ -51,6 +51,16 @@ function Login() {
                 setError(data.error);
             }
 
+            if (!resp.ok && resp.status === 400) {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: '<a href="">Why do I have this issue?</a>'
+                });
+            }
+
             if (resp.ok) {
                 setError(null);
                 localStorage.setItem('token', data.data.token);

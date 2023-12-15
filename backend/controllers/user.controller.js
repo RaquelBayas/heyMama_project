@@ -123,7 +123,11 @@ async function logIn(req, res, next) {
   const { email, password: truePassword } = data;
 
   try {
-    const checkEmailInDB = "SELECT * FROM users WHERE email = ?";
+    const checkEmailInDB = `SELECT *
+    FROM users 
+        LEFT JOIN data_users
+          USING (user_id)
+            WHERE email = ?`
 
     const [user] = await sendQuery(checkEmailInDB, [email]);
 
@@ -137,9 +141,12 @@ async function logIn(req, res, next) {
       return next(new HttpError(400, "Email y/o contraseña incorrectos"));
     }
 
+    if (!user.isActive) return next(new HttpError(400, "Usuario eliminado"));
+
     const infoUser = {
       id: user.user_id,
       type: user.type_user_id,
+      isactive: user.isActive
     };
 
     const token = jwt.sign(infoUser, process.env.JWT_SECRET, {
