@@ -14,7 +14,6 @@ userRoutes.post('/login', logIn);
 userRoutes.post('/isLogIn', isLogIn);
 userRoutes.post('/contact', contact_form);
 userRoutes.get('/getUserById/:userId', getUserById);
-// userRoutes.delete('/:userId', deleteUserById);
 userRoutes.get('/initialLogin', initialLogin);
 userRoutes.put('config/:userId', profileConfig);
 userRoutes.put('config/account/:userId', accountConfig);

@@ -71,7 +71,7 @@ function Login() {
                 localStorage.setItem('user', JSON.stringify(data.data.user));
                 logIn(data.data.user);
 
-                return navigate("/");
+                return navigate("/forum");
             }
         } catch (error) {
             console.log(error);

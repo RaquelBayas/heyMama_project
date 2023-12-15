@@ -38,7 +38,8 @@ function UserConf() {
                 </div>
             </nav>
 
-            <div className='flex flex-col ml-14 text-xl gap-2'>
+            <div 
+                className='flex flex-col ml-14 text-xl gap-2 lg:mx-auto'>
                 <Routes>
                     <Route path='/' element={<ProfileConfig />} />
                     <Route path='/account' element={<AccountConfig />} />

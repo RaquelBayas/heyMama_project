@@ -1,14 +1,63 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useUserContext from "../../hooks/useUserContext";
+
+interface FormError {
+    [key: string]: string
+}
+
+interface UserData {
+    username: string;
+    name: string;
+    surname: string;
+    phone: string;
+}
 
 function ProfileConfig(){
 
+    const [error, setError] = useState<FormError | null>(null);
+
+    const { user } = useUserContext();
+
+    const [userData, setUserData] = useState<UserData | undefined>();
+
+    useEffect(() => {
+
+        async function fetchData() {
+
+            const baseUrl = `http://localhost:5000/users/getUserById/:${user.id}`;
+
+            try {
+                const resp = await fetch(baseUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                setUserData(await resp.json());
+                
+            } catch (error){
+                console.error(error);
+            }
+        }
+        fetchData();
+    }, [user.id]);
+
+    useEffect(() => {
+        if (userData) {
+            setConfigData({
+                username: userData?.username || '',
+                name: userData?.name || '',
+                surname: userData?.surname || '',
+                phone: userData?.phone || '',
+            });
+        }
+    }, [user.id]);
+
     const [ configData, setConfigData ] = useState({
         username: '',
-        name: '',
-        surname:'',
-        phone: '',
-        email:'',
+        name: userData?.name,
+        surname:userData?.surname,
+        phone: userData?.phone,
     });
 
     const [ biographyData, setBiographyData ] = useState({
@@ -76,7 +125,7 @@ function ProfileConfig(){
                         name="avatar" 
                         className='hidden' />
                     <img 
-                        src="./src/assets/avatar-person.svg" alt="avatar" 
+                        src="./assets/avatar-person.svg" alt="avatar" 
                         className='ml-4 max-w-[6rem] cursor-pointer' 
                     />
                 </label>
