@@ -4,6 +4,7 @@ import { FaEye, FaArrowRight } from "react-icons/fa";
 import { IoEyeOffSharp } from "react-icons/io5";
 import { LogInForm } from "../models/LogInForm";
 import useUserContext from "../hooks/useUserContext";
+import Swal from "sweetalert2";
 
 interface FormError {
     [key: string]: string
@@ -44,34 +45,36 @@ function Login() {
             });
 
 
+
+
+
             const data = await resp.json();
-            console.log(data);
 
             if (!resp.ok && resp.status === 400) {
                 setError(data.error);
             }
 
-            if (!resp.ok && resp.status === 400) {
+            if (!resp.ok && resp.status === 403) {
 
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Something went wrong!',
-                    footer: '<a href="">Why do I have this issue?</a>'
+                    footer: '<a href="">This account has been disabled</a>'
                 });
             }
 
             if (resp.ok) {
                 setError(null);
+                console.log(data);
+
                 localStorage.setItem('token', data.data.token);
                 localStorage.setItem('user', JSON.stringify(data.data.user));
                 logIn(data.data.user);
-                console.log(data.data.user);
 
                 return navigate("/");
             }
         } catch (error) {
-            console.error(error);
+            console.log(error);
         }
     }
 

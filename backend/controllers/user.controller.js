@@ -131,8 +131,16 @@ async function logIn(req, res, next) {
 
     const [user] = await sendQuery(checkEmailInDB, [email]);
 
+
     if (!user) {
       return next(new HttpError(400, "Email y/o contraseña incorrectos"));
+    }
+
+    if (!user.isActive) {
+      return res.status(403).send({
+        message: "This account has been deleted",
+        data: null,
+      });
     }
 
     const match = await bcrypt.compare(truePassword, user.password);
@@ -141,19 +149,14 @@ async function logIn(req, res, next) {
       return next(new HttpError(400, "Email y/o contraseña incorrectos"));
     }
 
-    if (!user.isActive) return next(new HttpError(400, "Usuario eliminado"));
-
     const infoUser = {
       id: user.user_id,
       type: user.type_user_id,
-      isactive: user.isActive
     };
 
     const token = jwt.sign(infoUser, process.env.JWT_SECRET, {
       expiresIn: "1 day",
     });
-
-    console.log(token);
 
     infoUser.exp = Date.now() + 1000 * 60 * 60 * 24;
 
