@@ -19,8 +19,6 @@ async function contact_form(req, res) {
 
     const { name, phone, email, message } = req.body;
 
-    //crear tabla contact_form
-
     try {
         const newContactRequest = 'INSERT INTO contact_form (name, phone, email, message) VALUES (?, ?, ?, ?)';
 
