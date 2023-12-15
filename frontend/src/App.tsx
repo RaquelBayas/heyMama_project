@@ -17,8 +17,8 @@ import SubForum from './components/Forum/SubForum';
 import UserProvider from './context/UserProvider';
 import NewArticle from './components/Articles/NewArticle';
 import Home from './components/Home';
-import TextEditor from './components/Articles/TextEditor';
 import PrivateRoute from './components/PrivateRoute';
+import Profile from './components/Profile/Profile';
 
 function App() {
 
@@ -72,6 +72,11 @@ function App() {
         <Route path='/articles/newArticle' element={
           <PrivateRoute>
             <NewArticle />
+          </PrivateRoute>
+        } />
+        <Route path='/profile' element={
+          <PrivateRoute>
+            <Profile />
           </PrivateRoute>
         } />
       </Routes>
