@@ -31,6 +31,7 @@ async function addConsult(req, res, next) {
     }
 }
 
+async function getConsults
 async function getConsultsByProfId(req, res, next) {
     const {profesional_id} = req.params;
     
