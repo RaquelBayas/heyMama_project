@@ -15,9 +15,11 @@ userRoutes.post('/signup', [checkUsername], signUp);
 userRoutes.post('/login', logIn);
 userRoutes.post('/isLogIn', isLogIn);
 userRoutes.post('/contact', contact_form);
+
 userRoutes.get('/getUserById/:userId', getUserById);
 userRoutes.get('/initialLogin', initialLogin);
 userRoutes.get('/getDataUser/:userId',getDataUser);
+
 userRoutes.put('config/:userId', profileConfig);
 userRoutes.put('config/account/:userId', accountConfig);
 userRoutes.put('/:userId/addAvatar',addAvatar);

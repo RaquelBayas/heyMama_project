@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import useUserContext from "../../hooks/useUserContext";
-
-interface FormError {
-    [key: string]: string
-}
+import { getUserById } from "../../services/userService";
+import { getFromDataUser } from "../../services/profileService";
 
 interface UserData {
     username: string;
@@ -14,94 +11,90 @@ interface UserData {
 
 function ProfileConfig(){
 
-    const [error, setError] = useState<FormError | null>(null);
-
-    const { user } = useUserContext();
-
-    const [userData, setUserData] = useState<UserData | undefined>();
-
-    useEffect(() => {
-
-        async function fetchData() {
-
-            const baseUrl = `http://localhost:5000/users/getUserById/:${user.id}`;
-
-            try {
-                const resp = await fetch(baseUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                setUserData(await resp.json());
-                
-            } catch (error){
-                console.error(error);
-            }
-        }
-        fetchData();
-    }, [user.id]);
-
-    useEffect(() => {
-        if (userData) {
-            setConfigData({
-                username: userData?.username || '',
-                name: userData?.name || '',
-                surname: userData?.surname || '',
-                phone: userData?.phone || '',
-            });
-        }
-    }, [user.id]);
-
-    const [ configData, setConfigData ] = useState({
-        username: '',
-        name: userData?.name,
-        surname:userData?.surname,
-        phone: userData?.phone,
+    const [userData, setUserData] = useState<UserData>({
+        username:'',
+        name: '',
+        surname:'',
+        phone:'',
     });
 
-    const [ biographyData, setBiographyData ] = useState({
-        biography: '',
-    })
+    const [bioAndPhoto, setBioAndPhoto] = useState({
+        biography:'',
+        photo:'',
+    });
 
-    function handleChange (e:  React.ChangeEvent<HTMLInputElement>){
-        setConfigData({
-            ...configData,
+    const user = JSON.parse(localStorage.getItem("user")!);
+
+    useEffect(() => {
+        async function getUserData() {
+            const data = await getUserById(user!.id);
+            
+            const dataUser = await getFromDataUser(user!.id);
+
+            const username = data.data[0].username;
+            const name = data.data[0].name;
+            const surname = data.data[0].surname;
+            const phone = data.data[0].phone;
+
+            const biography = dataUser.data[0].biography;
+            const photo = dataUser.data[0].avatar;
+            
+            setUserData({
+                username,
+                name, 
+                surname,
+                phone,
+            })
+
+            setBioAndPhoto({
+                biography,
+                photo,
+            })
+        }
+        getUserData();
+    },[])
+
+    function handleProfileChange (e:  React.ChangeEvent<HTMLInputElement>){
+        setUserData({
+            ...userData,
             [e.target.name]:e.target.value
-        });
+        })
 
-        setBiographyData({
-            ...biographyData,
-            [e.target.name]: e.target.value
+        setBioAndPhoto({
+            ...bioAndPhoto,
+            [e.target.name]:e.target.value
         })
     }
 
     async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const { user } = useUserContext();
+        console.log(user.id);
+        
+         
+        const baseUrl = `http://localhost:5000/users/config/${user.id}`;
 
-        const userId = user ? user.id : '';
-
-        const baseUrl = `http://localhost:5000/users/config/:${userId}`;
+        console.log('holaa');
+        
 
         try {
-            const response = await fetch(baseUrl,{
+            const resp = await fetch(baseUrl,{
                 method:'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    ...configData,
-                    ...biographyData,
+                    userData
                 }),
             });
+            console.log(resp);
+            
 
-            if (response.ok){
-                const result = await response.json();
+            if (resp.ok){
+                const result = await resp.json();
                 console.log(result);
             } else{
-                console.error('Error al enviar datos al servidor');
+                console.error('Error al actualizar perfil')
             }
         } catch (error) {
             console.error(error);
@@ -122,66 +115,66 @@ function ProfileConfig(){
                         type="file" 
                         accept='image/*' 
                         id='avatar'
-                        name="avatar" 
+                        name="avatar"
                         className='hidden' />
                     <img 
-                        src="./assets/avatar-person.svg" alt="avatar" 
+                        src={bioAndPhoto.photo ? bioAndPhoto.photo : "./assets/avatar-person.svg"} alt="avatar" 
                         className='ml-4 max-w-[6rem] cursor-pointer' 
                     />
                 </label>
 
-            <div 
-                className="flex flex-col">
-                <label htmlFor="username">Nombre de usuario:</label>
-                <input
-                    name="username" 
-                    value={configData.username}
-                    onChange={handleChange}
-                    className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
-            </div>
+                <div 
+                    className="flex flex-col">
+                    <label htmlFor="username">Nombre de usuario:</label>
+                    <input
+                        name="username" 
+                        value={userData.username}
+                        onChange={handleProfileChange}
+                        className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
+                </div>
 
-            <div className="flex flex-col">
-                <label htmlFor="name">Nombre:</label>
-                <input 
-                    name="name"
-                    value={configData.name}
-                    onChange={handleChange}
-                    className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
-            </div>
+                <div className="flex flex-col">
+                    <label htmlFor="name">Nombre:</label>
+                    <input 
+                        name="name"
+                        value={userData.name}
+                        onChange={handleProfileChange}
+                        className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
+                </div>
             
-            <div className="flex flex-col">
-                <label htmlFor="name">Apellido:</label>
-                <input 
-                    name="surname"
-                    value={configData.surname}
-                    onChange={handleChange}
-                    className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none' />
-            </div>
+                <div className="flex flex-col">
+                    <label htmlFor="name">Apellido:</label>
+                    <input 
+                        name="surname"
+                        value={userData.surname}
+                        onChange={handleProfileChange}
+                        className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none' />
+                </div>
             
-            <div className="flex flex-col">
-                <label htmlFor="name">Teléfono:</label>
-                <input 
-                    name="phone"
-                    value={configData.phone}
-                    onChange={handleChange}
-                    className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
-            </div>
+                <div className="flex flex-col">
+                    <label htmlFor="name">Teléfono:</label>
+                    <input 
+                        name="phone"
+                        value={userData.phone}
+                        onChange={handleProfileChange}
+                        className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
+                </div>
 
+                <div className="flex flex-col">
+                    <label htmlFor="biography">Biografía:</label>
+                    <input 
+                        name="biography"
+                        value={bioAndPhoto.biography}
+                        onChange={handleProfileChange}
+                        className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
+                </div>
 
-            <div className="flex flex-col">
-                <label htmlFor="biography">Biografía:</label>
-                <input 
-                    name="biography"
-                    value={biographyData.biography}
-                    onChange={handleChange}
-                    className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
-            </div>
-
-            <button
-                className="p-2 w-[200px] bg-background border-2 border-black rounded-xl hover:bg-lime-400 hover:scale-110"
-            >
-                Actualizar perfil
-            </button>
+                <button
+                    type="submit"
+                    className="p-2 w-[200px] bg-background border-2 border-black rounded-xl hover:bg-lime-400 hover:scale-110"
+                >
+                    Actualizar perfil
+                </button>
             </form>
         </div>                
     )

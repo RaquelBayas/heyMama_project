@@ -10,27 +10,26 @@ async function profileConfig(req, res){
         const errors = zodErrorMap(error);
         return res.send({
         ok: false,
-        data: null,
         error: errors
         });
     }
 
     const { username, name, surname, phone } = data;
-    const { biography } = data;
+    /* const { biography } = data; */
 
     const { userId } = req.params;
 
     try {
 
-        const updateProfileDataQuery = 'UPDATE users SET username = IFNULL(?,username), name = IFNULL(?,name), surname = (?, surname), phone = IFNULL(?,phone) WHERE user_id = ?';
+        const updateProfileDataQuery = 'UPDATE users SET username = IFNULL(?, username), name = IFNULL(?, name), surname = IFNULL(?, surname), phone = IFNULL(?, phone) WHERE user_id = ?;';
 
         const [resultProfile] = await sendQuery(updateProfileDataQuery, [username, name, surname, phone, userId]);
 
-        const updateBiography = 'UPDATE data_users SET biography = IFNULL(?,biography) WHERE user_id = ?';
+        /* const updateBiography = 'UPDATE data_users SET biography = IFNULL(?,biography) WHERE user_id = ?;';
 
-        const [resultBio] = await sendQuery(updateBiography, [biography, userId]);
+        const [resultBio] = await sendQuery(updateBiography, [biography, userId]); */
 
-        if (resultProfile.affectedRows > 0 || resultBio.affectedRows > 0) {
+        if (resultProfile.affectedRows > 0 /* || resultBio.affectedRows > 0 */) {
             res.send({
                 ok: true,
                 data: { message: 'Perfil actualizado con éxito' },
@@ -39,7 +38,6 @@ async function profileConfig(req, res){
         } else {
             res.send({
                 ok: false,
-                data: null,
                 error: { message: 'No se realizaron actualizaciones en el perfil' }
             });
         }
@@ -48,7 +46,6 @@ async function profileConfig(req, res){
         console.error(error);
         res.send({
             ok: false,
-            data: null,
             error: { message: 'Error al actualizar el perfil' }
         });
     }
