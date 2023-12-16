@@ -1,23 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ToggleSwitch from "./Switch/ToggleSwitch";
 import useUserContext from "../../hooks/useUserContext";
+import { getUserById } from "../../services/userService";
 
 function AccountConfig(){
 
-    const [ accountData, setAccountData ] = useState({
-        email: '',
-        password:'',
-    });
+    const [ email, setEmail ] = useState('');
 
     const [ active, setActive ] = useState({
         isActive: '1',
     });
 
+    const user = JSON.parse(localStorage.getItem("user")!);
+
+    useEffect(()=>{
+        async function getData() {
+            const data = await getUserById(user!.id);
+
+            const email = data.data[0].email;
+
+            setEmail(email);
+        }
+        getData();
+    },[])
+
     function handleDataChange (e:  React.ChangeEvent<HTMLInputElement>){
-        setAccountData({
-            ...accountData,
-            [e.target.name]:e.target.value
-        });
+        setEmail(
+            e.target.name
+        );
     }
     
     function handleActiveChange (e:React.ChangeEvent<HTMLButtonElement>){
@@ -42,10 +52,7 @@ function AccountConfig(){
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    ...accountData,
-                    ...active,
-                }),
+                body: JSON.stringify(email),
             });
 
             if (response.ok){
@@ -73,7 +80,7 @@ function AccountConfig(){
                 <label htmlFor="name">Email:</label>
                 <input
                     name="email"
-                    value={accountData.email} 
+                    value={email} 
                     onChange={handleDataChange}
                     className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
             </div>
@@ -82,7 +89,6 @@ function AccountConfig(){
                 <label htmlFor="name">Contraseña:</label>
                 <input
                     name="password"
-                    value={accountData.password}
                     onChange={handleDataChange} 
                     className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
             </div>
