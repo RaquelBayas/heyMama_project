@@ -13,9 +13,12 @@ import MoodPage from './components/MoodPage';
 import Breathing from './components/Breathing';
 import UserProvider from './context/UserProvider';
 import NewArticle from './components/Articles/NewArticle';
+import Home from './components/Home';
+import Profile from './components/Profile/Profile';
 import PrivateRoute from './components/PrivateRoute';
 import SubForum from './components/Forum/forumTypes/SubForum';
 import Layout from './components/Layout';
+
 
 function App() {
 
@@ -66,6 +69,16 @@ function App() {
         <Route path='/articles/newArticle' element={
           <PrivateRoute>
             <NewArticle />
+          </PrivateRoute>
+        } />
+        <Route path='/profile' element={
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        } />
+        <Route path='/home' element={
+          <PrivateRoute>
+            <Home />
           </PrivateRoute>
         } />
       </Routes>

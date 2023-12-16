@@ -2,8 +2,9 @@
 interface UserServiceResponse {
     error: string
 }
-async function getUserById() {
-    const baseUrl = 'http://localhost:5000/users/getUserById/1';
+async function getUserById(user_id:string) {
+
+    const baseUrl = `http://localhost:5000/users/getUserById/${user_id}`;
 
     try {
         const resp = await fetch(baseUrl, {
@@ -20,8 +21,9 @@ async function getUserById() {
     } catch (error) {
         console.error(error);
         return { error: 'Error during registration' };
-    }
-    
+    }   
 }
+
+
 
 export {getUserById};

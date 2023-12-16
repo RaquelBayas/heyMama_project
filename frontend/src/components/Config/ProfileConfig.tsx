@@ -60,8 +60,8 @@ function ProfileConfig(){
     }
 
     return(
-        <div className='flex flex-col ml-14 text-xl gap-5'>
-            <h1 className='mt-10 mb-4 uppercase text-4xl text-center tracking-wider lg:text-start lg:ml-10'>Ajustes</h1>
+        <div className='flex flex-col gap-5 text-xl ml-14'>
+            <h1 className='mt-10 mb-4 text-4xl tracking-wider text-center uppercase lg:text-start lg:ml-10'>Ajustes</h1>
 
             <form
             onSubmit={handleSubmit}
