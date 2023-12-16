@@ -44,10 +44,6 @@ function Login() {
                 body: JSON.stringify(formData)
             });
 
-
-
-
-
             const data = await resp.json();
 
             if (!resp.ok && resp.status === 400) {
@@ -71,7 +67,7 @@ function Login() {
                 localStorage.setItem('user', JSON.stringify(data.data.user));
                 logIn(data.data.user);
 
-                return navigate("/");
+                return navigate("/forum");
             }
         } catch (error) {
             console.log(error);

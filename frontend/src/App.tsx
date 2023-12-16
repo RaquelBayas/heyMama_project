@@ -1,6 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import About from './components/MainPage/About';
-import Contact from './components/MainPage/Contact';
 import Login from './components/Login';
 import Register from './components/Register';
 import UserConf from './components/Config/UserConf';
@@ -23,13 +21,9 @@ import Layout from './components/Layout';
 function App() {
 
   return (
-
-
     <UserProvider>
       <Routes>
         <Route path='/' element={<MainPage />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/contact' element={<Contact />} />
         <Route path='/login' element={<Login />} />
         <Route path='/registerUser' element={<Register />} />
         <Route path='/registerProf' element={<RegisterProf />} />

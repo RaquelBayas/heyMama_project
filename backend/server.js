@@ -8,7 +8,6 @@ import { moodRoutes } from './routes/mood.routes.js'
 import { forumRoutes } from './routes/forum.routes.js'
 import { articlesRoutes } from './routes/articles.routes.js';
 
-
 const { PORT, MYSQL_ADDON_PORT } = process.env
 
 const port = PORT;
