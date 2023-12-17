@@ -14,7 +14,7 @@ function Menu() {
         <li className='mb-4'><Link to="/moods"><FaRegSmile className="text-3xl" /></Link></li>
 
         <li className='mb-4'><Link to="/profile"><BsPersonCircle className="text-3xl icons" /></Link></li>
-        <li className='mb-4'><Link to="/config"><IoIosSettings className="text-3xl icons" /></Link></li>
+        <li className='mb-4'><Link to="/setting"><IoIosSettings className="text-3xl icons" /></Link></li>
       </ul>
     </div>
 

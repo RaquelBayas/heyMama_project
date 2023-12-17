@@ -1,22 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ToggleSwitch from "./Switch/ToggleSwitch";
-import useUserContext from "../../hooks/useUserContext";
+import { getUserById } from "../../services/userService";
 
-function AccountConfig(){
+function AccountSetting(){
 
-    const [ accountData, setAccountData ] = useState({
-        email: '',
-        password:'',
-    });
+    const [ email, setEmail ] = useState('');
 
     const [ active, setActive ] = useState({
         isActive: '1',
     });
 
+    const [passwords, setPasswords] = useState({
+        pwdActual: '',
+        pwdNueva: '',
+    });
+
+    const user = JSON.parse(localStorage.getItem("user")!);
+
+    useEffect(()=>{
+        async function getData() {
+            const data = await getUserById(user!.id);
+
+            const email = data.data[0].email;
+
+            setEmail(email);
+        }
+        getData();
+    },[])
+
     function handleDataChange (e:  React.ChangeEvent<HTMLInputElement>){
-        setAccountData({
-            ...accountData,
-            [e.target.name]:e.target.value
+        setEmail(
+            e.target.name
+        );
+        setPasswords({
+            ...passwords,
+            [e.target.name]: e.target.value,
         });
     }
     
@@ -30,11 +48,7 @@ function AccountConfig(){
     async function handleSubmit(e:React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const { user } = useUserContext();
-
-        const userId = user ? user.id : '';
-
-        const baseUrl = `http://localhost:5000/users/config/account/:${userId}`;
+        const baseUrl = `http://localhost:5000/users/setting/account/:${user.id}`;
 
         try {
             const response = await fetch(baseUrl,{
@@ -43,8 +57,9 @@ function AccountConfig(){
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    ...accountData,
-                    ...active,
+                    email,
+                    pwdActul: passwords.pwdActual,
+                    pwdNueva: passwords.pwdNueva,
                 }),
             });
 
@@ -73,16 +88,23 @@ function AccountConfig(){
                 <label htmlFor="name">Email:</label>
                 <input
                     name="email"
-                    value={accountData.email} 
+                    value={email} 
                     onChange={handleDataChange}
                     className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
             </div>
             
             <div className="flex flex-col">
-                <label htmlFor="name">Contraseña:</label>
+                <label htmlFor="name">Inserte contraseña actual:</label>
                 <input
-                    name="password"
-                    value={accountData.password}
+                    name="pwcActual"
+                    onChange={handleDataChange} 
+                    className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
+            </div>
+            
+            <div className="flex flex-col">
+                <label htmlFor="name">Inserte nueva contraseña:</label>
+                <input
+                    name="pwdNueva"
                     onChange={handleDataChange} 
                     className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
             </div>
@@ -108,4 +130,4 @@ function AccountConfig(){
     )
 }
 
-export default AccountConfig;
+export default AccountSetting;

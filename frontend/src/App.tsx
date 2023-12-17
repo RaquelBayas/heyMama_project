@@ -1,21 +1,23 @@
 import { Routes, Route } from 'react-router-dom';
+
+import UserProvider from './context/UserProvider';
+import PrivateRoute from './components/PrivateRoute';
+
+import MainPage from './components/MainPage/MainPage';
 import Login from './components/Login';
 import Register from './components/Register';
-import UserConf from './components/Config/UserConf';
 import RegisterType from './components/RegisterType';
 import RegisterProf from './components/RegisterProf';
-import MainPage from './components/MainPage/MainPage';
+
 import ForumHome from './components/Forum/ForumHome';
 import Forums from './components/Forum/Forums';
+import SubForum from './components/Forum/forumTypes/SubForum';
 import MoodPage from './components/MoodPage';
 import Breathing from './components/Breathing';
-import UserProvider from './context/UserProvider';
 import NewArticle from './components/Articles/NewArticle';
-import Home from './components/Home';
 import Profile from './components/Profile/Profile';
-import PrivateRoute from './components/PrivateRoute';
-import SubForum from './components/Forum/forumTypes/SubForum';
 import Layout from './components/Layout';
+import UserSetting from './components/Settings/UserSetting';
 
 
 function App() {
@@ -38,9 +40,9 @@ function App() {
             <Forums />
           </PrivateRoute>
         } />
-        <Route path='/config/*' element={
+        <Route path='/setting/*' element={
           <PrivateRoute>
-            <UserConf />
+            <UserSetting />
           </PrivateRoute>
         } />
         <Route path='/forum/subforum/:id' element={
@@ -68,11 +70,6 @@ function App() {
         <Route path='/profile' element={
           <PrivateRoute>
             <Profile />
-          </PrivateRoute>
-        } />
-        <Route path='/home' element={
-          <PrivateRoute>
-            <Home />
           </PrivateRoute>
         } />
       </Routes>
