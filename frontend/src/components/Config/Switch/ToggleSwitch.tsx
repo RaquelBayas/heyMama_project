@@ -20,9 +20,32 @@ function ToggleSwitch() {
 
     }, [switchState])
 
-    function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
+    async function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
         console.log("---", e.target.checked);
         setSwitchState(!switchState);
+
+        const isPrivateValue = e.target.checked ? 1 : 0;
+
+        const user = JSON.parse(localStorage.getItem("user")!);
+        const userId = user!.id;
+
+        const baseUrl = `http://localhost:5000/users/config/account/privacy/${userId}`;
+
+        try {
+            const resp = await fetch(baseUrl, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ isPrivate: isPrivateValue }),
+            });
+
+            if(resp.ok){
+                await resp.json();
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (

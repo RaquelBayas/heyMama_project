@@ -1,7 +1,7 @@
 import { User } from "../../schemas/User.js";
 import { sendQuery } from '../../db/connectDB.js';
 import { zodErrorMap } from "../../helpers/zodErrorMap.js";
-import {getUserById} from '../../controllers/user.controller.js';
+import { getUserById } from '../../controllers/user.controller.js';
 
 async function accountConfig(req, res){
     const { success, error, data } = User.safeParse(req.body);
@@ -56,6 +56,10 @@ async function accountConfig(req, res){
 
             await sendQuery(pwdQuery, [hashedPassword, userId])
         } 
+
+        // Private - Public
+
+
 
         // Active
 
