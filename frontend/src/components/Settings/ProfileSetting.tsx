@@ -9,7 +9,7 @@ interface UserData {
     phone: string;
 }
 
-function ProfileConfig(){
+function ProfileSetting(){
 
     const [userData, setUserData] = useState<UserData>({
         username:'',
@@ -71,7 +71,7 @@ function ProfileConfig(){
          
         console.log('cargando form');
 
-        const baseUrl = `http://localhost:5000/users/config/${user.id}`;
+        const baseUrl = `http://localhost:5000/users/setting/${user.id}`;
         
         try {
             const resp = await fetch(baseUrl,{
@@ -181,4 +181,4 @@ function ProfileConfig(){
     )
 }
 
-export default ProfileConfig;
+export default ProfileSetting;

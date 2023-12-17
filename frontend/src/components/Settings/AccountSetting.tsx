@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ToggleSwitch from "./Switch/ToggleSwitch";
 import { getUserById } from "../../services/userService";
 
-function AccountConfig(){
+function AccountSetting(){
 
     const [ email, setEmail ] = useState('');
 
@@ -48,7 +48,7 @@ function AccountConfig(){
     async function handleSubmit(e:React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const baseUrl = `http://localhost:5000/users/config/account/:${user.id}`;
+        const baseUrl = `http://localhost:5000/users/setting/account/:${user.id}`;
 
         try {
             const response = await fetch(baseUrl,{
@@ -130,4 +130,4 @@ function AccountConfig(){
     )
 }
 
-export default AccountConfig;
+export default AccountSetting;

@@ -1,9 +1,9 @@
 import { User } from "../../schemas/User.js";
 import { sendQuery } from '../../db/connectDB.js';
 import { zodErrorMap } from "../../helpers/zodErrorMap.js";
-import { getUserById } from '../../controllers/user.controller.js';
+import { getUserById } from '../user.controller.js';
 
-async function accountConfig(req, res){
+async function accountSetting(req, res){
     const { success, error, data } = User.safeParse(req.body);
     console.log(data);
 
@@ -78,4 +78,4 @@ async function accountConfig(req, res){
     }
 }
 
-export default accountConfig;
+export default accountSetting;

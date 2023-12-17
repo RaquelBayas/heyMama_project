@@ -4,9 +4,9 @@ import checkUsername from "../middlewares/checkUsername.js";
 import { contact_form } from "../controllers/contact_form.js";
 
 import { signUp, logIn, isLogIn, getUserById, initialLogin } from "../controllers/user.controller.js";
-import profileConfig from "../controllers/settings/profileConfig.js";
-import accountConfig from "../controllers/settings/accountConfig.js";
-import isPrivate from "../controllers/settings/isPrivate.js";
+import profileSetting from "../controllers/setting/profileSetting.js";
+import accountSetting from "../controllers/setting/accountSetting.js";
+import isPrivate from "../controllers/setting/isPrivate.js";
 import { addAvatar, getDataUser } from "../controllers/profile.controller.js";
 
 
@@ -21,9 +21,9 @@ userRoutes.get('/getUserById/:userId', getUserById);
 userRoutes.get('/initialLogin', initialLogin);
 userRoutes.get('/getDataUser/:userId',getDataUser);
 
-userRoutes.put('config/:userId', profileConfig);
-userRoutes.put('config/account/:userId', accountConfig);
-userRoutes.put('/config/account/privacy/:userId',isPrivate);
-userRoutes.put('/:userId/addAvatar',addAvatar);
+userRoutes.put('setting/:userId', profileSetting);
+userRoutes.put('setting/account/:userId', accountSetting);
+userRoutes.put('/setting/account/privacy/:userId',isPrivate);
+userRoutes.put('/:userId/addAvatar', addAvatar);
 
 export { userRoutes };

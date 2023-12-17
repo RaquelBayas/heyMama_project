@@ -2,7 +2,7 @@ import { User } from "../../schemas/User.js";
 import { sendQuery } from '../../db/connectDB.js';
 import { zodErrorMap } from "../../helpers/zodErrorMap.js";
 
-async function profileConfig(req, res, next){
+async function profileSetting(req, res, next){
     const { success, error, data } = User.safeParse(req.body);
     console.log(data);
 
@@ -57,4 +57,4 @@ async function profileConfig(req, res, next){
     }
 }
 
-export default profileConfig;
+export default profileSetting;
