@@ -28,7 +28,7 @@ function App() {
         <Route path='/registerUser' element={<Register />} />
         <Route path='/registerProf' element={<RegisterProf />} />
         <Route path='/forum' element={
-          <PrivateRoute>
+          <PrivateRoute Professional={true}>
             <ForumHome />
           </PrivateRoute>
         } />
