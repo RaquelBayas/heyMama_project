@@ -1,6 +1,6 @@
 import { sendQuery } from '../db/connectDB.js'
 import { zodErrorMap } from '../helpers/zodErrorMap.js';
-
+import { ForumCard } from '../schemas/Forums.js';
 async function addSubForum(req, res, next) {
 
     const { success, error, data } = ForumCard.safeParse(req.body);
@@ -103,11 +103,11 @@ async function getForumById(req, res, next) {
 }
 
 async function getSubForum(req, res, next) {
-    const id = req.query;
+    const {id} = req.params;
     console.log('req.query:', id)
 
     try {
-        const results = await sendQuery('SELECT * FROM subforum WHERE forum_id=1');
+        const results = await sendQuery('SELECT * FROM subforum WHERE forum_id=?',id);
         if (!results) {
             const errors = zodErrorMap(error);
             return res.status(400).send({
@@ -115,7 +115,7 @@ async function getSubForum(req, res, next) {
                 data: null,
                 error: errors
             });
-        }
+        }   
         console.log('results.', results)
         res.send({
             ok: true,
@@ -130,10 +130,9 @@ async function getSubForum(req, res, next) {
 }
 
 async function getSubForumById(req, res, next) {
-    const id = req.params.id;
-    console.log('id.', id)
+    const {id, subforum_id} = req.params;
     try {
-        const subforum = await sendQuery('SELECT * FROM subforum WHERE forum_id = ?', id);
+        const subforum = await sendQuery('SELECT * FROM subforum WHERE forum_id = ? AND subforum_id=?', [id, subforum_id]);
         res.send({
             ok: true,
             error: null,
@@ -141,11 +140,39 @@ async function getSubForumById(req, res, next) {
             message: 'Subforum.'
         });
 
-        next()
+        next();
     } catch (error) {
         return next(new Error(error.message));
     }
-
 }
 
-export { addSubForum, deleteSubForum, getForum, getForumById, getSubForumById, getSubForum };
+async function getDiscussion(req, res, next) {
+    const {forum_id, subforum_id} = req.params;
+    console.log('id.', req.params)
+    try {
+        const discussion = await sendQuery('SELECT * FROM discussion WHERE forum_id=? AND subforum_id = ?', [forum_id, subforum_id]);
+        res.send({
+            ok: true,
+            error: null,
+            data: discussion,
+            message: 'Discussion.'
+        });
+
+        next();
+    } catch (error) {
+        return next(new Error(error.message));
+    }
+}
+
+async function addCommentsToDiscussion(req, res, next) {
+    const {forum_id,subforum_id} = req.params;
+    console.log('ids:',req.params);
+
+    try {
+        
+    } catch (error) {
+        return next(new Error(error.message));
+    }
+}
+
+export { addSubForum, deleteSubForum, getForum, getForumById, getSubForumById, getSubForum, getDiscussion };

@@ -16,7 +16,7 @@ function Forum({ children }: { children: ReactNode }) {
                 </div>
 
                 <main className="flex gap-4 font-Montserrat justify-center ml-[3.5rem] mb-8">
-
+                
                     <section className="flex flex-col gap-6">
                         {children}
                     </section>
