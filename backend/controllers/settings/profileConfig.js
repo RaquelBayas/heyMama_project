@@ -1,6 +1,6 @@
-import { User } from "../schemas/User.js";
-import { sendQuery } from '../db/connectDB.js';
-import { zodErrorMap } from "../helpers/zodErrorMap.js";
+import { User } from "../../schemas/User.js";
+import { sendQuery } from '../../db/connectDB.js';
+import { zodErrorMap } from "../../helpers/zodErrorMap.js";
 
 async function profileConfig(req, res, next){
     const { success, error, data } = User.safeParse(req.body);

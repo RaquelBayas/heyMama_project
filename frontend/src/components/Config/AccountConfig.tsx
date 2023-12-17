@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ToggleSwitch from "./Switch/ToggleSwitch";
-import useUserContext from "../../hooks/useUserContext";
 import { getUserById } from "../../services/userService";
 
 function AccountConfig(){
@@ -9,6 +8,11 @@ function AccountConfig(){
 
     const [ active, setActive ] = useState({
         isActive: '1',
+    });
+
+    const [passwords, setPasswords] = useState({
+        pwdActual: '',
+        pwdNueva: '',
     });
 
     const user = JSON.parse(localStorage.getItem("user")!);
@@ -28,6 +32,10 @@ function AccountConfig(){
         setEmail(
             e.target.name
         );
+        setPasswords({
+            ...passwords,
+            [e.target.name]: e.target.value,
+        });
     }
     
     function handleActiveChange (e:React.ChangeEvent<HTMLButtonElement>){
@@ -40,11 +48,7 @@ function AccountConfig(){
     async function handleSubmit(e:React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const { user } = useUserContext();
-
-        const userId = user ? user.id : '';
-
-        const baseUrl = `http://localhost:5000/users/config/account/:${userId}`;
+        const baseUrl = `http://localhost:5000/users/config/account/:${user.id}`;
 
         try {
             const response = await fetch(baseUrl,{
@@ -52,7 +56,11 @@ function AccountConfig(){
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(email),
+                body: JSON.stringify({
+                    email,
+                    pwdActul: passwords.pwdActual,
+                    pwdNueva: passwords.pwdNueva,
+                }),
             });
 
             if (response.ok){
@@ -86,9 +94,17 @@ function AccountConfig(){
             </div>
             
             <div className="flex flex-col">
-                <label htmlFor="name">Contraseña:</label>
+                <label htmlFor="name">Inserte contraseña actual:</label>
                 <input
-                    name="password"
+                    name="pwcActual"
+                    onChange={handleDataChange} 
+                    className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
+            </div>
+            
+            <div className="flex flex-col">
+                <label htmlFor="name">Inserte nueva contraseña:</label>
+                <input
+                    name="pwdNueva"
                     onChange={handleDataChange} 
                     className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
             </div>

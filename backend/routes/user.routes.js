@@ -4,8 +4,8 @@ import checkUsername from "../middlewares/checkUsername.js";
 import { contact_form } from "../controllers/contact_form.js";
 
 import { signUp, logIn, isLogIn, getUserById, initialLogin } from "../controllers/user.controller.js";
-import profileConfig from "../controllers/profileConfig.js";
-import accountConfig from "../controllers/accountConfig.js";
+import profileConfig from "../controllers/settings/profileConfig.js";
+import accountConfig from "../controllers/settings/accountConfig.js";
 import { addAvatar, getDataUser } from "../controllers/profile.controller.js";
 
 
