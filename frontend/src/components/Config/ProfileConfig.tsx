@@ -18,9 +18,9 @@ function ProfileConfig(){
         phone:'',
     });
 
-    const [bioAndPhoto, setBioAndPhoto] = useState({
+    const [bioAndAvatar, setBioAndAvatar] = useState({
         biography:'',
-        photo:'',
+        avatar:'',
     });
 
     const user = JSON.parse(localStorage.getItem("user")!);
@@ -37,7 +37,7 @@ function ProfileConfig(){
             const phone = data.data[0].phone;
 
             const biography = dataUser.data[0].biography;
-            const photo = dataUser.data[0].avatar;
+            const avatar = dataUser.data[0].avatar;
             
             setUserData({
                 username,
@@ -46,37 +46,33 @@ function ProfileConfig(){
                 phone,
             })
 
-            setBioAndPhoto({
+            setBioAndAvatar({
                 biography,
-                photo,
+                avatar,
             })
         }
         getUserData();
     },[])
 
-    function handleProfileChange (e:  React.ChangeEvent<HTMLInputElement>){
+    async function handleProfileChange (e:  React.ChangeEvent<HTMLInputElement>){
         setUserData({
             ...userData,
             [e.target.name]:e.target.value
         })
 
-        setBioAndPhoto({
-            ...bioAndPhoto,
+        setBioAndAvatar({
+            ...bioAndAvatar,
             [e.target.name]:e.target.value
         })
     }
 
     async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-
-        console.log(user.id);
-        
          
+        console.log('cargando form');
+
         const baseUrl = `http://localhost:5000/users/config/${user.id}`;
-
-        console.log('holaa');
         
-
         try {
             const resp = await fetch(baseUrl,{
                 method:'PUT',
@@ -84,29 +80,34 @@ function ProfileConfig(){
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    userData
+                    username: userData.username,
+                    name: userData.name,
+                    surname: userData.surname,
+                    phone: userData.phone,
+                    biography: bioAndAvatar.biography,
+                    avatar: bioAndAvatar.avatar,
                 }),
             });
-            console.log(resp);
-            
+
+            const data = await resp.json();
 
             if (resp.ok){
-                const result = await resp.json();
-                console.log(result);
+                console.log(data);
             } else{
                 console.error('Error al actualizar perfil')
             }
         } catch (error) {
             console.error(error);
         }
+
+        console.log('final form');
     }
 
     return(
         <div className='flex flex-col gap-5 text-xl ml-14'>
             <h1 className='mt-10 mb-4 text-4xl tracking-wider text-center uppercase lg:text-start lg:ml-10'>Ajustes</h1>
 
-            <form
-            onSubmit={handleSubmit}
+            <form onSubmit={(e)=> {handleSubmit(e)}}
                 className="flex flex-col justify-start gap-8"
             >
                 <h3>Foto de perfil:</h3>
@@ -118,7 +119,7 @@ function ProfileConfig(){
                         name="avatar"
                         className='hidden' />
                     <img 
-                        src={bioAndPhoto.photo ? bioAndPhoto.photo : "./assets/avatar-person.svg"} alt="avatar" 
+                        src={bioAndAvatar.avatar ? bioAndAvatar.avatar : "./assets/avatar-person.svg"} alt="avatar" 
                         className='ml-4 max-w-[6rem] cursor-pointer' 
                     />
                 </label>
@@ -164,7 +165,7 @@ function ProfileConfig(){
                     <label htmlFor="biography">Biografía:</label>
                     <input 
                         name="biography"
-                        value={bioAndPhoto.biography}
+                        value={bioAndAvatar.biography}
                         onChange={handleProfileChange}
                         className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
                 </div>

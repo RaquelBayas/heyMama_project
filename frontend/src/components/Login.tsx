@@ -80,7 +80,7 @@ function Login() {
                 <div className='absolute top-0 right-0 left-0 bottom-0 bg-shade-bg'>
                     <div className="flex flex-col w-550 text-center relative top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
                         <h1 className="text-5xl tracking-wide">¡BIENVENIDA!</h1>
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => {handleSubmit(e)}}>
                             <div className="flex flex-col h-[82px] mx-6 mt-8 mb-4 text-start text-xl">
                                 <label>Email:</label>
                                 <input
