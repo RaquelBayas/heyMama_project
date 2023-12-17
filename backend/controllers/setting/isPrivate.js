@@ -1,4 +1,4 @@
-import { sendQuery } from "../../db/connectDB";
+import { sendQuery } from "../../db/connectDB.js";
 
 async function isPrivate (req, res){
     const userId = req.params;

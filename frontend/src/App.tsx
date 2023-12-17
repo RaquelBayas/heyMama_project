@@ -18,6 +18,8 @@ import NewArticle from './components/Articles/NewArticle';
 import Profile from './components/Profile/Profile';
 import Layout from './components/Layout';
 import UserSetting from './components/Settings/UserSetting';
+import Articles from './components/Forum/Articles';
+import ArticleContent from './components/Forum/ArticleContent';
 
 
 function App() {
@@ -60,6 +62,16 @@ function App() {
         <Route path='/breathing' element={
           <PrivateRoute>
             <Breathing />
+          </PrivateRoute>
+        } />
+        <Route path='/articles' element={
+          <PrivateRoute>
+            <Articles />
+          </PrivateRoute>
+        } />
+        <Route path='/articles/content/:articleId' element={
+          <PrivateRoute>
+            <ArticleContent />
           </PrivateRoute>
         } />
         <Route path='/articles/newArticle' element={
