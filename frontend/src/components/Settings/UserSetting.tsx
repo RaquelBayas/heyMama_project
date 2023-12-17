@@ -1,9 +1,9 @@
 import { Routes, Route, Link } from 'react-router-dom';
-import AccountConfig from './AccountConfig';
-import ProfileConfig from './ProfileConfig';
+import AccountSetting from './AccountSetting';
+import ProfileSetting from './ProfileSetting';
 import useUserContext from '../../hooks/useUserContext';
 
-function UserConf() {
+function UserSetting() {
 
     const { logOut } = useUserContext();
 
@@ -14,14 +14,14 @@ function UserConf() {
                     <ul className='text-center'>
                         <div className='relative inline-block'>
                             <li className='group inline-block hover:animate-underline transition-all duration-500 ease-in-out'>
-                                <Link to='/config'>Ajustes de Perfil
+                                <Link to='/setting'>Ajustes de Perfil
                                     <span className='absolute inset-x-0 bottom-0 h-0.5 bg-black origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-in-out'></span>
                                 </Link>
                             </li>
                         </div>
                         <div className='relative inline-block'>
                             <li className='mt-10 group inline-block hover:animate-underline transition-all duration-500 ease-in-out'>
-                                <Link to='/config/account'>Ajustes de Cuenta
+                                <Link to='/setting/account'>Ajustes de Cuenta
                                     <span className='absolute inset-x-0 bottom-0 h-0.5 bg-black origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-in-out'></span>
                                 </Link>
                             </li>
@@ -38,14 +38,15 @@ function UserConf() {
                 </div>
             </nav>
 
-            <div className='flex flex-col ml-14 text-xl gap-2'>
+            <div 
+                className='flex flex-col ml-14 text-xl gap-2 lg:mx-auto'>
                 <Routes>
-                    <Route path='/' element={<ProfileConfig />} />
-                    <Route path='/account' element={<AccountConfig />} />
+                    <Route path='/' element={<ProfileSetting />} />
+                    <Route path='/account' element={<AccountSetting />} />
                 </Routes>
             </div>
         </form>
     );
 }
 
-export default UserConf;
+export default UserSetting;
