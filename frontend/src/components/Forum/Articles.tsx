@@ -18,16 +18,16 @@ function Articles() {
         fetch('http://localhost:5000/articles/getArticles')
             .then(resp => resp.json())
             .then(data => {
-                console.log(data);
-
+                console.log(data.articles);
+                //setArticles(data.articles);
                 if (!data.error) {
-                    return setArticles(data.data);
+                    return setArticles(data.articles);
 
                 }
             })
             .catch(error => console.error(error.message));
     }, []);
-
+    
     return (
         <div className='w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden'>
 
@@ -43,13 +43,13 @@ function Articles() {
 
                     <h1 className='slef-start ml-36 text-4xl font-semibold text-[#8B6956] mt-4 mb-6'>ARTICULOS</h1>
 
-                    <section className="self-center grid grid-cols-4 gap-12 mb-8 mx-auto">
+                    <section className="grid self-center grid-cols-4 gap-12 mx-auto mb-8">
 
                         {articles?.map(({ article_id, title, create_time }) => (
                             <Link to={`/articles/content/${article_id}`} key={article_id}>
                                 <article className="flex flex-col justify-between bg-white rounded-md p-3 border-2 border-[#8D5E44] drop-shadow-md w-[250px] h-[150px]">
 
-                                    <h2 className='font-semibold text-xl'>{title}</h2>
+                                    <h2 className='text-xl font-semibold'>{title}</h2>
                                     <time className='italic'>{create_time}</time>
                                 </article>
                             </Link>

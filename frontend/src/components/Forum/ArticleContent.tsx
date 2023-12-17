@@ -2,72 +2,94 @@ import { useEffect, useState } from "react";
 import Menu from "../Menu";
 import Search from "../Search";
 import { useParams } from "react-router-dom";
+import { getFromDataUser } from "../../services/profileService";
 
 function ArticleContent() {
+  const { articleId } = useParams();
+  console.log(articleId);
 
-    const articleId = useParams();
-    console.log(articleId.id);
+  interface Articles {
+    article_id: number;
+    title: string;
+    content: string;
+  }
 
-    interface Articles {
-        "article_id": number
-        "title": string
-        "content": string
-    }
+  const [articles, setArticles] = useState<Articles[]>([]);
+  const [author, setAuthor] = useState('');
+  const [avatar, setAvatar] = useState('');
 
-    const [articles, setArticles] = useState<Articles[]>([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/articles/getArticlesByID/${articleId}`)
+      .then((resp) => resp.json())
+      .then(async (data) => {
+        console.log(data);
 
-    useEffect(() => {
+        if (!data.error) {
+          
 
-        fetch(`http://localhost:5000/articles/getArticlesByID/${articleId.id}`)
-            .then(resp => resp.json())
-            .then(data => {
-                console.log(data);
+          setArticles(data.data);
+          console.log('authoooor',data.data[0].author);
+          fetch(`http://localhost:5000/users/getUserById/${data.data[0].author}`)
+          .then((resp)=>resp.json())
+          .then((data)=> {setAuthor(`${data.data[0].name} ${data.data[0].surname}`); console.log(data.data[0]);});
+            
+          const resultado = await getFromDataUser(data.data[0].author);
+          setAvatar(resultado.data[0].avatar);
+        }
+      })
+      .catch((error) => console.error(error.message));
+  }, [articleId]);
 
-                if (!data.error) {
-                    console.log(data.data);
-
-                    return setArticles(data.data);
-
-                }
-            })
-            .catch(error => console.error(error.message));
-    }, [articleId]);
-
-    return (
-        <div className='w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden'>
-
-            <Menu />
-            <div className="grid w-screen grid-rows-[5em_1fr]">
-
-                <div className='flex flex-col justify-center mt-3 mb-3 ml-[3.5rem]'>
-                    <div className='flex justify-evenly'><Search /></div>
-                    <div className='w-screen mt-2 mb-2 border-b border-secondary'></div>
-                </div>
-
-                <main className="flex gap-4 font-Montserrat justify-around ml-[3.5rem]">
-
-                    {articles?.map(({ article_id, title, content }) => (
-                        <section className="flex flex-col gap-6" key={article_id}>
-                            <h1 className='slef-start ml-36 text-4xl font-semibold text-[#8B6956] mt-6 mb-4'>{title}</h1>
-                            <article className="bg-white p-3 outline-4 outline-[#8D5E44] outline-offset-8 w-full min-h-min h-3/4">
-                                <p>{content}</p>
-                            </article>
-                        </section>
-
-                    ))}
-
-                    <section className="flex-grow-0 mt-16 mw150:hidden -ml-32 bg-white h-min">
-                        <article className="flex flex-col items-center w-[300px] h-[400px] outline-2 outline-[#8D5E44] justify-center gap-12">
-                            <img src="/assets/avatar-person.svg" alt="avatar" className='mt-6 max-w-[8rem]' />
-                            <p>Texto de prueba</p>
-                            <button className="rounded-md mb-6 py-4 px-8 bg-[#DDBEA9] text-[#8D5E44]">Enviar consulta</button>
-                        </article>
-                    </section>
-
-                </main>
-            </div>
+  return (
+    <div className="w-screen h-screen bg-background grid grid-cols-[100px,1fr] gap-4 overflow-x-hidden">
+      <div>
+      <Menu />
+      </div>
+      <div className="grid w-full h-full grid-rows-[5em,1fr] gap-2">
+        <div className="flex flex-col justify-center mt-3 mb-3 ">
+          <div className="flex justify-evenly">
+            <Search />
+          </div>
+          <div className="w-screen mt-2 mb-2 border-b border-secondary"></div>
+         
         </div>
-    );
+        <main className="flex w-fit mx-4 h-full gap-4 font-Montserrat justify-around ml-[3.5em]">
+            <div className="grid grid-cols-[2fr,1fr] gap-4">
+            <div className="w-full gap-2 ">
+              {articles?.map(({ article_id, title, content }) => (
+                <div className="flex flex-col gap-6 w-fit" key={article_id}>
+                  <h1 className="text-start text-4xl font-semibold text-[#8B6956] mt-6 mb-4">
+                    {title}
+                  </h1>
+                  <article className="bg-white rounded-md p-8 outline-4 outline-[#8D5E44] outline-offset-8 w-full min-h-min h-3/4">
+                    <div
+                      className="w-fit"
+                      dangerouslySetInnerHTML={{ __html: content }}
+                    ></div>
+                  </article>
+                </div>
+              ))}
+
+            </div>
+<div className="px-4 bg-white rounded-md w-fit mw150:hidden h-min">
+              <article className="flex flex-col items-center justify-center my-auto w-fit h-[400px] outline-2 outline-[#8D5E44] justify-center gap-12">
+                <img
+                  src={"/assets/avatar-person.svg" || avatar}
+                  alt="avatar"
+                  className="mt-6 max-w-[8rem]"
+                />
+                <p>{author}</p>
+                <button className="rounded-md mb-6 py-4 px-8 bg-[#DDBEA9] text-[#8D5E44]">
+                  Enviar consulta
+                </button>
+              </article>
+            </div>
+            </div>
+            
+          </main>
+      </div>
+    </div>
+  );
 }
 
 export default ArticleContent;
