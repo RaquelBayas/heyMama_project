@@ -21,8 +21,8 @@ userRoutes.get('/getUserById/:userId', getUserById);
 userRoutes.get('/initialLogin', initialLogin);
 userRoutes.get('/getDataUser/:userId',getDataUser);
 
-userRoutes.put('setting/:userId', profileSetting);
-userRoutes.put('setting/account/:userId', accountSetting);
+userRoutes.put('/setting/:userId', profileSetting);
+userRoutes.put('/setting/account/:userId', accountSetting);
 userRoutes.put('/setting/account/privacy/:userId',isPrivate);
 userRoutes.put('/:userId/addAvatar', addAvatar);
 

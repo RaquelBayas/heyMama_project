@@ -27,9 +27,11 @@ function ProfileSetting(){
 
     useEffect(() => {
         async function getUserData() {
-            const data = await getUserById(user!.id);
+            const data = await getUserById(user?.id);
+            console.log(data);
             
-            const dataUser = await getFromDataUser(user!.id);
+            
+            const dataUser = await getFromDataUser(user?.id);
 
             const username = data.data[0].username;
             const name = data.data[0].name;
@@ -68,46 +70,48 @@ function ProfileSetting(){
 
     async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-         
-        console.log('cargando form');
 
         const baseUrl = `http://localhost:5000/users/setting/${user.id}`;
+
+        const formData = new FormData(e.target);
+        
         
         try {
             const resp = await fetch(baseUrl,{
                 method:'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: userData.username,
-                    name: userData.name,
-                    surname: userData.surname,
-                    phone: userData.phone,
-                    biography: bioAndAvatar.biography,
-                    avatar: bioAndAvatar.avatar,
-                }),
+                // headers: {
+                //     'Content-Type': 'application/json',
+                // },
+                // body: JSON.stringify({
+                //     username: userData.username,
+                //     name: userData.name,
+                //     surname: userData.surname,
+                //     phone: userData.phone,
+                //     biography: bioAndAvatar.biography,
+                //     avatar: bioAndAvatar.avatar,
+                // }),
+                body: formData
             });
 
             const data = await resp.json();
 
-            if (resp.ok){
-                console.log(data);
-            } else{
-                console.error('Error al actualizar perfil')
+            if (!resp.ok){
+                return console.error(data.error)
             }
+
+            console.log('Cambiado!');
+            
         } catch (error) {
             console.error(error);
         }
 
-        console.log('final form');
     }
 
     return(
         <div className='flex flex-col gap-5 text-xl ml-14'>
             <h1 className='mt-10 mb-4 text-4xl tracking-wider text-center uppercase lg:text-start lg:ml-10'>Ajustes</h1>
 
-            <form onSubmit={(e)=> {handleSubmit(e)}}
+            <form onSubmit={handleSubmit}
                 className="flex flex-col justify-start gap-8"
             >
                 <h3>Foto de perfil:</h3>
@@ -119,7 +123,7 @@ function ProfileSetting(){
                         name="avatar"
                         className='hidden' />
                     <img 
-                        src={bioAndAvatar.avatar ? bioAndAvatar.avatar : "./assets/avatar-person.svg"} alt="avatar" 
+                        src={bioAndAvatar.avatar?.trim() !== '' ? bioAndAvatar.avatar : "../../../public/assets/avatar-person.svg"} alt="avatar" 
                         className='ml-4 max-w-[6rem] cursor-pointer' 
                     />
                 </label>
