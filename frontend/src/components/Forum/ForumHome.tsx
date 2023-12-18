@@ -3,7 +3,6 @@ import Forum from "./ForumBase";
 import ForumCard from "./ForumCard";
 
 function ForumHome(): ReactNode {
-
     const userRaw = localStorage.getItem('user');
     const user = JSON.parse(userRaw!);
 

@@ -4,6 +4,14 @@ import Search from "../Search";
 import { Link } from "react-router-dom";
 
 function Articles() {
+  const userRaw = localStorage.getItem("user");
+  const user = JSON.parse(userRaw!);
+  let isProf = false;
+
+  if (user.type === 2) {
+    isProf = true;
+  }
+
   interface Articles {
     article_id: number;
     title: string;
@@ -26,9 +34,11 @@ function Articles() {
   }, []);
 
   return (
-    <div className="w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden">
-      <Menu />
-      <div className="grid w-screen grid-rows-[5em_1fr]">
+    <div className="w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden gap-4">
+      <div>
+        <Menu />
+      </div>
+      <div className="grid w-full h-full grid-rows-[5em_1fr]">
         <div className="flex flex-col justify-center mt-3 mb-3 ml-[3.5rem]">
           <div className="flex justify-evenly">
             <Search />
@@ -36,11 +46,19 @@ function Articles() {
           <div className="w-screen mt-2 mb-2 border-b border-secondary"></div>
         </div>
 
-        <main className="flex flex-col gap-4 font-Montserrat ml-[3.5rem]">
-          <h1 className="slef-start ml-36 text-4xl font-semibold text-[#8B6956] mt-4 mb-6">
-            ARTICULOS
-          </h1>
-
+        <main className="flex flex-col gap-4 font-Montserrat">
+          <div className="flex flex-row gap-4 align-middle">
+            <h1 className="slef-start ml-36 text-4xl font-semibold text-[#8B6956] mt-4 mb-6">
+              ARTICULOS
+            </h1>
+            {isProf && (
+              <Link to={"/articles/newArticle"}>
+                <button className="self-start p-3 my-auto bg-red-300 rounded-full">
+                  Nuevo artículo
+                </button>
+              </Link>
+            )}
+          </div>
           <section className="grid self-center grid-cols-4 gap-12 mx-auto mb-8">
             {articles?.map(({ article_id, title, create_time }) => (
               <Link to={`/articles/content/${article_id}`} key={article_id}>
