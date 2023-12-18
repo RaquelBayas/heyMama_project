@@ -20,6 +20,7 @@ import Layout from './components/Layout';
 import UserSetting from './components/Settings/UserSetting';
 import Articles from './components/Forum/Articles';
 import ArticleContent from './components/Forum/ArticleContent';
+import Discussion from './components/Forum/Discussion';
 
 
 function App() {
@@ -77,6 +78,11 @@ function App() {
         <Route path='/articles/newArticle' element={
           <PrivateRoute>
             <NewArticle />
+          </PrivateRoute>
+        } />
+        <Route path='/forum/subforum/:forum_id/discussion/:discussion_id' element={
+          <PrivateRoute>
+            <Discussion />
           </PrivateRoute>
         } />
         <Route path='/profile' element={
