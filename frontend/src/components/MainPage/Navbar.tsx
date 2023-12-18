@@ -3,7 +3,7 @@ import { IoHomeOutline } from "react-icons/io5";
 
 function Navbar() {
     return (
-        <nav className='fixed font-semibold w-full p-4 mt-0 pl-10 border-2 border-solid shadow-md border-b-marron bg-piel-claro'>
+        <nav className='fixed font-semibold w-full p-4 mt-0 pl-10 border-2 border-solid shadow-md border-b-marron bg-piel-claro bg-opacity-75 backdrop-filter backdrop-blur-8'>
             <ul className="flex flex-row justify-between gap-5 text-anybody uppercase 
             
             sm:text-md md:text-xl lg:text-2xl lg:gap-8">
