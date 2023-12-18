@@ -54,7 +54,7 @@ function Articles() {
             {isProf && (
               <Link to={"/articles/newArticle"}>
                 <button className="self-start p-3 my-auto bg-red-300 rounded-full">
-                  Nuevo sub foro
+                  Nuevo artículo
                 </button>
               </Link>
             )}

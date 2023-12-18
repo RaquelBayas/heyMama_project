@@ -2,7 +2,7 @@ import { sendQuery } from '../db/connectDB.js'
 import { zodErrorMap } from '../helpers/zodErrorMap.js';
 import { ForumCard } from '../schemas/Forums.js';
 async function addSubForum(req, res, next) {
-
+    console.log('addsubforum..',req);
     const { success, error, data } = ForumCard.safeParse(req.body);
     console.log(data)
 
@@ -15,10 +15,10 @@ async function addSubForum(req, res, next) {
         });
     }
 
-    const { user_id, forum_id, subforum_title, subforum_content } = data
+    const { user_id, subforum_id, subforum_title, subforum_content } = data
 
     try {
-        await sendQuery(`INSERT INTO subforum (user_id, forum_id, subforum_title, subforum_content) VALUES (?, ?, ?, ?)`, [user_id, forum_id, subforum_title, subforum_content])
+        await sendQuery(`INSERT INTO subforum (user_id, forum_id, subforum_title, subforum_content) VALUES (?, ?, ?, ?)`, [user_id, subforum_id, subforum_title, subforum_content])
 
     } catch (error) {
         return next(new Error(error.message))
@@ -28,32 +28,60 @@ async function addSubForum(req, res, next) {
         ok: true,
         error: null,
         data: null,
-        message: 'SubForum added to ' + forum_id + ' forum.'
+        message: 'SubForum added to ' + subforum_id + ' forum.'
     });
 
     next()
 }
 
-async function deleteSubForum(req, res, next) {
-
-    const subForum_id = req.params.subForum_id;
+async function deleteCommentById(req, res, next) {
+    const {discussion_id, forum_id, subforum_id} = req.params;
 
     try {
-        await sendQuery(`DELETE FROM subforum WHERE ID = ? VALUES (?)`, [subForum_id])
-
+        await sendQuery(`DELETE FROM discussion WHERE discussion_id=? AND forum_id=? AND subforum_id=?`, [discussion_id,forum_id,subforum_id]);
+        res.send({
+            ok: true,
+            error: null,
+            data: null,
+            message: 'SubForum comments ' + subForum_id + ' deleted.'
+        });
     } catch (error) {
         return next(new Error(error.message))
     }
+}
 
-    res.send({
-        ok: true,
-        error: null,
-        data: null,
-        message: 'SubForum ' + subForum_id + ' deleted.'
-    });
 
-    next()
+async function deleteSubForumComments(req, res, next) {
+    console.log('deleteSubforum,',req.params)
+    const {forum_id, subforum_id} = req.params;
 
+    try {
+        await sendQuery(`DELETE FROM discussion WHERE forum_id=? AND subforum_id=?`, [forum_id,subforum_id]);
+        res.send({
+            ok: true,
+            error: null,
+            data: null,
+            message: 'SubForum comments ' + subForum_id + ' deleted.'
+        });
+    } catch (error) {
+        return next(new Error(error.message))
+    }
+}
+
+async function deleteSubForum(req, res, next) {
+    const {forum_id} = req.params;
+    try {
+        await sendQuery(`DELETE FROM subforum WHERE subforum_id=?`, [subForum_id]);
+        res.send({
+            ok: true,
+            error: null,
+            data: null,
+            message: 'SubForum ' + subForum_id + ' deleted.'
+        });
+        next();
+    } catch (error) {
+        return next(new Error(error.message));
+    }
 }
 
 async function getForum(req, res, next) {
@@ -126,7 +154,6 @@ async function getSubForum(req, res, next) {
         return next(new Error(error.message))
     }
     next();
-
 }
 
 async function getSubForumById(req, res, next) {
@@ -147,17 +174,17 @@ async function getSubForumById(req, res, next) {
 }
 
 async function getDiscussion(req, res, next) {
+    console.log('id.', req)
     const {forum_id, subforum_id} = req.params;
-    console.log('id.', req.params)
+    
     try {
-        const discussion = await sendQuery('SELECT * FROM discussion WHERE forum_id=? AND subforum_id = ?', [forum_id, subforum_id]);
+        const discussion = await sendQuery('SELECT * FROM discussion WHERE forum_id=? AND subforum_id=?', [forum_id, subforum_id]);
         res.send({
             ok: true,
             error: null,
             data: discussion,
             message: 'Discussion.'
         });
-
         next();
     } catch (error) {
         return next(new Error(error.message));
@@ -166,13 +193,21 @@ async function getDiscussion(req, res, next) {
 
 async function addCommentsToDiscussion(req, res, next) {
     const {forum_id,subforum_id} = req.params;
+    const {comments, author} = req.body;
     console.log('ids:',req.params);
 
     try {
-        
+        await sendQuery('INSERT INTO discussion(forum_id,subforum_id,comments,author) VALUES (?,?,?,?)',[forum_id,subforum_id,comments,author]);
+        res.send({
+            ok: true,
+            error: null,
+            data: null,
+            message: 'Comment added to Forum ID: '+forum_id+' Subforum ID: '+subforum_id
+        });
+        next();
     } catch (error) {
         return next(new Error(error.message));
     }
 }
 
-export { addSubForum, deleteSubForum, getForum, getForumById, getSubForumById, getSubForum, getDiscussion };
+export { addSubForum, deleteSubForumComments, deleteCommentById, getForum, getForumById, getSubForumById, getSubForum, getDiscussion, addCommentsToDiscussion };
