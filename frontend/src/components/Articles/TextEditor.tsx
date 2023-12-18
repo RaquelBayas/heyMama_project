@@ -119,11 +119,9 @@ function TextEditor() {
         author: userData.data[0].user_id,
         content: content,
       };
-      console.log("name.", article);
 
       
       await addArticle(article).then((response) => {
-        console.log("addartic.", response);
         if (response.error) {
           console.log(response.error);
           Swal.fire({

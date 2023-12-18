@@ -80,14 +80,14 @@ function App() {
             <NewArticle />
           </PrivateRoute>
         } />
-        <Route path='/profile' element={
+        <Route path='/profile/:user_id' element={
           <PrivateRoute>
             <Profile />
           </PrivateRoute>
         } />
         <Route path='/timeline' element={
           <PrivateRoute>
-            <Timeline />
+            <Timeline userId={undefined} loggedUser={undefined}  />
           </PrivateRoute>
         } />
       </Routes>

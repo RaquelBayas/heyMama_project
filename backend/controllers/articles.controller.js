@@ -3,7 +3,6 @@ import { zodErrorMap } from '../helpers/zodErrorMap.js';
 import { Articles } from '../schemas/Articles.js';
 
 async function addArticle(req, res, next) {
-
     const { success, error, data } = Articles.safeParse(req.body);
 
     if (!success) {
@@ -16,7 +15,6 @@ async function addArticle(req, res, next) {
     }
 
     const { title, author, content } = data;
-
     try {
         await sendQuery('INSERT INTO articles (title, author, content) VALUES (?, ?, ?)', [title, author, content]);
     } catch (error) {
@@ -29,7 +27,6 @@ async function addArticle(req, res, next) {
         data: null,
         message: 'Artículo añadido correctamente.'
     });
-
     next();
 }
 
@@ -44,7 +41,6 @@ async function deleteArticle(req, res, next) {
             data: null,
             message: 'Artículo eliminado correctamente.'
         });
-    
         next();
     } catch (error) {
         return next(new Error(error.message));
@@ -107,7 +103,7 @@ async function getArticles(req, res, next) {
         message: 'Articles.'
     });
 
-    next()
+    next();
 }
 
 async function findArticleById(req, res, next) {
@@ -122,7 +118,7 @@ async function findArticleById(req, res, next) {
             message: 'Articles.'
         });
 
-        next()
+        next();
     } catch (error) {
         return next(new Error(error.message));
     }

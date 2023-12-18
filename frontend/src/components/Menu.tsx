@@ -5,6 +5,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import { IoIosSettings } from "react-icons/io";
 
 function Menu() {
+  const user = JSON.parse(localStorage.getItem("user")!);
   return (
     <div className="bg-primary h-screen w-[100px] flex items-center flex-col shadow-md shadow-amber-950 fixed">
       <ul className='flex flex-col h-full align-top place-content-evenly'>
@@ -13,7 +14,7 @@ function Menu() {
         <li className='mb-4'><Link to="/articles"><FaBookOpen className="text-3xl icons" /></Link></li>
         <li className='mb-4'><Link to="/moods"><FaRegSmile className="text-3xl" /></Link></li>
 
-        <li className='mb-4'><Link to="/profile"><BsPersonCircle className="text-3xl icons" /></Link></li>
+        <li className='mb-4'><Link to={`/profile/${user.id}`}><BsPersonCircle className="text-3xl icons" /></Link></li>
         <li className='mb-4'><Link to="/setting"><IoIosSettings className="text-3xl icons" /></Link></li>
       </ul>
     </div>

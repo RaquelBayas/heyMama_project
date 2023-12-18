@@ -3,7 +3,7 @@ import express from "express";
 import checkUsername from "../middlewares/checkUsername.js";
 import { contact_form } from "../controllers/contact_form.js";
 
-import { signUp, logIn, isLogIn, getUserById, initialLogin } from "../controllers/user.controller.js";
+import { signUp, logIn, isLogIn, getUserById, initialLogin, findUser } from "../controllers/user.controller.js";
 import profileSetting from "../controllers/setting/profileSetting.js";
 import accountSetting from "../controllers/setting/accountSetting.js";
 import isPrivate from "../controllers/setting/isPrivate.js";
@@ -16,6 +16,7 @@ userRoutes.post('/signup', [checkUsername], signUp);
 userRoutes.post('/login', logIn);
 userRoutes.post('/isLogIn', isLogIn);
 userRoutes.post('/contact', contact_form);
+userRoutes.post('/findUser',findUser);
 
 userRoutes.get('/getUserById/:userId', getUserById);
 userRoutes.get('/initialLogin', initialLogin);

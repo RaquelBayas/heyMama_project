@@ -127,10 +127,9 @@ async function logIn(req, res, next) {
     FROM users 
         LEFT JOIN data_users
           USING (user_id)
-            WHERE email = ?`
+            WHERE email = ?`;
 
     const [user] = await sendQuery(checkEmailInDB, [email]);
-
 
     if (!user) {
       return next(new HttpError(400, "Email y/o contraseña incorrectos"));
@@ -205,43 +204,44 @@ async function isLogIn(req, res, next) {
   }
 }
 
-
 function initialLogin(req, res) {
   const { authorization } = req.headers;
 
   if (!authorization) {
     return res.status(400).send({
-      error: 'Tienes que enviar cabecera "authorization"'
-    })
+      error: 'Tienes que enviar cabecera "authorization"',
+    });
   }
 
-  const token = authorization.split(' ')[1];
+  const token = authorization.split(" ")[1];
 
   // verificar el token con JWT
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
     res.send({
-      user
-    })
+      user,
+    });
   } catch (error) {
     return res.status(400).send({
       user: null,
-      error: 'Token inválido o expirado'
-    })
+      error: "Token inválido o expirado",
+    });
   }
 }
 
 async function getUserById(req, res, next) {
   const { userId } = req.params;
-  console.log('user-id,', req.params)
+  console.log("user-id,", req.params);
   try {
-    const results = await sendQuery('SELECT * FROM users WHERE user_id=?', [userId]);
-    console.log(results)
+    const results = await sendQuery("SELECT * FROM users WHERE user_id=?", [
+      userId,
+    ]);
+    console.log(results);
     res.send({
       ok: true,
-      message: 'Datos del usuario',
+      message: "Datos del usuario",
       error: null,
-      data: results
+      data: results,
     });
     next();
   } catch (error) {
@@ -249,4 +249,30 @@ async function getUserById(req, res, next) {
   }
 }
 
-export { signUp, logIn, isLogIn, getUserById, initialLogin };
+async function findUser(req, res, next) {
+  console.log('findUser...',req.body);
+  const searchUser = req.body.user;
+  const query = `SELECT * FROM users
+  WHERE username LIKE ? OR name LIKE ? OR surname LIKE ?`;
+
+  const formattedUser = `%${searchUser}%`;
+
+  try {
+    const results = await sendQuery(query, [
+      formattedUser,
+      formattedUser,
+      formattedUser,
+    ]);
+    res.send({
+      ok: true,
+      message: "Usuario",
+      error: null,
+      data: results,
+    });
+    next();
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export { signUp, logIn, isLogIn, getUserById, initialLogin, findUser };
