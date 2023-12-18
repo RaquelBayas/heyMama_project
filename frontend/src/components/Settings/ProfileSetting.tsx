@@ -7,18 +7,17 @@ interface UserData {
     name: string;
     surname: string;
     phone: string;
+    biography: string;
+    avatar: string;
 }
 
 function ProfileSetting(){
 
-    const [userData, setUserData] = useState<UserData>({
+    const [settingData, setSettingData] = useState<UserData>({
         username:'',
         name: '',
         surname:'',
         phone:'',
-    });
-
-    const [bioAndAvatar, setBioAndAvatar] = useState({
         biography:'',
         avatar:'',
     });
@@ -41,14 +40,11 @@ function ProfileSetting(){
             const biography = dataUser.data[0].biography;
             const avatar = dataUser.data[0].avatar;
             
-            setUserData({
+            setSettingData({
                 username,
                 name, 
                 surname,
                 phone,
-            })
-
-            setBioAndAvatar({
                 biography,
                 avatar,
             })
@@ -56,14 +52,9 @@ function ProfileSetting(){
         getUserData();
     },[])
 
-    async function handleProfileChange (e:  React.ChangeEvent<HTMLInputElement>){
-        setUserData({
-            ...userData,
-            [e.target.name]:e.target.value
-        })
-
-        setBioAndAvatar({
-            ...bioAndAvatar,
+    async function handleChange (e:  React.ChangeEvent<HTMLInputElement>){
+        setSettingData({
+            ...settingData,
             [e.target.name]:e.target.value
         })
     }
@@ -73,24 +64,13 @@ function ProfileSetting(){
 
         const baseUrl = `http://localhost:5000/users/setting/${user.id}`;
 
-        const formData = new FormData(e.target);
+        const formData = new FormData(e.target as HTMLFormElement);
         
         
         try {
             const resp = await fetch(baseUrl,{
                 method:'PUT',
-                // headers: {
-                //     'Content-Type': 'application/json',
-                // },
-                // body: JSON.stringify({
-                //     username: userData.username,
-                //     name: userData.name,
-                //     surname: userData.surname,
-                //     phone: userData.phone,
-                //     biography: bioAndAvatar.biography,
-                //     avatar: bioAndAvatar.avatar,
-                // }),
-                body: formData
+                body: formData,
             });
 
             const data = await resp.json();
@@ -104,7 +84,6 @@ function ProfileSetting(){
         } catch (error) {
             console.error(error);
         }
-
     }
 
     return(
@@ -123,7 +102,7 @@ function ProfileSetting(){
                         name="avatar"
                         className='hidden' />
                     <img 
-                        src={bioAndAvatar.avatar?.trim() !== '' ? bioAndAvatar.avatar : "../../../public/assets/avatar-person.svg"} alt="avatar" 
+                        src={settingData.avatar?.trim() !== '' ? settingData.avatar : "../../../assets/avatar-person.svg"} alt="avatar" 
                         className='ml-4 max-w-[6rem] cursor-pointer' 
                     />
                 </label>
@@ -133,8 +112,8 @@ function ProfileSetting(){
                     <label htmlFor="username">Nombre de usuario:</label>
                     <input
                         name="username" 
-                        value={userData.username}
-                        onChange={handleProfileChange}
+                        value={settingData.username}
+                        onChange={handleChange}
                         className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
                 </div>
 
@@ -142,8 +121,8 @@ function ProfileSetting(){
                     <label htmlFor="name">Nombre:</label>
                     <input 
                         name="name"
-                        value={userData.name}
-                        onChange={handleProfileChange}
+                        value={settingData.name}
+                        onChange={handleChange}
                         className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
                 </div>
             
@@ -151,8 +130,8 @@ function ProfileSetting(){
                     <label htmlFor="name">Apellido:</label>
                     <input 
                         name="surname"
-                        value={userData.surname}
-                        onChange={handleProfileChange}
+                        value={settingData.surname}
+                        onChange={handleChange}
                         className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none' />
                 </div>
             
@@ -160,8 +139,8 @@ function ProfileSetting(){
                     <label htmlFor="name">Teléfono:</label>
                     <input 
                         name="phone"
-                        value={userData.phone}
-                        onChange={handleProfileChange}
+                        value={settingData.phone}
+                        onChange={handleChange}
                         className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
                 </div>
 
@@ -169,8 +148,8 @@ function ProfileSetting(){
                     <label htmlFor="biography">Biografía:</label>
                     <input 
                         name="biography"
-                        value={bioAndAvatar.biography}
-                        onChange={handleProfileChange}
+                        value={settingData.biography}
+                        onChange={handleChange}
                         className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
                 </div>
 

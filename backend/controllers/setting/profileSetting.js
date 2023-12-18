@@ -1,40 +1,57 @@
-import { User } from "../../schemas/User.js";
 import { sendQuery } from '../../db/connectDB.js';
-import { zodErrorMap } from "../../helpers/zodErrorMap.js";
+import deleteAvatar from '../../helpers/deleteAvatar.js';
+import saveAvatar from '../../helpers/saveAvatar.js';
+import { HttpError } from '../../models/HttpError.js';
 
 async function profileSetting(req, res, next){
-    console.log(req.files);
-
-    
-    // const { success, error, data } = User.safeParse(req.body);
-    // console.log(data);
-
-    // if (!success) {
-    //     const errors = zodErrorMap(error);
-    //     return res.send({
-    //     ok: false,
-    //     error: errors
-    //     });
-    // }
-
-    // const { username, name, surname, phone, biography } = data;
 
     const avatar = req.files?.avatar;
     const { username, name, surname, phone, biography } = req.body;
 
-
-
     const { userId } = req.params;
+
+    if(!avatar){
+        return next(new HttpError(400, 'No has enviado ninguna foto de avatar'))
+    }
+
+    try {
+        const checkingAvatar = 'SELECT avatar FROM data_users WHERE user_id = ?;';
+
+        const [result] = await sendQuery(checkingAvatar, [userId]);
+        console.log(result);
+
+        if(result.avatar){
+            try {
+                deleteAvatar(result.avatar);
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+
+        const avatarFileName = saveAvatar(avatar, 150);
+
+        const updateAvatarQuery = 'UPDATE data_users SET avatar = ? WHERE user_id = ?;';
+
+        await sendQuery(updateAvatarQuery, [avatarFileName, userId]);
+
+        res.send({
+            ok: true,
+            message: 'Avatar añadido correctamente',
+            data: null,
+            error: null
+        });
+
+    } catch (error) {
+        next(error)
+    }
 
     try {
 
         const checkingUserQuery = 'SELECT username, name, surname, phone FROM users WHERE user_id = ?;'
-
         const [ checkingUser ] = await sendQuery(checkingUserQuery, [userId]);
 
         
-        const checkingUserDataQuery = 'SELECT biography, avatar FROM data_users WHERE user_id = ?;'
-
+        const checkingUserDataQuery = 'SELECT biography FROM data_users WHERE user_id = ?;'
         const [ checkingUserData ] = await sendQuery(checkingUserDataQuery, [userId]);
 
         if(!checkingUser && !checkingUserData){        
@@ -43,11 +60,11 @@ async function profileSetting(req, res, next){
 
         const updateProfileDataQuery = 'UPDATE users SET username = IFNULL(?, username), name = IFNULL(?, name), surname = IFNULL(?, surname), phone = IFNULL(?, phone) WHERE user_id = ?;';
         
-        const updateOthersProfileQuery = 'UPDATE data_users SET biography = IFNULL(?, biography), avatar = IFNULL(?, avatar) WHERE user_id = ?;';
+        const updateBioQuery = 'UPDATE data_users SET biography = IFNULL(?, biography) WHERE user_id = ?;';
 
         await sendQuery(updateProfileDataQuery, [username, name, surname, phone, userId]);
         
-        await sendQuery(updateOthersProfileQuery, [biography, avatar.name, userId]);
+        await sendQuery(updateBioQuery, [biography, userId]);
 
         res.send({
             ok: true,
