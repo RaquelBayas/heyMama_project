@@ -18,7 +18,7 @@ function Navbar() {
                         <IoHomeOutline className='mt-0.5 text-3xl' />
                     </Link>
                 </li>
-                <div className="flex flex-row lg:mr-72">
+                <div className="flex flex-row sm:mr-20 md:mr-20 lg:mr-24 xl:mr-30 2xl:mr-30 3xl:mr-40">
                     <li className='cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out'>
                         <Link
                             activeClass="active"

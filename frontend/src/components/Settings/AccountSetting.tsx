@@ -81,7 +81,7 @@ function AccountSetting(){
             className='flex flex-col ml-14 text-xl gap-10'
         >
             
-            <h1 className='my-10 uppercase text-4xl text-center tracking-wider lg:text-start lg:ml-10'>Ajustes</h1>
+            <h1 className='my-10 uppercase text-4xl text-center tracking-wider lg:ml-40'>Ajustes</h1>
             
             
             <div className="flex flex-col">
