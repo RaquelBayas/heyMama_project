@@ -12,13 +12,21 @@ import { addPostTL, getPostByUser } from "../../services/timelineService";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 function Timeline({ userId, loggedUser }) {
-
+console.log('timeline')
   const [open, setOpen] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
   const [likePost, setLikePost] = useState<{ [post_timeline_id: number]: boolean }>({});
   const [comment, setComment] = useState("");
   const [posts, setPosts] = useState<PostTL[]>([]);
 
+  useEffect(() => {
+    const getPosts = async () => {
+      const results = await getPostByUser(userId);
+      setPosts(results.data);
+    };
+    getPosts();
+  }, [userId, hasChanged]);
+  
   const handleLike = (post_timeline_id:number) => {
     setLikePost((prevStates) => {
       const updatedStates = { ...prevStates, [post_timeline_id]: !prevStates[post_timeline_id] };
@@ -44,14 +52,6 @@ function Timeline({ userId, loggedUser }) {
 
     handleClose();
   };
-
-  useEffect(() => {
-    const getPosts = async () => {
-      const results = await getPostByUser(userId);
-      setPosts(results.data);
-    };
-    getPosts();
-  }, [userId, hasChanged]);
 
   return (
     <div className="ml-12">

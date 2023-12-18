@@ -16,17 +16,18 @@ import {
 import { addComment, deleteComment } from "../../services/forumService";
 
 function Discussion() {
-  const discussionId = useParams();
-
+  const { forum_id, discussion_id } = useParams();
+  const userRaw = localStorage.getItem("user");
+  const user = JSON.parse(userRaw!);
   interface Discussion {
     article_id: number;
     title: string;
     comments: string;
-    create_time: string;
-    author: string;
+    create_time?: string;
+    author?: string;
   }
 
-const [hasChanged, setHasChanged] = useState(false);
+  const [hasChanged, setHasChanged] = useState(false);
   const [discussions, setDiscussion] = useState<Comment[]>([]);
   const [theme, setTheme] = useState<SubForum>();
   const [open, setOpen] = useState(false);
@@ -81,38 +82,77 @@ const [hasChanged, setHasChanged] = useState(false);
       .catch((error) => console.error(error.message));
   }, [forum_id, discussion_id, hasChanged]);
 
-    return (
-        <div className='w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden'>
-
-            <Menu />
-            <div className="grid w-screen grid-rows-[5em_1fr]">
-
-                <div className='flex flex-col justify-center mt-3 mb-3 ml-[3.5rem]'>
-                    <div className='flex justify-evenly'><Search /></div>
-                    <div className='w-screen mt-2 mb-2 border-b border-[#DDBEA9]'></div>
-                </div>
-            </div>
-
-            <main>
-
-                <section className="flex flex-col w-2/4 gap-6 mx-auto mt-28">
-                    {discussions?.map(({ article_id, title, comments, create_time, author }) => (
-                        <article className="flex flex-col w-full p-3 bg-white border-4 border-green-300 rounded-lg min-h-min" key={article_id}>
-                            <h2 className='mb-2 text-xl font-semibold'>Esto es un test de prueba</h2>
-                            <p className="mb-4 text-gray-600">{comments}</p>
-
-                            <span className="text-gray-400">
-                                <time>{create_time.slice(0, 10)} {create_time.slice(11, 16)}</time>
-                                <small className="block">Tester</small>
-                            </span>
-                        </article>
-                    ))}
-                </section>
-
-            </main>
-
+  return (
+    <div className="w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden gap-2">
+      <div>
+        <Menu />
+      </div>
+      <div className="grid w-full h-full grid-rows-[5em_1fr]">
+        <div className="flex flex-col justify-center mt-3 mb-3 ">
+          <div className="flex justify-evenly">
+            <Search />
+          </div>
+          <div className="w-full mt-2 mb-2 border-b border-[#DDBEA9]"></div>
         </div>
-    );
+        <main className="flex flex-col">
+          <div className="flex flex-col w-3/5 p-3 mx-auto overflow-y-hidden bg-white border-4 rounded-lg border-secondary min-h-min">
+            <h1>{theme?.subforum_title}</h1>
+            <p>{theme?.subforum_content}</p>
+          </div>
+          <section className="flex flex-col w-2/4 gap-6 mx-auto mt-8">
+            {discussions?.reverse().map(({ discussion_id, comments, author }, index) => (
+              <article
+                className="flex flex-col w-full p-3 bg-white border-4 rounded-lg border-secondary min-h-min"
+                key={index}
+              >
+                {
+                  author === user.id && <div className="flex justify-end">
+                  <button
+                    onClick={() => handleDeleteComment(discussion_id)}
+                    className="p-2 text-sm text-white rounded-lg flex-end w-fit bg-marron"
+                  >
+                    <FaTrashAlt />
+                  </button>
+                </div>
+                }
+                <p className="mb-4 text-gray-600">{comments}</p>
+                <span className="text-gray-400">
+                  <small className="block">{author}</small>
+                </span>
+              </article>
+            ))}
+            <button
+              onClick={handleClickOpen}
+              className="absolute p-2 text-4xl text-white rounded-lg bg-marron bottom-8 right-8"
+            >
+              +
+            </button>
+          </section>
+          <div>
+            <Dialog open={open} onClose={handleClose}>
+              <DialogTitle>Añadir comentario</DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="comment"
+                  type="text"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  fullWidth
+                  variant="standard"
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Cancelar</Button>
+                <Button onClick={handleSubmit}>Añadir comentario</Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
 }
 
 export default Discussion;
