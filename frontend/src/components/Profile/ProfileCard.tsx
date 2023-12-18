@@ -12,8 +12,9 @@ function ProfileCard() {
   useEffect(() => {
     async function getData() {
         const data = await getUserById(user!.id);
+        console.log('datauser..',data);
         const dataUser = await getFromDataUser(user!.id);
-        console.log(dataUser.data[0]);
+        
         const name = data.data[0].name + " " + data.data[0].surname;
         setName(name);
         setBio(dataUser.data[0].biography);
@@ -21,21 +22,22 @@ function ProfileCard() {
         console.log(photo);
       }
     getData();
-  }, []);
+  }, [photo, user]);
 
 
   return (
     
-      <div className="flex flex-row justify-center gap-4 p-4 align-middle bg-white rounded-md h-fit w-fit">
+      <div className="flex flex-row justify-center gap-12 p-8 align-middle bg-white rounded-md h-fit w-fit">
         
         <img className="w-32 mx-auto rounded-full h-fit" src={ photo && photo.trim() !== ''
       ? photo : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541'} alt="" />
 
-        <div className="flex flex-col w-64 gap-3 text-left">
+        <div className="flex flex-col w-64 gap-4 text-left">
         <h1 className="text-lg ">{name}</h1>
-        <p className="text-md">{bio}</p>
+        <p className="text-md ">{bio}</p>
 
-        <button className="p-2 mt-2 rounded-md bg-primary w-fit">Mensajes</button>
+        <div className="flex gap-4"><button className="p-2 mt-2 rounded-md bg-primary w-fit">Mensajes</button>
+        <button className="p-2 mt-2 rounded-md bg-primary w-fit">Amigos</button></div>
         </div>
     </div>
     

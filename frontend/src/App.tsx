@@ -20,6 +20,7 @@ import Layout from './components/Layout';
 import UserSetting from './components/Settings/UserSetting';
 import Articles from './components/Forum/Articles';
 import ArticleContent from './components/Forum/ArticleContent';
+import Timeline from './components/Timeline/Timeline';
 
 
 function App() {
@@ -82,6 +83,11 @@ function App() {
         <Route path='/profile' element={
           <PrivateRoute>
             <Profile />
+          </PrivateRoute>
+        } />
+        <Route path='/timeline' element={
+          <PrivateRoute>
+            <Timeline />
           </PrivateRoute>
         } />
       </Routes>
