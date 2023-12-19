@@ -27,7 +27,15 @@ function Consults() {
   useEffect(() => {
     async function loadMessages() {
       try {
-        const response = await getConsultById(parseInt(consult_id!));
+        let response;
+
+        if (consult_id) {
+          // Si hay un consult_id en la ruta, usa la función getConsultById
+          response = await getConsultById(parseInt(consult_id!));
+        } else {
+          // Si no hay consult_id, usa la función getConsultByUsers
+          response = await getConsult(user.id, professionalId);
+        }
         // Establecer la información de la consulta
         setMessages(response.data.messages);
         setUserConsult(response.data.consult.user_id);
@@ -38,11 +46,6 @@ function Consults() {
     }
 
     loadMessages();
-
-    messages.map((message, index) => {
-      console.log(message);
-      console.log("id-log.", message.professional_id === parseInt(user.id));
-    });
   }, [user.id, professionalId, consult_id]);
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();

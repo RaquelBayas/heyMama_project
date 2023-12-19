@@ -27,11 +27,11 @@ function ListConsults() {
         <Menu />
       </div>
       <div className="grid w-full h-full">
-        <main className="flex flex-col gap-4 mt-8 justify-top font-Montserrat">
-        <h1>Consultas</h1>
-          <ul>
+        <main className="flex flex-col w-full gap-4 mt-8 align-middle font-Montserrat">
+        <h1 className="text-2xl text-center">Consultas</h1>
+          <ul className="mx-auto ">
             {consults.map((consult) => (
-              <li key={consult.consult_id}>
+              <li className="px-4 py-4 rounded-md cursor-pointer w-fit bg-secondary" key={consult.consult_id}>
                 
                 <Link to={`/consults/${consult.consult_id}`} state={{ professional_id: consult.professional_id }} >
                   Consulta {consult.consult_id}
