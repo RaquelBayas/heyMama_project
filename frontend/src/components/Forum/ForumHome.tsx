@@ -28,7 +28,7 @@ function ForumHome(): ReactNode {
             <ForumCard img='/assets/foro-info.svg' alt='Una bombilla' bg='primary' title='Información' text='Encuentra información más ampliada de parte de profesionales.' page='/articles' />
             {
                 user.type == 2 && 
-                (<ForumCard img='/assets/foro-info.svg' alt='Una bombilla' bg='primary' title='Consultas' text='Consultas.' page='/consults' />)
+                (<ForumCard img='/assets/foro-info.svg' alt='Una bombilla' bg='primary' title='Consultas' text='Consultas.' page='/listConsults' />)
             }
         </Forum>
     );

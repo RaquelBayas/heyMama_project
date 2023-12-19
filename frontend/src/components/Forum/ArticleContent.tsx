@@ -84,7 +84,7 @@ function ArticleContent() {
                 />
                 <p>{author}</p>
                 <button className="rounded-md mb-6 py-4 px-8 bg-[#DDBEA9] text-[#8D5E44]">
-                  <Link to={"/consults"} state={{ professional_id: professional_id }}>
+                  <Link to={"/consult"} state={{ professional_id: professional_id }}>
                     Enviar consulta
                   </Link>
                 </button>

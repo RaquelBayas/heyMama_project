@@ -24,6 +24,8 @@ import Timeline from './components/Timeline/Timeline';
 import Discussion from './components/Forum/Discussion';
 import TestEdimburgo from './components/TestEdimburgo';
 import Consults from './components/Consults/Consults';
+import ListConsults from './components/Consults/ListConsults';
+import ConsultPage from './components/Consults/ConsultPage';
 
 
 function App() {
@@ -103,7 +105,17 @@ function App() {
             <TestEdimburgo />
           </PrivateRoute>
         } />
-        <Route path='/consults' element={
+         <Route path='/listConsults' element={
+          <PrivateRoute>
+            <ListConsults />
+          </PrivateRoute>
+        } />
+        <Route path='/consult' element={
+          <PrivateRoute>
+            <ConsultPage />
+          </PrivateRoute>
+        } />
+        <Route path='/consults/:consult_id' element={
           <PrivateRoute>
             <Consults />
           </PrivateRoute>
