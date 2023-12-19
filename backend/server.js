@@ -2,12 +2,15 @@ import express from 'express'
 import 'dotenv/config'
 import morgan from 'morgan'
 import cors from 'cors'
+import path from 'node:path'
 import { connection } from './db/connectDB.js'
 import { userRoutes } from './routes/user.routes.js'
 import { moodRoutes } from './routes/mood.routes.js'
 import { forumRoutes } from './routes/forum.routes.js'
 import { articlesRoutes } from './routes/articles.routes.js';
 import { friendsRoutes } from './routes/friends.routes.js'
+import fileUpload from 'express-fileupload'
+import multer from 'multer';
 
 const { PORT, MYSQL_ADDON_PORT } = process.env
 
@@ -17,6 +20,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
+app.use(fileUpload());
+
+const staticFolderPath = path.join('./', 'src', 'uploads');
+
+app.use(express.static(staticFolderPath));
 
 
 app.get('/', (req, res) => {
@@ -28,6 +36,8 @@ app.use('/mood', moodRoutes)
 app.use('/forum', forumRoutes)
 app.use('/articles', articlesRoutes);
 app.use('/friends',friendsRoutes);
+
+// app.use("/uploads", express.static("C:\\Users\\mati\\Desktop\\Bootcamp\\heyMama_project\\backend\\src\\uploads"));
 
 app.use(async (error, req, res, next) => {
   console.log(error.message);
