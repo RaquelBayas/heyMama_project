@@ -74,9 +74,6 @@ function ProfileSetting(){
 
             const data = await resp.json();
 
-            const x = data.data[0]
-          
-
             if (!resp.ok){
                 return console.error(data.error)
             }
@@ -90,13 +87,13 @@ function ProfileSetting(){
 
     return(
         <div className='flex flex-col gap-5 text-xl ml-14'>
-            <h1 className='mt-10 mb-4 text-4xl tracking-wider text-center uppercase lg:text-start lg:ml-10'>Ajustes</h1>
+            <h1 className='mt-10 mb-4 text-4xl tracking-wider text-center uppercase lg:text-center lg:ml-10'>Ajustes</h1>
 
             <form onSubmit={handleSubmit}
                 className="flex flex-col justify-start gap-8"
             >
                 <h3 className="">Foto de perfil:</h3>
-                <div className="flex flex-col gap-3 mx-auto">
+                <div className="flex flex-col gap-3 mx-auto  max-w-[10rem]">
                     <label htmlFor="avatar">
                         <input
                             type="file"
@@ -106,7 +103,7 @@ function ProfileSetting(){
                             className='hidden' />
                         <img
                             src={settingData.avatar ? `http://localhost:5000/users/avatar/${settingData.avatar}` : "../../../assets/avatar-person.svg"} alt="avatar"
-                            className='ml-4 max-w-[8rem] rounded-full cursor-pointer'
+                            className='ml-4 max-w-[10rem] rounded-full border-2 border-marron cursor-pointer'
                         />
                     </label>
                 </div>

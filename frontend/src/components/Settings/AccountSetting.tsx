@@ -19,7 +19,7 @@ function AccountSetting(){
 
     useEffect(()=>{
         async function getData() {
-            const data = await getUserById(user!.id);
+            const data = await getUserById(user?.id);
 
             const email = data.data[0].email;
 
@@ -30,7 +30,7 @@ function AccountSetting(){
 
     function handleDataChange (e:  React.ChangeEvent<HTMLInputElement>){
         setEmail(
-            e.target.name
+            e.target.name = e.target.value
         );
         setPasswords({
             ...passwords,
@@ -50,22 +50,18 @@ function AccountSetting(){
 
         const baseUrl = `http://localhost:5000/users/setting/account/:${user.id}`;
 
-        try {
-            const response = await fetch(baseUrl,{
-                method:'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email,
-                    pwdActul: passwords.pwdActual,
-                    pwdNueva: passwords.pwdNueva,
-                }),
-            });
+        const formData = new FormData(e.target as HTMLFormElement);
 
-            if (response.ok){
-                const result = await response.json();
-                console.log(result);
+        try {
+            const resp = await fetch(baseUrl,{
+                method:'PUT',
+                body: JSON.stringify(formData)
+            })
+
+            const data = await resp.json();
+
+            if (!resp.ok){
+                return console.error(data.error)
             } else{
                 console.error('Error al enviar datos al servidor');
             }

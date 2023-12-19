@@ -7,11 +7,9 @@ import { signUp, logIn, isLogIn, getUserById, initialLogin } from "../controller
 import profileSetting from "../controllers/setting/profileSetting.js";
 import accountSetting from "../controllers/setting/accountSetting.js";
 import isPrivate from "../controllers/setting/isPrivate.js";
-import addAvatarPic from "../controllers/setting/addAvatarPic.js";
 import { addAvatar, getDataUser } from "../controllers/profile.controller.js";
 import getAvatar from "../controllers/setting/getAvatar.js";
 import userAuth from "../middlewares/userAuth.js";
-
 
 const userRoutes = express.Router();
 
@@ -19,13 +17,11 @@ userRoutes.post('/signup', [checkUsername], signUp);
 userRoutes.post('/login', logIn);
 userRoutes.post('/isLogIn', isLogIn);
 userRoutes.post('/contact', contact_form);
-userRoutes.post('/avatar/:userId', addAvatarPic);
 
 userRoutes.get('/getUserById/:userId' ,getUserById);
 userRoutes.get('/initialLogin', initialLogin);
 userRoutes.get('/getDataUser/:userId',getDataUser);
-userRoutes.get('/avatar/:nombreArchivo', getAvatar);
-
+userRoutes.get('/avatar/:nombreArchivo', userAuth, getAvatar);
 
 userRoutes.put('/setting/:userId', profileSetting);
 userRoutes.put('/setting/account/:userId', accountSetting);
