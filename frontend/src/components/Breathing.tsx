@@ -39,16 +39,15 @@ function Breathing() {
 
             <div><Menu /></div>
             <div className="grid w-screen ">
+                <main className="font-Montserrat flex  flex-col justify-center ml-[3.5rem] text-center">
 
-                <main className="font-Montserrat justify-center ml-[3.5rem]">
-
-                    <div className='mt-[3.5rem]'>
+                    <div className='mt-[3.5rem] '>
                         <p>Las técnicas de relajación y mindfulness son medidas eficaces para combatir
                             y reducir la ansiedad.
                     
                             
                         </p>
-                        <p>Con esta herramienta podrás controlar tu respiración y quitarte el estrés y preocupaciones.</p>
+                        <p>Con esta herramienta podrás controlar tu respiración.</p>
                     </div>
                     <div className="flex flex-col items-center justify-center">
                         <h1 className='mt-12 text-2xl'>{breathing}</h1>
