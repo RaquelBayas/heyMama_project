@@ -20,6 +20,7 @@ import Layout from './components/Layout';
 import UserSetting from './components/Settings/UserSetting';
 import Articles from './components/Forum/Articles';
 import ArticleContent from './components/Forum/ArticleContent';
+import Chat from './components/Chat/Chat';
 
 
 function App() {
@@ -34,6 +35,11 @@ function App() {
         <Route path='/forum' element={
           <PrivateRoute Professional={true}>
             <ForumHome />
+          </PrivateRoute>
+        } />
+        <Route path='/chat' element={
+          <PrivateRoute>
+            <Chat />
           </PrivateRoute>
         } />
         <Route path='/register' element={<RegisterType />} />
