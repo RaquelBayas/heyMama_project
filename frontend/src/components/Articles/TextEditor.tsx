@@ -7,6 +7,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import { addArticle } from "../../services/articlesService";
 import { getUserById } from "../../services/userService";
+import { getUserData } from "../../services/authService";
 
 function TextEditor() {
   const [title, setTitle] = useState("");
@@ -108,7 +109,9 @@ function TextEditor() {
       return;
     }
 
-    const userData = await getUserById();
+    const userDataStorage = getUserData();
+    const user = JSON.parse(userDataStorage!);
+    const userData = await getUserById(user.id);
 
     console.log("userData..", userData);
     //const name = `${userData.data[0].name} ${userData.data[0].surname}`;

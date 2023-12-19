@@ -20,7 +20,11 @@ import Layout from './components/Layout';
 import UserSetting from './components/Settings/UserSetting';
 import Articles from './components/Forum/Articles';
 import ArticleContent from './components/Forum/ArticleContent';
+<<<<<<< HEAD
 import Chat from './components/Chat/Chat';
+=======
+import Discussion from './components/Forum/Discussion';
+>>>>>>> b67b476ecd7c90e3700219d1cb1326199e094164
 
 
 function App() {
@@ -83,6 +87,11 @@ function App() {
         <Route path='/articles/newArticle' element={
           <PrivateRoute>
             <NewArticle />
+          </PrivateRoute>
+        } />
+        <Route path='/forum/subforum/:forum_id/discussion/:discussion_id' element={
+          <PrivateRoute>
+            <Discussion />
           </PrivateRoute>
         } />
         <Route path='/profile' element={

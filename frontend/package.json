@@ -11,6 +11,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.0",
     "@types/quill": "^2.0.14",
     "@types/styled-components": "^5.1.32",
     "chart.js": "^4.4.1",

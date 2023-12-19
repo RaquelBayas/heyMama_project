@@ -2,17 +2,8 @@
 import { useEffect, useState } from 'react';
 import ForumBase from './ForumBase.tsx';
 import ForumCard from './ForumCard.tsx';
-import { Link } from 'react-router-dom';
 
 function Forum() {
-
-    const userRaw = localStorage.getItem('user');
-    const user = JSON.parse(userRaw!);
-    let isProf = false;
-
-    if (user.type === 2) {
-        isProf = true;
-    }
 
     interface Forum {
         "forum_id": number
@@ -38,15 +29,6 @@ function Forum() {
 
     return (
         <ForumBase>
-            {isProf &&
-                <Link to={'/'}>
-                    <button
-                        className='self-start bg-red-300 p-3 rounded-full'
-                    >
-                        Nuevo sub foro
-                    </button>
-                </Link>
-            }
 
             {forums?.map(({ forum_id, forum_type: title }) => (
 
