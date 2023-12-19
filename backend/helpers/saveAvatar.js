@@ -13,25 +13,22 @@ function saveAvatar(avatar, size=150){
 
     const avatarSharp = sharp(avatar.data);
 
-    const { ext } = path.parse(avatar.name);
-    const avatarNewName = crypto.randomUUID() + ext;
-
-    const newAvatarPath = path.join(uploadsPath, avatarNewName);
-
     avatarSharp.resize(size);
     avatarSharp.extract({
         width: size,
         height: size,
         left:0,
         top:0
-    }).toFile(newAvatarPath, (err) => {
-    if (err) {
-        console.error('Error saving avatar:', err);
-        reject(err);
-    } else {
-        resolve(avatarNewName);
-    }
-});
+    });
+
+    const { ext } = path.parse(avatar.name);
+    const avatarNewName = crypto.randomUUID() + ext;
+
+    const newAvatarPath = path.join(uploadsPath, avatarNewName);
+
+    avatarSharp.toFile(newAvatarPath);
+
+    return avatarNewName;
 }
 
 export default saveAvatar;

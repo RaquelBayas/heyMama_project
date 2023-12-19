@@ -6,6 +6,7 @@ import { HttpError } from '../../models/HttpError.js';
 async function profileSetting(req, res, next){
 
     const avatar = req.files?.avatar;
+    
     const { username, name, surname, phone, biography } = req.body;
 
     const { userId } = req.params;
@@ -15,10 +16,11 @@ async function profileSetting(req, res, next){
     }
 
     try {
+        // avatar
+
         const checkingAvatar = 'SELECT avatar FROM data_users WHERE user_id = ?;';
 
         const [result] = await sendQuery(checkingAvatar, [userId]);
-        console.log(result);
 
         if(result.avatar){
             try {
@@ -34,22 +36,10 @@ async function profileSetting(req, res, next){
 
         await sendQuery(updateAvatarQuery, [avatarFileName, userId]);
 
-        res.send({
-            ok: true,
-            message: 'Avatar añadido correctamente',
-            data: null,
-            error: null
-        });
-
-    } catch (error) {
-        next(error)
-    }
-
-    try {
+        // username, name, surname, phone
 
         const checkingUserQuery = 'SELECT username, name, surname, phone FROM users WHERE user_id = ?;'
         const [ checkingUser ] = await sendQuery(checkingUserQuery, [userId]);
-
         
         const checkingUserDataQuery = 'SELECT biography FROM data_users WHERE user_id = ?;'
         const [ checkingUserData ] = await sendQuery(checkingUserDataQuery, [userId]);
@@ -59,6 +49,8 @@ async function profileSetting(req, res, next){
         }
 
         const updateProfileDataQuery = 'UPDATE users SET username = IFNULL(?, username), name = IFNULL(?, name), surname = IFNULL(?, surname), phone = IFNULL(?, phone) WHERE user_id = ?;';
+
+        // biography
         
         const updateBioQuery = 'UPDATE data_users SET biography = IFNULL(?, biography) WHERE user_id = ?;';
 

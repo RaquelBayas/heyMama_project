@@ -27,9 +27,7 @@ function ProfileSetting(){
     useEffect(() => {
         async function getUserData() {
             const data = await getUserById(user?.id);
-            console.log(data);
-            
-            
+                        
             const dataUser = await getFromDataUser(user?.id);
 
             const username = data.data[0].username;
@@ -38,7 +36,9 @@ function ProfileSetting(){
             const phone = data.data[0].phone;
 
             const biography = dataUser.data[0].biography;
-            const avatar = dataUser.data[0].avatar;
+            const avatar = dataUser.data[0].avatar.slice('.')[0];
+            console.log('AVATAR:', avatar);
+            
             
             setSettingData({
                 username,
@@ -66,7 +66,6 @@ function ProfileSetting(){
 
         const formData = new FormData(e.target as HTMLFormElement);
         
-        
         try {
             const resp = await fetch(baseUrl,{
                 method:'PUT',
@@ -74,6 +73,9 @@ function ProfileSetting(){
             });
 
             const data = await resp.json();
+
+            const x = data.data[0]
+          
 
             if (!resp.ok){
                 return console.error(data.error)
@@ -93,20 +95,21 @@ function ProfileSetting(){
             <form onSubmit={handleSubmit}
                 className="flex flex-col justify-start gap-8"
             >
-                <h3>Foto de perfil:</h3>
-                <label htmlFor="avatar">
-                    <input 
-                        type="file" 
-                        accept='image/*' 
-                        id='avatar'
-                        name="avatar"
-                        className='hidden' />
-                    <img 
-                        src={settingData.avatar?.trim() !== '' ? settingData.avatar : "../../../assets/avatar-person.svg"} alt="avatar" 
-                        className='ml-4 max-w-[6rem] cursor-pointer' 
-                    />
-                </label>
-
+                <h3 className="">Foto de perfil:</h3>
+                <div className="flex flex-col gap-3 mx-auto">
+                    <label htmlFor="avatar">
+                        <input
+                            type="file"
+                            id="avatar"
+                            accept='image/*'
+                            name="avatar"
+                            className='hidden' />
+                        <img
+                            src={settingData.avatar ? `http://localhost:5000/users/avatar/${settingData.avatar}` : "../../../assets/avatar-person.svg"} alt="avatar"
+                            className='ml-4 max-w-[8rem] rounded-full cursor-pointer'
+                        />
+                    </label>
+                </div>
                 <div 
                     className="flex flex-col">
                     <label htmlFor="username">Nombre de usuario:</label>
