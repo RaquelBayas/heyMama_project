@@ -37,9 +37,7 @@ function ProfileSetting(){
 
             const biography = dataUser.data[0].biography;
             const avatar = dataUser.data[0].avatar.slice('.')[0];
-            console.log('AVATAR:', avatar);
-            
-            
+             
             setSettingData({
                 username,
                 name, 
