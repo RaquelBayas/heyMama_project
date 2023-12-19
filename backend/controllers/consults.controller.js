@@ -30,4 +30,23 @@ async function addConsult(req, res, next) {
     next();
 }
 
-export {addConsult};
+
+async function getConsult(req, res, next) {
+    
+    const {user_id, professional_id} = req.params;
+    try {
+        const results = await sendQuery('SELECT * FROM consults WHERE user_id=? AND professional_id=?', [user_id, professional_id, consult]);
+        res.send({
+            ok: true,
+            error: null,
+            data: results,
+            message: 'Consulta.'
+        });
+        next();
+    } catch (error) {
+        return next(new Error(error.message));
+    };
+}
+
+
+export {addConsult, getConsult};

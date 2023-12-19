@@ -10,6 +10,8 @@ import {
 import Swal from "sweetalert2";
 import Modal from "react-modal";
 import { FriendRequest } from "../../models/FriendRequest";
+import { Link } from "react-router-dom";
+
 
 function ProfileCard({ userId, loggedUser }) {
   const customStyles = {
@@ -35,6 +37,7 @@ function ProfileCard({ userId, loggedUser }) {
   const [isModal2Open, setIsModal2Open] = useState(false);
   const [friendReq, setFriendReq] = useState<FriendRequest[]>([]);
   const [friends, setFriends] = useState([]);
+  const [userNames, setUserNames] = useState([]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -81,7 +84,6 @@ function ProfileCard({ userId, loggedUser }) {
     getFriendReq();
   }, [loggedUser]);
 
-  const [userNames, setUserNames] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -92,32 +94,34 @@ function ProfileCard({ userId, loggedUser }) {
   }, [friendReq]);
 
   async function getListReq(list) {
-    const names = {};
+    const names = {
+      id: 0,
+      fullname: '',
+    };
     for (const req of list) {
       const response = await getUserById(req.user_id);
       response.data.forEach((value) => {
-        names[req.user_id] = value.name + " " + value.surname;
-        console.log('listreq,names.',names)
+        names.id = req.user_id;
+        names.fullname = value.name + " " + value.surname;
       });
     }
     setUserNames(names);
-    console.log('names.listreq',names)
   }
 
   async function getListFriends(list) {
-    const names = {};
-    
+    const names = {
+      id: 0,
+      fullname: '',
+    };
     for (const req of list) {
       const response = await getUserById(req.user2_id);
       
       response.data.forEach((value) => {
-        console.log('names.',names)
-        names[req.user2_id] = value.name + " " + value.surname;
-        console.log('lista,',names)
+        names.id = req.user2_id;
+        names.fullname = value.name + " " + value.surname;
       });
     }
-    setUserNames(names);
-    
+    setUserNames(names);    
   }
   
   const handleAddFriend = async () => {
@@ -133,7 +137,6 @@ function ProfileCard({ userId, loggedUser }) {
   useEffect(()=> {
     const handleGetFriends = async(id: number) => {
       const result = await getFriends(id);
-      console.log('result-friends.',result.data);
       setFriends(result.data);
     };
     handleGetFriends(loggedUser.id);
@@ -144,9 +147,6 @@ function ProfileCard({ userId, loggedUser }) {
     getListFriends(friends);
   }, [friends]);
 
-  useEffect(()=> {
-    console.log(userNames)
-  })
 
   return (
     <div className="flex flex-col justify-center gap-12 p-8 text-center align-middle bg-white rounded-md h-fit w-fit">
@@ -199,14 +199,15 @@ function ProfileCard({ userId, loggedUser }) {
                   className="flex items-center justify-between gap-2 p-2 mt-2 align-middle border-2 border-primary"
                   key={index}
                 >
+                  <Link to={`/profile/${userNames['id']}`}>
+                  <span onClick={closeModal2}>{userNames['fullname']}</span>
+                  </Link>
+                 
                   
-                  <span>{userNames[value]}</span>
                   <div className="flex gap-4 flex-end">
+                    
                     <button className="p-2 mx-auto rounded-md bg-primary w-fit">
-                      Aceptar
-                    </button>
-                    <button className="p-2 mx-auto rounded-md bg-primary w-fit">
-                      Rechazar
+                      Eliminar
                     </button>
                   </div>
                 </div>

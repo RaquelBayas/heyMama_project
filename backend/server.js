@@ -9,6 +9,7 @@ import { forumRoutes } from './routes/forum.routes.js'
 import { articlesRoutes } from './routes/articles.routes.js';
 import { friendsRoutes } from './routes/friends.routes.js'
 import { timelineRoutes } from './routes/timeline.routes.js'
+import { consultsRoutes } from './routes/consults.routes.js'
 
 const { PORT, MYSQL_ADDON_PORT } = process.env
 
@@ -30,6 +31,7 @@ app.use('/forum', forumRoutes)
 app.use('/articles', articlesRoutes);
 app.use('/friends',friendsRoutes);
 app.use('/timeline',timelineRoutes);
+app.use('/consults',consultsRoutes);
 
 app.use(async (error, req, res, next) => {
   console.log(error.message);

@@ -8,4 +8,4 @@ const Consult = z.object({
     create_time: z.date().optional(),
 })
 
-export { ForumCard }
+export { Consult }
