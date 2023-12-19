@@ -5,6 +5,7 @@ import {
   addFriend,
   checkFriends,
   getFriendRequests,
+  getFriends,
 } from "../../services/friendsService";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
@@ -31,14 +32,24 @@ function ProfileCard({ userId, loggedUser }) {
   const [photo, setPhoto] = useState("");
   const [isFriend, setIsFriend] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModal2Open, setIsModal2Open] = useState(false);
   const [friendReq, setFriendReq] = useState<FriendRequest[]>([]);
+  const [friends, setFriends] = useState([]);
 
   const openModal = () => {
     setIsModalOpen(true);
   };
 
+  const openModal2 = () => {
+    setIsModal2Open(true);
+  };
+
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const closeModal2 = () => {
+    setIsModal2Open(false);
   };
 
   useEffect(() => {
@@ -66,30 +77,49 @@ function ProfileCard({ userId, loggedUser }) {
     const getFriendReq = async () => {
       const results = await getFriendRequests(loggedUser);
       setFriendReq(results.data);
-      console.log("friendsssreq,", results);
     };
     getFriendReq();
-  }, []);
+  }, [loggedUser]);
 
   const [userNames, setUserNames] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
-      const names = {};
-
-      for (const req of friendReq) {
-        const response = await getUserById(req.user_id);
-        console.log("friendreq-", response.data);
-        response.data.forEach((value) => {
-          names[req.user_id] = value.name + " " + value.surname;
-        }); 
-      }
-      setUserNames(names);
+      getListReq(friendReq);
     };
 
     fetchData();
   }, [friendReq]);
 
+  async function getListReq(list) {
+    const names = {};
+    for (const req of list) {
+      const response = await getUserById(req.user_id);
+      response.data.forEach((value) => {
+        names[req.user_id] = value.name + " " + value.surname;
+        console.log('listreq,names.',names)
+      });
+    }
+    setUserNames(names);
+    console.log('names.listreq',names)
+  }
+
+  async function getListFriends(list) {
+    const names = {};
+    
+    for (const req of list) {
+      const response = await getUserById(req.user2_id);
+      
+      response.data.forEach((value) => {
+        console.log('names.',names)
+        names[req.user2_id] = value.name + " " + value.surname;
+        console.log('lista,',names)
+      });
+    }
+    setUserNames(names);
+    
+  }
+  
   const handleAddFriend = async () => {
     await addFriend(loggedUser, userId);
     setIsFriend(true);
@@ -99,6 +129,24 @@ function ProfileCard({ userId, loggedUser }) {
       confirmButtonText: "Cerrar",
     });
   };
+
+  useEffect(()=> {
+    const handleGetFriends = async(id: number) => {
+      const result = await getFriends(id);
+      console.log('result-friends.',result.data);
+      setFriends(result.data);
+    };
+    handleGetFriends(loggedUser.id);
+    
+  }, [loggedUser.id]);
+
+  useEffect(() => {
+    getListFriends(friends);
+  }, [friends]);
+
+  useEffect(()=> {
+    console.log(userNames)
+  })
 
   return (
     <div className="flex flex-col justify-center gap-12 p-8 text-center align-middle bg-white rounded-md h-fit w-fit">
@@ -120,8 +168,10 @@ function ProfileCard({ userId, loggedUser }) {
           <button className="p-2 mt-2 rounded-md bg-primary w-fit">
             Mensajes
           </button>
-          {loggedUser === userId ? (
-            <span className="p-2 mt-2 rounded-md bg-primary w-fit">Amigos</span>
+          {loggedUser.id === parseInt(userId) ? (
+            <button onClick={openModal2} className="p-2 mt-2 rounded-md bg-primary w-fit">
+              Amigos
+            </button>
           ) : !isFriend ? (
             <button
               className="p-2 mt-2 rounded-md bg-primary w-fit"
@@ -134,46 +184,89 @@ function ProfileCard({ userId, loggedUser }) {
               Amigos
             </button>
           )}
+          <Modal
+            title='modalFriends'
+            isOpen={isModal2Open}
+            onRequestClose={closeModal2}
+            ariaHideApp={false}
+            style={customStyles}
+            contentLabel="Lista de amigos"
+          >
+            <div className="flex flex-col justify-around">
+              <h2>Lista de amigos</h2>
+              {friends.map((value, index) => (
+                <div
+                  className="flex items-center justify-between gap-2 p-2 mt-2 align-middle border-2 border-primary"
+                  key={index}
+                >
+                  
+                  <span>{userNames[value]}</span>
+                  <div className="flex gap-4 flex-end">
+                    <button className="p-2 mx-auto rounded-md bg-primary w-fit">
+                      Aceptar
+                    </button>
+                    <button className="p-2 mx-auto rounded-md bg-primary w-fit">
+                      Rechazar
+                    </button>
+                  </div>
+                </div>
+              ))}
+
+              <div className="flex align-bottom flex-end">
+                <button
+                  className="p-2 mx-auto rounded-md bg-primary w-fit"
+                  onClick={closeModal2}
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </Modal>
         </div>
         <div className="mx-auto">
-          <button
-            className="p-2 mx-auto mt-1 rounded-md bg-primary w-fit"
-            onClick={openModal}
-          >
-            Solicitudes de amistad
-          </button>
+          {loggedUser.id === parseInt(userId) && (
+            <button
+              className="p-2 mx-auto mt-1 rounded-md bg-primary w-fit"
+              onClick={openModal}
+            >
+              Solicitudes de amistad
+            </button>
+          )}
 
           <Modal
             isOpen={isModalOpen}
             onRequestClose={closeModal}
+            ariaHideApp={false}
             style={customStyles}
             contentLabel="Solicitudes de Amistad"
           >
-            <h2>Solicitudes de Amistad</h2>
-            {friendReq.map((value, index) => (
-              <div
-                className="flex items-center justify-between gap-2 p-2 mt-2 align-middle border-2 border-primary"
-                key={index}
-              >
-                <span>{userNames[value.user_id]}</span>
-                <div className="flex gap-4 flex-end">
-                  <button className="p-2 mx-auto rounded-md bg-primary w-fit">
-                    Aceptar
-                  </button>
-                  <button className="p-2 mx-auto rounded-md bg-primary w-fit">
-                    Rechazar
-                  </button>
+            <div className="flex flex-col justify-around">
+              <h2>Solicitudes de Amistad</h2>
+              {friendReq.map((value, index) => (
+                <div
+                  className="flex items-center justify-between gap-2 p-2 mt-2 align-middle border-2 border-primary"
+                  key={index}
+                >
+                  <span>{userNames[value.user_id]}</span>
+                  <div className="flex gap-4 flex-end">
+                    <button className="p-2 mx-auto rounded-md bg-primary w-fit">
+                      Aceptar
+                    </button>
+                    <button className="p-2 mx-auto rounded-md bg-primary w-fit">
+                      Rechazar
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
 
-            <div className="flex align-bottom flex-end">
-              <button
-                className="p-2 mx-auto rounded-md bg-primary w-fit"
-                onClick={closeModal}
-              >
-                Cerrar
-              </button>
+              <div className="flex align-bottom flex-end">
+                <button
+                  className="p-2 mx-auto rounded-md bg-primary w-fit"
+                  onClick={closeModal}
+                >
+                  Cerrar
+                </button>
+              </div>
             </div>
           </Modal>
         </div>

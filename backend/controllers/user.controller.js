@@ -231,7 +231,6 @@ function initialLogin(req, res) {
 
 async function getUserById(req, res, next) {
   const { userId } = req.params;
-  console.log("user-id,", req.params);
   try {
     const results = await sendQuery("SELECT * FROM users WHERE user_id=?", [
       userId,
@@ -250,7 +249,6 @@ async function getUserById(req, res, next) {
 }
 
 async function findUser(req, res, next) {
-  console.log('findUser...',req.body);
   const searchUser = req.body.user;
   const query = `SELECT * FROM users
   WHERE username LIKE ? OR name LIKE ? OR surname LIKE ?`;
@@ -275,4 +273,21 @@ async function findUser(req, res, next) {
   }
 }
 
-export { signUp, logIn, isLogIn, getUserById, initialLogin, findUser };
+async function getAllUsers(req, res, next) {
+  try {
+    const results = await sendQuery("SELECT * FROM users");
+    console.log(results);
+    res.send({
+      ok: true,
+      message: "Lista de usuarios registrados",
+      error: null,
+      data: results,
+    });
+    next();
+  } catch (error) {
+    return next(error);
+  }
+}
+
+
+export { signUp, logIn, isLogIn, getUserById, initialLogin, findUser, getAllUsers };

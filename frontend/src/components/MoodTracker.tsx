@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { FaRegFaceSmile, FaRegFaceGrinBeam, FaRegFaceMeh, FaRegFaceAngry, FaRegFaceLaughBeam } from "react-icons/fa6";
+import { FaRegFaceSmile, FaRegFaceGrinBeam, FaRegFaceMeh, FaRegFaceAngry, FaRegFaceLaughBeam, FaRegFaceSadCry } from "react-icons/fa6";
 import { addMood } from '../services/moodService';
 import { MoodData } from '../models/MoodData';
 import MoodProvider, { MoodContext, MoodContextValue } from '../context/MoodContext';
 
 function MoodTracker() {
+    const user = JSON.parse(localStorage.getItem("user")!);
     const { updateMoodData } = useContext(MoodContext) as MoodContextValue;
     const [moodState, setMoodState] = useState('');
     const [moodData, setMoodData] = useState<MoodData[]>([]); //useState('');
@@ -18,7 +19,7 @@ function MoodTracker() {
         //setMoodData({user_id:1, mood_type_id:parseFloat(moodState)})
 
         const moodData: MoodData = {
-            'user_id': 1,
+            'user_id': parseInt(user.id),
             'mood_type_id': parseFloat(moodState)
         };
         addMood(moodData).then((response) => {
@@ -43,7 +44,7 @@ function MoodTracker() {
                         <div className="flex">
                             <div className="flex justify-content-center">
                                 <div className="flex align-items-center">
-                                    <div className='flex flex-col justify-center p-2 rounded-l-md align-middle bg-pink-200'>
+                                    <div className='flex flex-col justify-center p-2 align-middle bg-pink-200 rounded-l-md'>
                                         <span className='mx-auto text-4xl text-pink-600'><FaRegFaceLaughBeam /></span>
                                         <div >
                                             <input type='radio' name='Feliz' value="1" checked={moodState === '1'} onChange={handleValueChange} />
@@ -71,8 +72,8 @@ function MoodTracker() {
                                             <label htmlFor="f5" className="ml-1 mr-3">Mal</label>
                                         </div>
                                     </div>
-                                    <div className='flex flex-col justify-center p-2 rounded-r-md align-middle bg-blue-200'>
-                                        <span className='mx-auto text-4xl text-blue-800'><FaRegFaceGrinBeam /> </span>
+                                    <div className='flex flex-col justify-center p-2 align-middle bg-blue-200 rounded-r-md'>
+                                        <span className='mx-auto text-4xl text-blue-800'><FaRegFaceSadCry/> </span>
                                         <div>
                                             <input type='radio' name='Triste' value="5" checked={moodState === '5'} onChange={handleValueChange} />
                                             <label htmlFor="f5" className="ml-1 mr-3">Triste</label>
@@ -81,7 +82,7 @@ function MoodTracker() {
                                 </div>
                             </div>
                         </div>
-                        <button id='btnForm' type="submit" className='p-2 m-4 mb-2 rounded-md bg-primary text-xl disabled:opacity-25'>Registrar estado</button>
+                        <button id='btnForm' type="submit" className='p-2 m-4 mb-2 text-xl rounded-md bg-primary disabled:opacity-25'>Registrar estado</button>
                     </form>
                 </MoodProvider>
             </MoodContext.Provider>

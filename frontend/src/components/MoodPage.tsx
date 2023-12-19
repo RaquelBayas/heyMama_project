@@ -3,9 +3,11 @@ import MoodRecord from './MoodRecord';
 import Menu from './Menu';
 import Search from './Search';
 import MoodGraphic from './MoodGraphic';
-import MoodProvider from '../context/MoodContext';
+import MoodProvider, { MoodContext, MoodContextValue } from '../context/MoodContext';
+import { useContext } from 'react';
 function MoodPage() {
-  
+  const {moodData} = useContext(MoodContext) as MoodContextValue;   
+  console.log(moodData.length);
   return (
     
     <div className='grid w-screen h-screen grid-cols-[auto,1fr] overflow-hidden bg-background'>
@@ -16,13 +18,16 @@ function MoodPage() {
       <div className='flex justify-evenly'><Search /></div>
       <div className='w-full mt-2 mb-2 border-b border-secondary'></div>
     </div>  
-    <div className='mx-auto h-screen w-full flex flex-row ml-4 justify-evenly'>
+    <div className='flex flex-row w-full h-screen mx-auto ml-4 justify-evenly'>
       <MoodProvider>
       <div className='h-fit'>
-        <MoodGraphic/>
+       
+        {moodData.length > 0 && (
+         <MoodGraphic/>)
+        }
         <MoodTracker />
         </div>
-        <div className='h-4/5 mb-4'>
+        <div className='mb-4 h-4/5'>
           <MoodRecord/>
         </div>   
       </MoodProvider>

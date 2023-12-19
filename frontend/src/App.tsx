@@ -22,6 +22,8 @@ import Articles from './components/Forum/Articles';
 import ArticleContent from './components/Forum/ArticleContent';
 import Timeline from './components/Timeline/Timeline';
 import Discussion from './components/Forum/Discussion';
+import TestEdimburgo from './components/TestEdimburgo';
+import Consults from './components/Consults/Consults';
 
 
 function App() {
@@ -94,6 +96,16 @@ function App() {
         <Route path='/timeline' element={
           <PrivateRoute>
             <Timeline userId={undefined} loggedUser={undefined}  />
+          </PrivateRoute>
+        } />
+         <Route path='/testEdimburgo' element={
+          <PrivateRoute>
+            <TestEdimburgo />
+          </PrivateRoute>
+        } />
+        <Route path='/consults' element={
+          <PrivateRoute>
+            <Consults />
           </PrivateRoute>
         } />
       </Routes>

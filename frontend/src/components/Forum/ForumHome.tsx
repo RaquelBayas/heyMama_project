@@ -5,7 +5,7 @@ import ForumCard from "./ForumCard";
 function ForumHome(): ReactNode {
     const userRaw = localStorage.getItem('user');
     const user = JSON.parse(userRaw!);
-
+    
     const [username, setUsername] = useState('');
 
     useEffect(() => {
@@ -26,6 +26,10 @@ function ForumHome(): ReactNode {
             <h1 className="text-4xl font-semibold text-[#755543]">¡Bienvenida, {username.toLowerCase()}!</h1>
             <ForumCard img='/assets/foros.svg' alt='Una imagen de gente hablando' bg='primary' title='Foros' text='Comparte y resuelve tus dudas y pensamientos con personas como tú' page='/Forums' />
             <ForumCard img='/assets/foro-info.svg' alt='Una bombilla' bg='primary' title='Información' text='Encuentra información más ampliada de parte de profesionales.' page='/articles' />
+            {
+                user.type == 2 && 
+                (<ForumCard img='/assets/foro-info.svg' alt='Una bombilla' bg='primary' title='Consultas' text='Consultas.' page='/consults' />)
+            }
         </Forum>
     );
 }

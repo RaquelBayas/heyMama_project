@@ -10,9 +10,11 @@ import { useEffect, useState } from "react";
 import { PostTL } from "../../models/PostTL";
 import { addPostTL, getPostByUser } from "../../services/timelineService";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { getUserById } from "../../services/userService";
 
 function Timeline({ userId, loggedUser }) {
-console.log('timeline')
+
+  const [name, setName] = useState("");
   const [open, setOpen] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
   const [likePost, setLikePost] = useState<{ [post_timeline_id: number]: boolean }>({});
@@ -23,6 +25,9 @@ console.log('timeline')
     const getPosts = async () => {
       const results = await getPostByUser(userId);
       setPosts(results.data);
+      
+      const nameUser = await getUserById(userId);
+      setName(nameUser.data[0].name + ' ' + nameUser.data[0].surname);
     };
     getPosts();
   }, [userId, hasChanged]);
@@ -58,7 +63,7 @@ console.log('timeline')
       {posts?.map(({ post_timeline_id,user_id, comment }) => (
         <article key={post_timeline_id} className="flex mb-4 bg-white rounded-md gap-24 p-3 border-2 border-primary drop-shadow-md w-[52rem] mw150:w-max mw68:flex-col mw68:gap-4 mw45:text-center">
           <div className="flex flex-col w-full mt-4 mr-12 mw150:m-0">
-            <h2 className="my-2 text-xl font-semibold mh150:m-0">{user_id}</h2>
+            <h2 className="my-2 text-xl font-semibold mh150:m-0">{name}</h2>
             <p className="w-full mw68:w-[15rem] mw45:hidden ">{comment}</p>
             <div className="flex justify-end">
             <button onClick={() => handleLike(post_timeline_id!)}>
@@ -71,10 +76,10 @@ console.log('timeline')
       <div>
        {
         loggedUser.id == userId &&  (<button
-          className="absolute p-3 text-white rounded-md bottom-8 right-8 bg-marron"
+          className="absolute p-4 text-white rounded-md text-md bottom-8 right-8 bg-marron"
           onClick={handleClickOpen}
         >
-          Click
+          Añadir post
         </button>)
        }
         <Dialog open={open} onClose={handleClose}>

@@ -4,7 +4,6 @@ import { Friends } from "../schemas/Friends.js";
 import { FriendRequestResponse } from "../schemas/Friends.js";
 
 async function addFriend(req, res, next) {
-console.log('addFRIEND',req.body);
   const request = {
     user_id : req.body.user_id.id,
     user2_id : parseInt(req.body.user2_id),
@@ -61,7 +60,6 @@ console.log('addFRIEND',req.body);
 }
 async function updateFriendRequest(req, res, next) {
   const parsedResponse = FriendRequestResponse.parse(req.body);
-    console.log('parsed:',req.body)
   const { request_id, state_id } = parsedResponse;
 
   try {
@@ -122,7 +120,6 @@ async function updateFriendRequest(req, res, next) {
 }
 
 async function getFriendRequest(req, res, next) {
-  console.log('getFriendRequest..',req.params);
     const {user_id} = req.params;
 
     try {
