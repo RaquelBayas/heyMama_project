@@ -27,7 +27,7 @@ function ProfileSetting(){
     useEffect(() => {
         async function getUserData() {
             const data = await getUserById(user?.id);
-                        
+    
             const dataUser = await getFromDataUser(user?.id);
 
             const username = data.data[0].username;
@@ -36,9 +36,8 @@ function ProfileSetting(){
             const phone = data.data[0].phone;
 
             const biography = dataUser.data[0].biography;
-            const avatar = dataUser.data[0].avatar.slice('.')[0];
-            
-            
+            const avatar = dataUser.data[0].avatar;
+
             setSettingData({
                 username,
                 name, 
@@ -72,6 +71,8 @@ function ProfileSetting(){
             });
 
             const data = await resp.json();
+            console.log('otra dataaa', data);
+            
 
             if (!resp.ok){
                 return console.error(data.error)
@@ -102,7 +103,7 @@ function ProfileSetting(){
                             className='hidden' />
                         <img
                             src={settingData.avatar ? `http://localhost:5000/users/avatar/${settingData.avatar}` : "../../../assets/avatar-person.svg"} alt="avatar"
-                            className='ml-4 max-w-[6-rem] rounded-full border-2 border-marron cursor-pointer'
+                            className='ml-4 h-96 max-w-[6-rem] rounded-full border-2 border-marron cursor-pointer'
                         />
                     </label>
                 </div>

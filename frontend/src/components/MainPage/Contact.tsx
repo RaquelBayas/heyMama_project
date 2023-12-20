@@ -49,17 +49,17 @@ function Contact() {
 
     return (
         <div id='contact' className="w-full h-screen bg-background font-anybody">
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-2 h-screen">
 
                 <div className="flex flex-col gap-12 mx-auto my-auto pt-36 
                 
-                sm:pt-0">
+                sm:pt-0 xl:mt-auto">
 
                     <h1 className="pb-8 text-4xl uppercase 
                     
                     sm:text-2xl 
                     md:text-3xl 
-                    lg:text-4xl"
+                    lg:text-4xl xl:text-6xl"
                     >
                         Ponte en contacto
                     </h1>
@@ -77,11 +77,11 @@ function Contact() {
 
                 <form
                     onSubmit={handleSubmit}
-                    className="mx-6 mb-auto leading-4 h-fit border-2 border-black border-solid bg-primary rounded-3xl overflow-hidden
+                    className="flex flex-col mt-auto mx-6 mt h-fit border-2 border-black border-solid bg-primary rounded-3xl overflow-hidden
                    
 
                    md:mt-24 
-                   lg:mt-32 lg:w-1/2 lg:ml-14 "
+                   lg:my-auto lg:w-1/2 lg:ml-14"
                 >
                     <div className="flex flex-col mx-6 mt-8 mb-4">
                         <label>Nombre:</label>

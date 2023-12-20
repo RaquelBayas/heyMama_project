@@ -14,7 +14,7 @@ function Landpage() {
               sm:text-3xl sm:gap-8 
               md:text-4xl 
               lg:text-5xl lg:mx-24
-              xl:text-6xl xl:mx-28
+              xl:text-8xl xl:mx-28 xl:gap-24 xl:mt-80
               '>
             <p className="animate-fade-right animate-once animate-duration-[2000ms] animate-delay-300">No estás sola,</p>
             <p className="animate-fade-right animate-once animate-duration-[2000ms] animate-delay-1000">¡Únete a nuestra</p>
@@ -27,9 +27,7 @@ function Landpage() {
             md:pr-10 md:pb-28 md:mt-auto 
             lg:pr-44 lg:pb-40 lg:gap-6
             xl:pr-52 xl:pb-52">
-            <div className='flex flex-row justify-start gap-2 p-3 px-5  leading-relaxed uppercase transition-all duration-300 ease-in-out border border-black border-solid rounded-full shadow-md cursor-pointer  bg-primary hover:scale-110 
-              
-              resize'>
+            <div className='flex flex-row justify-start gap-2 p-3 px-5 uppercase transition-all duration-300 ease-in-out border border-black border-solid rounded-full shadow-md cursor-pointer bg-primary hover:scale-110 xl:'>
               <FaArrowRight className='my-0.5' />
               <Link to='/login'>Iniciar sesión</Link>
             </div>
