@@ -233,7 +233,7 @@ function initialLogin(req, res) {
 
 async function getUserById(req, res, next) {
   const { userId } = req.params;
-  console.log('user-id,', req.params)
+  console.log('user id: ', req.params)
   try {
     const results = await sendQuery('SELECT * FROM users WHERE user_id=?', [userId]);
     console.log(results)

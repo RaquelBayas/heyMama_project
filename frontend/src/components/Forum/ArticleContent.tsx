@@ -25,14 +25,14 @@ function ArticleContent() {
         console.log(data);
 
         if (!data.error) {
-          
+
 
           setArticles(data.data);
-          console.log('authoooor',data.data[0].author);
+          console.log('authoooor', data.data[0].author);
           fetch(`http://localhost:5000/users/getUserById/${data.data[0].author}`)
-          .then((resp)=>resp.json())
-          .then((data)=> {setAuthor(`${data.data[0].name} ${data.data[0].surname}`); console.log(data.data[0]);});
-            
+            .then((resp) => resp.json())
+            .then((data) => { setAuthor(`${data.data[0].name} ${data.data[0].surname}`); console.log(data.data[0]); });
+
           const resultado = await getFromDataUser(data.data[0].author);
           setAvatar(resultado.data[0].avatar);
         }
@@ -43,7 +43,7 @@ function ArticleContent() {
   return (
     <div className="w-screen h-screen bg-background grid grid-cols-[100px,1fr] gap-4 overflow-x-hidden">
       <div>
-      <Menu />
+        <Menu />
       </div>
       <div className="grid w-full h-full grid-rows-[5em,1fr] gap-2">
         <div className="flex flex-col justify-center mt-3 mb-3 ">
@@ -51,10 +51,10 @@ function ArticleContent() {
             <Search />
           </div>
           <div className="w-screen mt-2 mb-2 border-b border-secondary"></div>
-         
+
         </div>
         <main className="flex w-fit mx-4 h-full gap-4 font-Montserrat justify-around ml-[3.5em]">
-            <div className="grid grid-cols-[2fr,1fr] gap-4">
+          <div className="grid grid-cols-[2fr,1fr] gap-4">
             <div className="w-full gap-2 ">
               {articles?.map(({ article_id, title, content }) => (
                 <div className="flex flex-col gap-6 w-fit" key={article_id}>
@@ -71,8 +71,8 @@ function ArticleContent() {
               ))}
 
             </div>
-<div className="px-4 bg-white rounded-md w-fit mw150:hidden h-min">
-              <article className="flex flex-col items-center justify-center my-auto w-fit h-[400px] outline-2 outline-[#8D5E44] justify-center gap-12">
+            <div className="px-4 bg-white rounded-md w-fit mw150:hidden h-min">
+              <article className="flex flex-col items-center justify-center my-auto w-fit h-[400px] outline-2 outline-[#8D5E44] gap-12">
                 <img
                   src={"/assets/avatar-person.svg" || avatar}
                   alt="avatar"
@@ -84,9 +84,9 @@ function ArticleContent() {
                 </button>
               </article>
             </div>
-            </div>
-            
-          </main>
+          </div>
+
+        </main>
       </div>
     </div>
   );

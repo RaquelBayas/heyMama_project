@@ -10,6 +10,8 @@ import { articlesRoutes } from './routes/articles.routes.js';
 import { friendsRoutes } from './routes/friends.routes.js'
 import { Server } from 'socket.io';
 import http from 'node:http';
+import { log } from 'node:console'
+import { chatRoutes } from './routes/chat.routes.js'
 
 const { PORT, MYSQL_ADDON_PORT } = process.env
 
@@ -30,39 +32,84 @@ app.use('/mood', moodRoutes)
 app.use('/forum', forumRoutes)
 app.use('/articles', articlesRoutes);
 app.use('/friends', friendsRoutes);
+app.use('/chat', chatRoutes);
 
 app.use(async (error, req, res, next) => {
-  console.log(error.message);
+  console.error(error.message);
 });
 
 
 connection.connect()
   .then(() => {
-    console.log('Conectado a la base de datos...' + MYSQL_ADDON_PORT);
-    app.listen(port, () => console.log(`Escuchando en el puerto ${port}...`));
+    console.error('Conectado a la base de datos...' + MYSQL_ADDON_PORT);
+    app.listen(port, () => console.error(`Escuchando en el puerto ${port}...`));
   })
-  .catch(err => console.log(err.message));
+  .catch(err => console.error(err.message));
 
 
 
 const server = http.createServer(app);
 const io = new Server(server, {
-  transports: ['websocket'],
-  connectionStateRecovery: {}
+  transports: ['websocket']
 });
 
 
 server.listen(443)
 console.log('Server on port', 443);
 
+let users = []
+
+const addUser = (userId, socketId) => {
+  !users.some(user => user.userId === userId) &&
+    users.push({ userId, socketId });
+  console.log('existe el usuario? ' + !users.some(user => user.userId === userId));
+};
+
+const removeUser = (socketId) => {
+  users = users.filter((user) => user.socketId !== socketId);
+  console.log('usuario removido ' + users);
+};
+
+const getUser = (userId) => {
+  console.log('usuario encontrado? ' + JSON.stringify(users.find((user) => user.userId === userId)));
+  return users.find((user) => user.userId === userId);
+};
+
 io.on('connection', socket => {
   // when connect
-  console.log('a user has connected');
+  console.error('a user has connected');
 
-  socket.on('message', (msg) => {
-    console.log(msg);
-    io.emit('chat message', msg)
-  })
+  socket.on('addUser', (userId) => {
+    console.log('usuario recibido, user id ' + userId);
+    addUser(userId, socket.id);
+    console.log('usuario añadido con user id ' + userId + ' | socket.id ' + socket.id);
+    console.log('lista de usuarios ' + JSON.stringify(users));
+  });
+
+  socket.on("sendMessage", ({ sender, receiver, text }) => {
+
+    console.log('send message', sender, receiver, text);
+    console.error('quien envia el mensaje? sender: ' + sender);
+    const user = getUser(receiver);
+    console.log('user que recibe el mensaje' + JSON.stringify(user));
+
+    if (user && user.socketId) {
+      io.to(user.socketId).emit("getMessage", {
+        sender,
+        text,
+      });
+      console.log('mensaje enviado, sender: ' + sender + ' text: ' + text);
+    } else {
+      console.error(`Usuario no encontrado o sin socketId: ${receiver}`);
+    }
+  });
 
 
-})
+
+  socket.on('disconnect', () => {
+    console.error('a user has disconnected!');
+    removeUser(socket.id);
+    io.emit('getUsers', users);
+  });
+
+});

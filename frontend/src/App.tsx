@@ -20,11 +20,8 @@ import Layout from './components/Layout';
 import UserSetting from './components/Settings/UserSetting';
 import Articles from './components/Forum/Articles';
 import ArticleContent from './components/Forum/ArticleContent';
-<<<<<<< HEAD
 import Chat from './components/Chat/Chat';
-=======
 import Discussion from './components/Forum/Discussion';
->>>>>>> b67b476ecd7c90e3700219d1cb1326199e094164
 
 
 function App() {
