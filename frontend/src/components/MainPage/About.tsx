@@ -39,7 +39,7 @@ function About() {
                     '
             >
 
-                <p>A partir de nuestros conocimientos y de la experiencia directa de las personas con depresión perinatal, procuramos dar respuesta a las necesidades de atención social de las mujeres.</p>
+                <p className='flex flex-col leading-relaxed'>A partir de nuestros conocimientos y de la experiencia directa de las personas con depresión perinatal, procuramos dar respuesta a las necesidades de atención social de las mujeres.</p>
                 <hr className='flex flex-col bg-black py-[0.5px] border-none my-10 gap-7' />
                 <p>Ofrecemos un espacio de confianza para que profesionales de la salud realizen atención directa a mujeres durante este proceso.</p>
                 <hr className='bg-black py-[0.5px] border-none my-10' />

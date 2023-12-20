@@ -37,7 +37,6 @@ function ProfileSetting(){
 
             const biography = dataUser.data[0].biography;
             const avatar = dataUser.data[0].avatar.slice('.')[0];
-            console.log('AVATAR:', avatar);
             
             
             setSettingData({
@@ -74,9 +73,6 @@ function ProfileSetting(){
 
             const data = await resp.json();
 
-            const x = data.data[0]
-          
-
             if (!resp.ok){
                 return console.error(data.error)
             }
@@ -96,7 +92,7 @@ function ProfileSetting(){
                 className="flex flex-col justify-start gap-8"
             >
                 <h3 className="">Foto de perfil:</h3>
-                <div className="flex flex-col gap-3 mx-auto">
+                <div className="flex flex-col gap-3 mx-auto max-w-[6-rem]">
                     <label htmlFor="avatar">
                         <input
                             type="file"
@@ -106,7 +102,7 @@ function ProfileSetting(){
                             className='hidden' />
                         <img
                             src={settingData.avatar ? `http://localhost:5000/users/avatar/${settingData.avatar}` : "../../../assets/avatar-person.svg"} alt="avatar"
-                            className='ml-4 max-w-[8rem] rounded-full cursor-pointer'
+                            className='ml-4 max-w-[6-rem] rounded-full border-2 border-marron cursor-pointer'
                         />
                     </label>
                 </div>

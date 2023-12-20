@@ -8,7 +8,7 @@ function Menu() {
   return (
     <div className="bg-primary h-screen w-[100px] flex items-center flex-col shadow-md shadow-amber-950 fixed">
       <ul className='flex flex-col h-full align-top place-content-evenly'>
-        <li className='mb-4'><Link to="/home"><FaHome className="text-3xl icons" /></Link></li>
+        <li className='mb-4'><Link to="/mainpage"><FaHome className="text-3xl icons" /></Link></li>
         <li className='mb-4'><Link to="/forum"><MdOutlineForum className="text-3xl icons" /></Link></li>
         <li className='mb-4'><Link to="/articles"><FaBookOpen className="text-3xl icons" /></Link></li>
         <li className='mb-4'><Link to="/moods"><FaRegSmile className="text-3xl" /></Link></li>
