@@ -3,7 +3,6 @@ import { addMood, deleteMood, getMood, getMoodName } from "../controllers/mood.c
 
 const moodRoutes = express.Router();
 
-
 moodRoutes.post('/addMood', addMood);
 moodRoutes.get('/getMood/:user_id',getMood);
 moodRoutes.get('/getMoodName', getMoodName);

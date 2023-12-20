@@ -7,18 +7,17 @@ interface UserData {
     name: string;
     surname: string;
     phone: string;
+    biography: string;
+    avatar: string;
 }
 
 function ProfileSetting(){
 
-    const [userData, setUserData] = useState<UserData>({
+    const [settingData, setSettingData] = useState<UserData>({
         username:'',
         name: '',
         surname:'',
         phone:'',
-    });
-
-    const [bioAndAvatar, setBioAndAvatar] = useState({
         biography:'',
         avatar:'',
     });
@@ -27,9 +26,9 @@ function ProfileSetting(){
 
     useEffect(() => {
         async function getUserData() {
-            const data = await getUserById(user!.id);
-            
-            const dataUser = await getFromDataUser(user!.id);
+            const data = await getUserById(user?.id);
+                        
+            const dataUser = await getFromDataUser(user?.id);
 
             const username = data.data[0].username;
             const name = data.data[0].name;
@@ -37,16 +36,14 @@ function ProfileSetting(){
             const phone = data.data[0].phone;
 
             const biography = dataUser.data[0].biography;
-            const avatar = dataUser.data[0].avatar;
+            const avatar = dataUser.data[0].avatar.slice('.')[0];
             
-            setUserData({
+            
+            setSettingData({
                 username,
                 name, 
                 surname,
                 phone,
-            })
-
-            setBioAndAvatar({
                 biography,
                 avatar,
             })
@@ -54,83 +51,68 @@ function ProfileSetting(){
         getUserData();
     },[])
 
-    async function handleProfileChange (e:  React.ChangeEvent<HTMLInputElement>){
-        setUserData({
-            ...userData,
-            [e.target.name]:e.target.value
-        })
-
-        setBioAndAvatar({
-            ...bioAndAvatar,
+    async function handleChange (e:  React.ChangeEvent<HTMLInputElement>){
+        setSettingData({
+            ...settingData,
             [e.target.name]:e.target.value
         })
     }
 
     async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-         
-        console.log('cargando form');
 
         const baseUrl = `http://localhost:5000/users/setting/${user.id}`;
+
+        const formData = new FormData(e.target as HTMLFormElement);
         
         try {
             const resp = await fetch(baseUrl,{
                 method:'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: userData.username,
-                    name: userData.name,
-                    surname: userData.surname,
-                    phone: userData.phone,
-                    biography: bioAndAvatar.biography,
-                    avatar: bioAndAvatar.avatar,
-                }),
+                body: formData,
             });
 
             const data = await resp.json();
 
-            if (resp.ok){
-                console.log(data);
-            } else{
-                console.error('Error al actualizar perfil')
+            if (!resp.ok){
+                return console.error(data.error)
             }
+
+            console.log('Cambiado!');
+            
         } catch (error) {
             console.error(error);
         }
-
-        console.log('final form');
     }
 
     return(
         <div className='flex flex-col gap-5 text-xl ml-14'>
             <h1 className='mt-10 mb-4 text-4xl tracking-wider text-center uppercase lg:text-start lg:ml-10'>Ajustes</h1>
 
-            <form onSubmit={(e)=> {handleSubmit(e)}}
+            <form onSubmit={handleSubmit}
                 className="flex flex-col justify-start gap-8"
             >
-                <h3>Foto de perfil:</h3>
-                <label htmlFor="avatar">
-                    <input 
-                        type="file" 
-                        accept='image/*' 
-                        id='avatar'
-                        name="avatar"
-                        className='hidden' />
-                    <img 
-                        src={bioAndAvatar.avatar ? bioAndAvatar.avatar : "./assets/avatar-person.svg"} alt="avatar" 
-                        className='ml-4 max-w-[6rem] cursor-pointer' 
-                    />
-                </label>
-
+                <h3 className="">Foto de perfil:</h3>
+                <div className="flex flex-col gap-3 mx-auto max-w-[6-rem]">
+                    <label htmlFor="avatar">
+                        <input
+                            type="file"
+                            id="avatar"
+                            accept='image/*'
+                            name="avatar"
+                            className='hidden' />
+                        <img
+                            src={settingData.avatar ? `http://localhost:5000/users/avatar/${settingData.avatar}` : "../../../assets/avatar-person.svg"} alt="avatar"
+                            className='ml-4 max-w-[6-rem] rounded-full border-2 border-marron cursor-pointer'
+                        />
+                    </label>
+                </div>
                 <div 
                     className="flex flex-col">
                     <label htmlFor="username">Nombre de usuario:</label>
                     <input
                         name="username" 
-                        value={userData.username}
-                        onChange={handleProfileChange}
+                        value={settingData.username}
+                        onChange={handleChange}
                         className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
                 </div>
 
@@ -138,8 +120,8 @@ function ProfileSetting(){
                     <label htmlFor="name">Nombre:</label>
                     <input 
                         name="name"
-                        value={userData.name}
-                        onChange={handleProfileChange}
+                        value={settingData.name}
+                        onChange={handleChange}
                         className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
                 </div>
             
@@ -147,8 +129,8 @@ function ProfileSetting(){
                     <label htmlFor="name">Apellido:</label>
                     <input 
                         name="surname"
-                        value={userData.surname}
-                        onChange={handleProfileChange}
+                        value={settingData.surname}
+                        onChange={handleChange}
                         className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none' />
                 </div>
             
@@ -156,8 +138,8 @@ function ProfileSetting(){
                     <label htmlFor="name">Teléfono:</label>
                     <input 
                         name="phone"
-                        value={userData.phone}
-                        onChange={handleProfileChange}
+                        value={settingData.phone}
+                        onChange={handleChange}
                         className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
                 </div>
 
@@ -165,8 +147,8 @@ function ProfileSetting(){
                     <label htmlFor="biography">Biografía:</label>
                     <input 
                         name="biography"
-                        value={bioAndAvatar.biography}
-                        onChange={handleProfileChange}
+                        value={settingData.biography}
+                        onChange={handleChange}
                         className='w-[400px] text-gray-500 mt-2 mb-4 border-2 border-transparent border-b-black bg-transparent focus:outline-none'/>
                 </div>
 

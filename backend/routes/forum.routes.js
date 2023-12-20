@@ -19,6 +19,4 @@ forumRoutes.delete('/subforum/:forum_id/discussion/:subforum_id/deleteComment/:d
 forumRoutes.delete('/subforum/:forum_id/discussion/:subforum_id', deleteSubForumComments);
 
 
-
-
 export { forumRoutes };

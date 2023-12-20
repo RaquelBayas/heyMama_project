@@ -76,9 +76,9 @@ function Login() {
 
     return (
         <section>
-            <div className="w-screen h-screen font-anybody box-border bg-img-login bg-no-repeat bg-center bg-contain">
-                <div className='absolute top-0 right-0 left-0 bottom-0 bg-shade-bg'>
-                    <div className="flex flex-col w-550 text-center relative top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+            <div className="box-border w-screen h-screen bg-center bg-no-repeat bg-contain font-anybody bg-img-login">
+                <div className='absolute top-0 bottom-0 left-0 right-0 bg-shade-bg'>
+                    <div className="relative flex flex-col text-center -translate-x-1/2 -translate-y-1/2 w-550 top-1/2 left-1/2">
                         <h1 className="text-5xl tracking-wide">¡BIENVENIDA!</h1>
                         <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => {handleSubmit(e)}}>
                             <div className="flex flex-col h-[82px] mx-6 mt-8 mb-4 text-start text-xl">
@@ -92,14 +92,14 @@ function Login() {
                                     autoComplete="on"
                                     onChange={handleChange}
 
-                                    className='h-10 mt-2 border-2 border-solid border-transparent border-b-black bg-transparent text-lg text-gray-600 tracking-wide focus:outline-none'
+                                    className='h-10 mt-2 text-lg tracking-wide text-gray-600 bg-transparent border-2 border-transparent border-solid border-b-black focus:outline-none'
                                 />
                                 {error?.email && <span className="text-[18px] text-red-500 p-3">{error.email}</span>}
                             </div>
                             <div className="box-border flex flex-col h-[82px] mx-6 mt-8 mb-4 text-start text-xl">
                                 <label>Contraseña:</label>
                                 <button
-                                    className='absolute transform -translate-y-1/2 right-8 top-56 cursor-pointer'
+                                    className='absolute transform -translate-y-1/2 cursor-pointer right-8 top-56'
 
                                     type='button'
                                     onClick={() => setHidden(!hidden)}>
@@ -113,15 +113,15 @@ function Login() {
                                     onChange={handleChange}
                                     autoComplete="off"
 
-                                    className='w-full bg-transparent border-b-2 border-dark_brownh-10 border-2 border-solid text-lg text-gray-600 border-transparent border-b-black focus:outline-none'
+                                    className='w-full text-lg text-gray-600 bg-transparent border-2 border-b-2 border-transparent border-solid border-dark_brownh-10 border-b-black focus:outline-none'
                                 />
                                 {error?.password && <span className="text-[18px] text-red-500 p-3">{error.password}</span>}
                             </div>
-                            <div className="flex flex-row text-center justify-center align-bottom gap-10 mt-8">
+                            <div className="flex flex-row justify-center gap-10 mt-8 text-center align-bottom">
                                 <h2>¿No tienes una cuenta?</h2>
-                                <Link to='/register' className="font-bold tracking-wider text-lg hover:scale-110 transition-transform duration-300 ease-in-out">Registrate</Link>
+                                <Link to='/register' className="text-lg font-bold tracking-wider transition-transform duration-300 ease-in-out hover:scale-110">Registrate</Link>
                             </div>
-                            <div className='mx-auto mt-8 w-56 text-xl bg-primary flex flex-row justify-start gap-2 border border-solid border-black p-3 px-5 rounded-full shadow-md cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out'>
+                            <div className='flex flex-row justify-start w-56 gap-2 p-3 px-5 mx-auto mt-8 text-xl transition-transform duration-300 ease-in-out border border-black border-solid rounded-full shadow-md cursor-pointer bg-primary hover:scale-110'>
                                 <FaArrowRight className='my-0.5' />
                                 <button type="submit">INICIAR SESIÓN</button>
                             </div>
@@ -129,10 +129,10 @@ function Login() {
                     </div>
                     <Link
                         to={'/'}
-                        className='absolute bottom-12 left-6 flex flex-row justify-start gap-2 m-4 align-middle bg-primary border border-solid border-black p-3 px-5 rounded-full shadow-md cursor-pointer lg:bottom-24 lg:left-40 hover:scale-110 transition-transform duration-300 ease-in-out'
+                        className='absolute flex flex-row justify-start gap-2 p-3 px-5 m-4 align-middle transition-transform duration-300 ease-in-out border border-black border-solid rounded-full shadow-md cursor-pointer bottom-12 left-6 bg-primary lg:bottom-24 lg:left-40 hover:scale-110'
                     >
                         <FaArrowRight className='my-0.5' />
-                        <button className='w-max text-xl sm:text-base'>VOLVER AL INICIO</button>
+                        <button className='text-xl w-max sm:text-base'>VOLVER AL INICIO</button>
                     </Link>
                 </div>
             </div>

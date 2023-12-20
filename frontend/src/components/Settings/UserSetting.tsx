@@ -8,7 +8,7 @@ function UserSetting() {
     const { logOut } = useUserContext();
 
     return (
-        <form className='grid grid-cols-200 p-4 h-screen w-screen font-anybody'>
+        <div className='grid grid-cols-200 p-4 h-screen w-screen font-anybody'>
             <nav className='bg-background flex flex-col'>
                 <div className='flex flex-col mt-32 mx-auto gap-20 text-xl flex-grow'>
                     <ul className='text-center'>
@@ -45,7 +45,7 @@ function UserSetting() {
                     <Route path='/account' element={<AccountSetting />} />
                 </Routes>
             </div>
-        </form>
+        </div>
     );
 }
 

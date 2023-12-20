@@ -21,7 +21,12 @@ import UserSetting from './components/Settings/UserSetting';
 import Articles from './components/Forum/Articles';
 import ArticleContent from './components/Forum/ArticleContent';
 import Chat from './components/Chat/Chat';
+import Timeline from './components/Timeline/Timeline';
 import Discussion from './components/Forum/Discussion';
+import TestEdimburgo from './components/TestEdimburgo';
+import Consults from './components/Consults/Consults';
+import ListConsults from './components/Consults/ListConsults';
+import ConsultPage from './components/Consults/ConsultPage';
 
 
 function App() {
@@ -91,9 +96,34 @@ function App() {
             <Discussion />
           </PrivateRoute>
         } />
-        <Route path='/profile' element={
+        <Route path='/profile/:user_id' element={
           <PrivateRoute>
             <Profile />
+          </PrivateRoute>
+        } />
+        <Route path='/timeline' element={
+          <PrivateRoute>
+            <Timeline userId={undefined} loggedUser={undefined}  />
+          </PrivateRoute>
+        } />
+         <Route path='/testEdimburgo' element={
+          <PrivateRoute>
+            <TestEdimburgo />
+          </PrivateRoute>
+        } />
+         <Route path='/listConsults' element={
+          <PrivateRoute>
+            <ListConsults />
+          </PrivateRoute>
+        } />
+        <Route path='/consult' element={
+          <PrivateRoute>
+            <ConsultPage />
+          </PrivateRoute>
+        } />
+        <Route path='/consults/:consult_id' element={
+          <PrivateRoute>
+            <Consults />
           </PrivateRoute>
         } />
       </Routes>

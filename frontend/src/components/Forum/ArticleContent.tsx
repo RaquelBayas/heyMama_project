@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Menu from "../Menu";
 import Search from "../Search";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getFromDataUser } from "../../services/profileService";
 
 function ArticleContent() {
@@ -15,8 +15,9 @@ function ArticleContent() {
   }
 
   const [articles, setArticles] = useState<Articles[]>([]);
-  const [author, setAuthor] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [author, setAuthor] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const [professional_id, setProfessional_id] = useState();
 
   useEffect(() => {
     fetch(`http://localhost:5000/articles/getArticlesByID/${articleId}`)
@@ -25,13 +26,17 @@ function ArticleContent() {
         console.log(data);
 
         if (!data.error) {
-
-
           setArticles(data.data);
-          console.log('authoooor', data.data[0].author);
-          fetch(`http://localhost:5000/users/getUserById/${data.data[0].author}`)
+          console.log("authoooor", data.data[0].author);
+          fetch(
+            `http://localhost:5000/users/getUserById/${data.data[0].author}`
+          )
             .then((resp) => resp.json())
-            .then((data) => { setAuthor(`${data.data[0].name} ${data.data[0].surname}`); console.log(data.data[0]); });
+            .then((data) => {
+              setProfessional_id(data.data[0].user_id);
+              setAuthor(`${data.data[0].name} ${data.data[0].surname}`);
+              console.log(data.data[0]);
+            });
 
           const resultado = await getFromDataUser(data.data[0].author);
           setAvatar(resultado.data[0].avatar);
@@ -40,6 +45,7 @@ function ArticleContent() {
       .catch((error) => console.error(error.message));
   }, [articleId]);
 
+  function handleSendConsult() {}
   return (
     <div className="w-screen h-screen bg-background grid grid-cols-[100px,1fr] gap-4 overflow-x-hidden">
       <div>
@@ -51,7 +57,6 @@ function ArticleContent() {
             <Search />
           </div>
           <div className="w-screen mt-2 mb-2 border-b border-secondary"></div>
-
         </div>
         <main className="flex w-fit mx-4 h-full gap-4 font-Montserrat justify-around ml-[3.5em]">
           <div className="grid grid-cols-[2fr,1fr] gap-4">
@@ -69,23 +74,24 @@ function ArticleContent() {
                   </article>
                 </div>
               ))}
-
             </div>
             <div className="px-4 bg-white rounded-md w-fit mw150:hidden h-min">
-              <article className="flex flex-col items-center justify-center my-auto w-fit h-[400px] outline-2 outline-[#8D5E44] gap-12">
+              <article className="flex flex-col items-center justify-center my-auto w-fit h-[400px] outline-2 outline-[#8D5E44] justify-center gap-12">
                 <img
                   src={"/assets/avatar-person.svg" || avatar}
                   alt="avatar"
                   className="mt-6 max-w-[8rem]"
                 />
-                <p>{author}</p>
+                <p ><Link to={`/profile/${professional_id}`}>{author}</Link></p>
+                
                 <button className="rounded-md mb-6 py-4 px-8 bg-[#DDBEA9] text-[#8D5E44]">
-                  Enviar consulta
+                  <Link to={"/consult"} state={{ professional_id: professional_id }}>
+                    Enviar consulta
+                  </Link>
                 </button>
               </article>
             </div>
           </div>
-
         </main>
       </div>
     </div>

@@ -30,20 +30,21 @@ function About() {
             </div>
 
             <article
-                className='flex flex-col ml-auto my-auto h-auto gap-4 font-light text-justify
+                className='flex flex-col ml-auto mt-auto mb-14 h-auto gap-3 font-light text-justify
                     
-                    sm:w-96 sm:mr-10 sm:text-sm
-                    md:w-350 md:mr-12 md:text-md
+                    sm:w-[250px] sm:mr-10 sm:text-sm
+                    md:w-550 md:mr-12 md:text-xl
                     lg:w-650 lg:mr-auto lg:text-xl
                     xl:w-650 xl:mr-auto xl:text-xl
                     '
             >
 
-                <p>Lorem ipsum dolor sit amet consectetur. Accumsan cursus tempus in purus at.</p>
+                <p className='leading-relaxed'>A partir de nuestros conocimientos y de la experiencia directa de las personas con depresión perinatal, procuramos dar respuesta a las necesidades de atención social de las mujeres.</p>
+                <hr className='flex flex-col bg-black py-[0.5px] border-none my-10 gap-7' />
+                <p className='leading-relaxed'>Ofrecemos un espacio de confianza para que profesionales de la salud realizen atención directa a mujeres durante este proceso.</p>
                 <hr className='bg-black py-[0.5px] border-none my-10' />
-                <p>Lorem ipsum dolor sit amet consectetur. Ultrices auctor aenean in id imperdiet vel. Consequat quis egestas faucibus netus aliquam ac scelerisque tortor commodo.</p>
-                <hr className='bg-black py-[0.5px] border-none my-10' />
-                <p>Lorem ipsum dolor sit amet consectetur. Accumsan cursus tempus in purus at.</p>
+                <p className='leading-relaxed'>Consideramos que la primera línea de tratamiento para la depresión perinatal son las intervenciones psicológicas.</p>
+                <p className="flex mx-auto pt-8 font-bold tracking-wide animate-pulse animate-once animate-duration-[2000ms] animate-delay-1000 animate-ease-linear">¡Nos encantará que nos acompañes!</p>
             </article>
 
         </section>
