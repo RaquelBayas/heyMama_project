@@ -160,8 +160,8 @@ async function getFriendsFromUserID(req, res, next) {
     const {user_id} = req.params;
 
     try {
-        const getFriendsQuery = `SELECT * FROM friends WHERE user_id=?`;
-        const results = await sendQuery(getFriendsQuery, [user_id]);
+        const getFriendsQuery = `SELECT * FROM friends WHERE (user_id=?) OR (user2_id=?)`;
+        const results = await sendQuery(getFriendsQuery, [user_id,user_id]);
         res.send({
             ok: true,
             error: null,

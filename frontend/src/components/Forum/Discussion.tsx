@@ -14,6 +14,7 @@ import {
   DialogActions,
 } from "@mui/material";
 import { addComment, deleteComment } from "../../services/forumService";
+import { getUserById } from "../../services/userService";
 
 function Discussion() {
   const { forum_id, discussion_id } = useParams();
@@ -32,6 +33,9 @@ function Discussion() {
   const [theme, setTheme] = useState<SubForum>();
   const [open, setOpen] = useState(false);
   const [comment, setComment] = useState("");
+  const [authorName, setAuthorName] = useState("");
+  const [namesAuthor, setNamesAuthor] = useState([]);
+  const [idsAuthor, setIdsAuthor] = useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -49,17 +53,18 @@ function Discussion() {
     };
     setComment(comment);
     addComment(newComment);
-    setHasChanged(!hasChanged);
+
     handleClose();
     setComment("");
+    setHasChanged(!hasChanged);
   };
-  const handleDeleteComment = async(index:number) => {
-    const selectedComment = discussions.find((item:Comment) => {if(item.discussion_id==index) return item;});
+  const handleDeleteComment = async (index: number) => {
+    const selectedComment = discussions.find((item: Comment) => {
+      if (item.discussion_id == index) return item;
+    });
     await deleteComment(selectedComment!);
-    setHasChanged(hasChanged);
-
+    setHasChanged(!hasChanged);
   };
-
 
   useEffect(() => {
     fetch(`http://localhost:5000/forum/subforum/${forum_id}/${discussion_id}`)
@@ -76,12 +81,27 @@ function Discussion() {
       .then((resp) => resp.json())
       .then((comentarios) => {
         if (!comentarios.error) {
+          //getAuthorNames(comentarios.data);
           return setDiscussion(comentarios.data);
         }
       })
       .catch((error) => console.error(error.message));
   }, [forum_id, discussion_id, hasChanged]);
 
+  /**function getAuthorNames(data) {
+    let setNames = [];
+    let setIDs = [];
+    setNamesAuthor(data.author);
+          data.forEach((element) => setIDs.push(element.author));
+          setIdsAuthor(setIDs);
+          idsAuthor.forEach(async (id) => {
+            const data = await getUserById(id);
+            const name = data.data[0].name + " " + data.data[0].surname;
+            setNames.push(name);
+          });
+          setNamesAuthor(setNames);
+          console.log(namesAuthor);
+  }*/
   return (
     <div className="w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden gap-2">
       <div>
@@ -100,27 +120,28 @@ function Discussion() {
             <p>{theme?.subforum_content}</p>
           </div>
           <section className="flex flex-col w-2/4 gap-6 mx-auto mt-8">
-            {discussions?.reverse().map(({ discussion_id, comments, author }, index) => (
-              <article
-                className="flex flex-col w-full p-3 bg-white border-4 rounded-lg border-secondary min-h-min"
-                key={index}
-              >
-                {
-                  author === user.id && <div className="flex justify-end">
-                  <button
-                    onClick={() => handleDeleteComment(discussion_id)}
-                    className="p-2 text-sm text-white rounded-lg flex-end w-fit bg-marron"
-                  >
-                    <FaTrashAlt />
-                  </button>
-                </div>
-                }
-                <p className="mb-4 text-gray-600">{comments}</p>
-                <span className="text-gray-400">
-                  <small className="block">{author}</small>
-                </span>
-              </article>
-            ))}
+            {discussions
+              ?.reverse()
+              .map(({ discussion_id, comments, author }, index) => (
+                <article
+                  className="flex flex-col w-full p-3 bg-white border-4 rounded-lg border-secondary min-h-min"
+                  key={index}
+                >
+                  {author === user.id && (
+                    <div className="flex justify-end">
+                      <button
+                        onClick={() => handleDeleteComment(discussion_id)}
+                        className="p-2 text-sm text-white rounded-lg flex-end w-fit bg-marron"
+                      >
+                        <FaTrashAlt />
+                      </button>
+                    </div>
+                  )}
+                  <p className="mb-4 text-gray-600">{comments}</p>
+
+                  <span className="text-gray-400">{author}</span>
+                </article>
+              ))}
             <button
               onClick={handleClickOpen}
               className="absolute p-2 text-4xl text-white rounded-lg bg-marron bottom-8 right-8"

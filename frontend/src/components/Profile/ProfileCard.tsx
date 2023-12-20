@@ -12,7 +12,6 @@ import Modal from "react-modal";
 import { FriendRequest } from "../../models/FriendRequest";
 import { Link } from "react-router-dom";
 
-
 function ProfileCard({ userId, loggedUser }) {
   const customStyles = {
     content: {
@@ -29,6 +28,7 @@ function ProfileCard({ userId, loggedUser }) {
     },
   };
 
+  const user = JSON.parse(localStorage.getItem("user")!);
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [photo, setPhoto] = useState("");
@@ -63,8 +63,7 @@ function ProfileCard({ userId, loggedUser }) {
       const name = data.data[0].name + " " + data.data[0].surname;
       setName(name);
       setBio(dataUser.data[0].biography);
-      setPhoto(dataUser.data[0].avatar);
-      console.log(photo);
+      setPhoto(dataUser.data[0].avatar.slice('.')[0]);
     }
     getData();
 
@@ -84,7 +83,6 @@ function ProfileCard({ userId, loggedUser }) {
     getFriendReq();
   }, [loggedUser]);
 
-
   useEffect(() => {
     const fetchData = async () => {
       getListReq(friendReq);
@@ -96,7 +94,7 @@ function ProfileCard({ userId, loggedUser }) {
   async function getListReq(list) {
     const names = {
       id: 0,
-      fullname: '',
+      fullname: "",
     };
     for (const req of list) {
       const response = await getUserById(req.user_id);
@@ -111,19 +109,26 @@ function ProfileCard({ userId, loggedUser }) {
   async function getListFriends(list) {
     const names = {
       id: 0,
-      fullname: '',
+      fullname: "",
     };
     for (const req of list) {
-      const response = await getUserById(req.user2_id);
-      
+      let response;
+      if (parseInt(user.id) === req.user_id) {
+        response = await getUserById(req.user2_id);
+        console.log("1.resp");
+      } else {
+        response = await getUserById(req.user_id);
+        console.log("2.resp");
+      }
+
       response.data.forEach((value) => {
         names.id = req.user2_id;
         names.fullname = value.name + " " + value.surname;
       });
     }
-    setUserNames(names);    
+    setUserNames(names);
   }
-  
+
   const handleAddFriend = async () => {
     await addFriend(loggedUser, userId);
     setIsFriend(true);
@@ -134,30 +139,28 @@ function ProfileCard({ userId, loggedUser }) {
     });
   };
 
-  useEffect(()=> {
-    const handleGetFriends = async(id: number) => {
+  useEffect(() => {
+    const handleGetFriends = async (id: number) => {
       const result = await getFriends(id);
       setFriends(result.data);
     };
     handleGetFriends(loggedUser.id);
-    
   }, [loggedUser.id]);
 
   useEffect(() => {
     getListFriends(friends);
   }, [friends]);
 
-
   return (
     <div className="flex flex-col justify-center gap-12 p-8 text-center align-middle bg-white rounded-md h-fit w-fit">
       <img
-        className="w-32 mx-auto rounded-full h-fit"
         src={
-          photo && photo.trim() !== ""
-            ? photo
-            : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+          photo
+            ? `http://localhost:5000/users/avatar/${photo}`
+            : "../../../assets/avatar-person.svg"
         }
-        alt=""
+        alt="avatar"
+        className="ml-4 max-w-[8rem] rounded-full cursor-pointer"
       />
 
       <div className="flex flex-col w-64 h-64 gap-4 text-left">
@@ -169,7 +172,10 @@ function ProfileCard({ userId, loggedUser }) {
             Mensajes
           </button>
           {loggedUser.id === parseInt(userId) ? (
-            <button onClick={openModal2} className="p-2 mt-2 rounded-md bg-primary w-fit">
+            <button
+              onClick={openModal2}
+              className="p-2 mt-2 rounded-md bg-primary w-fit"
+            >
               Amigos
             </button>
           ) : !isFriend ? (
@@ -185,7 +191,7 @@ function ProfileCard({ userId, loggedUser }) {
             </button>
           )}
           <Modal
-            title='modalFriends'
+            title="modalFriends"
             isOpen={isModal2Open}
             onRequestClose={closeModal2}
             ariaHideApp={false}
@@ -199,13 +205,11 @@ function ProfileCard({ userId, loggedUser }) {
                   className="flex items-center justify-between gap-2 p-2 mt-2 align-middle border-2 border-primary"
                   key={index}
                 >
-                  <Link to={`/profile/${userNames['id']}`}>
-                  <span onClick={closeModal2}>{userNames['fullname']}</span>
+                  <Link to={`/profile/${userNames["id"]}`}>
+                    <span onClick={closeModal2}>{userNames["fullname"]}</span>
                   </Link>
-                 
-                  
+
                   <div className="flex gap-4 flex-end">
-                    
                     <button className="p-2 mx-auto rounded-md bg-primary w-fit">
                       Eliminar
                     </button>

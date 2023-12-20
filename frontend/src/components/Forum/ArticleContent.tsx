@@ -82,7 +82,8 @@ function ArticleContent() {
                   alt="avatar"
                   className="mt-6 max-w-[8rem]"
                 />
-                <p>{author}</p>
+                <p ><Link to={`/profile/${professional_id}`}>{author}</Link></p>
+                
                 <button className="rounded-md mb-6 py-4 px-8 bg-[#DDBEA9] text-[#8D5E44]">
                   <Link to={"/consult"} state={{ professional_id: professional_id }}>
                     Enviar consulta
