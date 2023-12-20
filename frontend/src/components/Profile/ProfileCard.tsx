@@ -148,7 +148,7 @@ function ProfileCard({ userId, loggedUser }) {
         text: "Ha ocurrido un error al obtener el chat",
       });
     }
-    /*try {
+    try {
       await newChat(user.id,userId);
     } catch(error) {
       Swal.fire({
@@ -156,7 +156,7 @@ function ProfileCard({ userId, loggedUser }) {
         icon: "error",
         text: "Ha ocurrido un error al crear el chat",
       });
-    }*/
+    }
     
     navigate('/chat');
   }
