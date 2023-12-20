@@ -9,7 +9,7 @@ function Chat() {
     const [conversations, setConversations] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [newMessage, setNewMessage] = useState('');
-    const socket = useRef();
+    // const socket = useRef();
     const scrollRef = useRef();
     const inputRef = useRef();
 
@@ -17,15 +17,17 @@ function Chat() {
     const user = JSON.parse(userRaw!);
     console.log('user localstorage ' + JSON.stringify(user));
 
+    const socket = io('http://localhost:443', {
+        transports: ['websocket']
+    });
 
     useEffect(() => {
-        socket.current = io('http://localhost:443', {
-            transports: ['websocket']
-        });
         console.log('conectando con websockets');
-        socket.current.on("getMessage", (data) => {
+        socket.on("getMessage", (data) => {
+            console.log('😊', data);
+
             setArrivalMessage({
-                sender: data.senderId,
+                sender: data.sender,
                 text: data.text,
                 createdAt: Date.now(),
             });
@@ -35,12 +37,14 @@ function Chat() {
     useEffect(() => {
         console.log('Si existe una conversacion/chat actual y llega un mensaje nuevo');
 
+        console.log('👌👌👌👌👌👌', arrivalMessage, currentChat);
+
         if (arrivalMessage && currentChat) {
-            const members = [currentChat?.member, currentChat?.member2];
-            console.log('usuario actual y contacto (desordenados) ' + members);
+            const members = [currentChat.member, currentChat.member2];
+            console.log('usuario actual y contacto (desordenados) ', members);
 
             const isSenderInCurrentChat = members.includes(arrivalMessage.sender);
-            console.log('esta el user id del contacto que envío este mensaje en la conversacion/chat actual? ' + isSenderInCurrentChat);
+            console.log('esta el user id del contacto que envío este mensaje en la conversacion/chat actual? ', isSenderInCurrentChat);
 
 
             if (isSenderInCurrentChat) {
@@ -53,10 +57,10 @@ function Chat() {
     }, [arrivalMessage, currentChat]);
 
     useEffect(() => {
-        socket.current.emit("addUser", user.id);
+        socket.emit("addUser", user.id);
         console.log('envío mi user id al server para que lo guarde en el array de usuarios ' + user.id);
 
-    }, [user]);
+    }, [user, socket]);
 
     useEffect(() => {
 
@@ -69,7 +73,7 @@ function Chat() {
 
             })
             .catch(error => console.error(error.message));
-    }, []);
+    }, [user.id]);
 
     useEffect(() => {
 
@@ -108,7 +112,7 @@ function Chat() {
             text: newMessage,
             conversationId: currentChat.conversation_id
         };
-        console.log('Mensaje ' + message);
+        console.log('Mensaje ', message);
 
         const members = [currentChat.member, currentChat.member2];
         console.log('members ' + members);
@@ -120,7 +124,7 @@ function Chat() {
         console.log('id del que recibirá el mensaje ' + receiverId);
 
 
-        socket.current.emit("sendMessage", {
+        socket.emit("sendMessage", {
             sender: user.id,
             receiver: receiverId,
             text: newMessage,

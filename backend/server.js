@@ -62,38 +62,49 @@ let users = []
 const addUser = (userId, socketId) => {
   !users.some(user => user.userId === userId) &&
     users.push({ userId, socketId });
-  console.log('existe el usuario? ' + !users.some(user => user.userId === userId));
+  // console.log('existe el usuario? ' + !users.some(user => user.userId === userId));
 };
 
 const removeUser = (socketId) => {
   users = users.filter((user) => user.socketId !== socketId);
-  console.log('usuario removido ' + users);
+  // console.log('usuario removido ' + users);
 };
 
 const getUser = (userId) => {
-  console.log('usuario encontrado? ' + JSON.stringify(users.find((user) => user.userId === userId)));
-  return users.find((user) => user.userId === userId);
+  // console.log('usuario encontrado? ' + JSON.stringify(users.find((user) => user.userId === userId)));
+
+  console.log('🌞🌞🌞🌞🌞🌞', userId);
+  const user = users.find(user => {
+    console.log('🍏🍏🍏🍏🍏🍏🍏🍏', user);
+    return user.userId === userId
+  })
+  console.log('💋💋💋💋💋💋💋💋💋', user);
+  return user;
 };
 
 io.on('connection', socket => {
   // when connect
-  console.error('a user has connected');
+  // console.error('a user has connected');
 
   socket.on('addUser', (userId) => {
-    console.log('usuario recibido, user id ' + userId);
+    // console.log('usuario recibido, user id ' + userId);
     addUser(userId, socket.id);
-    console.log('usuario añadido con user id ' + userId + ' | socket.id ' + socket.id);
-    console.log('lista de usuarios ' + JSON.stringify(users));
+    // console.log('usuario añadido con user id ' + userId + ' | socket.id ' + socket.id);
+    // console.log('lista de usuarios ' + JSON.stringify(users));
   });
 
   socket.on("sendMessage", ({ sender, receiver, text }) => {
 
-    console.log('send message', sender, receiver, text);
-    console.error('quien envia el mensaje? sender: ' + sender);
+    // console.log('send message', sender, receiver, text);
+    // console.error('quien envia el mensaje? sender: ' + sender);
     const user = getUser(receiver);
-    console.log('user que recibe el mensaje' + JSON.stringify(user));
+    // console.log('user que recibe el mensaje' + JSON.stringify(user));
+
+
+    console.log('❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤', sender);
 
     if (user && user.socketId) {
+      console.log('😊');
       io.to(user.socketId).emit("getMessage", {
         sender,
         text,

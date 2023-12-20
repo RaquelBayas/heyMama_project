@@ -9,14 +9,12 @@ function Message({ own, message }) {
     const li = document.querySelector('li');
     if (message.sender !== user.id) li?.classList.add('self-end');
 
-    // console.log(' probando el formateador de tiempo ' + timeAgo(message.created_at));
-
-    console.log(1);
+    console.log(message.text);
 
 
     return (
         <li className={`p-6 mx-6 bg-gray-900 text-white rounded-lg w-[500px] ${own ? 'self-end' : ''}`} > {message.text}
-            <time className="block">{message?.created_at}</time>
+            <time className="block">{timeAgo(message.created_at)}</time>
         </ li>
     );
 }
