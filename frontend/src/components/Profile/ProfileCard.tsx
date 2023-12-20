@@ -63,7 +63,9 @@ function ProfileCard({ userId, loggedUser }) {
       const name = data.data[0].name + " " + data.data[0].surname;
       setName(name);
       setBio(dataUser.data[0].biography);
-      setPhoto(dataUser.data[0].avatar.slice('.')[0]);
+      console.log('1.',dataUser.data[0].avatar)
+      dataUser.data[0].avatar ? setPhoto(dataUser.data[0].avatar.slice(".")[0]) : setPhoto('');
+      console.log(photo)
     }
     getData();
 
@@ -116,15 +118,18 @@ function ProfileCard({ userId, loggedUser }) {
       if (parseInt(user.id) === req.user_id) {
         response = await getUserById(req.user2_id);
         console.log("1.resp");
+        response.data.forEach((value) => {
+          names.id = req.user2_id;
+          names.fullname = value.name + " " + value.surname;
+        });
       } else {
         response = await getUserById(req.user_id);
         console.log("2.resp");
-      }
-
-      response.data.forEach((value) => {
-        names.id = req.user2_id;
-        names.fullname = value.name + " " + value.surname;
-      });
+        response.data.forEach((value) => {
+          names.id = req.user_id;
+          names.fullname = value.name + " " + value.surname;
+        });
+      }      
     }
     setUserNames(names);
   }
@@ -155,125 +160,127 @@ function ProfileCard({ userId, loggedUser }) {
     <div className="flex flex-col justify-center gap-12 p-8 text-center align-middle bg-white rounded-md h-fit w-fit">
       <img
         src={
-          photo
+          photo !== ''
             ? `http://localhost:5000/users/avatar/${photo}`
-            : "../../../assets/avatar-person.svg"
+            : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&usqp=CAU"
         }
         alt="avatar"
-        className="ml-4 max-w-[8rem] rounded-full cursor-pointer"
+        className="max-w-[8rem] mx-auto rounded-full cursor-pointer"
       />
 
-      <div className="flex flex-col w-64 h-64 gap-4 text-left">
-        <h1 className="text-lg ">{name}</h1>
-        <p className="text-md ">{bio}</p>
+      <div className="flex flex-col justify-around w-64 h-64 gap-4 text-left">
+        <h1 className="text-lg text-center">{name}</h1>
+        <p className="text-center text-md ">{bio}</p>
 
-        <div className="relative bottom-0 flex gap-4 mx-auto align-middle">
-          <button className="p-2 mt-2 rounded-md bg-primary w-fit">
-            Mensajes
-          </button>
-          {loggedUser.id === parseInt(userId) ? (
-            <button
-              onClick={openModal2}
-              className="p-2 mt-2 rounded-md bg-primary w-fit"
-            >
-              Amigos
-            </button>
-          ) : !isFriend ? (
-            <button
-              className="p-2 mt-2 rounded-md bg-primary w-fit"
-              onClick={handleAddFriend}
-            >
-              Añadir amigo
-            </button>
-          ) : (
-            <button className="p-2 mt-2 rounded-md bg-primary w-fit">
-              Amigos
-            </button>
-          )}
-          <Modal
-            title="modalFriends"
-            isOpen={isModal2Open}
-            onRequestClose={closeModal2}
-            ariaHideApp={false}
-            style={customStyles}
-            contentLabel="Lista de amigos"
-          >
-            <div className="flex flex-col justify-around">
-              <h2>Lista de amigos</h2>
-              {friends.map((value, index) => (
-                <div
-                  className="flex items-center justify-between gap-2 p-2 mt-2 align-middle border-2 border-primary"
-                  key={index}
-                >
-                  <Link to={`/profile/${userNames["id"]}`}>
-                    <span onClick={closeModal2}>{userNames["fullname"]}</span>
-                  </Link>
-
-                  <div className="flex gap-4 flex-end">
-                    <button className="p-2 mx-auto rounded-md bg-primary w-fit">
-                      Eliminar
-                    </button>
-                  </div>
-                </div>
-              ))}
-
-              <div className="flex align-bottom flex-end">
-                <button
-                  className="p-2 mx-auto rounded-md bg-primary w-fit"
-                  onClick={closeModal2}
-                >
-                  Cerrar
-                </button>
-              </div>
-            </div>
-          </Modal>
-        </div>
         <div className="mx-auto">
-          {loggedUser.id === parseInt(userId) && (
-            <button
-              className="p-2 mx-auto mt-1 rounded-md bg-primary w-fit"
-              onClick={openModal}
-            >
-              Solicitudes de amistad
+          <div className="bottom-0 flex justify-center gap-4 mx-auto align-middle ">
+            <button className="p-2 mt-2 rounded-md bg-primary w-fit">
+              Mensajes
             </button>
-          )}
+            {loggedUser.id === parseInt(userId) ? (
+              <button
+                onClick={openModal2}
+                className="p-2 mt-2 rounded-md bg-primary w-fit"
+              >
+                Amigos
+              </button>
+            ) : !isFriend ? (
+              <button
+                className="p-2 mt-2 rounded-md bg-primary w-fit"
+                onClick={handleAddFriend}
+              >
+                Añadir amigo
+              </button>
+            ) : (
+              <button className="p-2 mt-2 rounded-md bg-primary w-fit">
+                Amigos
+              </button>
+            )}
+            <Modal
+              title="modalFriends"
+              isOpen={isModal2Open}
+              onRequestClose={closeModal2}
+              ariaHideApp={false}
+              style={customStyles}
+              contentLabel="Lista de amigos"
+            >
+              <div className="flex flex-col justify-around">
+                <h2>Lista de amigos</h2>
+                {friends.map((value, index) => (
+                  <div
+                    className="flex items-center justify-between gap-2 p-2 mt-2 align-middle border-2 border-primary"
+                    key={index}
+                  >
+                    <Link to={`/profile/${userNames["id"]}`}>
+                      <span onClick={closeModal2}>{userNames["fullname"]}</span>
+                    </Link>
 
-          <Modal
-            isOpen={isModalOpen}
-            onRequestClose={closeModal}
-            ariaHideApp={false}
-            style={customStyles}
-            contentLabel="Solicitudes de Amistad"
-          >
-            <div className="flex flex-col justify-around">
-              <h2>Solicitudes de Amistad</h2>
-              {friendReq.map((value, index) => (
-                <div
-                  className="flex items-center justify-between gap-2 p-2 mt-2 align-middle border-2 border-primary"
-                  key={index}
-                >
-                  <span>{userNames[value.user_id]}</span>
-                  <div className="flex gap-4 flex-end">
-                    <button className="p-2 mx-auto rounded-md bg-primary w-fit">
-                      Aceptar
-                    </button>
-                    <button className="p-2 mx-auto rounded-md bg-primary w-fit">
-                      Rechazar
-                    </button>
+                    <div className="flex gap-4 flex-end">
+                      <button className="p-2 mx-auto rounded-md bg-primary w-fit">
+                        Eliminar
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
 
-              <div className="flex align-bottom flex-end">
-                <button
-                  className="p-2 mx-auto rounded-md bg-primary w-fit"
-                  onClick={closeModal}
-                >
-                  Cerrar
-                </button>
+                <div className="flex align-bottom flex-end">
+                  <button
+                    className="p-2 mx-auto rounded-md bg-primary w-fit"
+                    onClick={closeModal2}
+                  >
+                    Cerrar
+                  </button>
+                </div>
               </div>
-            </div>
-          </Modal>
+            </Modal>
+          </div>
+          <div className="mx-auto">
+            {loggedUser.id === parseInt(userId) && (
+              <button
+                className="p-2 mx-auto mt-1 rounded-md bg-primary w-fit"
+                onClick={openModal}
+              >
+                Solicitudes de amistad
+              </button>
+            )}
+
+            <Modal
+              isOpen={isModalOpen}
+              onRequestClose={closeModal}
+              ariaHideApp={false}
+              style={customStyles}
+              contentLabel="Solicitudes de Amistad"
+            >
+              <div className="flex flex-col justify-around">
+                <h2>Solicitudes de Amistad</h2>
+                {friendReq.map((value, index) => (
+                  <div
+                    className="flex items-center justify-between gap-2 p-2 mt-2 align-middle border-2 border-primary"
+                    key={index}
+                  >
+                    <span>{userNames[value.user_id]}</span>
+                    <div className="flex gap-4 flex-end">
+                      <button className="p-2 mx-auto rounded-md bg-primary w-fit">
+                        Aceptar
+                      </button>
+                      <button className="p-2 mx-auto rounded-md bg-primary w-fit">
+                        Rechazar
+                      </button>
+                    </div>
+                  </div>
+                ))}
+
+                <div className="flex align-bottom flex-end">
+                  <button
+                    className="p-2 mx-auto rounded-md bg-primary w-fit"
+                    onClick={closeModal}
+                  >
+                    Cerrar
+                  </button>
+                </div>
+              </div>
+            </Modal>
+          </div>
         </div>
       </div>
     </div>

@@ -18,7 +18,7 @@ function Menu() {
   };
 
   const links = [
-    { to: '/mainpage', icon: <FaHome className="text-3xl icons" />, text: 'Home' },
+    { to: '/forum', icon: <FaHome className="text-3xl icons" />, text: 'Home' },
     { to: '/forums', icon: <MdOutlineForum className="text-3xl icons" />, text: 'Forums' },
     { to: '/articles', icon: <FaBookOpen className="text-3xl icons" />, text: 'Artículos' },
     { to: '/listConsults', icon: <FaMessage className="text-3xl icons" />, text: 'Consultas' },

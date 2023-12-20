@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import Menu from "../Menu";
 import Search from "../Search";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { SubForum } from "../../models/SubForum";
 import { FaTrashAlt } from "react-icons/fa";
 import { Comment } from "../../models/Comment";
@@ -20,22 +20,13 @@ function Discussion() {
   const { forum_id, discussion_id } = useParams();
   const userRaw = localStorage.getItem("user");
   const user = JSON.parse(userRaw!);
-  interface Discussion {
-    article_id: number;
-    title: string;
-    comments: string;
-    create_time?: string;
-    author?: string;
-  }
 
   const [hasChanged, setHasChanged] = useState(false);
   const [discussions, setDiscussion] = useState<Comment[]>([]);
   const [theme, setTheme] = useState<SubForum>();
   const [open, setOpen] = useState(false);
   const [comment, setComment] = useState("");
-  const [authorName, setAuthorName] = useState("");
-  const [namesAuthor, setNamesAuthor] = useState([]);
-  const [idsAuthor, setIdsAuthor] = useState([]);
+  const [namesAuthor, setNamesAuthor] = useState();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -51,12 +42,9 @@ function Discussion() {
       comments: comment!,
       author: user.id!,
     };
-    setComment(comment);
     addComment(newComment);
-
-    handleClose();
-    setComment("");
     setHasChanged(!hasChanged);
+    handleClose();   
   };
   const handleDeleteComment = async (index: number) => {
     const selectedComment = discussions.find((item: Comment) => {
@@ -79,29 +67,22 @@ function Discussion() {
       `http://localhost:5000/forum/subforum/${forum_id}/discussion/${discussion_id}`
     )
       .then((resp) => resp.json())
-      .then((comentarios) => {
+      .then(async (comentarios) => {
         if (!comentarios.error) {
-          //getAuthorNames(comentarios.data);
+          const names = await Promise.all(
+            comentarios.data.map(async (value) => {
+              const data = await getUserById(value.author);
+              return data.data[0].name + " " + data.data[0].surname;
+            })
+          );
+          setNamesAuthor(names);
+
           return setDiscussion(comentarios.data);
         }
       })
       .catch((error) => console.error(error.message));
-  }, [forum_id, discussion_id, hasChanged]);
+  }, [forum_id, discussion_id,hasChanged]);
 
-  /**function getAuthorNames(data) {
-    let setNames = [];
-    let setIDs = [];
-    setNamesAuthor(data.author);
-          data.forEach((element) => setIDs.push(element.author));
-          setIdsAuthor(setIDs);
-          idsAuthor.forEach(async (id) => {
-            const data = await getUserById(id);
-            const name = data.data[0].name + " " + data.data[0].surname;
-            setNames.push(name);
-          });
-          setNamesAuthor(setNames);
-          console.log(namesAuthor);
-  }*/
   return (
     <div className="w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden gap-2">
       <div>
@@ -121,7 +102,7 @@ function Discussion() {
           </div>
           <section className="flex flex-col w-2/4 gap-6 mx-auto mt-8">
             {discussions
-              ?.reverse()
+              
               .map(({ discussion_id, comments, author }, index) => (
                 <article
                   className="flex flex-col w-full p-3 bg-white border-4 rounded-lg border-secondary min-h-min"
@@ -130,7 +111,7 @@ function Discussion() {
                   {author === user.id && (
                     <div className="flex justify-end">
                       <button
-                        onClick={() => handleDeleteComment(discussion_id)}
+                        onClick={() => handleDeleteComment(discussion_id!)}
                         className="p-2 text-sm text-white rounded-lg flex-end w-fit bg-marron"
                       >
                         <FaTrashAlt />
@@ -139,7 +120,9 @@ function Discussion() {
                   )}
                   <p className="mb-4 text-gray-600">{comments}</p>
 
-                  <span className="text-gray-400">{author}</span>
+                  <span key={index} className="text-gray-400">
+                    {namesAuthor![index]}
+                  </span>
                 </article>
               ))}
             <button

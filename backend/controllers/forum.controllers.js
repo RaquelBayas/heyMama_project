@@ -43,7 +43,7 @@ async function deleteCommentById(req, res, next) {
             ok: true,
             error: null,
             data: null,
-            message: 'SubForum comments ' + subForum_id + ' deleted.'
+            message: 'SubForum comments ' + subforum_id + ' deleted.'
         });
     } catch (error) {
         return next(new Error(error.message))
