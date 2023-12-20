@@ -16,9 +16,9 @@ function Landpage() {
               lg:text-5xl lg:mx-24
               xl:text-6xl xl:mx-28
               '>
-            <p>No estás sola,</p>
-            <p>¡Únete a nuestra</p>
-            <p>comunidad!</p>
+            <p className="animate-fade-right animate-once animate-duration-[2000ms] animate-delay-300">No estás sola,</p>
+            <p className="animate-fade-right animate-once animate-duration-[2000ms] animate-delay-1000">¡Únete a nuestra</p>
+            <p className="animate-fade-right animate-once animate-duration-[2000ms] animate-delay-1000">comunidad!</p>
           </h1>
 
           <div className="flex flex-col pr-10 ml-auto mt-auto 
