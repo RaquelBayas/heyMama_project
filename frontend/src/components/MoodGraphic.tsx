@@ -4,9 +4,21 @@ import { Pie } from 'react-chartjs-2';
 import { getMood } from '../services/moodService';
 import { MoodData } from '../models/MoodData';
 import {MoodContext, MoodContextValue} from '../context/MoodContext';
-import MoodProvider from '../context/MoodContext';
+
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+
+const getStylesForMoodType = (moodTypeName: string) => {
+  const colorMap: Record<string, { backgroundColor: string; borderColor: string }> = {
+    'FELIZ': { backgroundColor: 'rgba(251, 207, 232, 0.8)', borderColor: 'rgba(255, 99, 132, 1)' },
+    'BIEN': { backgroundColor: 'rgba(233, 213, 255, 0.8)', borderColor: 'rgba(153, 102, 255, 1)' },
+    'REGULAR': { backgroundColor: 'rgba(250, 225, 195, 0.8)', borderColor: 'rgba(255, 206, 86, 1)' },
+    'MAL': { backgroundColor: 'rgba(254, 202, 202, 0.8)', borderColor: '#eb3666' },
+    'TRISTE': { backgroundColor: 'rgba(191, 219, 254, 0.8)', borderColor: '#4b76c0' },
+  };
+
+  return colorMap[moodTypeName] || { backgroundColor: 'rgba(0, 0, 0, 0)', borderColor: 'rgba(0, 0, 0, 0)' };
+};
 
 const moodTypeNames: Record<number, string> = {
   1: 'FELIZ',
@@ -56,20 +68,8 @@ function MoodGraphic() {
             {
              label: '# of Votes',
              data: percentageData.map((entry) => entry.percentage),
-             backgroundColor: [
-               'rgba(251, 207, 232, 0.8)',
-               'rgba(233, 213, 255, 0.8)',
-               'rgba(250, 225, 195, 0.8)',
-               'rgba(254, 202, 202, 0.8)',
-               'rgba(191, 219, 254, 0.8)'
-             ],
-             borderColor: [
-              'rgba(255, 99, 132, 1)',
-              ' rgba(153, 102, 255, 1)',
-              'rgba(255, 206, 86, 1)',
-              '#eb3666',              
-              '#4b76c0',
-            ],
+             backgroundColor: percentageData.map((entry) => getStylesForMoodType(entry.moodTypeName).backgroundColor),
+             borderColor: percentageData.map((entry) => getStylesForMoodType(entry.moodTypeName).borderColor),
              borderWidth: 1,
            }
         ]

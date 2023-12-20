@@ -4,8 +4,13 @@ import { Friends } from "../schemas/Friends.js";
 import { FriendRequestResponse } from "../schemas/Friends.js";
 
 async function addFriend(req, res, next) {
-  const { success, error, data } = Friends.safeParse(req.body);
-  console.log(req.body);
+  const request = {
+    user_id : req.body.user_id.id,
+    user2_id : parseInt(req.body.user2_id),
+    state_id : req.body.state_id
+  }
+  const { success, error, data } = Friends.safeParse(request);
+  
   if (!success) {
     const errors = zodErrorMap(error);
     return res.status(400).send({
@@ -55,7 +60,6 @@ async function addFriend(req, res, next) {
 }
 async function updateFriendRequest(req, res, next) {
   const parsedResponse = FriendRequestResponse.parse(req.body);
-    console.log('parsed:',req.body)
   const { request_id, state_id } = parsedResponse;
 
   try {
@@ -70,8 +74,7 @@ async function updateFriendRequest(req, res, next) {
           error: null,
           data: null,
           message:
-            "Friendship OK" 
-            
+            "Friendship OK"             
         });
       }
   } catch(error) {
@@ -157,8 +160,8 @@ async function getFriendsFromUserID(req, res, next) {
     const {user_id} = req.params;
 
     try {
-        const getFriendsQuery = `SELECT * FROM friends WHERE user_id=?`;
-        const results = await sendQuery(getFriendsQuery, [user_id]);
+        const getFriendsQuery = `SELECT * FROM friends WHERE (user_id=?) OR (user2_id=?)`;
+        const results = await sendQuery(getFriendsQuery, [user_id,user_id]);
         res.send({
             ok: true,
             error: null,
@@ -172,5 +175,33 @@ async function getFriendsFromUserID(req, res, next) {
     }
 }
 
+async function areFriends(req, res, next) {
+  const { user_id, user2_id } = req.body;
+  
+  try {
+    const query = `
+      SELECT *
+      FROM friends
+      WHERE (user_id = ? AND user2_id = ?) OR (user_id = ? AND user2_id = ?)
+    `;
+    const results = await sendQuery(query, [user_id.id, user2_id, user2_id, user_id.id]);
+    if(results.length>0) {
+      res.send({
+        ok: true,
+        error: null,
+        data: null,
+        message: "Friends: YES",
+      });
+      next();
+    }
+  } catch (error) {
+    return res.status(500).send({
+      ok: false,
+      error: error.message,
+      data: null,
+      message: "Error checking frienship",
+    });
+  }
+}
 
-export { addFriend, updateFriendRequest, getFriendRequest, deleteFriend, getFriendsFromUserID};
+export { addFriend, updateFriendRequest, getFriendRequest, deleteFriend, areFriends, getFriendsFromUserID};

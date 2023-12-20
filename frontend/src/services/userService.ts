@@ -1,9 +1,8 @@
 
 interface UserServiceResponse {
-    error: string
+  error: string
 }
 async function getUserById(user_id:string) {
-
     const baseUrl = `http://localhost:5000/users/getUserById/${user_id}`;
 
     try {

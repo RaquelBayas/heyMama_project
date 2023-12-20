@@ -9,6 +9,8 @@ import { moodRoutes } from './routes/mood.routes.js'
 import { forumRoutes } from './routes/forum.routes.js'
 import { articlesRoutes } from './routes/articles.routes.js';
 import { friendsRoutes } from './routes/friends.routes.js'
+import { timelineRoutes } from './routes/timeline.routes.js'
+import { consultsRoutes } from './routes/consults.routes.js'
 import fileUpload from 'express-fileupload'
 import multer from 'multer';
 
@@ -36,6 +38,8 @@ app.use('/mood', moodRoutes)
 app.use('/forum', forumRoutes)
 app.use('/articles', articlesRoutes);
 app.use('/friends',friendsRoutes);
+app.use('/timeline',timelineRoutes);
+app.use('/consults',consultsRoutes);
 
 // app.use("/uploads", express.static("C:\\Users\\mati\\Desktop\\Bootcamp\\heyMama_project\\backend\\src\\uploads"));
 
