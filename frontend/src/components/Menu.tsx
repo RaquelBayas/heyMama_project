@@ -21,7 +21,7 @@ function Menu() {
     { to: '/forum', icon: <FaHome className="text-3xl icons" />, text: 'Home' },
     { to: '/forums', icon: <MdOutlineForum className="text-3xl icons" />, text: 'Forums' },
     { to: '/articles', icon: <FaBookOpen className="text-3xl icons" />, text: 'Artículos' },
-    { to: '/listConsults', icon: <FaMessage className="text-3xl icons" />, text: 'Consultas' },
+    { to: '/chat', icon: <FaMessage className="text-3xl icons" />, text: 'Chat' },
     { to: '/moods', icon: <FaRegSmile className="text-3xl" />, text: 'Estado de ánimo' },
     { to: '/breathing', icon: <RiMentalHealthFill className="text-3xl" />, text: 'Relajación' },
     { to: `/profile/${user.id}`, icon: <BsPersonCircle className="text-3xl icons" />, text: 'Perfil' },

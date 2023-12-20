@@ -10,7 +10,8 @@ import {
 import Swal from "sweetalert2";
 import Modal from "react-modal";
 import { FriendRequest } from "../../models/FriendRequest";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getChat, newChat } from "../../services/chatService";
 
 function ProfileCard({ userId, loggedUser }) {
   const customStyles = {
@@ -38,6 +39,7 @@ function ProfileCard({ userId, loggedUser }) {
   const [friendReq, setFriendReq] = useState<FriendRequest[]>([]);
   const [friends, setFriends] = useState([]);
   const [userNames, setUserNames] = useState([]);
+  const navigate = useNavigate(); 
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -134,6 +136,31 @@ function ProfileCard({ userId, loggedUser }) {
     setUserNames(names);
   }
 
+  async function handleNewChat() {
+    console.log('user1.',user.id,'user2.',userId);
+    try {
+      const result = await getChat(userId);
+      console.log('result.',result);
+    } catch(error){
+      Swal.fire({
+        title: "Oops...",
+        icon: "error",
+        text: "Ha ocurrido un error al obtener el chat",
+      });
+    }
+    /*try {
+      await newChat(user.id,userId);
+    } catch(error) {
+      Swal.fire({
+        title: "Oops...",
+        icon: "error",
+        text: "Ha ocurrido un error al crear el chat",
+      });
+    }*/
+    
+    navigate('/chat');
+  }
+
   const handleAddFriend = async () => {
     await addFriend(loggedUser, userId);
     setIsFriend(true);
@@ -174,7 +201,7 @@ function ProfileCard({ userId, loggedUser }) {
 
         <div className="mx-auto">
           <div className="bottom-0 flex justify-center gap-4 mx-auto align-middle ">
-            <button className="p-2 mt-2 rounded-md bg-primary w-fit">
+            <button onClick={handleNewChat} className="p-2 mt-2 rounded-md bg-primary w-fit">
               Mensajes
             </button>
             {loggedUser.id === parseInt(userId) ? (

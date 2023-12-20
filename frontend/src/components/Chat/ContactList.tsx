@@ -30,7 +30,7 @@ function ContactList({ conv, user }) {
 
 
     return (
-        <article className=" flex gap-4 p-6 hover:bg-gray-300 items-center">
+        <article className="flex items-center gap-4 p-6 mb-4 bg-gray-200 hover:bg-gray-300">
             <img src="/assets/avatar-person.svg" width={50} />
             {friend?.username}
         </article>

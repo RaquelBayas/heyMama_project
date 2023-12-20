@@ -27,6 +27,7 @@ import TestEdimburgo from './components/TestEdimburgo';
 import Consults from './components/Consults/Consults';
 import ListConsults from './components/Consults/ListConsults';
 import ConsultPage from './components/Consults/ConsultPage';
+import ChatPage from './components/Chat/ChatPage';
 
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
         } />
         <Route path='/chat' element={
           <PrivateRoute>
-            <Chat />
+            <ChatPage />
           </PrivateRoute>
         } />
         <Route path='/register' element={<RegisterType />} />
