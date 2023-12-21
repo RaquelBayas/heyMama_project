@@ -1,11 +1,16 @@
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import AccountSetting from './AccountSetting';
 import ProfileSetting from './ProfileSetting';
 import useUserContext from '../../hooks/useUserContext';
 
 function UserSetting() {
+    const navigate = useNavigate()
 
-    const { logOut } = useUserContext();
+    function handleClick() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        navigate('/');
+    }
 
     return (
         <div className='grid grid-cols-200 p-4 h-screen w-screen font-anybody'>
@@ -31,14 +36,14 @@ function UserSetting() {
                     <button
                         type='submit'
                         className='text-red-500 text-center mt-auto mb-16 text-2xl'
-                        onClick={logOut}
+                        onClick={handleClick}
                     >
                         Cerrar sesión
                     </button>
                 </div>
             </nav>
 
-            <div 
+            <div
                 className='flex flex-col ml-14 text-xl gap-2 lg:mx-auto'>
                 <Routes>
                     <Route path='/' element={<ProfileSetting />} />

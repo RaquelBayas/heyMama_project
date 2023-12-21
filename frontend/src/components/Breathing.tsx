@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import Menu from "./Menu";
-import Search from "./Search";
 
 function Breathing() {
   const [breathing, setBreathing] = useState("Respira...");
@@ -56,18 +55,18 @@ function Breathing() {
                   La respiración
                   consciente es una piedra angular en la gestión de la ansiedad.{" "}
                 </p>
-                  <p className="p-3 bg-white border-2 rounded-xl border-marron">Aprender y aplica
+                <p className="p-3 bg-white border-2 rounded-xl border-marron">Aprender y aplica
                   técnicas de respiración para encontrar calma y
-                  equilibrio en cualquier momento del día.{" "}</p> 
+                  equilibrio en cualquier momento del día.{" "}</p>
               </blockquote>
             </div>
           </div>
         </main>
         <div className="flex flex-col items-center justify-center gap-4 mx-auto ml-32">
-          <h1 className="mt-12 text-2xl">{breathing}</h1>
-          <div className="my-16 rounded-full w-52 h-52 bg-secondary ball"></div>
+          <h1 className="mt-12 text-4xl tracking-wider">{breathing}</h1>
+          <div className="my-16 rounded-full w-52 h-52 bg-sky-300 ball"></div>
           <button
-            className="w-32 p-4 mb-8 font-bold border-2 rounded-xl border-marron bg-secondary animate-pulse animate-infinite hover:animate-none"
+            className="w-32 p-4 mb-8 text-2xlfont-bold border-2 rounded-xl border-marron bg-secondary animate-pulse animate-infinite hover:animate-none"
             onClick={initBreath}
           >
             EMPEZAR

@@ -63,25 +63,25 @@ function SubForum() {
       const result = await getNamesForum();
       result.forums.find((object: { forum_id: number; forum_type: SetStateAction<string>; }) => {
         if (object.forum_id === parseInt(subforumId.id!)) {
-            setTitleForum(object.forum_type!);
-        } 
+          setTitleForum(object.forum_type!);
+        }
       });
     };
     getForumName();
   }, [subforumId.id]);
 
   return (
-    <main className="flex flex-col items-center gap-4 font-Montserrat ml-60">
+    <main className="flex flex-col items-center gap-4 font-Montserrat ml-60 mt-10">
       <div className="flex items-center self-start">
-      <Link to={'/forums'} > 
-      <h1 className=" text-4xl font-semibold text-[#8B6956] flex items-center mt-4 mb-6 data-forumspath">
-        FOROS <img src="/assets/arrow-symbol.svg" className="inline w-4 mx-6" />{" "}
-       
-      </h1>
-      </Link>
-      <span className="text-2xl text-marron"> {titleForum}</span>
+        <Link to={'/forums'} >
+          <h1 className=" text-4xl font-semibold text-[#8B6956] flex items-center mt-4 mb-6 data-forumspath">
+            FOROS <img src="/assets/arrow-symbol.svg" className="inline w-4 mx-6" />{" "}
+
+          </h1>
+        </Link>
+        <span className="text-2xl text-marron"> {titleForum}</span>
       </div>
-      { forumCards.length>0 && <section className="grid grid-cols-2 mw150:flex mw150:flex-col justify-center gap-6 border-2 border-[#DDBEA9] p-8 -pr-8 -ml-[12rem] mb-4 w-5/6">
+      {forumCards.length > 0 && <section className="grid grid-cols-2 mw150:flex mw150:flex-col justify-center gap-6 border-2 border-[#DDBEA9] p-8 -pr-8 -ml-[12rem] mb-4 w-5/6">
         {forumCards?.map(
           ({
             subforum_id,

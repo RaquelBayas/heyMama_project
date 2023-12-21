@@ -64,7 +64,7 @@
 
 @keyframes pulse-animation {
     0% {
-        box-shadow: 0 0 0 0px #DDBEA9;
+        box-shadow: 0 0 0 0px rgb(125 211 252);
     }
 
     100% {

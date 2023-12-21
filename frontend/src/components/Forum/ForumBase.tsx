@@ -8,7 +8,7 @@ function Forum({ children }: { children: ReactNode }) {
       <Menu />
       <div className="grid w-screen grid-rows-[5em_1fr]">
         <div className="flex flex-col justify-center mt-3 mb-3 ml-[3.5rem]">
-          <div className="flex justify-evenly">
+          <div className="flex ml-auto mr-40 justify-evenly">
             <Search />
           </div>
           <div className="w-screen mt-2 mb-2 border-b border-secondary"></div>
