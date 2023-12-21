@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { FaRegFaceSmile, FaRegFaceGrinBeam, FaRegFaceMeh, FaRegFaceAngry, FaRegFaceLaughBeam, FaRegFaceSadCry } from "react-icons/fa6";
+import { FaRegFaceMehBlank , FaRegFaceTired, FaRegFaceAngry, FaRegFaceLaughBeam, FaRegFaceSadCry } from "react-icons/fa6";
 import { addMood } from '../services/moodService';
 import { MoodData } from '../models/MoodData';
 import MoodProvider, { MoodContext, MoodContextValue } from '../context/MoodContext';
@@ -44,36 +44,36 @@ function MoodTracker() {
                         <div className="flex">
                             <div className="flex justify-content-center">
                                 <div className="flex align-items-center">
-                                    <div className='flex flex-col justify-center p-2 align-middle bg-pink-200 rounded-l-md'>
-                                        <span className='mx-auto text-4xl text-pink-600'><FaRegFaceLaughBeam /></span>
+                                    <div className='flex flex-col justify-center p-2 align-middle bg-yellow-200 rounded-l-md'>
+                                        <span className='mx-auto text-4xl text-amber-500'><FaRegFaceLaughBeam /></span>
                                         <div >
                                             <input type='radio' name='Alegre' value="1" checked={moodState === '1'} onChange={handleValueChange} />
                                             <label htmlFor="f5" className="ml-1 mr-3">Alegre</label>
                                         </div>
                                     </div>
-                                    <div className='flex flex-col justify-center p-2 align-middle bg-purple-200'>
-                                        <span className='mx-auto text-4xl text-purple-800'><FaRegFaceSadCry /> </span>
+                                    <div className='flex flex-col justify-center p-2 align-middle bg-blue-200'>
+                                        <span className='mx-auto text-4xl text-blue-800'><FaRegFaceSadCry /> </span>
                                         <div>
                                             <input type='radio' name='Triste' value="2" checked={moodState === '2'} onChange={handleValueChange} />
                                             <label htmlFor="f5" className="ml-1 mr-3">Triste</label>
                                         </div>
                                     </div>
-                                    <div className='flex flex-col justify-center p-2 align-middle bg-orange-200'>
-                                        <span className='mx-auto text-4xl text-orange-600'><FaRegFaceMeh /> </span>
+                                    <div className='flex flex-col justify-center p-2 align-middle bg-purple-200'>
+                                        <span className='mx-auto text-4xl text-purple-800'><FaRegFaceMehBlank  /> </span>
                                         <div>
                                             <input type='radio' name='Miedo' value="3" checked={moodState === '3'} onChange={handleValueChange} />
                                             <label htmlFor="f5" className="ml-1 mr-3">Miedo</label>
                                         </div>
                                     </div>
-                                    <div className='flex flex-col justify-center p-2 align-middle bg-red-200'>
-                                        <span className='mx-auto text-4xl text-red-600'><FaRegFaceAngry /> </span>
+                                    <div className='flex flex-col justify-center p-2 align-middle bg-green-100'>
+                                        <span className='mx-auto text-4xl text-green-600'><FaRegFaceTired /> </span>
                                         <div>
                                             <input type='radio' name='Asco' value="4" checked={moodState === '4'} onChange={handleValueChange} />
                                             <label htmlFor="f5" className="ml-1 mr-3">Asco</label>
                                         </div>
                                     </div>
-                                    <div className='flex flex-col justify-center p-2 align-middle bg-blue-200 rounded-r-md'>
-                                        <span className='mx-auto text-4xl text-blue-800'><FaRegFaceAngry/> </span>
+                                    <div className='flex flex-col justify-center p-2 align-middle bg-red-200 rounded-r-md'>
+                                        <span className='mx-auto text-4xl text-red-600'><FaRegFaceAngry/> </span>
                                         <div>
                                             <input type='radio' name='Ira' value="5" checked={moodState === '5'} onChange={handleValueChange} />
                                             <label htmlFor="f5" className="ml-1 mr-3">Ira</label>

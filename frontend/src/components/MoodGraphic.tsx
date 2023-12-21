@@ -10,11 +10,11 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const getStylesForMoodType = (moodTypeName: string) => {
   const colorMap: Record<string, { backgroundColor: string; borderColor: string }> = {
-    'ALEGRE': { backgroundColor: 'rgba(251, 207, 232, 0.8)', borderColor: 'rgba(255, 99, 132, 1)' },
-    'TRISTE': { backgroundColor: 'rgba(233, 213, 255, 0.8)', borderColor: 'rgba(153, 102, 255, 1)' },
-    'MIEDO': { backgroundColor: 'rgba(250, 225, 195, 0.8)', borderColor: 'rgba(255, 206, 86, 1)' },
-    'ASCO': { backgroundColor: 'rgba(254, 202, 202, 0.8)', borderColor: '#eb3666' },
-    'IRA': { backgroundColor: 'rgba(191, 219, 254, 0.8)', borderColor: '#4b76c0' },
+    'ALEGRE': { backgroundColor: 'rgb(254, 240, 138)', borderColor: 'rgb(245, 158, 11)' },
+    'TRISTE': { backgroundColor: 'rgb(191, 219, 254)', borderColor: 'rgb(30, 64, 175)' },
+    'MIEDO': { backgroundColor: 'rgb(233, 213, 255)', borderColor: 'rgb(107, 33, 168)' },
+    'ASCO': { backgroundColor: 'rgb(220, 252, 231)', borderColor: 'rgb(53, 177, 98)' },
+    'IRA': { backgroundColor: 'rgb(254, 202, 202)', borderColor: 'rgb(220, 38, 38)' },
   };
 
   return colorMap[moodTypeName] || { backgroundColor: 'rgba(0, 0, 0, 0)', borderColor: 'rgba(0, 0, 0, 0)' };
