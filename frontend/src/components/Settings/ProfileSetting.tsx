@@ -48,7 +48,7 @@ function ProfileSetting(){
             })
         }
         getUserData();
-    },[])
+    },[user?.id])
 
     async function handleChange (e:  React.ChangeEvent<HTMLInputElement>){
         setSettingData({
@@ -93,7 +93,7 @@ function ProfileSetting(){
                 className="flex flex-col justify-start gap-8"
             >
                 <h3 className="">Foto de perfil:</h3>
-                <div className="flex flex-col gap-3 mx-auto max-w-[6-rem]">
+                <div className="flex flex-col gap-3 mx-auto max-w-[4-rem]">
                     <label htmlFor="avatar">
                         <input
                             type="file"
@@ -103,7 +103,7 @@ function ProfileSetting(){
                             className='hidden' />
                         <img
                             src={settingData.avatar ? `http://localhost:5000/users/avatar/${settingData.avatar}` : "../../../assets/avatar-person.svg"} alt="avatar"
-                            className='ml-4 h-96 max-w-[6-rem] rounded-full border-2 border-marron cursor-pointer'
+                            className='ml-4 h-60 max-w-[4-rem] rounded-full border-2 border-marron cursor-pointer'
                         />
                     </label>
                 </div>

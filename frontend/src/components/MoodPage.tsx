@@ -9,7 +9,7 @@ function MoodPage() {
   const {moodData} = useContext(MoodContext) as MoodContextValue;   
   console.log(moodData.length);
   return (
-    
+    // nombre de las emociones alegre triste con miedo asco ira sorpresa
     <div className='grid w-screen h-screen grid-cols-[auto,1fr] overflow-hidden bg-background'>
   <div><Menu /></div>
   

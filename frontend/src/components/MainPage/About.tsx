@@ -3,30 +3,18 @@ function About() {
     return (
         <section
             id='about'
-            className='m-0 p-0 flex flex-row w-full h-screen mx-auto bg-primary font-anybody '
+            className='flex flex-row w-full h-screen p-0 m-0 mx-auto bg-primary font-anybody '
         >
             <div className='flex flex-col w-2/5'>
                 <h1
-                    className='flex flex-col gap-8 mt-auto font-semibold tracking-widest text-center uppercase
-                    
-                    sm:text-xl
-                    md:text-2xl
-                    lg:text-3xl
-                    xl:text-6xl xl:my-auto xl:gap-10'
+                    className='flex flex-col gap-5 mt-auto font-semibold leading-loose tracking-widest text-center uppercase sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl xl:my-auto xl:gap-10'
                 >
                     <span>¿Quiénes </span>
                     <span>somos?</span>
                 </h1>
                 <img
                     src="/assets/flower.svg" alt="flower"
-                    className='mt-0 h-350 mr-auto
-                    
-                    sm:h-250 sm:mt-20
-                    md:h-350 md:mt-20
-                    lg:h-350 lg:mt-26
-                    xl:mt-0 xl:h-550 
-                    2xl:mt-30
-                    ' />
+                    className='mt-0 mr-auto h-350 sm:h-250 sm:mt-20 md:h-350 md:mt-20 lg:h-350 lg:mt-26 xl:mt-30 xl:h-550 2xl:mt-30 ' />
             </div>
 
             <article
@@ -35,7 +23,7 @@ function About() {
                     sm:w-[250px] sm:mr-10 sm:text-sm
                     md:w-550 md:mr-12 md:text-xl
                     lg:w-650 lg:mr-auto lg:text-xl
-                    xl:w-[750px] xl:mr-auto xl:text-3xl xl:my-auto
+                    xl:w-[750px] xl:mr-auto xl:text-2xl xl:my-auto
                     '
             >
 
@@ -44,7 +32,7 @@ function About() {
                 <p className='leading-relaxed'>Ofrecemos un espacio de confianza para que profesionales de la salud realizen atención directa a mujeres durante este proceso.</p>
                 <hr className='bg-black py-[0.5px] border-none my-10' />
                 <p className='leading-relaxed'>Consideramos que la primera línea de tratamiento para la depresión perinatal son las intervenciones psicológicas.</p>
-                <p className="flex mx-auto pt-8 font-bold tracking-wide animate-pulse animate-once animate-duration-[2000ms] animate-delay-1000 animate-ease-linear xl:pt-12">¡Nos encantará que nos acompañes!</p>
+                <p className="flex mx-auto pt-8 font-bold tracking-wide animate-pulse animate-once animate-duration-[2000ms] animate-delay-1000 animate-ease-linear">¡Nos encantará que nos acompañes!</p>
             </article>
 
         </section>

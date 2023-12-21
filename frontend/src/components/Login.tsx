@@ -89,7 +89,7 @@ function Login() {
                                     id='email'
                                     value={formData.email}
                                     required
-                                    autoComplete="on"
+                                    autoComplete="off"
                                     onChange={handleChange}
 
                                     className='h-10 mt-2 text-lg tracking-wide text-gray-600 bg-transparent border-2 border-transparent border-solid border-b-black focus:outline-none'

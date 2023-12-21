@@ -24,7 +24,7 @@ async function newChat(user_id, user2_id){
 }
 
 async function getChat(userId){
-    const baseUrl = 'http://localhost:5000/chat/';
+    const baseUrl = `http://localhost:5000/chat/${userId}`;
 
     try {
         const resp = await fetch(baseUrl, {

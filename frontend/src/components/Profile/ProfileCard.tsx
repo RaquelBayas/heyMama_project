@@ -59,9 +59,17 @@ function ProfileCard({ userId, loggedUser }) {
 
   useEffect(() => {
     async function getData() {
-      const data = await getUserById(userId);
-      const dataUser = await getFromDataUser(userId);
-
+      let data;
+      let dataUser;
+      console.log('userId.',(userId),'- logged', (loggedUser.id));
+      if(parseInt(userId) === loggedUser.id) {
+        data = await getUserById(loggedUser.id);
+        dataUser = await getFromDataUser(loggedUser.id);
+      } else {
+        data = await getUserById(userId);
+        dataUser = await getFromDataUser(userId);
+      }
+     
       const name = data.data[0].name + " " + data.data[0].surname;
       setName(name);
       setBio(dataUser.data[0].biography);
@@ -119,14 +127,12 @@ function ProfileCard({ userId, loggedUser }) {
       let response;
       if (parseInt(user.id) === req.user_id) {
         response = await getUserById(req.user2_id);
-        console.log("1.resp");
         response.data.forEach((value) => {
           names.id = req.user2_id;
           names.fullname = value.name + " " + value.surname;
         });
       } else {
         response = await getUserById(req.user_id);
-        console.log("2.resp");
         response.data.forEach((value) => {
           names.id = req.user_id;
           names.fullname = value.name + " " + value.surname;
@@ -141,23 +147,26 @@ function ProfileCard({ userId, loggedUser }) {
     try {
       const result = await getChat(userId);
       console.log('result.',result);
+      if(!result) {
+        try {
+          await newChat(user.id,userId);
+        } catch(error) {
+          Swal.fire({
+            title: "Oops...",
+            icon: "error",
+            text: "Ha ocurrido un error al crear el chat",
+          });
+        }
+      } else {
+        navigate('/chat');
+      }
     } catch(error){
       Swal.fire({
         title: "Oops...",
         icon: "error",
         text: "Ha ocurrido un error al obtener el chat",
       });
-    }
-    try {
-      await newChat(user.id,userId);
-    } catch(error) {
-      Swal.fire({
-        title: "Oops...",
-        icon: "error",
-        text: "Ha ocurrido un error al crear el chat",
-      });
-    }
-    
+    }    
     navigate('/chat');
   }
 

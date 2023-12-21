@@ -38,44 +38,47 @@ function Breathing() {
       <div>
         <Menu />
       </div>
-      <div className="grid w-screen ">
-        <main className="flex flex-col justify-center text-center font-Montserrat">
-          <div className="mt-[3.5rem] justify-start">
-            <p>
-              Enfrentar la ansiedad puede ser desafiante, pero las técnicas de
-              relajación y mindfulness ofrecen una vía efectiva para reducir su
-              impacto en tu bienestar.
-              La práctica constante de estas técnicas no solo te permite aliviar
-              la ansiedad, sino que también contribuye a mejorar tu salud mental
-              y emocional. 
-            </p>
-
-            <p>
-              Para facilitar este proceso, hemos creado una herramienta dedicada
-              a ayudarte a controlar tu respiración. La respiración consciente
-              es una piedra angular en la gestión de la ansiedad. A través de
-              esta herramienta, podrás aprender y aplicar técnicas de
-              respiración que te permitirán encontrar calma y equilibrio en
-              cualquier momento del día.
-            </p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <h1 className="mt-12 text-2xl">{breathing}</h1>
-            <div className="my-16 rounded-full w-52 h-52 bg-secondary ball"></div>
-            <button
-              className="w-32 p-4 mb-8 rounded-md bg-secondary"
-              onClick={initBreath}
-            >
-              EMPEZAR
-            </button>
-            <button
-              className="w-32 p-4 rounded-md bg-secondary"
-              onClick={stopBreath}
-            >
-              PARAR
-            </button>
+      <div className="grid w-screen grid-cols-2 mx-auto text-center">
+        <main className="flex gap-16 mx-auto font-Montserrat">
+          <div className="flex justify-end gap-16 ml-16 text-center">
+            <div className="flex my-auto w-fit">
+              <blockquote className="flex flex-col gap-10 mx-auto w-[150px] md:w-96">
+                <h1 className="p-3 border-2 rounded-xl border-marron bg-primary">
+                  Enfrentar la ansiedad puede ser desafiante, pero tenemos técnicas
+                  de relajación y mindfulness para ayudarte
+                  reducir su impacto en tu bienestar.
+                </h1>
+                <p className="p-3 bg-white border-2 rounded-xl border-marron">
+                  La práctica constante de estas técnicas contribuye a mejorar tu
+                  salud mental y emocional.{" "}
+                </p>
+                <p className="p-3 border-2 rounded-xl border-marron bg-primary">
+                  La respiración
+                  consciente es una piedra angular en la gestión de la ansiedad.{" "}
+                </p>
+                  <p className="p-3 bg-white border-2 rounded-xl border-marron">Aprender y aplica
+                  técnicas de respiración para encontrar calma y
+                  equilibrio en cualquier momento del día.{" "}</p> 
+              </blockquote>
+            </div>
           </div>
         </main>
+        <div className="flex flex-col items-center justify-center gap-4 mx-auto ml-32">
+          <h1 className="mt-12 text-2xl">{breathing}</h1>
+          <div className="my-16 rounded-full w-52 h-52 bg-secondary ball"></div>
+          <button
+            className="w-32 p-4 mb-8 font-bold border-2 rounded-xl border-marron bg-secondary animate-pulse animate-infinite hover:animate-none"
+            onClick={initBreath}
+          >
+            EMPEZAR
+          </button>
+          <button
+            className="w-32 p-4 border-2 rounded-xl border-marron bg-secondary"
+            onClick={stopBreath}
+          >
+            PARAR
+          </button>
+        </div>
       </div>
     </div>
   );
