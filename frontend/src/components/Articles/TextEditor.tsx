@@ -100,11 +100,11 @@ function TextEditor() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (title === '' || content === ''){
+    if (title === "" || content === "") {
       Swal.fire({
-        title: 'Oops...',
-        icon: 'error',
-        text: 'Rellena todos los campos'
+        title: "Oops...",
+        icon: "error",
+        text: "Rellena todos los campos",
       });
       return;
     }
@@ -123,22 +123,21 @@ function TextEditor() {
         content: content,
       };
 
-      
       await addArticle(article).then((response) => {
         if (response.error) {
           console.log(response.error);
           Swal.fire({
-            title: 'Oops...',
-            icon: 'error',
-            text: 'Ha ocurrido un error al guardar el artículo'
+            title: "Oops...",
+            icon: "error",
+            text: "Ha ocurrido un error al guardar el artículo",
           });
         } else {
           setTitle("");
           setContent("");
           Swal.fire({
-            title: '¡Artículo añadido!',
-            icon: 'success',
-            confirmButtonText: 'Cerrar'
+            title: "¡Artículo añadido!",
+            icon: "success",
+            confirmButtonText: "Cerrar",
           });
         }
 
@@ -147,10 +146,12 @@ function TextEditor() {
     }
   };
 
-  
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-col justify-center w-fit h-fit">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col justify-center h-screen w-scren sm:w-fit sm:h-fit"
+      >
         <input
           className="p-2 my-4 border-2 rounded-md border-secondary"
           type="text"
@@ -168,18 +169,17 @@ function TextEditor() {
           style={{
             border: "2px solid 	rgb(221, 190, 169)",
             backgroundColor: "white",
-            borderRadius: "6px"
+            borderRadius: "6px",
           }}
           className="customStyles"
         />
         <button
-        className="w-40 p-2 mx-auto mt-4 text-lg rounded-md bg-secondary"
-        type="submit"
-      >
-        Guardar
-      </button>
+          className="w-40 p-2 mx-auto mt-4 text-lg rounded-md bg-secondary"
+          type="submit"
+        >
+          Guardar
+        </button>
       </form>
-      
     </>
   );
 }

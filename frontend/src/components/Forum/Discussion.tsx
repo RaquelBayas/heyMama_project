@@ -88,19 +88,19 @@ function Discussion() {
       <div>
         <Menu />
       </div>
-      <div className="grid w-full h-full grid-rows-[5em_1fr]">
+      <div className="sm:grid w-full h-full sm:grid-rows-[5em_1fr]">
         <div className="flex flex-col justify-center mt-3 mb-3 ">
           <div className="flex justify-evenly">
             <Search />
           </div>
           <div className="w-full mt-2 mb-2 border-b border-[#DDBEA9]"></div>
         </div>
-        <main className="flex flex-col">
-          <div className="flex flex-col w-3/5 p-3 mx-auto overflow-y-hidden bg-white border-4 rounded-lg border-secondary min-h-min">
+        <main className="flex flex-col mt-12 sm:mt-0">
+          <div className="flex flex-col p-3 mx-4 overflow-y-hidden bg-white border-4 rounded-lg sm:mx-auto sm:w-3/5 border-secondary min-h-min">
             <h1 className="font-bold">{theme?.subforum_title}</h1>
             <p>{theme?.subforum_content}</p>
           </div>
-          <section className="flex flex-col w-2/4 gap-6 mx-auto mt-8">
+          <section className="flex flex-col gap-6 mx-4 mt-8 sm:mx-auto sm:w-3/5">
             {discussions.map(({ discussion_id, comments, author }, index) => (
               <article
                 className="flex flex-col w-full p-3 bg-white border-4 rounded-lg border-secondary min-h-min"

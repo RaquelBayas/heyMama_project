@@ -5,7 +5,7 @@ import Search from "./Search";
 function Layout({ children }: { children: ReactNode }) {
 
     return (
-        <div className='w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden'>
+        <div className='w-screen h-screen bg-background grid sm:grid-cols-[100px,1fr] overflow-x-hidden'>
 
             <Menu />
             <div className="grid w-screen grid-rows-[5em_1fr]">

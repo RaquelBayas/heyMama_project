@@ -5,20 +5,20 @@ function ToggleSwitch() {
     const [switchState, setSwitchState] = useState(true);
 
     useEffect(() => {
-        const label = document.querySelector(`.${styles.switch}`) as HTMLLabelElement
-        const privacyState = document.querySelector('.profile') as HTMLSpanElement
+        const label = document.querySelector(`.${styles.switch}`) as HTMLLabelElement;
+        const privacyState = document.querySelector('.profile') as HTMLSpanElement;
 
         if (switchState) {
-            label.classList.add(styles.on)
-            label.classList.remove(styles.off)
-            privacyState.innerText = 'Perfil privado'
+            label.classList.add(styles.on);
+            label.classList.remove(styles.off);
+            privacyState.innerText = 'Perfil privado';
         } else {
-            label.classList.add(styles.off)
-            label.classList.remove(styles.on)
-            privacyState.innerText = 'Perfil público'
+            label.classList.add(styles.off);
+            label.classList.remove(styles.on);
+            privacyState.innerText = 'Perfil público';
         }
 
-    }, [switchState])
+    }, [switchState]);
 
     async function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
         console.log("---", e.target.checked);
@@ -52,7 +52,7 @@ function ToggleSwitch() {
         <div>
             <label className={`flex flex-col gap-4`} htmlFor="checkbox">
                 Politica de privacidad:
-                <span className={`ml-5 profile block text-gray-500`}>
+                <span className={`ml-5 profile block text-orange-800`}>
                     Perfil público
                 </span>
                 <label htmlFor="checkbox" className={`ml-5 ${styles.switch} ${switchState ? styles.on : styles.off}`}>

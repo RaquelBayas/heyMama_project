@@ -73,9 +73,7 @@ function ProfileCard({ userId, loggedUser }) {
       const name = data.data[0].name + " " + data.data[0].surname;
       setName(name);
       setBio(dataUser.data[0].biography);
-      console.log('1.',dataUser.data[0].avatar)
       dataUser.data[0].avatar ? setPhoto(dataUser.data[0].avatar.slice(".")[0]) : setPhoto('');
-      console.log(photo)
     }
     getData();
 
@@ -193,7 +191,7 @@ function ProfileCard({ userId, loggedUser }) {
   }, [friends]);
 
   return (
-    <div className="flex flex-col justify-center gap-12 p-8 text-center align-middle bg-white rounded-md h-fit w-fit">
+    <div className="flex flex-col justify-center gap-12 p-8 mx-auto text-center align-middle bg-white rounded-md h-fit w-fit">
       <img
         src={
           photo !== ''
@@ -208,7 +206,7 @@ function ProfileCard({ userId, loggedUser }) {
         <h1 className="text-lg text-center">{name}</h1>
         <p className="text-center text-md ">{bio}</p>
 
-        <div className="mx-auto">
+        <div className="w-full mx-auto">
           <div className="bottom-0 flex justify-center gap-4 mx-auto align-middle ">
             <button onClick={handleNewChat} className="p-2 mt-2 rounded-md bg-primary w-fit">
               Mensajes
@@ -270,7 +268,7 @@ function ProfileCard({ userId, loggedUser }) {
               </div>
             </Modal>
           </div>
-          <div className="mx-auto">
+          <div className="w-full mx-auto">
             {loggedUser.id === parseInt(userId) && (
               <button
                 className="p-2 mx-auto mt-1 rounded-md bg-primary w-fit"

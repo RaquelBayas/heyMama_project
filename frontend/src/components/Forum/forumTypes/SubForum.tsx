@@ -71,17 +71,17 @@ function SubForum() {
   }, [subforumId.id]);
 
   return (
-    <main className="flex flex-col items-center gap-4 mx-auto mt-10 font-Montserrat sm:ml-60">
+    <main className="flex flex-col gap-4 mt-10 sm:items-center sm:mx-auto font-Montserrat sm:ml-60">
       <div className="flex items-center self-start">
         <Link to={'/forums'} >
           <h1 className=" text-4xl font-semibold text-[#8B6956] flex items-center mt-4 mb-6 data-forumspath">
-            FOROS <img src="/assets/arrow-symbol.svg" className="inline w-4 mx-6" />{" "}
+            FOROS <img src="/assets/arrow-symbol.svg" className="inline w-4 sm:mx-6" />{" "}
 
           </h1>
         </Link>
         <span className="text-2xl text-marron"> {titleForum}</span>
       </div>
-      {forumCards.length > 0 && <section className="grid grid-cols-2 mw150:flex mw150:flex-col justify-center gap-6 border-2 border-[#DDBEA9] p-8 -pr-8 -ml-[12rem] mb-4 w-5/6">
+      {forumCards.length > 0 && <section className="flex flex-col sm:grid sm:grid-cols-2 mw150:flex mw150:flex-col justify-center gap-6 border-2 border-[#DDBEA9] p-8 sm:-pr-8 sm:-ml-[12rem] mb-4 w-5/6">
         {forumCards?.map(
           ({
             subforum_id,

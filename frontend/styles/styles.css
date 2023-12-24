@@ -36,7 +36,7 @@
     .data-forumspath {
         justify-content: center;
         align-self: center;
-        margin-left: -8rem;
+        /*margin-left: -8rem;*/
         flex-direction: column;
     }
 }
