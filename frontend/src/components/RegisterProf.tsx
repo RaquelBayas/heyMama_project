@@ -52,7 +52,7 @@ function RegisterProf() {
       <div className="my-auto bg-background">
         <h1 className="text-4xl text-center font-anybody">CREA UNA CUENTA</h1>
         <form
-          className="max-w-md mx-auto my-auto mt-8 max-h-md sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
+          className="max-w-md mx-6 my-8 sm:mx-auto max-h-md sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
           onSubmit={handleSubmit}
         >
           <div className="mb-4">
@@ -184,7 +184,7 @@ function RegisterProf() {
           </div>
           <button
             type="submit"
-            className="flex p-2 mx-auto my-auto border-2 border-solid rounded-md border-dark_brown text-dark_brown bg-primary"
+            className="flex p-4 mx-auto my-12 text-xl border-2 border-solid rounded-md sm:my-auto border-dark_brown text-dark_brown bg-primary"
           >
             <span className="my-auto mr-2">
               <FaArrowRight />{" "}

@@ -50,7 +50,7 @@ function Register() {
       <div className="my-auto bg-background">
         <h1 className="text-4xl text-center font-anybody">CREA UNA CUENTA</h1>
         <form
-          className="max-w-md mx-auto my-auto mt-8 max-h-md sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
+          className="max-w-md mx-6 my-8 sm:mx-auto max-h-md sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
           onSubmit={handleSubmit}
         >
           <div className="mb-4">
@@ -144,8 +144,9 @@ function Register() {
                 {showPassword ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
-            <div className="mb-4">
-          <label
+          </div>
+          <div className="mb-4">
+            <label
               htmlFor="username"
               className="block mb-1 text-sm font-medium text-gray-600"
             >
@@ -161,10 +162,9 @@ function Register() {
               className="w-full py-2 bg-transparent border-b-2 border-dark_brown focus:outline-none focus:border-blue-700"
             />
           </div>
-          </div>
           <button
             type="submit"
-            className="flex p-2 mx-auto mt-4 border-2 border-solid rounded-md border-dark_brown text-dark_brown bg-primary"
+            className="flex p-4 mx-auto mt-12 text-xl border-2 border-solid rounded-md border-dark_brown text-dark_brown bg-primary"
           >
             <span className="my-auto mr-2">
               <FaArrowRight />{" "}
@@ -178,4 +178,3 @@ function Register() {
 }
 
 export default Register;
-

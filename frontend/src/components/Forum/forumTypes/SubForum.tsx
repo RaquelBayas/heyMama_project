@@ -71,7 +71,7 @@ function SubForum() {
   }, [subforumId.id]);
 
   return (
-    <main className="flex flex-col items-center gap-4 font-Montserrat ml-60 mt-10">
+    <main className="flex flex-col items-center gap-4 mx-auto mt-10 font-Montserrat sm:ml-60">
       <div className="flex items-center self-start">
         <Link to={'/forums'} >
           <h1 className=" text-4xl font-semibold text-[#8B6956] flex items-center mt-4 mb-6 data-forumspath">

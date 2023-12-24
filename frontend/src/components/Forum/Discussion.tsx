@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import Menu from "../Menu";
 import Search from "../Search";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SubForum } from "../../models/SubForum";
 import { FaTrashAlt } from "react-icons/fa";
 import { Comment } from "../../models/Comment";
@@ -44,7 +44,7 @@ function Discussion() {
     };
     addComment(newComment);
     setHasChanged(!hasChanged);
-    handleClose();   
+    handleClose();
   };
   const handleDeleteComment = async (index: number) => {
     const selectedComment = discussions.find((item: Comment) => {
@@ -81,10 +81,10 @@ function Discussion() {
         }
       })
       .catch((error) => console.error(error.message));
-  }, [forum_id, discussion_id,hasChanged]);
+  }, [forum_id, discussion_id, hasChanged]);
 
   return (
-    <div className="w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden gap-2">
+    <div className="w-screen h-screen bg-background sm:grid sm:grid-cols-[100px,1fr] overflow-x-hidden gap-2">
       <div>
         <Menu />
       </div>
@@ -101,30 +101,28 @@ function Discussion() {
             <p>{theme?.subforum_content}</p>
           </div>
           <section className="flex flex-col w-2/4 gap-6 mx-auto mt-8">
-            {discussions
-              
-              .map(({ discussion_id, comments, author }, index) => (
-                <article
-                  className="flex flex-col w-full p-3 bg-white border-4 rounded-lg border-secondary min-h-min"
-                  key={index}
-                >
-                  {author === user.id && (
-                    <div className="flex justify-end">
-                      <button
-                        onClick={() => handleDeleteComment(discussion_id!)}
-                        className="p-2 text-sm text-white rounded-lg flex-end w-fit bg-marron"
-                      >
-                        <FaTrashAlt />
-                      </button>
-                    </div>
-                  )}
-                  <p className="mb-4 text-gray-600">{comments}</p>
+            {discussions.map(({ discussion_id, comments, author }, index) => (
+              <article
+                className="flex flex-col w-full p-3 bg-white border-4 rounded-lg border-secondary min-h-min"
+                key={index}
+              >
+                {author === user.id && (
+                  <div className="flex justify-end">
+                    <button
+                      onClick={() => handleDeleteComment(discussion_id!)}
+                      className="p-2 text-sm text-white rounded-lg flex-end w-fit bg-marron"
+                    >
+                      <FaTrashAlt />
+                    </button>
+                  </div>
+                )}
+                <p className="mb-4 text-gray-600">{comments}</p>
 
-                  <span key={index} className="text-gray-400">
-                    {namesAuthor![index]}
-                  </span>
-                </article>
-              ))}
+                <span key={index} className="text-gray-400">
+                  {namesAuthor![index]}
+                </span>
+              </article>
+            ))}
             <button
               onClick={handleClickOpen}
               className="absolute p-2 text-4xl text-white rounded-lg bg-marron bottom-8 right-8"

@@ -166,7 +166,7 @@ function Chat() {
   }
 
   return (
-    <div className="flex place-content-center gap-16 h-screen p-[36px] pb-[100px]">
+    <div className="flex flex-col sm:flex-row place-content-center mt-24 sm:gap-16 h-fit sm:h-screen p-[36px] pb-[100px]">
       <section className="border-2 border-marron rounded-sm w-[300px] h-full relative bg-white">
         {conversations.map((conv, index) => (
           <>
@@ -182,7 +182,7 @@ function Chat() {
           </>
         ))}
       </section>
-      <section className="border-2 border-marron rounded-sm w-[850px] h-full relative">
+      <section className="border-2 border-marron rounded-sm sm:w-[850px] h-full relative">
         {currentChat ? (
           <>
             {console.log("existe conversacion/chat actual y carga el chat")}

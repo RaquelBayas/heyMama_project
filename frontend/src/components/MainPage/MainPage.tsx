@@ -9,8 +9,8 @@ function MainPage() {
         <div className="overflow-x-hidden overflow-y-hidden">
             <Navbar />
             <Landpage />
-            <About />
-            <Contact />
+            <div className="my-12"><About /></div>
+            <div className=""><Contact /></div>
         </div>
     );
 }

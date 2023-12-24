@@ -29,10 +29,10 @@ function Menu() {
   ];
 
   return (
-    <div className="bg-primary h-screen w-[100px] flex items-center flex-col shadow-md shadow-amber-950 fixed">
-      <ul className="flex flex-col h-full align-top place-content-evenly">
+    <div className="absolute z-10 top-0 bg-primary h-24 flex-col w-screen sm:h-screen sm:w-[100px] flex items-center sm:flex-col shadow-md shadow-amber-950">
+      <ul className="flex flex-row h-full align-middle sm:align-top sm:flex-col place-content-evenly">
         {links.map((link, index) => (
-          <li className="mb-4" key={index}>
+          <li className="my-auto sm:mb-4 " key={index}>
             <Tooltip
               title={link.text}
               position="right"

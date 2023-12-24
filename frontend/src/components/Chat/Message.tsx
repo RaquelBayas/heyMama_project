@@ -13,7 +13,7 @@ function Message({ own, message }) {
 
 
     return (
-        <li className={`p-6 mx-6 bg-gray-900 text-white rounded-lg w-[500px] ${own ? 'self-end' : ''}`} > {message.text}
+        <li className={`p-6 mx-6 bg-gray-900 w-fit text-white rounded-lg sm:w-[500px] ${own ? 'self-end' : ''}`} > {message.text}
             <time className="block">{timeAgo(message.created_at)}</time>
         </ li>
     );

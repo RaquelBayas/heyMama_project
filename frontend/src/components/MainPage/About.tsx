@@ -3,22 +3,22 @@ function About() {
     return (
         <section
             id='about'
-            className='flex flex-row w-full h-screen p-0 m-0 mx-auto bg-primary font-anybody '
+            className='flex flex-col w-full h-screen p-0 m-0 mx-auto text-center align-center bg-primary font-anybody md:flex-row '
         >
-            <div className='flex flex-col w-2/5'>
+            <div className='flex flex-col w-2/5 my-8 text-center'>
                 <h1
-                    className='flex flex-col gap-5 mt-auto font-semibold leading-loose tracking-widest text-center uppercase sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl xl:my-auto xl:gap-10'
+                    className='flex flex-row gap-5 mt-auto font-semibold leading-loose tracking-widest text-center uppercase md:flex-col sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl xl:my-auto xl:gap-10'
                 >
                     <span>¿Quiénes </span>
                     <span>somos?</span>
                 </h1>
                 <img
                     src="/assets/flower.svg" alt="flower"
-                    className='mt-0 mr-auto h-350 sm:h-250 sm:mt-20 md:h-350 md:mt-20 lg:h-350 lg:mt-26 xl:mt-30 xl:h-550 2xl:mt-30 ' />
+                    className='hidden mt-0 mr-auto sm:block md:h-350 md:mt-20 lg:h-350 lg:mt-26 xl:mt-30 xl:h-550 2xl:mt-30 ' />
             </div>
 
             <article
-                className='flex flex-col ml-auto mt-auto mb-14 h-auto gap-3 font-light text-justify
+                className='flex flex-col m-10 h-auto gap-3 text-xl font-light text-justify
                     
                     sm:w-[250px] sm:mr-10 sm:text-sm
                     md:w-550 md:mr-12 md:text-xl

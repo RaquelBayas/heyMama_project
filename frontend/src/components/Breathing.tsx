@@ -33,15 +33,15 @@ function Breathing() {
   }
 
   return (
-    <div className="w-screen h-screen bg-background grid grid-cols-[100px,1fr] overflow-x-hidden">
+    <div className="w-screen h-screen bg-background grid sm:grid-cols-[100px,1fr] overflow-x-hidden">
       <div>
         <Menu />
       </div>
-      <div className="grid w-screen grid-cols-2 mx-auto text-center">
-        <main className="flex gap-16 mx-auto font-Montserrat">
-          <div className="flex justify-end gap-16 ml-16 text-center">
-            <div className="flex my-auto w-fit">
-              <blockquote className="flex flex-col gap-10 mx-auto w-[150px] md:w-96">
+      <div className="grid w-screen mx-auto mt-32 text-center sm:grid-cols-2">
+        <main className="flex mx-auto sm:gap-16 font-Montserrat">
+          <div className="flex justify-end text-center sm:gap-16 sm:ml-16">
+            <div className="flex my-auto sm:w-fit">
+              <blockquote className="flex flex-col gap-10 mx-auto sm:w-[150px] md:w-96">
                 <h1 className="p-3 border-2 rounded-xl border-marron bg-primary">
                   Enfrentar la ansiedad puede ser desafiante, pero tenemos técnicas
                   de relajación y mindfulness para ayudarte
@@ -66,7 +66,7 @@ function Breathing() {
           <h1 className="mt-12 text-4xl tracking-wider">{breathing}</h1>
           <div className="my-16 rounded-full w-52 h-52 bg-sky-300 ball"></div>
           <button
-            className="w-32 p-4 mb-8 text-2xlfont-bold border-2 rounded-xl border-marron bg-secondary animate-pulse animate-infinite hover:animate-none"
+            className="w-32 p-4 mb-8 border-2 text-2xlfont-bold rounded-xl border-marron bg-secondary animate-pulse animate-infinite hover:animate-none"
             onClick={initBreath}
           >
             EMPEZAR
