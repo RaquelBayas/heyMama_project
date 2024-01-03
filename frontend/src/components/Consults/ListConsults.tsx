@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import Menu from "../Menu";
 import { getListConsult } from "../../services/consultsService";
 import { Link } from "react-router-dom";
+import { Consult } from "../../models/Consult";
 
 function ListConsults() {
   const user = JSON.parse(localStorage.getItem("user")!);
 
-  const [consults, setConsults] = useState([]);
+  const [consults, setConsults] = useState<Consult[]>([]);
 
   useEffect(() => {
      const fetchConsults = async () => {
