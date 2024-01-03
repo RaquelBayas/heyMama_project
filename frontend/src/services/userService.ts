@@ -2,7 +2,7 @@
 interface UserServiceResponse {
   error: string
 }
-async function getUserById(user_id:string) {
+async function getUserById(user_id:number|string) {
     const baseUrl = `https://heymamaproject.onrender.com/users/getUserById/${user_id}`;
 
     try {

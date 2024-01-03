@@ -1,7 +1,7 @@
 interface ProfileResponse {
   error: string;
 }
-async function getFromDataUser(user_id: string) {
+async function getFromDataUser(user_id: number|string) {
   const baseUrl = `https://heymamaproject.onrender.com/users/getDataUser/${user_id}`;
   try {
     const resp = await fetch(baseUrl, {

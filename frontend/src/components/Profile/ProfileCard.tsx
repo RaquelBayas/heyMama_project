@@ -14,8 +14,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { getChat, newChat } from "../../services/chatService";
 
 interface ProfileCardProps {
-  userId: number | string;
-  loggedUser: { id: number; [key: string]: any }; 
+  userId: string;
+  loggedUser: LoggedUser; 
+}
+
+interface LoggedUser {
+  id: number;
 }
 
 function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
@@ -107,7 +111,7 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
     fetchData();
   }, [friendReq]);
 
-  async function getListReq(list) {
+  async function getListReq(list:FriendRequest[]) {
     const names = {
       id: 0,
       fullname: "",
@@ -122,7 +126,7 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
     setUserNames(names);
   }
 
-  async function getListFriends(list) {
+  async function getListFriends(list: FriendRequest[]) {
     const names = {
       id: 0,
       fullname: "",

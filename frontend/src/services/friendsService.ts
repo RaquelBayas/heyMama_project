@@ -5,7 +5,7 @@ interface Response {
 interface LoggedUser {
   id: number;
 }
-async function addFriend(loggedUser: number, userId: number) {
+async function addFriend(loggedUser: LoggedUser, userId: string|number) {
   const baseUrl = "https://heymamaproject.onrender.com/friends/addFriend";
 
   try {
@@ -31,7 +31,7 @@ async function addFriend(loggedUser: number, userId: number) {
   }
 }
 
-async function checkFriends(loggedUser: number, userId: number) {
+async function checkFriends(loggedUser: LoggedUser, userId: number|string) {
   const baseUrl = "https://heymamaproject.onrender.com/friends/areFriends";
   try {
     const resp = await fetch(baseUrl, {

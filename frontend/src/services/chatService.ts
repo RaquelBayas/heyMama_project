@@ -1,7 +1,7 @@
 interface Response {
     error: string
 }
-async function newChat(user_id:number, user2_id:number){
+async function newChat(user_id:number, user2_id:number|string){
     const baseUrl = 'https://heymamaproject.onrender.com/chat/';
 
     try {
@@ -23,7 +23,7 @@ async function newChat(user_id:number, user2_id:number){
     }
 }
 
-async function getChat(userId:number){
+async function getChat(userId:string){
     const baseUrl = `https://heymamaproject.onrender.com/chat/${userId}`;
 
     try {
