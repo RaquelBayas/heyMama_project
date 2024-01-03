@@ -12,9 +12,13 @@ import { addPostTL, getPostByUser } from "../../services/timelineService";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { getUserById } from "../../services/userService";
 
-function Timeline({ userId, loggedUser }) {
+interface TimelineProps {
+  userId: string;
+  loggedUser: number 
+}
+function Timeline({ userId, loggedUser }: TimelineProps) {
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string>("");
   const [open, setOpen] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
   const [likePost, setLikePost] = useState<{ [post_timeline_id: number]: boolean }>({});
@@ -46,7 +50,7 @@ function Timeline({ userId, loggedUser }) {
     setOpen(false);
   };
 
-  const handleSubmit = async (e: Event) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newPost: PostTL = {
       user_id: loggedUser,
@@ -60,7 +64,7 @@ function Timeline({ userId, loggedUser }) {
 
   return (
     <div className="mx-auto sm:ml-12">
-      {posts?.map(({ post_timeline_id,user_id, comment }) => (
+      {posts?.map(({ post_timeline_id, comment }) => (
         <article key={post_timeline_id} className="flex mb-4 bg-white rounded-md gap-24 p-3 border-2 border-primary drop-shadow-md sm:w-[52rem] mw150:w-max mw68:flex-col mw68:gap-4 mw45:text-center">
           <div className="flex flex-col w-full mt-4 mr-12 mw150:m-0">
             <h2 className="my-2 text-xl font-semibold mh150:m-0">{name}</h2>
