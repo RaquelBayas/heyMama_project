@@ -1,8 +1,8 @@
 import { moodTypeNames } from './MoodGraphic';
 
 type MoodRecordProps = {
-    moodDate: Date;
-    moodType: string;
+    moodDate: Date | undefined;
+    moodType: number;
 }
 function MoodRecordRow(props:MoodRecordProps) {
     const {moodDate, moodType} = props;    
@@ -17,13 +17,13 @@ function MoodRecordRow(props:MoodRecordProps) {
     }
     
   return (
-    <div className='border-solid border-2 m-2 border-secondary p-2 rounded-md'>
-       <div className='flex  font-Montserrat text-center justify-center'>
-       <h1 className='text-left'>{formatDate(moodDate)}</h1>
+    <div className='p-2 m-2 border-2 border-solid rounded-md border-secondary'>
+       <div className='flex justify-center text-center font-Montserrat'>
+       <h1 className='text-left'>{formatDate(moodDate!)}</h1>
         <h1 className='ml-4'>{moodTypeNames[moodType]}</h1>
        </div>
     </div>
-  )
+  );
 }
 
-export default MoodRecordRow
+export default MoodRecordRow;
