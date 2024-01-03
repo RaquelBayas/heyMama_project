@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaRegFaceMehBlank , FaRegFaceTired, FaRegFaceAngry, FaRegFaceLaughBeam, FaRegFaceSadCry } from "react-icons/fa6";
 import { addMood } from '../services/moodService';
 import { MoodData } from '../models/MoodData';

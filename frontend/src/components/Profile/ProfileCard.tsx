@@ -13,7 +13,12 @@ import { FriendRequest } from "../../models/FriendRequest";
 import { Link, useNavigate } from "react-router-dom";
 import { getChat, newChat } from "../../services/chatService";
 
-function ProfileCard({ userId, loggedUser }) {
+interface ProfileCardProps {
+  userId: any; 
+  loggedUser: any; 
+}
+
+function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
   const customStyles = {
     content: {
       width: "50%",
@@ -126,13 +131,13 @@ function ProfileCard({ userId, loggedUser }) {
       let response;
       if (parseInt(user.id) === req.user_id) {
         response = await getUserById(req.user2_id);
-        response.data.forEach((value) => {
+        response.data.forEach((value: { name: string; surname: string; }) => {
           names.id = req.user2_id;
           names.fullname = value.name + " " + value.surname;
         });
       } else {
         response = await getUserById(req.user_id);
-        response.data.forEach((value) => {
+        response.data.forEach((value: { name: string; surname: string; }) => {
           names.id = req.user_id;
           names.fullname = value.name + " " + value.surname;
         });

@@ -10,7 +10,7 @@ function Search() {
   const [isSelectVisible, setIsSelectVisible] = useState(true); 
   const navigate = useNavigate();
 
-  const handleProfileClick = (userId) => {
+  const handleProfileClick = (userId: number) => {
     navigate(`/profile/${userId}`);
     setIsSelectVisible(false); // Oculta el Select al seleccionar un usuario
   };
