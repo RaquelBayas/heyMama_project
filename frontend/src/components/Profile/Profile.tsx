@@ -1,4 +1,3 @@
-import React from "react";
 import ProfileCard from "./ProfileCard";
 import Timeline from "../Timeline/Timeline";
 import Search from "../Search";

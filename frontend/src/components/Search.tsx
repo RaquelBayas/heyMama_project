@@ -3,7 +3,6 @@ import Select from 'react-select';
 import { findUser } from '../services/searchService';
 import { useNavigate } from 'react-router-dom';
 
-
 function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);

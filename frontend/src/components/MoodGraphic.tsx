@@ -1,8 +1,7 @@
-import { useState, useEffect, useContext } from 'react'
+import { useEffect, useContext } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { getMood } from '../services/moodService';
-import { MoodData } from '../models/MoodData';
 import {MoodContext, MoodContextValue} from '../context/MoodContext';
 
 

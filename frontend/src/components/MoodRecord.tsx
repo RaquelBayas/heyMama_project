@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react';
 import { MoodData } from '../models/MoodData';
 import { getMood } from '../services/moodService';
 import MoodRecordRow from './MoodRecordRow';
@@ -25,8 +25,8 @@ function MoodRecord() {
   
   return (
     <MoodProvider>
-        <div className='w-full h-4/5 text-center overflow-y-auto '>
-        <h1 className='text-xl font-Montserrat m-4'>Historial de emociones</h1>
+        <div className='w-full overflow-y-auto text-center h-4/5 '>
+        <h1 className='m-4 text-xl font-Montserrat'>Historial de emociones</h1>
         {           
         data.map((item:MoodData, index) =>{
           return <MoodRecordRow key={index} moodDate={item.mood_date} moodType={item.mood_type_id}/>

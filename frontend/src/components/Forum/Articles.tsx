@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Menu from "../Menu";
 import Search from "../Search";
 import { Link } from "react-router-dom";
-import { create } from "@mui/material/styles/createTransitions";
 
 function Articles() {
   const userRaw = localStorage.getItem("user");

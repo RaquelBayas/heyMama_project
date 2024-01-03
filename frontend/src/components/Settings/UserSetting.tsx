@@ -1,7 +1,6 @@
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import AccountSetting from './AccountSetting';
 import ProfileSetting from './ProfileSetting';
-import useUserContext from '../../hooks/useUserContext';
 
 function UserSetting() {
     const navigate = useNavigate()

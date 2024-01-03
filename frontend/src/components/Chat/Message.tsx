@@ -1,4 +1,4 @@
-import timeAgo from '../../helpers/timeAgo.js';
+import timeAgo from '../../helpers/timeAgo.js'
 
 function Message({ own, message }) {
 
