@@ -14,7 +14,7 @@ import { getUserById } from "../../services/userService";
 
 interface TimelineProps {
   userId: string;
-  loggedUser: number 
+  loggedUser: {id:number} 
 }
 function Timeline({ userId, loggedUser }: TimelineProps) {
 
@@ -53,7 +53,7 @@ function Timeline({ userId, loggedUser }: TimelineProps) {
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const newPost: PostTL = {
-      user_id: loggedUser,
+      user_id: loggedUser.id,
       comment: comment,
     };
     await addPostTL(newPost);
@@ -79,7 +79,7 @@ function Timeline({ userId, loggedUser }: TimelineProps) {
       ))}
       <div>
        {
-        loggedUser.id == userId &&  (<button
+        loggedUser.id === parseInt(userId) &&  (<button
           className="absolute p-4 text-white rounded-md text-md bottom-8 right-8 bg-marron"
           onClick={handleClickOpen}
         >
