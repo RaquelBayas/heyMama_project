@@ -47,7 +47,7 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
   const [isModal2Open, setIsModal2Open] = useState(false);
   const [friendReq, setFriendReq] = useState<FriendRequest[]>([]);
   const [friends, setFriends] = useState([]);
-  const [userNames, setUserNames] = useState([]);
+  const [userNames, setUserNames] = useState<{ id: number; fullname: string }[]>([]);
   const navigate = useNavigate(); 
 
   const openModal = () => {
@@ -112,18 +112,24 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
   }, [friendReq]);
 
   async function getListReq(list:FriendRequest[]) {
-    const names = {
-      id: 0,
-      fullname: "",
-    };
-    for (const req of list) {
-      const response = await getUserById(req.user_id);
-      response.data.forEach((value) => {
-        names.id = req.user_id;
-        names.fullname = value.name + " " + value.surname;
-      });
-    }
-    setUserNames(names);
+    const names = list.map(async (req) => {
+      try {
+        const response = await getUserById(req.user_id);
+        const user = response.data[0];
+        return {
+          id: req.user_id,
+          fullname: `${user.name} ${user.surname}`,
+        };
+      } catch (error) {
+        console.error("Error al obtener el usuario por ID", error);
+        return {
+          id: 0,
+          fullname: "",
+        };
+      }
+    });
+    const resolvedNames = await Promise.all(names);
+    setUserNames(resolvedNames as { id: number; fullname: string }[]);
   }
 
   async function getListFriends(list: FriendRequest[]) {
