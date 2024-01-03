@@ -45,6 +45,7 @@ function TestEdimburgo() {
     const totalScore = calculateTotalScore();
 
     try {
+      console.log(totalScore);
       //const response = await axios.post('https://heymamaproject.onrender.com/api/submit-epds', { totalScore });
       //console.log('Respuesta del servidor:', response.data);
     } catch (error) {

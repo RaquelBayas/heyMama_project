@@ -3,6 +3,12 @@ import Select from 'react-select';
 import { findUser } from '../services/searchService';
 import { useNavigate } from 'react-router-dom';
 
+interface SearchResult {
+  user_id: number;
+  username: string;
+  name: string;
+  surname: string;
+}
 function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -29,13 +35,12 @@ function Search() {
       }
     } catch (error) {
       console.error("Error en la búsqueda:", error);
-      setError('Error while searching user');
       setSearchResults([]);
       setIsSelectVisible(true); // Muestra el Select en caso de error
     }
   };
 
-  const dropdownOptions = searchResults.map((result) => ({
+  const dropdownOptions = searchResults.map((result: SearchResult) => ({
     value: result.user_id,
     label: `${result.username} - ${result.name} ${result.surname}`,
   }));
@@ -61,7 +66,7 @@ function Search() {
           isSearchable={false}
           menuIsOpen={true}
           placeholder="Select a user..."
-          onChange={(selectedOption) => handleProfileClick(selectedOption.value)}
+          onChange={(selectedOption) => handleProfileClick(selectedOption!.value)}
         />
       )}
     </div>
