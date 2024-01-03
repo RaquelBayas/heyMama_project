@@ -1,5 +1,4 @@
 import { MoodData } from "../models/MoodData";
-import { getUserData } from "./authService";
 
 interface MoodResponse {
     error: string

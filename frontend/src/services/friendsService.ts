@@ -2,6 +2,9 @@ interface Response {
   error: string;
 }
 
+interface LoggedUser {
+  id: number;
+}
 async function addFriend(loggedUser: number, userId: number) {
   const baseUrl = "https://heymamaproject.onrender.com/friends/addFriend";
 
@@ -52,7 +55,7 @@ async function checkFriends(loggedUser: number, userId: number) {
   }
 }
 
-async function getFriendRequests(loggedUser: number) {
+async function getFriendRequests(loggedUser: LoggedUser) {
   const baseUrl = `https://heymamaproject.onrender.com/friends/${loggedUser.id}/getFriendRequests`;
   try {
     const resp = await fetch(baseUrl, {
