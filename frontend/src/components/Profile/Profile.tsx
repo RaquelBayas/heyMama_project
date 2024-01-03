@@ -22,8 +22,8 @@ function Profile() {
         </div>
 
         <main className="flex flex-col justify-center sm:flex-row gap-4 font-Montserrat sm:ml-[3.5rem]">
-          <ProfileCard userId={user_id} loggedUser={loggedUser}/>
-          <Timeline userId={user_id} loggedUser={loggedUser}/>
+          <ProfileCard userId={user_id!} loggedUser={loggedUser}/>
+          <Timeline userId={user_id!} loggedUser={loggedUser}/>
         </main>
       </div>
     </div>
