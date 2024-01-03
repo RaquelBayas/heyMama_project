@@ -7,7 +7,7 @@ interface Response {
 
 async function addPostTL(post: PostTL){
     console.log('post-serv.',post);
-    const baseUrl = 'http://localhost:5000/timeline/addPost';
+    const baseUrl = 'https://heymamaproject.onrender.com/timeline/addPost';
 
     try {
         const resp = await fetch(baseUrl, {
@@ -30,7 +30,7 @@ async function addPostTL(post: PostTL){
 
 async function getPostByUser(user_id:string) {
 
-    const baseUrl = `http://localhost:5000/timeline/getPostsByUser/${user_id}`;
+    const baseUrl = `https://heymamaproject.onrender.com/timeline/getPostsByUser/${user_id}`;
     try {
         const resp = await fetch(baseUrl, {
           method: 'GET',

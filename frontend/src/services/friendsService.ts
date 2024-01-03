@@ -3,7 +3,7 @@ interface Response {
 }
 
 async function addFriend(loggedUser: number, userId: number) {
-  const baseUrl = "http://localhost:5000/friends/addFriend";
+  const baseUrl = "https://heymamaproject.onrender.com/friends/addFriend";
 
   try {
     const resp = await fetch(baseUrl, {
@@ -29,7 +29,7 @@ async function addFriend(loggedUser: number, userId: number) {
 }
 
 async function checkFriends(loggedUser: number, userId: number) {
-  const baseUrl = "http://localhost:5000/friends/areFriends";
+  const baseUrl = "https://heymamaproject.onrender.com/friends/areFriends";
   try {
     const resp = await fetch(baseUrl, {
       method: "POST",
@@ -53,7 +53,7 @@ async function checkFriends(loggedUser: number, userId: number) {
 }
 
 async function getFriendRequests(loggedUser: number) {
-  const baseUrl = `http://localhost:5000/friends/${loggedUser.id}/getFriendRequests`;
+  const baseUrl = `https://heymamaproject.onrender.com/friends/${loggedUser.id}/getFriendRequests`;
   try {
     const resp = await fetch(baseUrl, {
       method: "GET",
@@ -73,7 +73,7 @@ async function getFriendRequests(loggedUser: number) {
 }
 
 async function getFriends(id: number) {
-  const baseUrl = `http://localhost:5000/friends/${id}/friends`;
+  const baseUrl = `https://heymamaproject.onrender.com/friends/${id}/friends`;
   try {
     const resp = await fetch(baseUrl, {
       method: "GET",

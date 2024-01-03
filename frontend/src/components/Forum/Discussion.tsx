@@ -55,7 +55,7 @@ function Discussion() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/forum/subforum/${forum_id}/${discussion_id}`)
+    fetch(`https://heymamaproject.onrender.com/forum/subforum/${forum_id}/${discussion_id}`)
       .then((data) => data.json())
       .then((info) => {
         setTheme(info.data[0]);
@@ -64,7 +64,7 @@ function Discussion() {
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/forum/subforum/${forum_id}/discussion/${discussion_id}`
+      `https://heymamaproject.onrender.com/forum/subforum/${forum_id}/discussion/${discussion_id}`
     )
       .then((resp) => resp.json())
       .then(async (comentarios) => {

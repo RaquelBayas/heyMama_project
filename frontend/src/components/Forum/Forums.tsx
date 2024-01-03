@@ -14,7 +14,7 @@ function Forum() {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/forum/`)
+        fetch(`https://heymamaproject.onrender.com/forum/`)
             .then(resp => resp.json())
             .then(forums => {
                 console.log(forums);

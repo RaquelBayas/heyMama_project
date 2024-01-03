@@ -5,7 +5,7 @@ interface Response {
 }
 
 async function addConsult(consult: Consult) {
-  const baseUrl = "http://localhost:5000/consults/addConsult";
+  const baseUrl = "https://heymamaproject.onrender.com/consults/addConsult";
 
   try {
     const resp = await fetch(baseUrl, {
@@ -27,7 +27,7 @@ async function addConsult(consult: Consult) {
 }
 
 async function getConsult(user_id: number, professional_id: number) {
-  const baseUrl = `http://localhost:5000/consults/getConsults/${user_id}/${professional_id}`;
+  const baseUrl = `https://heymamaproject.onrender.com/consults/getConsults/${user_id}/${professional_id}`;
   try {
     const resp = await fetch(baseUrl, {
       method: "GET",
@@ -48,7 +48,7 @@ async function getConsult(user_id: number, professional_id: number) {
 
 async function getListConsult(id: number) {
     
-  const baseUrl = `http://localhost:5000/consults/${id}/getConsults`;
+  const baseUrl = `https://heymamaproject.onrender.com/consults/${id}/getConsults`;
   try {
     const resp = await fetch(baseUrl, {
       method: "GET",
@@ -68,7 +68,7 @@ async function getListConsult(id: number) {
 }
 
 async function getConsultById(consult_id: number) {
-    const baseUrl = `http://localhost:5000/consults/consult/${consult_id}`;
+    const baseUrl = `https://heymamaproject.onrender.com/consults/consult/${consult_id}`;
     try {
       const resp = await fetch(baseUrl, {
         method: "GET",

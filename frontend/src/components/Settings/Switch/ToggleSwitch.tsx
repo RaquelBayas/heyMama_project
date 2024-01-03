@@ -29,7 +29,7 @@ function ToggleSwitch() {
         const user = JSON.parse(localStorage.getItem("user")!);
         const userId = user!.id;
 
-        const baseUrl = `http://localhost:5000/users/setting/account/privacy/${userId}`;
+        const baseUrl = `https://heymamaproject.onrender.com/users/setting/account/privacy/${userId}`;
 
         try {
             const resp = await fetch(baseUrl, {

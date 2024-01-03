@@ -48,7 +48,7 @@ function SubForum() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/forum/subforum/${subforumId.id}`)
+    fetch(`https://heymamaproject.onrender.com/forum/subforum/${subforumId.id}`)
       .then((resp) => resp.json())
       .then((data) => {
         if (!data.error) {

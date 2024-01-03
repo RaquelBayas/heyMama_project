@@ -67,7 +67,7 @@ function Chat() {
   }, [user, socket]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/chat/${user.id}`)
+    fetch(`https://heymamaproject.onrender.com/chat/${user.id}`)
       .then((resp) => resp.json())
       .then((res) => {
         setConversations(res.data);
@@ -82,7 +82,7 @@ function Chat() {
   useEffect(() => {
     const convId = currentChat?.conversation_id;
 
-    fetch(`http://localhost:5000/chat/msg/${convId}`)
+    fetch(`https://heymamaproject.onrender.com/chat/msg/${convId}`)
       .then((resp) => resp.json())
       .then((res) => {
         setMessages(res.data);
@@ -142,7 +142,7 @@ function Chat() {
         JSON.stringify(message)
     );
 
-    fetch(`http://localhost:5000/chat/msg`, {
+    fetch(`https://heymamaproject.onrender.com/chat/msg`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

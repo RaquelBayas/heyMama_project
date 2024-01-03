@@ -57,6 +57,12 @@ function ProfileCard({ userId, loggedUser }) {
     setIsModal2Open(false);
   };
 
+  const checkFriendship = async () => {
+    const friends = await checkFriends(loggedUser, userId);
+    setIsFriend(friends);
+    getListFriends(friends);
+  };
+
   useEffect(() => {
     async function getData() {
       let data;
@@ -76,11 +82,6 @@ function ProfileCard({ userId, loggedUser }) {
       dataUser.data[0].avatar ? setPhoto(dataUser.data[0].avatar.slice(".")[0]) : setPhoto('');
     }
     getData();
-
-    const checkFriendship = async () => {
-      const friends = await checkFriends(loggedUser, userId);
-      setIsFriend(friends);
-    };
 
     checkFriendship();
   }, [loggedUser, photo, userId]);
@@ -195,7 +196,7 @@ function ProfileCard({ userId, loggedUser }) {
       <img
         src={
           photo !== ''
-            ? `http://localhost:5000/users/avatar/${photo}`
+            ? `https://heymamaproject.onrender.com/users/avatar/${photo}`
             : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&usqp=CAU"
         }
         alt="avatar"
@@ -226,7 +227,7 @@ function ProfileCard({ userId, loggedUser }) {
                 Añadir amigo
               </button>
             ) : (
-              <button className="p-2 mt-2 rounded-md bg-primary w-fit">
+              <button onClick={checkFriendship} className="p-2 mt-2 rounded-md bg-primary w-fit">
                 Amigos
               </button>
             )}

@@ -5,7 +5,7 @@ interface Response {
   error: string;
 }
 async function addComment(comment: Comment) {
-  const baseUrl = `http://localhost:5000/forum/subforum/${comment.forum_id}/discussion/${comment.subforum_id}/addComment`;
+  const baseUrl = `https://heymamaproject.onrender.com/forum/subforum/${comment.forum_id}/discussion/${comment.subforum_id}/addComment`;
 
   try {
     const resp = await fetch(baseUrl, {
@@ -27,7 +27,7 @@ async function addComment(comment: Comment) {
 }
 
 async function addSubForum(subforum: SubForum) {
-  const baseUrl = `http://localhost:5000/forum`;
+  const baseUrl = `https://heymamaproject.onrender.com/forum`;
 
   try {
     const resp = await fetch(baseUrl, {
@@ -49,7 +49,7 @@ async function addSubForum(subforum: SubForum) {
 
 async function getNamesForum() {
 
-  const baseUrl = `http://localhost:5000/forum`;
+  const baseUrl = `https://heymamaproject.onrender.com/forum`;
   try {
     const resp = await fetch(baseUrl, {
       method: "GET",
@@ -70,7 +70,7 @@ async function getNamesForum() {
 
 async function deleteComment(comment:Comment) {
     
-    const baseUrl = `http://localhost:5000/forum/subforum/${comment.forum_id}/discussion/${comment.subforum_id}/deleteComment/${comment.discussion_id}`;
+    const baseUrl = `https://heymamaproject.onrender.com/forum/subforum/${comment.forum_id}/discussion/${comment.subforum_id}/deleteComment/${comment.discussion_id}`;
     
     console.log('forumservice,delete',comment);
     try {

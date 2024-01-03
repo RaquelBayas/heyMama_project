@@ -4,7 +4,7 @@ interface RegisterResponse {
   error: string
 }
 async function register(registerData: RegistrationFormState): Promise<RegisterResponse> {
-  const baseUrl = 'http://localhost:5000/users/signUp';
+  const baseUrl = 'https://heymamaproject.onrender.com/users/signUp';
   try {
     const resp = await fetch(baseUrl, {
       method: 'POST',

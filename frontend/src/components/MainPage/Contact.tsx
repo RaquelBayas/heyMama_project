@@ -24,7 +24,7 @@ function Contact() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const baseUrl = "http://localhost:5000/users/contact";
+    const baseUrl = "https://heymamaproject.onrender.com/users/contact";
 
     try {
       const resp = await fetch(baseUrl, {

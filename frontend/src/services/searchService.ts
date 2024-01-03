@@ -3,7 +3,7 @@ interface Response {
   }
 
 async function findUser(user: string){
-    const baseUrl = 'http://localhost:5000/users/findUser';
+    const baseUrl = 'https://heymamaproject.onrender.com/users/findUser';
 
     try {
         const resp = await fetch(baseUrl, {

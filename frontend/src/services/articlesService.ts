@@ -4,7 +4,7 @@ interface ArticleResponse {
     error: string
 }
 async function addArticle(article: Article){
-    const baseUrl = 'http://localhost:5000/articles/addArticle';
+    const baseUrl = 'https://heymamaproject.onrender.com/articles/addArticle';
 
     try {
         const resp = await fetch(baseUrl, {

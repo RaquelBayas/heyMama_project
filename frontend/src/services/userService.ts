@@ -3,7 +3,7 @@ interface UserServiceResponse {
   error: string
 }
 async function getUserById(user_id:string) {
-    const baseUrl = `http://localhost:5000/users/getUserById/${user_id}`;
+    const baseUrl = `https://heymamaproject.onrender.com/users/getUserById/${user_id}`;
 
     try {
         const resp = await fetch(baseUrl, {

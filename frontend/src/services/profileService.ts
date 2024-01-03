@@ -2,7 +2,7 @@ interface ProfileResponse {
   error: string;
 }
 async function getFromDataUser(user_id: string) {
-  const baseUrl = `http://localhost:5000/users/getDataUser/${user_id}`;
+  const baseUrl = `https://heymamaproject.onrender.com/users/getDataUser/${user_id}`;
   try {
     const resp = await fetch(baseUrl, {
       method: "GET",

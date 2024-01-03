@@ -23,7 +23,7 @@ function Articles() {
   const [dateArticle, setDateArticle] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/articles/getArticles")
+    fetch("https://heymamaproject.onrender.com/articles/getArticles")
       .then((resp) => resp.json())
       .then((data) => {
         if (!data.error) {

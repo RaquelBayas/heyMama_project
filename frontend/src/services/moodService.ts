@@ -5,7 +5,7 @@ interface MoodResponse {
     error: string
 }
 async function addMood(moodData: MoodData){
-    const baseUrl = 'http://localhost:5000/mood/addMood';
+    const baseUrl = 'https://heymamaproject.onrender.com/mood/addMood';
 
     try {
         const resp = await fetch(baseUrl, {
@@ -28,7 +28,7 @@ async function addMood(moodData: MoodData){
 
 async function getMood(){
     const {id}  = JSON.parse(localStorage.getItem('user')!);
-    const baseUrl = 'http://localhost:5000/mood/getMood/'+id;
+    const baseUrl = 'https://heymamaproject.onrender.com/mood/getMood/'+id;
 
     try {
         const resp = await fetch(baseUrl, {

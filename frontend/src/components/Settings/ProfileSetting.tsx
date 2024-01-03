@@ -59,7 +59,7 @@ function ProfileSetting() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const baseUrl = `http://localhost:5000/users/setting/${user.id}`;
+    const baseUrl = `https://heymamaproject.onrender.com/users/setting/${user.id}`;
 
     const formData = new FormData(e.target as HTMLFormElement);
 
@@ -98,7 +98,7 @@ function ProfileSetting() {
             <img
               src={
                 settingData.avatar
-                  ? `http://localhost:5000/users/avatar/${settingData.avatar}`
+                  ? `https://heymamaproject.onrender.com/users/avatar/${settingData.avatar}`
                   : "../../../assets/avatar-person.svg"
               }
               alt="avatar"

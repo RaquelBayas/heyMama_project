@@ -17,7 +17,7 @@ function ContactList({ conv, user }) {
         console.log('id del contacto ' + friendId);
 
 
-        fetch(`http://localhost:5000/users/getUserById/${friendId}`)
+        fetch(`https://heymamaproject.onrender.com/users/getUserById/${friendId}`)
             .then(resp => resp.json())
             .then(user => {
                 setFriend(user.data[0]);

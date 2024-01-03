@@ -2,7 +2,7 @@ interface Response {
     error: string
 }
 async function newChat(user_id, user2_id){
-    const baseUrl = 'http://localhost:5000/chat/';
+    const baseUrl = 'https://heymamaproject.onrender.com/chat/';
 
     try {
         const resp = await fetch(baseUrl, {
@@ -24,7 +24,7 @@ async function newChat(user_id, user2_id){
 }
 
 async function getChat(userId){
-    const baseUrl = `http://localhost:5000/chat/${userId}`;
+    const baseUrl = `https://heymamaproject.onrender.com/chat/${userId}`;
 
     try {
         const resp = await fetch(baseUrl, {

@@ -20,7 +20,7 @@ function ArticleContent() {
   const [professional_id, setProfessional_id] = useState();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/articles/getArticlesByID/${articleId}`)
+    fetch(`https://heymamaproject.onrender.com/articles/getArticlesByID/${articleId}`)
       .then((resp) => resp.json())
       .then(async (data) => {
         console.log(data);
@@ -29,7 +29,7 @@ function ArticleContent() {
           setArticles(data.data);
           console.log("authoooor", data.data[0].author);
           fetch(
-            `http://localhost:5000/users/getUserById/${data.data[0].author}`
+            `https://heymamaproject.onrender.com/users/getUserById/${data.data[0].author}`
           )
             .then((resp) => resp.json())
             .then((data) => {

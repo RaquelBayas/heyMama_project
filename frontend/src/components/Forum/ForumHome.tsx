@@ -10,7 +10,7 @@ function ForumHome(): ReactNode {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/users/getUserById/${user.id}`)
+        fetch(`https://heymamaproject.onrender.com/users/getUserById/${user.id}`)
             .then(resp => resp.json())
             .then(user => {
                 console.log(user.data[0].username);
