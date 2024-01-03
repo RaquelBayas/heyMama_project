@@ -15,11 +15,16 @@ import { getChat, newChat } from "../../services/chatService";
 
 interface ProfileCardProps {
   userId: string;
-  loggedUser: LoggedUser; 
+  loggedUser: LoggedUser;
 }
 
 interface LoggedUser {
   id: number;
+}
+
+interface UserNames {
+  id: number;
+  fullname: string;
 }
 
 function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
@@ -47,8 +52,10 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
   const [isModal2Open, setIsModal2Open] = useState(false);
   const [friendReq, setFriendReq] = useState<FriendRequest[]>([]);
   const [friends, setFriends] = useState([]);
-  const [userNames, setUserNames] = useState<{ id: number; fullname: string }[]>([]);
-  const navigate = useNavigate(); 
+  const [userNames, setUserNames] = useState<
+    { id: number; fullname: string }[]
+  >([]);
+  const navigate = useNavigate();
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -76,19 +83,21 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
     async function getData() {
       let data;
       let dataUser;
-      console.log('userId.',(userId),'- logged', (loggedUser.id));
-      if(parseInt(userId) === loggedUser.id) {
+      console.log("userId.", userId, "- logged", loggedUser.id);
+      if (parseInt(userId) === loggedUser.id) {
         data = await getUserById(loggedUser.id);
         dataUser = await getFromDataUser(loggedUser.id);
       } else {
         data = await getUserById(userId);
         dataUser = await getFromDataUser(userId);
       }
-     
+
       const name = data.data[0].name + " " + data.data[0].surname;
       setName(name);
       setBio(dataUser.data[0].biography);
-      dataUser.data[0].avatar ? setPhoto(dataUser.data[0].avatar.slice(".")[0]) : setPhoto('');
+      dataUser.data[0].avatar
+        ? setPhoto(dataUser.data[0].avatar.slice(".")[0])
+        : setPhoto("");
     }
     getData();
 
@@ -111,7 +120,7 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
     fetchData();
   }, [friendReq]);
 
-  async function getListReq(list:FriendRequest[]) {
+  async function getListReq(list: FriendRequest[]) {
     const names = list.map(async (req) => {
       try {
         const response = await getUserById(req.user_id);
@@ -133,38 +142,36 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
   }
 
   async function getListFriends(list: FriendRequest[]) {
-    const names = {
-      id: 0,
-      fullname: "",
-    };
-    for (const req of list) {
-      let response;
-      if (parseInt(user.id) === req.user_id) {
-        response = await getUserById(req.user2_id);
-        response.data.forEach((value: { name: string; surname: string; }) => {
-          names.id = req.user2_id;
-          names.fullname = value.name + " " + value.surname;
-        });
-      } else {
-        response = await getUserById(req.user_id);
-        response.data.forEach((value: { name: string; surname: string; }) => {
-          names.id = req.user_id;
-          names.fullname = value.name + " " + value.surname;
-        });
-      }      
-    }
-    setUserNames(names);
+    const names = list.map(async (req) => {
+      try {
+        const response = await getUserById(req.user_id);
+        const user = response.data[0];
+        return {
+          id: req.user_id,
+          fullname: `${user.name} ${user.surname}`,
+        };
+      } catch (error) {
+        console.error("Error al obtener el usuario por ID", error);
+        return {
+          id: 0,
+          fullname: "",
+        };
+      }
+    });
+
+    const resolvedNames = await Promise.all(names);
+    setUserNames(resolvedNames as { id: number; fullname: string }[]);
   }
 
   async function handleNewChat() {
-    console.log('user1.',user.id,'user2.',userId);
+    console.log("user1.", user.id, "user2.", userId);
     try {
       const result = await getChat(userId);
-      console.log('result.',result);
-      if(!result) {
+      console.log("result.", result);
+      if (!result) {
         try {
-          await newChat(user.id,userId);
-        } catch(error) {
+          await newChat(user.id, userId);
+        } catch (error) {
           Swal.fire({
             title: "Oops...",
             icon: "error",
@@ -172,16 +179,16 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
           });
         }
       } else {
-        navigate('/chat');
+        navigate("/chat");
       }
-    } catch(error){
+    } catch (error) {
       Swal.fire({
         title: "Oops...",
         icon: "error",
         text: "Ha ocurrido un error al obtener el chat",
       });
-    }    
-    navigate('/chat');
+    }
+    navigate("/chat");
   }
 
   const handleAddFriend = async () => {
@@ -210,7 +217,7 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
     <div className="flex flex-col justify-center gap-12 p-8 mx-auto text-center align-middle bg-white rounded-md h-fit w-fit">
       <img
         src={
-          photo !== ''
+          photo !== ""
             ? `https://heymamaproject.onrender.com/users/avatar/${photo}`
             : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&usqp=CAU"
         }
@@ -224,7 +231,10 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
 
         <div className="w-full mx-auto">
           <div className="bottom-0 flex justify-center gap-4 mx-auto align-middle ">
-            <button onClick={handleNewChat} className="p-2 mt-2 rounded-md bg-primary w-fit">
+            <button
+              onClick={handleNewChat}
+              className="p-2 mt-2 rounded-md bg-primary w-fit"
+            >
               Mensajes
             </button>
             {loggedUser.id === parseInt(userId) ? (
@@ -242,12 +252,14 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
                 Añadir amigo
               </button>
             ) : (
-              <button onClick={checkFriendship} className="p-2 mt-2 rounded-md bg-primary w-fit">
+              <button
+                onClick={checkFriendship}
+                className="p-2 mt-2 rounded-md bg-primary w-fit"
+              >
                 Amigos
               </button>
             )}
             <Modal
-              title="modalFriends"
               isOpen={isModal2Open}
               onRequestClose={closeModal2}
               ariaHideApp={false}
@@ -308,7 +320,7 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
                     className="flex items-center justify-between gap-2 p-2 mt-2 align-middle border-2 border-primary"
                     key={index}
                   >
-                    <span>{userNames[value.user_id]}</span>
+                    
                     <div className="flex gap-4 flex-end">
                       <button className="p-2 mx-auto rounded-md bg-primary w-fit">
                         Aceptar
