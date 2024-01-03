@@ -2,7 +2,7 @@ import timeAgo from "../../helpers/timeAgo.js";
 
 interface MessageProps {
   own: boolean;
-  message: { sender: string; text: string; created_at: string };
+  message: { sender?: string; text?: string; created_at?: string };
 }
 function Message({ own, message }: MessageProps) {
   const userRaw = localStorage.getItem("user");

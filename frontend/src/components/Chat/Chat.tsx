@@ -22,8 +22,8 @@ function Chat() {
   const [currentChat, setCurrentChat] = useState<Conversation | null>(null);
   const [newMessage, setNewMessage] = useState("");
   // const socket = useRef();
-  const scrollRef = useRef<HTMLUListElement>();
-  const inputRef = useRef<HTMLInputElement>();
+  const scrollRef = useRef<HTMLUListElement|null>(null);
+  const inputRef = useRef<HTMLInputElement|null>(null);
 
   const userRaw = localStorage.getItem("user");
   const user = JSON.parse(userRaw!);
@@ -121,7 +121,7 @@ function Chat() {
     }
   }
 
-  function handleSubmit(e: SubmitEvent) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     console.log("form submit");
 

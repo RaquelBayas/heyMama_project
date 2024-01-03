@@ -34,7 +34,7 @@ function SubForum() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleSubmit = (e: Event) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const newSubForum = {
       user_id: user.id!,
