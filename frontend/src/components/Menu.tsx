@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaBookOpen, FaRegSmile } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
@@ -15,7 +15,7 @@ function Menu() {
   const [selectedLink, setSelectedLink] = useState(null);
   const [isMenuOpen, setMenuOpen] = useState(false);
 
-  const handleLinkClick = (link) => {
+  const handleLinkClick = (link: SetStateAction<null>) => {
     setSelectedLink(link);
   };
 

@@ -45,7 +45,7 @@ function ArticleContent() {
       .catch((error) => console.error(error.message));
   }, [articleId]);
 
-  function handleSendConsult() {}
+ 
   return (
     <div className="w-screen h-screen bg-background grid grid-cols-[100px,1fr] gap-4 overflow-x-hidden">
       <div>

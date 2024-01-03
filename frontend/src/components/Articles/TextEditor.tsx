@@ -93,7 +93,7 @@ function TextEditor() {
     "align",
   ];
 
-  const handleContentChange = (value) => {
+  const handleContentChange = (value: React.SetStateAction<string>) => {
     setContent(value);
   };
 

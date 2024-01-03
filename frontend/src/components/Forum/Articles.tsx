@@ -19,7 +19,6 @@ function Articles() {
   }
 
   const [articles, setArticles] = useState<Articles[]>([]);
-  const [dateArticle, setDateArticle] = useState([]);
 
   useEffect(() => {
     fetch("https://heymamaproject.onrender.com/articles/getArticles")

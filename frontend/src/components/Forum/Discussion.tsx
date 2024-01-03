@@ -70,7 +70,7 @@ function Discussion() {
       .then(async (comentarios) => {
         if (!comentarios.error) {
           const names = await Promise.all(
-            comentarios.data.map(async (value) => {
+            comentarios.data.map(async (value: { author: string; }) => {
               const data = await getUserById(value.author);
               return data.data[0].name + " " + data.data[0].surname;
             })
