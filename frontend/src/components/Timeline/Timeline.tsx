@@ -50,7 +50,7 @@ function Timeline({ userId, loggedUser }: TimelineProps) {
     setOpen(false);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const newPost: PostTL = {
       user_id: loggedUser,
