@@ -14,8 +14,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { getChat, newChat } from "../../services/chatService";
 
 interface ProfileCardProps {
-  userId: any; 
-  loggedUser: any; 
+  userId: number | string;
+  loggedUser: { id: number; [key: string]: any }; 
 }
 
 function ProfileCard({ userId, loggedUser }: ProfileCardProps) {

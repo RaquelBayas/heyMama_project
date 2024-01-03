@@ -3,15 +3,27 @@ import ContactList from "./ContactList";
 import Message from "./Message";
 import io from "socket.io-client";
 
+interface Message {
+  sender: string;
+  text: string;
+  createdAt: number;
+}
+
+interface Conversation {
+  member: string;
+  member2: string;
+  conversation_id: string;
+}
+
 function Chat() {
-  const [messages, setMessages] = useState([]);
-  const [arrivalMessage, setArrivalMessage] = useState(null);
-  const [conversations, setConversations] = useState([]);
-  const [currentChat, setCurrentChat] = useState(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [arrivalMessage, setArrivalMessage] = useState<Message | null>(null);
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [currentChat, setCurrentChat] = useState<Conversation | null>(null);
   const [newMessage, setNewMessage] = useState("");
   // const socket = useRef();
-  const scrollRef = useRef();
-  const inputRef = useRef();
+  const scrollRef = useRef<HTMLUListElement>();
+  const inputRef = useRef<HTMLInputElement>();
 
   const userRaw = localStorage.getItem("user");
   const user = JSON.parse(userRaw!);
@@ -116,11 +128,11 @@ function Chat() {
     const message = {
       sender: user.id,
       text: newMessage,
-      conversationId: currentChat.conversation_id,
+      conversationId: currentChat!.conversation_id,
     };
     console.log("Mensaje ", message);
 
-    const members = [currentChat.member, currentChat.member2];
+    const members = [currentChat!.member, currentChat!.member2];
     console.log("members " + members);
 
     const receiverId = members.find((member) => member !== user.id);
@@ -152,7 +164,7 @@ function Chat() {
       .then((resp) => resp.json())
       .then((res) => {
         setMessages([...messages, res.data]);
-        inputRef.current.value = "";
+        inputRef!.current!.value = "";
         setNewMessage("");
         console.log(
           "mensaje enviado " +
