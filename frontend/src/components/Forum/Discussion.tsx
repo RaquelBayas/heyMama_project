@@ -26,7 +26,7 @@ function Discussion() {
   const [theme, setTheme] = useState<SubForum>();
   const [open, setOpen] = useState(false);
   const [comment, setComment] = useState("");
-  const [namesAuthor, setNamesAuthor] = useState();
+  const [namesAuthor, setNamesAuthor] = useState<string[]>([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -34,7 +34,7 @@ function Discussion() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleSubmit = (e: Event) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const newComment = {
       forum_id: parseInt(forum_id!),
