@@ -12,7 +12,7 @@ interface UserContextType {
 
 interface User {
     id: string;
-    userType: 'user' | 'prof';
+    userType: 'user' | 'prof' | 'admin';
     exp: number;
 }
 

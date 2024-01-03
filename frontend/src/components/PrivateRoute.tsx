@@ -1,13 +1,18 @@
 import { Navigate } from 'react-router-dom';
 import useUserContext from '../hooks/useUserContext';
+import { ReactNode } from 'react';
 
-function PrivateRoute({ children, Professional = false }) {
+interface PrivateRouteProps {
+    children: ReactNode;
+    Professional?: boolean;
+}
+function PrivateRoute({ children, Professional = false }: PrivateRouteProps) {
     const { user } = useUserContext();
     console.log(user);
 
-    const isExpired = user?.exp < Date.now();
+    const isExpired = user!.exp < Date.now();
 
-    if (Professional && user.type === 1) return <Navigate to="/" />;
+    if (Professional && user!.userType === 'admin') return <Navigate to="/" />;
 
     if (!user || isExpired) {
         return <Navigate to="/login" />;
