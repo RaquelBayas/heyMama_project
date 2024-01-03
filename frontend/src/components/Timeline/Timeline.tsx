@@ -13,8 +13,8 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { getUserById } from "../../services/userService";
 
 interface TimelineProps {
-  userId: string;
-  loggedUser: {id:number} 
+  userId: string | undefined;
+  loggedUser: {id:number} | undefined;
 }
 function Timeline({ userId, loggedUser }: TimelineProps) {
 
@@ -27,10 +27,10 @@ function Timeline({ userId, loggedUser }: TimelineProps) {
 
   useEffect(() => {
     const getPosts = async () => {
-      const results = await getPostByUser(userId);
+      const results = await getPostByUser(userId!);
       setPosts(results.data);
       
-      const nameUser = await getUserById(userId);
+      const nameUser = await getUserById(userId!);
       setName(nameUser.data[0].name + ' ' + nameUser.data[0].surname);
     };
     getPosts();
@@ -53,7 +53,7 @@ function Timeline({ userId, loggedUser }: TimelineProps) {
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const newPost: PostTL = {
-      user_id: loggedUser.id,
+      user_id: loggedUser!.id,
       comment: comment,
     };
     await addPostTL(newPost);
@@ -79,7 +79,7 @@ function Timeline({ userId, loggedUser }: TimelineProps) {
       ))}
       <div>
        {
-        loggedUser.id === parseInt(userId) &&  (<button
+        loggedUser!.id === parseInt(userId!) &&  (<button
           className="absolute p-4 text-white rounded-md text-md bottom-8 right-8 bg-marron"
           onClick={handleClickOpen}
         >
