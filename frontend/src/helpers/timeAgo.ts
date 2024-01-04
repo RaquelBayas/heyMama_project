@@ -1,5 +1,5 @@
 
-export default function timeAgo(time:string): string{
+export default function timeAgo(time:string){
     const fechaActual = new Date();
     const fechaMensajeObj = new Date(time);
 
