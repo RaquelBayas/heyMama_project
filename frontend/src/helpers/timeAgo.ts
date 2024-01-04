@@ -1,9 +1,9 @@
 
-export default function timeAgo(time) {
+export default function timeAgo(time:string): string{
     const fechaActual = new Date();
     const fechaMensajeObj = new Date(time);
 
-    const diferenciaEnMs = fechaActual - fechaMensajeObj;
+    const diferenciaEnMs = fechaActual.getTime() - fechaMensajeObj.getTime();
     const segundosTranscurridos = Math.floor(diferenciaEnMs / 1000);
     const minutosTranscurridos = Math.floor(segundosTranscurridos / 60);
     const horasTranscurridas = Math.floor(minutosTranscurridos / 60);
@@ -21,5 +21,5 @@ export default function timeAgo(time) {
         return `hace ${horasTranscurridas} ${horasTranscurridas === 1 ? 'hora' : 'horas'}`;
     } else if (minutosTranscurridos > 0) {
         return `hace ${minutosTranscurridos} ${minutosTranscurridos === 1 ? 'minuto' : 'minutos'}`;
-    } else return;
+    } else '';
 }

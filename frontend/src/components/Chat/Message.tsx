@@ -1,4 +1,5 @@
-import timeAgo from "../../helpers/timeAgo.js";
+
+import timeAgo from "../../helpers/timeAgo.ts";
 
 interface MessageProps {
   own: boolean;
@@ -21,7 +22,7 @@ function Message({ own, message }: MessageProps) {
     >
       {" "}
       {message.text}
-      <time className="block">{timeAgo(message.created_at)}</time>
+      <time className="block">{timeAgo(message.created_at!)}</time>
     </li>
   );
 }
