@@ -9,6 +9,7 @@ import { IoIosSettings } from "react-icons/io";
 //import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
 import Tooltip from '@mui/material/Tooltip';
+import { Link } from "react-router-dom";
 
 function Menu() {
   const user = JSON.parse(localStorage.getItem("user")!);
@@ -81,13 +82,13 @@ function Menu() {
       >
         {links.map((link, index) => (
           <li className="flex m-6 my-auto sm:p-4 sm:mb-4" key={index}>
-            <Tooltip title={link.text} placement="right">
-              <button
-                onClick={() => handleLinkClick(link)}
+            <Tooltip title={link.text} placement="right" onClick={() => handleLinkClick(link)}>
+              <Link
+                to={link.to}
                 className={`tu-clase ${selectedLink === link ? "selected" : ""}`}
               >
                 {link.icon} <span className="sm:hidden">{link.text}</span>
-              </button>
+              </Link>
             </Tooltip>
           </li>
         ))}
