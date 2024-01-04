@@ -8,7 +8,7 @@ function MoodTracker() {
     const user = JSON.parse(localStorage.getItem("user")!);
     const { updateMoodData } = useContext(MoodContext) as MoodContextValue;
     const [moodState, setMoodState] = useState('');
-    const [moodData, setMoodData] = useState<MoodData[]>([]); //useState('');
+    const [moodData] = useState<MoodData[]>([]); //useState('');
 
     function handleValueChange(event: React.ChangeEvent<HTMLInputElement>) {
         setMoodState(event.target.value);
