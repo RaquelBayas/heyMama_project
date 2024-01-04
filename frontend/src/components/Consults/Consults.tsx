@@ -8,6 +8,7 @@ import {
 import Menu from "../Menu";
 import { ChangeEvent, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { Message } from "../../models/Message";
 
 function Consults() {
   const user = JSON.parse(localStorage.getItem("user")!);
@@ -37,6 +38,7 @@ function Consults() {
           response = await getConsult(user.id, professionalId);
         }
         // Establecer la información de la consulta
+        console.log(response.data.messages);
         setMessages(response.data.messages);
         setUserConsult(response.data.consult.user_id);
         console.log("msgs recibidos.", response.data.consult.user_id);
@@ -101,13 +103,12 @@ function Consults() {
             <div className="w-[60rem] bg-white h-[40rem] rounded-md">
               <div className="h-full p-12 rounded-md w-[60rem] border-2 border-secondary">
                 <ul className="flex flex-col h-full overflow-y-scroll">
-                  {messages.map((message, index) => (
+                  {messages.map((message: Message, index) => (
                     <li
                       className={`px-8 py-3 mb-2 rounded-lg w-fit bg-primary  `}
                       key={index}
                     >
                       {message.message_text}
-                      
                     </li>
                   ))}
                 </ul>
