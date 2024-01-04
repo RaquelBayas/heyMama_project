@@ -24,7 +24,7 @@
 
 @media (max-width: 430px) {
     .quill {
-        width: calc(100% -2rem);
+        width: calc(100% - 2rem);
     }
     .quill.customStyles .ql-container.ql-snow {
         height: 32rem;
