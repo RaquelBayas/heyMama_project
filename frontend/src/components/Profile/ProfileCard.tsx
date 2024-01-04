@@ -52,9 +52,7 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
   const [isModal2Open, setIsModal2Open] = useState(false);
   const [friendReq, setFriendReq] = useState<FriendRequest[]>([]);
   const [friends, setFriends] = useState([]);
-  const [userNames, setUserNames] = useState<
-    { id: number; fullname: string }[]
-  >([]);
+  const [userNames, setUserNames] = useState<UserNames[]>([]);
   const navigate = useNavigate();
 
   const openModal = () => {
@@ -268,13 +266,13 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
             >
               <div className="flex flex-col justify-around">
                 <h2>Lista de amigos</h2>
-                {friends.map((value, index) => (
+                {friends.map((_value, index) => (
                   <div
                     className="flex items-center justify-between gap-2 p-2 mt-2 align-middle border-2 border-primary"
                     key={index}
                   >
-                    <Link to={`/profile/${userNames["id"]}`}>
-                      <span onClick={closeModal2}>{userNames["fullname"]}</span>
+                    <Link to={`/profile/${userNames[index].id}`}>
+                      <span onClick={closeModal2}>{userNames[index].fullname}</span>
                     </Link>
 
                     <div className="flex gap-4 flex-end">
@@ -315,12 +313,11 @@ function ProfileCard({ userId, loggedUser }: ProfileCardProps) {
             >
               <div className="flex flex-col justify-around">
                 <h2>Solicitudes de Amistad</h2>
-                {friendReq.map((value, index) => (
+                {friendReq.map((_value, index) => (
                   <div
                     className="flex items-center justify-between gap-2 p-2 mt-2 align-middle border-2 border-primary"
                     key={index}
                   >
-                    
                     <div className="flex gap-4 flex-end">
                       <button className="p-2 mx-auto rounded-md bg-primary w-fit">
                         Aceptar
